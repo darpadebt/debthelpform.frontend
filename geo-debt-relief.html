@@ -2,14 +2,27 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes"/>
   <title>Debt Relief Estimate | Lower Your Payments Today</title>
   <meta name="description" content="Residents: Instantly see how much you can save on debt. Get a free, secure estimate in under 60 seconds. Reduce your payments. No obligation.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://debthelpform.com/geo-debt-relief/">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-  
+
+  <!-- Open Graph (Facebook, LinkedIn) -->
+  <meta property="og:title" content="Debt Relief Estimate | Lower Your Payments Today">
+  <meta property="og:description" content="Residents: Instantly see how much you can save. No pressure, no fees. Estimate in under 60 seconds.">
+  <meta property="og:image" content="https://debthelpform.com/wp-content/uploads/2024/01/debtrelief-og.jpg">
+  <meta property="og:url" content="https://debthelpform.com/geo-debt-relief/">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lower Your Payments | Free Debt Relief Estimate">
+  <meta name="twitter:description" content="See what you could save. No obligation, no fees. Just help.">
+  <meta name="twitter:image" content="https://debthelpform.com/wp-content/uploads/2024/01/debtrelief-twitter.jpg">
+
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
   {
@@ -37,6 +50,7 @@
   }
   </script>
 
+  <!-- Styles -->
   <style>
     body {
       margin: 0;
@@ -56,6 +70,9 @@
       margin: 0 0.5rem;
       text-decoration: none;
       font-weight: 600;
+    }
+    nav a:hover {
+      text-decoration: underline;
     }
     .container {
       max-width: 960px;
@@ -85,6 +102,9 @@
       border-radius: 8px;
       display: inline-block;
       margin-top: 1rem;
+    }
+    .cta-btn:hover {
+      background: #00593d;
     }
     img {
       width: 100%;
@@ -117,7 +137,14 @@
     <section class="card">
       <h2>Get Your Free Debt Relief Estimate</h2>
       <p>Residents in your state are saving thousands every month with personalized debt relief plans. Get your free quote in 60 seconds — secure and confidential.</p>
-      <iframe src="https://api.leadconnectorhq.com/widget/form/A5c9I3HkyNd1puU4nJWl" height="1360" width="100%" frameborder="0" loading="lazy"></iframe>
+      <iframe src="https://api.leadconnectorhq.com/widget/form/A5c9I3HkyNd1puU4nJWl"
+              height="1360"
+              width="100%"
+              frameborder="0"
+              loading="lazy"
+              title="Debt Relief Estimate Form"
+              style="border:none; border-radius:8px;">
+      </iframe>
     </section>
 
     <section class="card">
@@ -146,6 +173,7 @@
     <p>&copy; 2025 DebtHelpForm.com — Geo Edition | Legal, Ethical Relief</p>
   </footer>
 
+  <!-- AI Features: Geo, A/B, Heatmap -->
   <script>
     // Geo headline via IP
     fetch('https://ipapi.co/json')
