@@ -16,31 +16,28 @@
   <meta property="og:image" content="https://debthelpform.com/wp-content/uploads/2024/01/about-page-preview.jpg">
 
   <!-- Twitter -->
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="About Us | DebtHelpForm.com">
   <meta name="twitter:description" content="Built on trust. DebtHelpForm.com helps people reduce debt legally and securely.">
+  <meta name="twitter:image" content="https://debthelpform.com/wp-content/uploads/2024/01/about-page-preview.jpg">
 
   <!-- Schema Markup -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "AboutPage",
+    "@type": "WebPage",
     "name": "About DebtHelpForm.com",
     "url": "https://debthelpform.com/about",
+    "description": "DebtHelpForm.com helps Americans discover compliant, pressure-free debt relief.",
+    "mainEntityOfPage": "https://debthelpform.com/about",
     "publisher": {
       "@type": "Organization",
       "name": "DebtHelpForm.com"
-    },
-    "mainEntity": {
-      "@type": "WebPageElement",
-      "name": "Mission Statement",
-      "description": "DebtHelpForm.com helps Americans discover compliant, pressure-free debt relief."
     }
   }
   </script>
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
   <style>
     body {
       font-family: 'Inter', sans-serif;
@@ -59,7 +56,7 @@
       margin: 0;
       font-size: 2rem;
     }
-    nav a {
+    nav[aria-label="Main navigation"] a {
       color: #ffdd00;
       margin: 0 1rem;
       text-decoration: none;
@@ -114,27 +111,91 @@
     @media (max-width: 768px) {
       .mobile-call { display: block; }
     }
+    iframe {
+      width: 100%;
+      border: none;
+      border-radius: 8px;
+      margin-top: 2rem;
+    }
   </style>
 </head>
 <body>
 
+  <!-- Mobile Call CTA -->
   <div class="mobile-call" aria-label="Call Now">
     <a href="tel:8884377141">📞 Tap to Call: 888-437-7141</a>
   </div>
 
+  <!-- Header -->
   <header>
     <h1>About DebtHelpForm.com</h1>
-    <nav>
+    <nav aria-label="Main navigation">
       <a href="/">Home</a>
-      <a href="/blog">Blog</a>
+      <a href="/debt-help-blog-expert-tips-relief-options-financial-freedom/">Blog</a>
       <a href="https://gatewaydebthelp.com" target="_blank" rel="noopener noreferrer">GatewayDebtHelp.com</a>
       <a href="https://debtreliefguard.com" target="_blank" rel="noopener noreferrer">DebtReliefGuard.com</a>
     </nav>
   </header>
 
+  <!-- Main Content -->
   <main>
-    <h2>Real Help, Real Relief</h2>
-    <p>At <strong>DebtHelpForm.com</strong>, we help individuals reduce financial stress and take back control with clarity, privacy, and no pressure. Our mission is simple: connect people with trustworthy, proven debt relief options they can actually use.</p>
+    <section>
+      <h2>Real Help, Real Relief</h2>
+      <p>At <strong>DebtHelpForm.com</strong>, we help individuals reduce financial stress and take back control with clarity, privacy, and no pressure. Our mission is simple: connect people with trustworthy, proven debt relief options they can actually use.</p>
+    </section>
 
-    <h2>Built on Trust</h2>
-    <p>We believe in transparency, respect, and keeping your information secure. Our services are built in accordance with <a href="https://www.ftc.gov/" target="_blank" rel="noopener noreferrer">FTC</a>, <a href="https://www.fcc.gov/" target="_blank" rel="noopener noreferrer">FCC</a>, and <a href="https://www.tcpacompliance.com/" target="_blank" rel="noopener noreferrer">TCPA</a> standards — and_
+    <section>
+      <h2>Built on Trust</h2>
+      <p>We believe in transparency, respect, and keeping your information secure. Our services are built in accordance with <a href="https://www.ftc.gov/" target="_blank" rel="noopener noreferrer">FTC</a>, <a href="https://www.fcc.gov/" target="_blank" rel="noopener noreferrer">FCC</a>, and <a href="https://www.tcpacompliance.com/" target="_blank" rel="noopener noreferrer">TCPA</a> standards — and we are committed to ongoing compliance, data protection, and user empowerment.</p>
+    </section>
+
+    <!-- Call-to-Action -->
+    <div class="cta">
+      Ready to take control? <a href="/">Start Your Free Debt Relief Estimate</a>
+    </div>
+
+    <!-- GHL Embedded Form -->
+    <iframe
+      src="https://api.leadconnectorhq.com/widget/form/A5c9I3HkyNd1puU4nJWl"
+      height="1360"
+      data-form-id="A5c9I3HkyNd1puU4nJWl"
+      title="Free Debt Help Form"
+      loading="lazy"
+      allowtransparency="true">
+    </iframe>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    &copy; <script>document.write(new Date().getFullYear());</script> DebtHelpForm.com | Built with ❤️ for those ready to break free.
+  </footer>
+
+  <!-- ChatGPT Tracking Scripts -->
+  <script>
+    // Heatmap + Engagement Tracker
+    fetch("https://debthelpform.com/backend/heatmap-tracker.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        page: "about",
+        timestamp: new Date().toISOString(),
+        path: window.location.pathname,
+        referrer: document.referrer,
+        userAgent: navigator.userAgent
+      })
+    }).catch(() => {});
+
+    // Compliance Auditor Hook
+    fetch("https://debthelpform.com/backend/compliance-auditor.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        page: "about",
+        scanTime: new Date().toISOString()
+      })
+    }).catch(() => {});
+  </script>
+
+</body>
+</html>
