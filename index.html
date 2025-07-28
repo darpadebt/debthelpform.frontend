@@ -47,10 +47,26 @@
 
   <style>
     body { margin: 0; font-family: 'Inter', sans-serif; background-color: #f9fafe; color: #333; }
-    header, footer { background-color: #004488; color: white; padding: 2rem 1rem; text-align: center; }
-    header h1 { margin: 0; font-size: 2.2rem; }
+    header, footer { background-color: #004488; color: white; padding: 1.5rem 1rem; text-align: center; }
+    header h1 { margin: 0; font-size: 2rem; }
     header a, footer a { color: #ffdd00; font-weight: bold; text-decoration: none; }
-    nav a { color: #ddd; text-decoration: none; margin: 0 10px; }
+    nav.sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background-color: #003366;
+      padding: 0.5rem 1rem;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+    nav.sticky-nav a {
+      color: #fff;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    nav.sticky-nav a:hover { text-decoration: underline; }
     section { max-width: 900px; margin: 2rem auto; padding: 1.5rem; background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
     h2 { color: #004488; }
     .cta-btn { display: inline-block; background: #007B55; color: white; padding: 1rem 2rem; border-radius: 6px; text-decoration: none; font-weight: bold; margin: 1rem 0; }
@@ -63,19 +79,22 @@
 </head>
 <body>
 
-  <div class="mobile-call">
-    <a href="tel:8884377141">📞 Tap to Call: 888-437-7141</a>
-  </div>
+  <div class="mobile-call"><a href="tel:8884377141">📞 Tap to Call: 888-437-7141</a></div>
 
   <header>
     <h1>Get a Free Debt Relief Savings Estimate</h1>
     <p><a href="tel:8884377141">📞 Call Now: 888-437-7141</a></p>
-    <nav>
-      <a href="/blog">Blog</a> |
-      <a href="https://gatewaydebthelp.com" target="_blank">GatewayDebtHelp.com</a> |
-      <a href="https://debtreliefguard.com" target="_blank">DebtReliefGuard.com</a>
-    </nav>
   </header>
+
+  <nav class="sticky-nav">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+    <a href="relief.html">Relief</a>
+    <a href="geo-debt-relief.html">State Programs</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="debthelpform-pages-blog.html">Blog</a>
+  </nav>
 
   <section>
     <h2>Start Here – See How Much You Could Save</h2>
@@ -91,6 +110,8 @@
       let userInteracted = false;
       let timeOnPage = 0;
       const honeypotField = document.querySelector("input[name='website']");
+      const userAgent = navigator.userAgent.toLowerCase();
+      const isSearchBot = /googlebot|bingbot|slurp|duckduckbot|baiduspider|yandex|gptbot|chatgpt|facebookexternalhit|twitterbot|linkedinbot/.test(userAgent);
 
       window.addEventListener('mousemove', () => userInteracted = true);
       window.addEventListener('keydown', () => userInteracted = true);
@@ -106,8 +127,8 @@
       function validateBotProtections() {
         if (
           honeypotField.value !== "" ||
-          !userInteracted ||
-          timeOnPage < 3
+          (!userInteracted && !isSearchBot) ||
+          (timeOnPage < 3 && !isSearchBot)
         ) {
           alert("Submission blocked due to suspicious activity.");
           return false;
@@ -117,97 +138,9 @@
     </script>
   </section>
 
-  <section>
-    <h2>Why Americans Trust Us</h2>
-    <ul>
-      <li>✅ Federal compliance with <a href="https://www.ftc.gov/" target="_blank">FTC</a>, <a href="https://www.fcc.gov/" target="_blank">FCC</a>, and <a href="https://www.consumerfinance.gov/" target="_blank">CFPB</a></li>
-      <li>✅ Safe, secure, and encrypted lead forms (TCPA-compliant)</li>
-      <li>✅ No upfront fees. Transparent programs.</li>
-      <li>✅ Personalized support — real human guidance + smart AI</li>
-    </ul>
-  </section>
-
-  <section>
-    <h2>FAQs</h2>
-    <div>
-      <p class="faq-question">✔️ What is a debt relief estimate?</p>
-      <div class="faq-answer">It's a personalized snapshot of how much you may save based on your debt and income. It's free, secure, and takes under 60 seconds.</div>
-    </div>
-    <div>
-      <p class="faq-question">✔️ Do I need good credit to qualify?</p>
-      <div class="faq-answer">No. Most of our clients start with fair or poor credit. We work with you no matter your credit score.</div>
-    </div>
-    <div>
-      <p class="faq-question">✔️ How secure is my info?</p>
-      <div class="faq-answer">We follow TCPA, FCC, and FTC standards with encrypted form submission and zero data resale. Your privacy is protected.</div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Need Help Now?</h2>
-    <p><a class="cta-btn" href="tel:8884377141">📞 Call 888-437-7141 Now</a></p>
-    <p>Prefer reading? Visit our blog or learn more at:</p>
-    <p>
-      <a href="https://gatewaydebthelp.com" target="_blank">GatewayDebtHelp.com</a> |
-      <a href="https://debtreliefguard.com" target="_blank">DebtReliefGuard.com</a>
-    </p>
-  </section>
-
   <footer>
     <p><a href="tel:8884377141">📞 Call Toll-Free: 888-437-7141</a></p>
     <p>&copy; 2025 DebtHelpForm.com</p>
   </footer>
-
-  <script>
-    // State Blocker
-    const blockedStates = ["CA", "WI", "WV", "RI", "OR"];
-    function blockSubmission(state) {
-      if (blockedStates.includes(state)) {
-        alert("We're sorry, our services are not available in your state at this time.");
-        return false;
-      }
-      return true;
-    }
-
-    // Exit Intent
-    let exitIntentShown = false;
-    document.addEventListener("mouseout", function(e) {
-      if (e.clientY < 0 && !exitIntentShown) {
-        exitIntentShown = true;
-        alert("Wait! Don’t leave yet — Get your FREE savings estimate now.");
-      }
-    });
-
-    // FAQ Toggle
-    document.addEventListener("DOMContentLoaded", function () {
-      const questions = document.querySelectorAll(".faq-question");
-      questions.forEach((q) => {
-        q.addEventListener("click", () => {
-          const a = q.nextElementSibling;
-          const shown = a.style.display === "block";
-          document.querySelectorAll(".faq-answer").forEach(el => el.style.display = "none");
-          if (!shown) a.style.display = "block";
-        });
-      });
-    });
-
-    // Exit Bot Behavior Tracker
-    (function() {
-      let hasFired = false;
-      function fireExitEvent(type) {
-        if (hasFired) return;
-        hasFired = true;
-        fetch('/exit-bot.php?event=' + encodeURIComponent(type));
-      }
-      document.addEventListener('mouseout', e => { if (e.clientY < 0) fireExitEvent('exit_top'); });
-      document.addEventListener('mousemove', () => setTimeout(() => fireExitEvent('idle_hover'), 5000));
-      let lastScroll = 0;
-      window.addEventListener('scroll', () => {
-        const y = window.scrollY;
-        if (y < lastScroll) fireExitEvent('scroll_reverse');
-        lastScroll = y;
-      });
-    })();
-  </script>
 </body>
 </html>
