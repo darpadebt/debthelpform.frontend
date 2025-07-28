@@ -4,9 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>DebtHelpForm.com | Free Personalized Debt Relief Estimate</title>
+
+  <!-- Essential SEO Meta -->
   <meta name="description" content="Get a secure, compliant, and free debt relief estimate. See how much you could save. Trusted by Americans nationwide. No fees. No pressure. Just help.">
   <meta name="keywords" content="debt relief, debt consolidation, debt settlement, free debt estimate, get out of debt, financial help, reduce debt, stop collection calls, personalized debt help">
   <meta name="author" content="DebtHelpForm.com">
+  <meta name="robots" content="index, follow">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Get Your Free Debt Relief Savings Estimate">
@@ -21,7 +24,7 @@
   <meta name="twitter:description" content="Compliant, secure, and fast. Discover your savings estimate in 60 seconds.">
   <meta name="twitter:image" content="https://debthelpform.com/wp-content/uploads/2024/01/debthelpform-twitter-image.jpg">
 
-  <!-- Schema -->
+  <!-- Schema.org -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -45,10 +48,30 @@
 
   <!-- Styles -->
   <style>
-    body { margin: 0; font-family: 'Inter', sans-serif; background-color: #f9fafe; color: #333; }
-    header, footer { background-color: #004488; color: white; padding: 1.5rem 1rem; text-align: center; }
-    header h1 { margin: 0; font-size: 2rem; }
-    header a, footer a { color: #ffdd00; font-weight: bold; text-decoration: none; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #f9fafe;
+      color: #333;
+    }
+
+    header, footer {
+      background-color: #004488;
+      color: white;
+      padding: 1.5rem 1rem;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    header a, footer a {
+      color: #ffdd00;
+      font-weight: bold;
+      text-decoration: none;
+    }
 
     nav.sticky-nav {
       position: sticky;
@@ -68,18 +91,22 @@
       text-decoration: none;
     }
 
-    nav.sticky-nav a:hover { text-decoration: underline; }
+    nav.sticky-nav a:hover {
+      text-decoration: underline;
+    }
 
     section {
       max-width: 900px;
       margin: 2rem auto;
       padding: 1.5rem;
-      background: white;
+      background: #ffffff;
       border-radius: 10px;
       box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
 
-    h2 { color: #004488; }
+    h2 {
+      color: #004488;
+    }
 
     .mobile-call {
       display: none;
@@ -95,10 +122,16 @@
       z-index: 9999;
     }
 
-    .mobile-call a { color: white; text-decoration: none; font-weight: bold; }
+    .mobile-call a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
 
     @media (max-width: 768px) {
-      .mobile-call { display: block; }
+      .mobile-call {
+        display: block;
+      }
     }
   </style>
 </head>
@@ -106,7 +139,9 @@
 <body>
 
   <!-- Mobile Sticky Call Bar -->
-  <div class="mobile-call"><a href="tel:8884377141">📞 Tap to Call: 888-437-7141</a></div>
+  <div class="mobile-call">
+    <a href="tel:8884377141">📞 Tap to Call: 888-437-7141</a>
+  </div>
 
   <!-- Header -->
   <header>
@@ -123,8 +158,8 @@
     <a href="/geo-debt-relief.html">State Programs</a>
     <a href="/privacy.html">Privacy</a>
     <a href="/debthelpform-pages-blog.html">Blog</a>
-    <a href="https://gatewaydebthelp.com" target="_blank">GatewayDebtHelp.com</a>
-    <a href="https://debtreliefguard.com" target="_blank">DebtReliefGuard.com</a>
+    <a href="https://gatewaydebthelp.com" target="_blank" rel="noopener">GatewayDebtHelp.com</a>
+    <a href="https://debtreliefguard.com" target="_blank" rel="noopener">DebtReliefGuard.com</a>
   </nav>
 
   <!-- Form Section -->
@@ -142,21 +177,22 @@
       data-activation-type="alwaysActivated"
       data-deactivation-type="neverDeactivate"
       data-form-name="Debthelpform.com"
-      title="Debthelpform.com">
+      title="DebtHelpForm.com Embedded Form">
     </iframe>
-    <script src="https://link.msgsndr.com/js/form_embed.js"></script>
+    <script src="https://link.msgsndr.com/js/form_embed.js" defer></script>
   </section>
 
   <!-- Footer -->
   <footer>
     <p><a href="tel:8884377141">📞 Call Toll-Free: 888-437-7141</a></p>
-    <p>&copy; 2025 DebtHelpForm.com</p>
+    <p>&copy; 2025 DebtHelpForm.com. All rights reserved.</p>
   </footer>
 
   <!-- Bot Protection -->
   <script>
     let userInteracted = false;
     let timeOnPage = 0;
+
     const honeypotField = document.createElement("input");
     honeypotField.type = "text";
     honeypotField.name = "website";
@@ -182,5 +218,6 @@
       return true;
     }
   </script>
+
 </body>
 </html>
