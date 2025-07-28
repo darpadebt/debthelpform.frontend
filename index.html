@@ -8,7 +8,7 @@
   <meta name="keywords" content="debt relief, debt consolidation, debt settlement, free debt estimate, get out of debt, financial help, reduce debt, stop collection calls, personalized debt help">
   <meta name="author" content="DebtHelpForm.com">
 
-  <!-- Open Graph Meta -->
+  <!-- Open Graph -->
   <meta property="og:title" content="Get Your Free Debt Relief Savings Estimate">
   <meta property="og:description" content="Secure, no-pressure estimate based on your real debt profile. No fees, just help.">
   <meta property="og:image" content="https://debthelpform.com/wp-content/uploads/2024/01/debthelpform-og-image.jpg">
@@ -21,7 +21,7 @@
   <meta name="twitter:description" content="Compliant, secure, and fast. Discover your savings estimate in 60 seconds.">
   <meta name="twitter:image" content="https://debthelpform.com/wp-content/uploads/2024/01/debthelpform-twitter-image.jpg">
 
-  <!-- Structured Data (Schema.org) -->
+  <!-- Schema -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -31,10 +31,7 @@
     "logo": "https://debthelpform.com/wp-content/uploads/2024/01/logo.png",
     "description": "Get a personalized, secure debt relief estimate. No fees. No pressure.",
     "telephone": "+18884377141",
-    "areaServed": {
-      "@type": "Country",
-      "name": "United States"
-    },
+    "areaServed": { "@type": "Country", "name": "United States" },
     "sameAs": [
       "https://gatewaydebthelp.com",
       "https://debtreliefguard.com"
@@ -42,14 +39,17 @@
   }
   </script>
 
+  <!-- Fonts -->
   <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" as="style">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
+  <!-- Styles -->
   <style>
     body { margin: 0; font-family: 'Inter', sans-serif; background-color: #f9fafe; color: #333; }
     header, footer { background-color: #004488; color: white; padding: 1.5rem 1rem; text-align: center; }
     header h1 { margin: 0; font-size: 2rem; }
     header a, footer a { color: #ffdd00; font-weight: bold; text-decoration: none; }
+
     nav.sticky-nav {
       position: sticky;
       top: 0;
@@ -61,86 +61,126 @@
       flex-wrap: wrap;
       gap: 15px;
     }
+
     nav.sticky-nav a {
       color: #fff;
       font-weight: 600;
       text-decoration: none;
     }
+
     nav.sticky-nav a:hover { text-decoration: underline; }
-    section { max-width: 900px; margin: 2rem auto; padding: 1.5rem; background: white; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+
+    section {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    }
+
     h2 { color: #004488; }
-    .cta-btn { display: inline-block; background: #007B55; color: white; padding: 1rem 2rem; border-radius: 6px; text-decoration: none; font-weight: bold; margin: 1rem 0; }
-    .faq-question { cursor: pointer; font-weight: bold; color: #004488; margin-top: 1rem; }
-    .faq-answer { display: none; margin: 0.5rem 0 1.5rem; padding-left: 1rem; color: #333; }
-    .mobile-call { display: none; position: fixed; bottom: 0; left: 0; width: 100%; background: #007B55; color: white; text-align: center; font-size: 1.2rem; padding: 1rem; z-index: 9999; }
+
+    .mobile-call {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #007B55;
+      color: white;
+      text-align: center;
+      font-size: 1.2rem;
+      padding: 1rem;
+      z-index: 9999;
+    }
+
     .mobile-call a { color: white; text-decoration: none; font-weight: bold; }
-    @media (max-width: 768px) { .mobile-call { display: block; } }
+
+    @media (max-width: 768px) {
+      .mobile-call { display: block; }
+    }
   </style>
 </head>
+
 <body>
 
+  <!-- Mobile Sticky Call Bar -->
   <div class="mobile-call"><a href="tel:8884377141">📞 Tap to Call: 888-437-7141</a></div>
 
+  <!-- Header -->
   <header>
     <h1>Get a Free Debt Relief Savings Estimate</h1>
     <p><a href="tel:8884377141">📞 Call Now: 888-437-7141</a></p>
   </header>
 
+  <!-- Sticky Floating Menu -->
   <nav class="sticky-nav">
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="contact.html">Contact</a>
-    <a href="relief.html">Relief</a>
-    <a href="geo-debt-relief.html">State Programs</a>
-    <a href="privacy.html">Privacy</a>
-    <a href="debthelpform-pages-blog.html">Blog</a>
+    <a href="/index.html">Home</a>
+    <a href="/about.html">About</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/relief.html">Relief</a>
+    <a href="/geo-debt-relief.html">State Programs</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/debthelpform-pages-blog.html">Blog</a>
+    <a href="https://gatewaydebthelp.com" target="_blank">GatewayDebtHelp.com</a>
+    <a href="https://debtreliefguard.com" target="_blank">DebtReliefGuard.com</a>
   </nav>
 
+  <!-- Form Section -->
   <section>
     <h2>Start Here – See How Much You Could Save</h2>
     <p>Answer a few simple questions. Get a custom debt relief estimate. No obligation. No pressure.</p>
 
-    <form id="secure-lead-form" onsubmit="return validateBotProtections()" style="display:none;">
-      <input type="text" name="website" style="display:none;" tabindex="-1" autocomplete="off">
-      <div id="gform-container"></div>
-    </form>
-
+    <!-- GHL Embedded Form -->
+    <iframe
+      src="https://api.leadconnectorhq.com/widget/form/A5c9I3HkyNd1puU4nJWl"
+      style="width:100%;height:1360px;border:none;border-radius:6px;"
+      id="inline-A5c9I3HkyNd1puU4nJWl" 
+      data-layout="{'id':'INLINE'}"
+      data-trigger-type="alwaysShow"
+      data-activation-type="alwaysActivated"
+      data-deactivation-type="neverDeactivate"
+      data-form-name="Debthelpform.com"
+      title="Debthelpform.com">
+    </iframe>
     <script src="https://link.msgsndr.com/js/form_embed.js"></script>
-    <script>
-      let userInteracted = false;
-      let timeOnPage = 0;
-      const honeypotField = document.querySelector("input[name='website']");
-      const userAgent = navigator.userAgent.toLowerCase();
-      const isSearchBot = /googlebot|bingbot|slurp|duckduckbot|baiduspider|yandex|gptbot|chatgpt|facebookexternalhit|twitterbot|linkedinbot/.test(userAgent);
-
-      window.addEventListener('mousemove', () => userInteracted = true);
-      window.addEventListener('keydown', () => userInteracted = true);
-      setInterval(() => timeOnPage++, 1000);
-
-      window.addEventListener("DOMContentLoaded", () => {
-        setTimeout(() => {
-          document.getElementById('secure-lead-form').style.display = "block";
-          window.formEmbedder.loadForm("A5c9I3HkyNd1puU4nJWl", "gform-container");
-        }, 1500);
-      });
-
-      function validateBotProtections() {
-        if (
-          honeypotField.value !== "" ||
-          (!userInteracted && !isSearchBot) ||
-          (timeOnPage < 3 && !isSearchBot)
-        ) {
-          alert("Submission blocked due to suspicious activity.");
-          return false;
-        }
-        return true;
-      }
-    </script>
   </section>
 
+  <!-- Footer -->
   <footer>
     <p><a href="tel:8884377141">📞 Call Toll-Free: 888-437-7141</a></p>
     <p>&copy; 2025 DebtHelpForm.com</p>
   </footer>
+
+  <!-- Bot Protection -->
+  <script>
+    let userInteracted = false;
+    let timeOnPage = 0;
+    const honeypotField = document.createElement("input");
+    honeypotField.type = "text";
+    honeypotField.name = "website";
+    honeypotField.style.display = "none";
+    document.body.appendChild(honeypotField);
+
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isSearchBot = /googlebot|bingbot|slurp|duckduckbot|baiduspider|yandex|gptbot|chatgpt|facebookexternalhit|twitterbot|linkedinbot/.test(userAgent);
+
+    window.addEventListener('mousemove', () => userInteracted = true);
+    window.addEventListener('keydown', () => userInteracted = true);
+    setInterval(() => timeOnPage++, 1000);
+
+    function validateBotProtections() {
+      if (
+        honeypotField.value !== "" ||
+        (!userInteracted && !isSearchBot) ||
+        (timeOnPage < 3 && !isSearchBot)
+      ) {
+        alert("Submission blocked due to suspicious activity.");
+        return false;
+      }
+      return true;
+    }
+  </script>
 </body>
 </html>
