@@ -73,20 +73,24 @@
     nav {
       background: #004488;
       display: flex;
-      justify-content: center;
-      gap: 1rem;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+      overflow-x: auto;
       padding: 0.8rem 1rem;
       position: sticky;
       top: 0;
       z-index: 999;
-      overflow-x: auto;
-      white-space: nowrap;
     }
     nav a {
       color: #fff;
       font-weight: 600;
       text-decoration: none;
+      margin-right: 1rem;
+      white-space: nowrap;
+    }
+    nav a:last-child {
+      color: #ffdd00;
+      font-weight: bold;
     }
     nav a:hover {
       text-decoration: underline;
@@ -162,7 +166,7 @@
   <a href="/privacy.html">Privacy</a>
   <a href="https://gatewaydebthelp.com" target="_blank" rel="noopener">GatewayDebtHelp.com</a>
   <a href="https://debtreliefguard.com" target="_blank" rel="noopener">DebtReliefGuard.com</a>
-  <a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener" style="color:#ffdd00; font-weight:bold;">Site Owner</a>
+  <a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener">Site Owner</a>
 </nav>
 
 <section>
