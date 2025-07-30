@@ -6,21 +6,21 @@
   <title>DebtHelpForm.com | Free Personalized Debt Relief Estimate</title>
 
   <!-- SEO Meta -->
-  <meta name="description" content="Get a secure, compliant, and free debt relief estimate. See how much you could save. Trusted by Americans nationwide. No fees. No pressure. Just help.">
-  <meta name="keywords" content="debt relief, debt consolidation, debt settlement, free debt estimate, get out of debt, financial help, reduce debt, stop collection calls, personalized debt help, gateway financial settlement relief, GFSR, gatewaydebthelp, debtreliefguard">
+  <meta name="description" content="Get a secure, compliant, and free debt relief estimate.">
+  <meta name="keywords" content="debt relief, debt consolidation, debt settlement, free debt estimate, financial help, gateway financial settlement relief, GFSR, gatewaydebthelp, debtreliefguard">
   <meta name="author" content="DebtHelpForm.com">
   <meta name="robots" content="index, follow">
 
   <!-- Open Graph -->
   <meta property="og:title" content="Get Your Free Debt Relief Savings Estimate">
-  <meta property="og:description" content="Secure, no-pressure estimate based on your real debt profile. No fees, just help.">
+  <meta property="og:description" content="Secure estimate with no fees.">
   <meta property="og:url" content="https://debthelpform.com">
   <meta property="og:type" content="website">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="DebtHelpForm.com | Free Personalized Debt Relief Estimate">
-  <meta name="twitter:description" content="Compliant, secure, and fast. Discover your savings estimate in 60 seconds.">
+  <meta name="twitter:description" content="Secure, fast, and compliant.">
 
   <!-- Schema.org -->
   <script type="application/ld+json">
@@ -29,7 +29,7 @@
     "@type": "WebPage",
     "name": "DebtHelpForm.com",
     "url": "https://debthelpform.com",
-    "description": "Get a personalized, secure debt relief estimate. No fees. No pressure.",
+    "description": "Get a personalized, secure debt relief estimate.",
     "publisher": {
       "@type": "Organization",
       "name": "Gateway Financial Settlement Relief",
@@ -224,27 +224,20 @@
 
 <!-- Bot Protection -->
 <script>
+  const honeypot = document.createElement("input");
+  honeypot.type = "text";
+  honeypot.name = "website";
+  honeypot.style.display = "none";
+  document.body.appendChild(honeypot);
+
   let userInteracted = false;
-  let timeOnPage = 0;
-  const honeypotField = document.createElement("input");
-  honeypotField.type = "text";
-  honeypotField.name = "website";
-  honeypotField.style.display = "none";
-  document.body.appendChild(honeypotField);
-
-  const userAgent = navigator.userAgent.toLowerCase();
-  const isSearchBot = /googlebot|bingbot|slurp|duckduckbot|baiduspider|yandex|gptbot|chatgpt|facebookexternalhit|twitterbot|linkedinbot/.test(userAgent);
-
   window.addEventListener('mousemove', () => userInteracted = true);
   window.addEventListener('keydown', () => userInteracted = true);
+  let timeOnPage = 0;
   setInterval(() => timeOnPage++, 1000);
 
   function validateBotProtections() {
-    if (
-      honeypotField.value !== "" ||
-      (!userInteracted && !isSearchBot) ||
-      (timeOnPage < 3 && !isSearchBot)
-    ) {
+    if (honeypot.value !== "" || !userInteracted || timeOnPage < 3) {
       alert("Submission blocked due to suspicious activity.");
       return false;
     }
