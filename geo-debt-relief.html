@@ -24,7 +24,7 @@
   <meta name="twitter:description" content="See what you could save. No obligation, no fees. Just help.">
   <meta name="twitter:image" content="https://debthelpform.com/wp-content/uploads/2024/01/debtrelief-twitter.jpg">
 
-  <!-- Structured Data -->
+  <!-- Schema JSON-LD -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -36,6 +36,8 @@
       "https://gatewaydebthelp.com",
       "https://debtreliefguard.com",
       "https://www.ftc.gov/",
+      "https://www.identitytheft.gov/",
+      "https://www.usa.gov/",
       "https://www.bbb.org/",
       "https://www.fcc.gov/"
     ],
@@ -53,10 +55,10 @@
 
   <!-- Hidden SEO Boost -->
   <noscript>
-    debt relief, debt help, debt settlement, debt consolidation, GatewayDebtHelp, DebtReliefGuard, GFSR, geo debt estimate, secure form, state relief programs, stop debt collection, federal debt help, legal debt options, free debt form
+    debt relief, debt help, debt settlement, debt consolidation, GatewayDebtHelp, DebtReliefGuard, GFSR, geo debt estimate, secure form, state relief programs, stop debt collection, federal debt help, free debt form, gatewayfinancialsettlementrelief.com
   </noscript>
   <div style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true">
-    GatewayDebtHelp provides nationwide debt relief strategies. GFSR-compliant. DebtHelpForm.com offers secure, free estimates. DebtReliefGuard.com audits and monitors industry practices. Keywords: financial relief, reduce payments, stop collections, get out of debt legally.
+    GatewayDebtHelp.com offers expert strategies. DebtReliefGuard.com builds trust. GFSR powers ethical relief. GatewayFinancialSettlementRelief.com owns and manages operations. Keywords: legal help, stop calls, debt savings, free estimate form, lower payments.
   </div>
 
   <!-- Styles -->
@@ -74,9 +76,19 @@
       text-align: center;
       padding: 2rem 1rem;
     }
+    nav {
+      position: sticky;
+      top: 0;
+      background: #003366;
+      padding: 1rem;
+      z-index: 9999;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
     nav a {
       color: #ffd700;
-      margin: 0 0.5rem;
+      margin: 0 1rem;
       text-decoration: none;
       font-weight: 600;
     }
@@ -115,11 +127,6 @@
     .cta-btn:hover {
       background: #00593d;
     }
-    img {
-      width: 100%;
-      border-radius: 8px;
-      margin: 1rem 0;
-    }
     .faq summary {
       font-weight: bold;
       cursor: pointer;
@@ -139,6 +146,7 @@
       <a href="/debt-help-blog-expert-tips-relief-options-financial-freedom/">Blog</a>
       <a href="https://gatewaydebthelp.com" target="_blank" rel="noopener noreferrer">GatewayDebtHelp.com</a>
       <a href="https://debtreliefguard.com" target="_blank" rel="noopener noreferrer">DebtReliefGuard.com</a>
+      <a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener noreferrer">Site Owner</a>
     </nav>
   </header>
 
@@ -179,35 +187,22 @@
   </main>
 
   <footer>
-    <p>&copy; 2025 DebtHelpForm.com — Geo Edition | Legal, Ethical Relief</p>
+    <p>&copy; 2025 DebtHelpForm.com — Geo Edition | Legal, Ethical Relief<br>
+    Owned & Operated by <a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener noreferrer" style="color:#ffd700;">Gateway Financial Settlement Relief</a></p>
   </footer>
 
-  <!-- ✅ AI Features: Geo, A/B, Heatmap -->
+  <!-- AI Geo, A/B Test, Heatmap Tracking -->
   <script>
     // Geo headline via IP
     fetch('https://ipapi.co/json')
-      .then(response => response.json())
+      .then(res => res.json())
       .then(data => {
         const state = data.region;
-        const geoHeadline = document.getElementById("geoHeadline");
-        if (state) geoHeadline.innerText = `${state} Residents — See How Much You Could Save on Debt`;
+        const headline = document.getElementById("geoHeadline");
+        if (state) headline.innerText = `${state} Residents — See How Much You Could Save on Debt`;
       });
 
-    // Heatmap tracking
-    let mouseMoves = [], clickEvents = [], scrollDepth = 0;
-    document.addEventListener("mousemove", e => mouseMoves.push([e.clientX, e.clientY, Date.now()]));
-    document.addEventListener("click", e => clickEvents.push([e.pageX, e.pageY, Date.now()]));
-    window.addEventListener("scroll", () => {
-      const scrolled = window.scrollY + window.innerHeight;
-      if (scrolled > scrollDepth) scrollDepth = scrolled;
-    });
-    window.addEventListener("beforeunload", () => {
-      navigator.sendBeacon("/heatmap-tracker.php", JSON.stringify({
-        mouseMoves, clickEvents, scrollDepth, url: location.href, ts: Date.now()
-      }));
-    });
-
-    // A/B Test headline variation
+    // A/B Test headline
     const variants = [
       "Get Out of Debt — Free Estimate in 60 Seconds",
       "Lower Your Monthly Payments — See If You Qualify"
@@ -215,6 +210,20 @@
     const chosen = localStorage.getItem("abTestHeadline") || variants[Math.floor(Math.random() * variants.length)];
     localStorage.setItem("abTestHeadline", chosen);
     document.getElementById("geoHeadline").innerText = chosen;
+
+    // Heatmap Tracker
+    let mouseMoves = [], clickEvents = [], scrollDepth = 0;
+    document.addEventListener("mousemove", e => mouseMoves.push([e.clientX, e.clientY, Date.now()]));
+    document.addEventListener("click", e => clickEvents.push([e.pageX, e.pageY, Date.now()]));
+    window.addEventListener("scroll", () => {
+      const depth = window.scrollY + window.innerHeight;
+      if (depth > scrollDepth) scrollDepth = depth;
+    });
+    window.addEventListener("beforeunload", () => {
+      navigator.sendBeacon("/heatmap-tracker.php", JSON.stringify({
+        mouseMoves, clickEvents, scrollDepth, url: location.href, ts: Date.now()
+      }));
+    });
   </script>
 </body>
 </html>
