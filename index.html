@@ -16,159 +16,168 @@
   <meta property="og:description" content="Secure estimate with no fees.">
   <meta property="og:url" content="https://debthelpform.com">
   <meta property="og:type" content="website">
+  <meta property="og:image" content="https://gatewaydebthelp.com/wp-content/uploads/2024/01/logo.png">
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="DebtHelpForm.com | Free Personalized Debt Relief Estimate">
   <meta name="twitter:description" content="Secure, fast, and compliant.">
+  <meta name="twitter:image" content="https://gatewaydebthelp.com/wp-content/uploads/2024/01/logo.png">
 
-  <!-- Schema.org -->
+  <!-- Schema.org WebPage -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "DebtHelpForm.com",
-    "url": "https://debthelpform.com",
-    "description": "Get a personalized, secure debt relief estimate.",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Gateway Financial Settlement Relief",
-      "url": "https://gatewayfinancialsettlementrelief.com",
-      "logo": {
-        "@type": "ImageObject",
-        "url": "https://debthelpform.com/wp-content/uploads/2024/01/logo.png"
-      },
-      "sameAs": [
-        "https://gatewaydebthelp.com",
-        "https://debtreliefguard.com",
-        "https://consumer.ftc.gov",
-        "https://consumerfinance.gov",
-        "https://identitytheft.gov",
-        "https://usa.gov"
-      ]
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "DebtHelpForm.com",
+      "url": "https://debthelpform.com",
+      "description": "Get a personalized, secure debt relief estimate.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "Gateway Financial Settlement Relief",
+        "url": "https://gatewayfinancialsettlementrelief.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://gatewaydebthelp.com/wp-content/uploads/2024/01/logo.png",
+          "width": 200,
+          "height": 50
+        },
+        "sameAs": [
+          "https://gatewaydebthelp.com",
+          "https://debtreliefguard.com",
+          "https://consumer.ftc.gov",
+          "https://consumerfinance.gov",
+          "https://identitytheft.gov",
+          "https://usa.gov"
+        ]
+      }
     }
-  }
   </script>
 
-  <!-- Fonts -->
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Styles -->
+  <!-- Inline Styles -->
   <style>
+    /* Reset and Base */
     body {
       margin: 0;
-      padding-top: 64px; /* Space for fixed nav */
+      padding-top: 64px;
       font-family: 'Inter', sans-serif;
       background: #f9fafe;
       color: #222;
     }
 
-    /* Fixed sticky navigation at top */
+    /* Fixed Navigation */
     .sticky-nav {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-      z-index: 9999;
       background: #004488;
+      z-index: 9999;
       display: flex;
-      flex-wrap: nowrap;
-      overflow-x: auto;
-      white-space: nowrap;
       gap: 1rem;
       padding: 1rem;
+      overflow-x: auto;
+      white-space: nowrap;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
-
-    .sticky-nav::-webkit-scrollbar {
-      display: none;
-    }
-
     .sticky-nav a {
       color: #fff;
-      font-weight: 600;
       text-decoration: none;
       padding: 0.5rem 0.75rem;
-      flex: 0 0 auto;
+      font-weight: 600;
     }
-
     .sticky-nav a:hover {
       text-decoration: underline;
     }
+    .sticky-nav::-webkit-scrollbar { display: none; }
 
-    header {
-      background: #003366;
-      color: white;
+    /* Mobile Call Button */
+    .mobile-call {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background: #007b55;
+      color: #fff;
       text-align: center;
-      padding: 2rem 1rem;
-      margin: 0 auto;
-      max-width: 900px;
+      padding: 1rem;
+      z-index: 998;
+    }
+    @media(max-width:768px) {
+      .mobile-call { display: block; }
+    }
+    .mobile-call a {
+      color: #fff;
+      font-weight: bold;
+      text-decoration: none;
     }
 
+    /* Header Section */
+    header {
+      max-width: 900px;
+      margin: 0 auto;
+      background: #003366;
+      color: #fff;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    header img {
+      margin-top: 1rem;
+      max-width: 150px;
+      height: auto;
+    }
+    header a {
+      color: #ffdd00;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    /* Main Content Section */
     section {
       max-width: 900px;
       margin: 2rem auto;
-      background: white;
+      background: #fff;
       border-radius: 10px;
       padding: 2rem;
       box-shadow: 0 2px 12px rgba(0,0,0,0.08);
     }
 
+    /* Trust Links List */
     .trust-links {
-      font-size: 0.95rem;
       margin-top: 2rem;
+      font-size: 0.95rem;
     }
-
     .trust-links ul {
       padding-left: 1rem;
       list-style: disc;
     }
-
     .trust-links a {
       color: #0055aa;
       text-decoration: none;
     }
-
     .trust-links a:hover {
       text-decoration: underline;
     }
 
-    .mobile-call {
-      display: none;
-      background: #007b55;
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      font-size: 1.1rem;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      z-index: 998;
-    }
-
-    .mobile-call a {
-      color: white;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
+    /* Footer Styles */
     footer {
+      max-width: 900px;
+      margin: 2rem auto 0;
       background: #003366;
-      color: white;
+      color: #fff;
       text-align: center;
       padding: 3rem 1rem 4rem;
       z-index: 9999;
-      margin: 2rem auto 0;
-      max-width: 900px;
     }
-
     footer a {
       color: #ffdd00;
       text-decoration: underline;
       font-weight: bold;
     }
-
     footer a:hover {
       color: #ffffff;
     }
@@ -180,11 +189,10 @@
     }
   </style>
 </head>
-
 <body>
 
-  <!-- Fixed Sticky Navigation -->
-  <nav class="sticky-nav">
+  <!-- Navigation -->
+  <nav class="sticky-nav" role="navigation" aria-label="Main navigation">
     <a href="/">Home</a>
     <a href="/relief.html">Relief Options</a>
     <a href="/geo-debt-relief.html">State Programs</a>
@@ -196,28 +204,33 @@
     <a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener noreferrer">Site Owner</a>
   </nav>
 
-  <!-- Mobile Call Button -->
-  <div class="mobile-call">
-    <a href="tel:8884377141">📞 Tap to Call: 888-4377141</a>
+  <!-- Mobile Call -->
+  <div class="mobile-call" aria-label="Tap to call 888-437-7141">
+    <a href="tel:+18884377141">📞 Tap to Call: 888-437-7141</a>
   </div>
 
+  <!-- Header -->
   <header>
     <h1>Get Your Free Debt Relief Savings Estimate</h1>
-    <p><a href="tel:8884377141" style="color:#ffdd00; font-weight:bold;">📞 Call Now: 888-4377141</a></p>
+    <p><a href="tel:+18884377141">📞 Call Now: 888-437-7141</a></p>
+    <!-- Company Logo -->
+    <img src="https://gatewaydebthelp.com/wp-content/uploads/2024/01/logo.png" alt="Gateway Debt Help Logo" />
   </header>
 
+  <!-- Main Section -->
   <section>
     <h2>Start Here – See How Much You Could Save</h2>
     <p>Get a personalized debt relief estimate in under 60 seconds. No obligations, no pressure — just answers.</p>
-
+    <!-- Embedded Form -->
     <iframe
       src="https://api.leadconnectorhq.com/widget/form/A5c9I3HkyNd1puU4nJWl"
       style="width:100%;height:1360px;border:none;border-radius:6px;"
-      title="DebtHelpForm.com Embedded Form"
+      title="Debt Relief Estimate Form"
       loading="lazy">
     </iframe>
     <script src="https://link.msgsndr.com/js/form_embed.js" defer></script>
 
+    <!-- Trust Links -->
     <div class="trust-links">
       <h3>Helpful Government & Compliance Resources:</h3>
       <ul>
@@ -232,12 +245,13 @@
     </div>
   </section>
 
+  <!-- Footer -->
   <footer>
     <p>&copy; 2025 DebtHelpForm.com. All rights reserved.</p>
     <p><a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener noreferrer">This website is owned and operated by Gateway Financial Settlement Relief</a>.</p>
   </footer>
 
-  <!-- Bot Protection -->
+  <!-- Bot Protection Script -->
   <script>
     const honeypot = document.createElement("input");
     honeypot.type = "text";
@@ -259,6 +273,5 @@
       return true;
     }
   </script>
-
 </body>
 </html>
