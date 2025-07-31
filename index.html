@@ -3,6 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Caching -->
+  <meta http-equiv="Cache-Control" content="max-age=31536000, public">
+  <meta http-equiv="Pragma" content="cache">
+  <meta http-equiv="Expires" content="Thu, 31 Dec 2037 23:55:55 GMT">
   <title>DebtHelpForm.com | Free Personalized Debt Relief Estimate</title>
 
   <!-- SEO Meta -->
@@ -26,64 +30,51 @@
 
   <!-- Schema.org WebPage -->
   <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": "DebtHelpForm.com",
-      "url": "https://debthelpform.com",
-      "description": "Get a personalized, secure debt relief estimate.",
-      "publisher": {
-        "@type": "Organization",
-        "name": "Gateway Financial Settlement Relief",
-        "url": "https://gatewayfinancialsettlementrelief.com",
-        "logo": {
-          "@type": "ImageObject",
-          "url": "https://gatewaydebthelp.com/wp-content/uploads/2024/01/logo.png",
-          "width": 200,
-          "height": 50
-        },
-        "sameAs": [
-          "https://gatewaydebthelp.com",
-          "https://debtreliefguard.com",
-          "https://consumer.ftc.gov",
-          "https://consumerfinance.gov",
-          "https://identitytheft.gov",
-          "https://usa.gov"
-        ]
-      }
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "DebtHelpForm.com",
+    "url": "https://debthelpform.com",
+    "description": "Get a personalized, secure debt relief estimate.",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Gateway Financial Settlement Relief",
+      "url": "https://gatewayfinancialsettlementrelief.com",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://gatewaydebthelp.com/wp-content/uploads/2024/01/logo.png",
+        "width": 200,
+        "height": 50
+      },
+      "sameAs": [
+        "https://gatewaydebthelp.com",
+        "https://debtreliefguard.com",
+        "https://consumer.ftc.gov",
+        "https://consumerfinance.gov",
+        "https://identitytheft.gov",
+        "https://usa.gov"
+      ]
     }
+  }
   </script>
 
   <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 
   <!-- Inline Styles -->
   <style>
-    /* Reset and Base */
+    /* Base Reset */
     body {
       margin: 0;
-      padding-top: 64px;
+      padding-top: 64px; /* offset for fixed nav */
       font-family: 'Inter', sans-serif;
       background: #f9fafe;
       color: #222;
     }
 
-    /* Fixed Navigation */
+    /* Floating Sticky Navigation */
     .sticky-nav {
-      position: fixed !important;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: #004488;
-      z-index: 9999;
-      display: flex;
-      gap: 1rem;
-      padding: 1rem;
-      overflow-x: auto;
-      white-space: nowrap;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
       position: fixed;
       top: 0;
       left: 0;
@@ -121,7 +112,9 @@
       padding: 1rem;
       z-index: 998;
     }
-    @media(max-width:768px) { .mobile-call { display: block; } }
+    @media (max-width: 768px) {
+      .mobile-call { display: block; }
+    }
     .mobile-call a {
       color: #fff;
       font-weight: bold;
@@ -172,45 +165,29 @@
 
     /* Footer Section */
     footer {
-      position: relative;
-      z-index: 1000;
       max-width: 900px;
-      margin: 2rem auto 0;
+      margin: 2rem auto;
       background: #003366;
       color: #fff;
       text-align: center;
       padding: 3rem 1rem 4rem;
+      position: relative;
+      z-index: 1000;
     }
-    footer a {
+    footer p a {
       color: #ffdd00;
       text-decoration: underline;
       font-weight: bold;
       pointer-events: auto;
     }
-    footer a:hover {
-      color: #ffffff;
-    }
-      max-width: 900px;
-      margin: 2rem auto 0;
-      background: #003366;
-      color: #fff;
-      text-align: center;
-      padding: 3rem 1rem 4rem;
-      z-index: 9999;
-    }
-    footer a {
-      color: #ffdd00;
-      text-decoration: underline;
-      font-weight: bold;
-    }
-    footer a:hover {
+    footer p a:hover {
       color: #ffffff;
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
+  <!-- Sticky Navigation -->
   <nav class="sticky-nav" role="navigation" aria-label="Main navigation">
     <a href="/">Home</a>
     <a href="/relief.html">Relief Options</a>
@@ -245,20 +222,20 @@
     <div class="trust-links">
       <h3>Helpful Government & Compliance Resources:</h3>
       <ul>
-        <li><a href="https://consumer.ftc.gov" target="_blank" rel="noopener noreferrer">FTC – Federal Trade Commission</a></li>
-        <li><a href="https://consumerfinance.gov" target="_blank" rel="noopener noreferrer">CFPB – Consumer Financial Protection Bureau</a></li>
-        <li><a href="https://fcc.gov" target="_blank" rel="noopener noreferrer">FCC – Federal Communications Commission</a></li>
-        <li><a href="https://identitytheft.gov" target="_blank" rel="noopener noreferrer">IdentityTheft.gov – ID Theft Help</a></li>
-        <li><a href="https://usa.gov" target="_blank" rel="noopener noreferrer">USA.gov – Government Assistance Portal</a></li>
-        <li><a href="https://nfcc.org" target="_blank" rel="noopener noreferrer">NFCC – National Foundation for Credit Counseling</a></li>
-        <li><a href="https://bbb.org" target="_blank" rel="noopener noreferrer">BBB – Better Business Bureau</a></li>
+        <li><a href="https://consumer.ftc.gov" target="_blank" rel="noopener noreferrer">FTC – Federal Trade Commission</a></li>
+        <li><a href="https://consumerfinance.gov" target="_blank" rel="noopener noreferrer">CFPB – Consumer Financial Protection Bureau</a></li>
+        <li><a href="https://fcc.gov" target="_blank" rel="noopener noreferrer">FCC – Federal Communications Commission</a></li>
+        <li><a href="https://identitytheft.gov" target="_blank" rel="noopener noreferrer">IdentityTheft.gov – ID Theft Help</a></li>
+        <li><a href="https://usa.gov" target="_blank" rel="noopener noreferrer">USA.gov – Government Assistance Portal</a></li>
+        <li><a href="https://nfcc.org" target="_blank" rel="noopener noreferrer">NFCC – National Foundation for Credit Counseling</a></li>
+        <li><a href="https://bbb.org" target="_blank" rel="noopener noreferrer">BBB – Better Business Bureau</a></li>
       </ul>
     </div>
   </section>
 
   <!-- Footer -->
   <footer>
-    <p>&copy; 2025 DebtHelpForm.com. All rights reserved.</p>
+    <p>&copy; 2025 DebtHelpForm.com. All rights reserved.</p>
     <p><a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener noreferrer">Site Owner</a></p>
   </footer>
 
