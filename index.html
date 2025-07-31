@@ -70,7 +70,10 @@
       padding: 2rem 1rem;
     }
 
-    nav {
+    .sticky-nav {
+      position: sticky;
+      top: 0;
+      z-index: 9999;
       background: #004488;
       display: flex;
       flex-wrap: nowrap;
@@ -78,17 +81,14 @@
       white-space: nowrap;
       gap: 1rem;
       padding: 1rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-      scrollbar-width: none;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
-    nav::-webkit-scrollbar {
+    .sticky-nav::-webkit-scrollbar {
       display: none;
     }
 
-    nav a {
+    .sticky-nav a {
       color: #fff;
       font-weight: 600;
       text-decoration: none;
@@ -96,7 +96,7 @@
       flex: 0 0 auto;
     }
 
-    nav a:hover {
+    .sticky-nav a:hover {
       text-decoration: underline;
     }
 
@@ -179,7 +179,7 @@
   <p><a href="tel:8884377141" style="color:#ffdd00; font-weight:bold;">📞 Call Now: 888-437-7141</a></p>
 </header>
 
-<nav>
+<nav class="sticky-nav">
   <a href="/">Home</a>
   <a href="/relief.html">Relief Options</a>
   <a href="/geo-debt-relief.html">State Programs</a>
