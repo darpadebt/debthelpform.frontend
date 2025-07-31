@@ -58,21 +58,18 @@
   <style>
     body {
       margin: 0;
+      padding-top: 64px; /* Space for fixed nav */
       font-family: 'Inter', sans-serif;
       background: #f9fafe;
       color: #222;
     }
 
-    header {
-      background: #003366;
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
-    }
-
+    /* Fixed sticky navigation at top */
     .sticky-nav {
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      width: 100%;
       z-index: 9999;
       background: #004488;
       display: flex;
@@ -98,6 +95,15 @@
 
     .sticky-nav a:hover {
       text-decoration: underline;
+    }
+
+    header {
+      background: #003366;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin: 0 auto;
+      max-width: 900px;
     }
 
     section {
@@ -153,6 +159,8 @@
       text-align: center;
       padding: 3rem 1rem 4rem;
       z-index: 9999;
+      margin: 2rem auto 0;
+      max-width: 900px;
     }
 
     footer a {
@@ -175,16 +183,7 @@
 
 <body>
 
-  <!-- Mobile Call Button -->
-  <div class="mobile-call">
-    <a href="tel:8884377141">📞 Tap to Call: 888-437-7141</a>
-  </div>
-
-  <header>
-    <h1>Get Your Free Debt Relief Savings Estimate</h1>
-    <p><a href="tel:8884377141" style="color:#ffdd00; font-weight:bold;">📞 Call Now: 888-437-7141</a></p>
-  </header>
-
+  <!-- Fixed Sticky Navigation -->
   <nav class="sticky-nav">
     <a href="/">Home</a>
     <a href="/relief.html">Relief Options</a>
@@ -197,14 +196,24 @@
     <a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener noreferrer">Site Owner</a>
   </nav>
 
+  <!-- Mobile Call Button -->
+  <div class="mobile-call">
+    <a href="tel:8884377141">📞 Tap to Call: 888-4377141</a>
+  </div>
+
+  <header>
+    <h1>Get Your Free Debt Relief Savings Estimate</h1>
+    <p><a href="tel:8884377141" style="color:#ffdd00; font-weight:bold;">📞 Call Now: 888-4377141</a></p>
+  </header>
+
   <section>
     <h2>Start Here – See How Much You Could Save</h2>
     <p>Get a personalized debt relief estimate in under 60 seconds. No obligations, no pressure — just answers.</p>
 
     <iframe
       src="https://api.leadconnectorhq.com/widget/form/A5c9I3HkyNd1puU4nJWl"
-      style="width:100%;height:1360px;border:none;border-radius:6px;" 
-      title="DebtHelpForm.com Embedded Form" 
+      style="width:100%;height:1360px;border:none;border-radius:6px;"
+      title="DebtHelpForm.com Embedded Form"
       loading="lazy">
     </iframe>
     <script src="https://link.msgsndr.com/js/form_embed.js" defer></script>
@@ -225,7 +234,7 @@
 
   <footer>
     <p>&copy; 2025 DebtHelpForm.com. All rights reserved.</p>
-    <p>This website is owned and operated by <a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener noreferrer">Gateway Financial Settlement Relief</a>.</p>
+    <p><a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener noreferrer">This website is owned and operated by Gateway Financial Settlement Relief</a>.</p>
   </footer>
 
   <!-- Bot Protection -->
