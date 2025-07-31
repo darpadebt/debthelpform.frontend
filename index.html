@@ -86,9 +86,10 @@
     }
     .sticky-nav a {
       color: #fff;
+      font-weight: 600;
       text-decoration: none;
       padding: 0.5rem 0.75rem;
-      font-weight: 600;
+      flex: 0 0 auto;
     }
     .sticky-nav a:hover {
       text-decoration: underline;
@@ -107,9 +108,7 @@
       padding: 1rem;
       z-index: 998;
     }
-    @media(max-width:768px) {
-      .mobile-call { display: block; }
-    }
+    @media(max-width:768px) { .mobile-call { display: block; } }
     .mobile-call a {
       color: #fff;
       font-weight: bold;
@@ -124,11 +123,6 @@
       color: #fff;
       text-align: center;
       padding: 2rem 1rem;
-    }
-    header img {
-      margin-top: 1rem;
-      max-width: 150px;
-      height: auto;
     }
     header a {
       color: #ffdd00;
@@ -163,7 +157,7 @@
       text-decoration: underline;
     }
 
-    /* Footer Styles */
+    /* Footer Section */
     footer {
       max-width: 900px;
       margin: 2rem auto 0;
@@ -180,12 +174,6 @@
     }
     footer a:hover {
       color: #ffffff;
-    }
-
-    @media (max-width: 768px) {
-      .mobile-call {
-        display: block;
-      }
     }
   </style>
 </head>
@@ -204,7 +192,7 @@
     <a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener noreferrer">Site Owner</a>
   </nav>
 
-  <!-- Mobile Call -->
+  <!-- Mobile Call Button -->
   <div class="mobile-call" aria-label="Tap to call 888-437-7141">
     <a href="tel:+18884377141">📞 Tap to Call: 888-437-7141</a>
   </div>
@@ -213,32 +201,24 @@
   <header>
     <h1>Get Your Free Debt Relief Savings Estimate</h1>
     <p><a href="tel:+18884377141">📞 Call Now: 888-437-7141</a></p>
-    <!-- Company Logo -->
-    <img src="https://gatewaydebthelp.com/wp-content/uploads/2024/01/logo.png" alt="Gateway Debt Help Logo" />
   </header>
 
   <!-- Main Section -->
   <section>
     <h2>Start Here – See How Much You Could Save</h2>
     <p>Get a personalized debt relief estimate in under 60 seconds. No obligations, no pressure — just answers.</p>
-    <!-- Embedded Form -->
-    <iframe
-      src="https://api.leadconnectorhq.com/widget/form/A5c9I3HkyNd1puU4nJWl"
-      style="width:100%;height:1360px;border:none;border-radius:6px;"
-      title="Debt Relief Estimate Form"
-      loading="lazy">
-    </iframe>
+    <img src="https://debthelpform.com/wp-content/uploads/2025/07/couple-reviewing-paperwork.jpg" alt="Couple reviewing debt options paperwork and finding relief" style="width:100%; max-width:900px; border-radius:10px; margin:1.5rem 0;" loading="lazy" />
+    <iframe src="https://api.leadconnectorhq.com/widget/form/A5c9I3HkyNd1puU4nJWl" style="width:100%; height:1360px; border:none; border-radius:6px;" title="Debt Relief Estimate Form" loading="lazy"></iframe>
     <script src="https://link.msgsndr.com/js/form_embed.js" defer></script>
 
-    <!-- Trust Links -->
     <div class="trust-links">
       <h3>Helpful Government & Compliance Resources:</h3>
       <ul>
         <li><a href="https://consumer.ftc.gov" target="_blank" rel="noopener noreferrer">FTC – Federal Trade Commission</a></li>
         <li><a href="https://consumerfinance.gov" target="_blank" rel="noopener noreferrer">CFPB – Consumer Financial Protection Bureau</a></li>
         <li><a href="https://fcc.gov" target="_blank" rel="noopener noreferrer">FCC – Federal Communications Commission</a></li>
-        <li><a href="https://www.identitytheft.gov" target="_blank" rel="noopener noreferrer">IdentityTheft.gov – ID Theft Help</a></li>
-        <li><a href="https://www.usa.gov" target="_blank" rel="noopener noreferrer">USA.gov – Government Assistance Portal</a></li>
+        <li><a href="https://identitytheft.gov" target="_blank" rel="noopener noreferrer">IdentityTheft.gov – ID Theft Help</a></li>
+        <li><a href="https://usa.gov" target="_blank" rel="noopener noreferrer">USA.gov – Government Assistance Portal</a></li>
         <li><a href="https://nfcc.org" target="_blank" rel="noopener noreferrer">NFCC – National Foundation for Credit Counseling</a></li>
         <li><a href="https://bbb.org" target="_blank" rel="noopener noreferrer">BBB – Better Business Bureau</a></li>
       </ul>
@@ -248,7 +228,7 @@
   <!-- Footer -->
   <footer>
     <p>&copy; 2025 DebtHelpForm.com. All rights reserved.</p>
-    <p><a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener noreferrer">This website is owned and operated by Gateway Financial Settlement Relief</a>.</p>
+    <p><a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener noreferrer">Site Owner</a></p>
   </footer>
 
   <!-- Bot Protection Script -->
@@ -273,5 +253,6 @@
       return true;
     }
   </script>
+
 </body>
 </html>
