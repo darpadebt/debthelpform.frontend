@@ -71,6 +71,19 @@
 
     /* Fixed Navigation */
     .sticky-nav {
+      position: fixed !important;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: #004488;
+      z-index: 9999;
+      display: flex;
+      gap: 1rem;
+      padding: 1rem;
+      overflow-x: auto;
+      white-space: nowrap;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
       position: fixed;
       top: 0;
       left: 0;
@@ -159,6 +172,24 @@
 
     /* Footer Section */
     footer {
+      position: relative;
+      z-index: 1000;
+      max-width: 900px;
+      margin: 2rem auto 0;
+      background: #003366;
+      color: #fff;
+      text-align: center;
+      padding: 3rem 1rem 4rem;
+    }
+    footer a {
+      color: #ffdd00;
+      text-decoration: underline;
+      font-weight: bold;
+      pointer-events: auto;
+    }
+    footer a:hover {
+      color: #ffffff;
+    }
       max-width: 900px;
       margin: 2rem auto 0;
       background: #003366;
