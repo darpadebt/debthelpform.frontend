@@ -73,8 +73,7 @@
     nav {
       background: #004488;
       display: flex;
-      justify-content: flex-start;
-      align-items: center;
+      flex-wrap: nowrap;
       overflow-x: auto;
       white-space: nowrap;
       gap: 1rem;
@@ -94,7 +93,7 @@
       font-weight: 600;
       text-decoration: none;
       padding: 0.5rem 0.75rem;
-      flex-shrink: 0;
+      flex: 0 0 auto;
     }
 
     nav a:hover {
@@ -144,20 +143,17 @@
 
     footer {
       position: relative;
-      z-index: 999;
       background: #003366;
       color: white;
       text-align: center;
-      padding: 2rem 1rem;
-      margin-top: 3rem;
+      padding: 3rem 1rem 4rem;
+      z-index: 9999;
     }
 
     footer a {
       color: #ffdd00;
       text-decoration: underline;
-      transition: color 0.3s;
-      position: relative;
-      z-index: 1001;
+      font-weight: bold;
     }
 
     footer a:hover {
@@ -255,4 +251,3 @@
 
 </body>
 </html>
-// Push Test
