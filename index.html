@@ -63,7 +63,7 @@
       color: #222;
     }
 
-    header, footer {
+    header {
       background: #003366;
       color: white;
       text-align: center;
@@ -133,7 +133,7 @@
       position: fixed;
       bottom: 0;
       width: 100%;
-      z-index: 9999;
+      z-index: 998;
     }
 
     .mobile-call a {
@@ -142,10 +142,22 @@
       text-decoration: none;
     }
 
+    footer {
+      position: relative;
+      z-index: 999;
+      background: #003366;
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      margin-top: 3rem;
+    }
+
     footer a {
       color: #ffdd00;
       text-decoration: underline;
       transition: color 0.3s;
+      position: relative;
+      z-index: 1001;
     }
 
     footer a:hover {
