@@ -32,26 +32,30 @@
 
   <!-- Styles -->
   <style>
-    body {
-      margin: 0;
-      padding-top: 64px;
-      font-family: 'Inter', sans-serif;
-      background: #f9fafe;
-      color: #222;
-    }
+   body {
+  margin: 0;
+  padding-top: 80px; /* More room for fixed nav */
+  font-family: 'Inter', sans-serif;
+  background: #f9fafe;
+  color: #222;
+}
+
 
     .sticky-nav {
-      position: sticky;
-      top: 0;
-      background: #004488;
-      z-index: 9999;
-      display: flex;
-      gap: 1rem;
-      padding: 1rem;
-      overflow-x: auto;
-      white-space: nowrap;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: #004488;
+  z-index: 9999;
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
     .sticky-nav a {
       color: #fff;
       font-weight: 600;
@@ -121,17 +125,15 @@
       text-decoration: underline;
     }
 
-    footer {
-      max-width: 900px;
-      margin: 2rem auto;
-      background: #003366;
-      color: #fff;
-      text-align: center;
-      padding: 3rem 1rem 4rem;
-      position: relative;
-      z-index: 1000;
-    }
-    footer p a {
+   <footer>
+  <p>&copy; 2025 DebtHelpForm.com. All rights reserved.</p>
+  <p>Website owned and operated by 
+    <a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener noreferrer">
+      Gateway Financial Settlement Relief
+    </a>
+  </p>
+</footer>
+
       color: #ffdd00;
       text-decoration: underline;
       font-weight: bold;
@@ -144,18 +146,19 @@
 </head>
 <body>
 
-  <!-- Sticky Nav -->
-  <nav class="sticky-nav" role="navigation" aria-label="Main navigation">
-    <a href="/">Home</a>
-    <a href="/relief.html">Relief Options</a>
-    <a href="/geo-debt-relief.html">State Programs</a>
-    <a href="/debthelpform-pages-blog.html">Blog</a>
-    <a href="/contact.html">Contact</a>
-    <a href="/privacy.html">Privacy</a>
-    <a href="https://gatewaydebthelp.com" target="_blank" rel="noopener noreferrer">GatewayDebtHelp.com</a>
-    <a href="https://debtreliefguard.com" target="_blank" rel="noopener noreferrer">DebtReliefGuard.com</a>
-    <a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener noreferrer">Site Owner</a>
-  </nav>
+<!-- Sticky Nav -->
+<nav class="sticky-nav" role="navigation" aria-label="Main navigation">
+  <a href="/">Home</a>
+  <a href="/relief.html">Relief Options</a>
+  <a href="/geo-debt-relief.html">State Programs</a>
+  <a href="/debthelpform-pages-blog.html">Blog</a>
+  <a href="/contact.html">Contact</a>
+  <a href="/privacy.html">Privacy</a>
+  <a href="https://gatewaydebthelp.com" target="_blank" rel="noopener noreferrer">GatewayDebtHelp.com</a>
+  <a href="https://debtreliefguard.com" target="_blank" rel="noopener noreferrer">DebtReliefGuard.com</a>
+  <a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener noreferrer"><strong>Site Owner</strong></a>
+</nav>
+
 
   <!-- Mobile Call -->
   <div class="mobile-call" aria-label="Tap to call 888-437-7141">
@@ -194,11 +197,16 @@
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 DebtHelpForm.com. All rights reserved.</p>
-    <p><a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener noreferrer">Site Owner</a></p>
-  </footer>
+<!-- Footer -->
+<footer>
+  <p>&copy; 2025 DebtHelpForm.com. All rights reserved.</p>
+  <p>
+    Website owned and operated by
+    <a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener noreferrer">
+      Gateway Financial Settlement Relief
+    </a>
+  </p>
+</footer>
 
   <!-- Bot Protection -->
   <script>
