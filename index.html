@@ -160,7 +160,8 @@
           style="width:100%; height:1360px; border:none; border-radius:6px;"
           title="Debt Relief Estimate Form"
           loading="lazy"
-          alt="Debt Relief Form"></iframe>
+          alt="Debt Relief Form"
+          onload="trackConversion()"></iframe>
   <script src="https://link.msgsndr.com/js/form_embed.js" defer></script>
 
   <!-- Trust Links -->
@@ -213,7 +214,7 @@
   }
 </script>
 
-<!-- ✅ GPT-4o A/B Variant Switcher -->
+<!-- ✅ GPT-4o A/B Variant Logic + Conversion Tracker -->
 <script>
 (async () => {
   try {
@@ -238,8 +239,16 @@
       headers: { "Content-Type": "application/json" }
     });
 
+    window.trackConversion = () => {
+      fetch("https://debthelpform.com/ai-loop-optimizer/ab-convert", {
+        method: "POST",
+        body: JSON.stringify({ variant }),
+        headers: { "Content-Type": "application/json" }
+      });
+    };
+
   } catch (e) {
-    console.error("A/B Switcher failed:", e);
+    console.error("A/B logic failed:", e);
   }
 })();
 </script>
