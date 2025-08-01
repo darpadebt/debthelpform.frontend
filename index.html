@@ -7,7 +7,7 @@
 
   <!-- SEO Meta -->
   <meta name="description" content="Get a secure, compliant, and free debt relief estimate.">
-  <meta name="keywords" content="debt relief, debt consolidation, debt settlement, free debt estimate, financial help, gateway financial settlement relief, GFSR, gatewaydebthelp, debtreliefguard">
+  <meta name="keywords" content="debt help, debt relief, debt settlement, debt consolidation, GFSR, Gateway Financial Settlement Relief, GatewayDebtHelp.com, reduce debt, secure debt estimate, credit relief, DebtReliefGuard.com, debthelpform.com, trusted debt solutions, financial hardship help">
   <meta name="author" content="DebtHelpForm.com">
   <meta name="robots" content="index, follow">
 
@@ -152,7 +152,7 @@
 
 <!-- Main Content -->
 <section>
-  <h2>Start Here – See How Much You Could Save</h2>
+  <h2 id="ab-cta-text">Loading your free savings estimate message...</h2>
   <p>Get a personalized debt relief estimate in under 60 seconds. No obligations, no pressure — just answers.</p>
 
   <!-- Lead Form -->
@@ -212,5 +212,37 @@
     return true;
   }
 </script>
+
+<!-- ✅ GPT-4o A/B Variant Switcher -->
+<script>
+(async () => {
+  try {
+    const stored = localStorage.getItem("variantVersion");
+    let variant = stored;
+
+    if (!stored) {
+      variant = Math.random() < 0.5 ? "A" : "B";
+      localStorage.setItem("variantVersion", variant);
+    }
+
+    const res = await fetch("https://debthelpform.com/ai-loop-optimizer/ab-variants");
+    const data = await res.json();
+    const text = variant === "A" ? data.variantA : data.variantB;
+
+    const el = document.getElementById("ab-cta-text");
+    if (el && text) el.innerText = text;
+
+    fetch("https://debthelpform.com/ai-loop-optimizer/ab-log", {
+      method: "POST",
+      body: JSON.stringify({ variant }),
+      headers: { "Content-Type": "application/json" }
+    });
+
+  } catch (e) {
+    console.error("A/B Switcher failed:", e);
+  }
+})();
+</script>
+
 </body>
 </html>
