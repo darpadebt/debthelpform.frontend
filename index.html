@@ -254,6 +254,24 @@
     ]
   }
   </script>
+
+  <!-- ===== A/B hook for AI Loop Optimizer (050) ===== -->
+  <meta name="x-ai-optimizer-page" content="dhf:index" />
+  <script>
+    window.__ab = {
+      pageKey: 'dhf:index',
+      slots: {
+        headline: '#ab-cta-text',
+        // DHF homepage doesn't have a separate hero primary CTA button;
+        // expose the phone CTA for experiments if needed:
+        phoneCta: 'header a[href^="tel:"]'
+      },
+      defaults: {
+        primaryCtaText: '🔒 Start Secure Estimate',
+        primaryCtaHref: 'https://debthelpform.com/#lead-form'
+      }
+    };
+  </script>
 </head>
 
 <body>
@@ -638,3 +656,4 @@
   <noscript><p style="text-align:center;color:#666">For the best experience, please enable JavaScript to load your personalized savings estimate.</p></noscript>
 </body>
 </html>
+```0
