@@ -84,9 +84,23 @@
     footer a { color:#0055aa; text-decoration:none; }
     footer a:hover { text-decoration:underline; }
 
-    /* Chat widget */
-    #chatbox{position:fixed;bottom:20px;right:20px;width:320px;max-width:92vw;background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 12px 32px rgba(0,0,0,.16);overflow:hidden;font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-    #chatbox header{background:#003366;color:#fff;padding:.6rem .8rem;font-weight:700}
+    /* Chat widget fixed to bottom right (desktop), bottom full width on mobile */
+    #chatbox{
+      position:fixed;
+      right:20px;
+      bottom:0;
+      width:320px;
+      max-width:92vw;
+      background:#fff;
+      border:1px solid #e5e7eb;
+      border-radius:12px 12px 0 0;
+      box-shadow:0 -4px 24px rgba(0,0,0,.16);
+      overflow:hidden;
+      font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      z-index:10000;
+      transition:bottom 0.2s;
+    }
+    #chatbox header{background:#003366;color:#fff;padding:.6rem .8rem;font-weight:700;border-radius:12px 12px 0 0;}
     #chatlog{height:260px;overflow:auto;padding:.6rem .8rem;background:#fafafa}
     #chatlog .msg{margin:.35rem 0;word-wrap:break-word}
     #chatlog .user{text-align:right;color:#111}
@@ -95,7 +109,14 @@
     #chatform input{flex:1;padding:.55rem .6rem;border:1px solid #e5e7eb;border-radius:8px}
     #chatform button{padding:.55rem .8rem;background:#2563eb;color:#fff;border:0;border-radius:8px;font-weight:700;cursor:pointer}
     #chatform button:disabled{opacity:.6;cursor:not-allowed}
-    @media (max-width:420px){#chatbox{right:12px;left:12px;width:auto}}
+    @media (max-width:600px){
+      #chatbox{
+        left:0;
+        right:0;
+        width:auto;
+        border-radius:12px 12px 0 0;
+      }
+    }
   </style>
 
   <!-- Structured Data: Website + Breadcrumbs + FAQ -->
@@ -221,9 +242,9 @@
     })();
   </script>
 
-  <!-- Chatbot Widget (016) -->
+  <!-- Chatbot Widget (bottom fixed) -->
   <div id="chatbox" aria-live="polite" aria-label="Debt Relief Chatbot" hidden>
-    <header id="chatbox-header">Ask about debt relief</header>
+    <header>Ask about debt relief</header>
     <div id="chatlog" role="log" aria-label="Chat transcript"></div>
     <form id="chatform" autocomplete="off">
       <input id="chatinput" type="text" placeholder="Type your question…" aria-label="Chat input" maxlength="500"/>
