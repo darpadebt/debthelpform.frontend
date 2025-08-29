@@ -8,32 +8,26 @@
   <!-- =========================
        TITLE & DESCRIPTION (CTR)
        ========================= -->
-  <!-- SEO UPGRADE: tightened, US-targeted, conversion-first -->
   <title>Debt Help Form — Free U.S. Debt Relief Savings Estimate (Fast, Secure & FTC-Aligned)</title>
-  <!-- ≤160 chars, benefits + compliance + speed -->
   <meta name="description" content="Get a secure, FTC-aligned U.S. debt relief savings estimate in 60 seconds. Compare trusted options—debt settlement & consolidation—then choose your best path today." />
 
   <!-- =========================
        KEYWORDS (lightweight cue)
        ========================= -->
-  <!-- SEO UPGRADE: LSI/intent terms (not stuffed; modern engines de-prioritize but harmless) -->
   <meta name="keywords" content="U.S. debt relief, debt help, debt settlement, debt consolidation, credit card debt relief, free debt estimate, FTC compliant, TCPA, Gateway Financial Settlement Relief" />
 
   <!-- =========================
        INDEXING & CANONICAL
        ========================= -->
   <meta name="robots" content="index,follow,max-image-preview:large" />
-  <!-- SEO UPGRADE: strong Googlebot guidance -->
   <meta name="googlebot" content="index,follow,max-snippet:-1,max-image-preview:large,max-video-preview:-1" />
   <link rel="canonical" href="https://debthelpform.com/" />
 
   <!-- =========================
        GEO / LOCALE / HREFLANG
        ========================= -->
-  <!-- SEO UPGRADE: U.S. targeting signals (advisory but safe) -->
   <meta name="geo.region" content="US" />
   <meta name="geo.placename" content="United States" />
-  <!-- hreflang set for U.S. English + x-default -->
   <link rel="alternate" href="https://debthelpform.com/" hreflang="en-us" />
   <link rel="alternate" href="https://debthelpform.com/" hreflang="x-default" />
 
@@ -42,25 +36,28 @@
        ========================= -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://debthelpform.com/" />
-  <!-- SEO UPGRADE: match title for higher CTR -->
   <meta property="og:title" content="Debt Help Form — Free U.S. Debt Relief Savings Estimate (Fast, Secure & FTC-Aligned)" />
   <meta property="og:description" content="Get a secure, FTC-aligned U.S. debt relief savings estimate in 60 seconds. Compare trusted options and start reducing debt today." />
   <meta property="og:site_name" content="DebtHelpForm.com" />
   <meta property="og:image" content="https://debthelpform.com/og-cover.jpg" />
-  <!-- SEO UPGRADE: locale + alt text -->
   <meta property="og:locale" content="en_US" />
   <meta property="og:image:alt" content="Secure U.S. debt relief savings estimate in 60 seconds" />
-  <!-- SEO UPGRADE: larger preview for social CTR -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Debt Help Form — Free U.S. Debt Relief Savings Estimate (Fast, Secure & FTC-Aligned)" />
   <meta name="twitter:description" content="Fast, secure, and compliant. Get your debt relief savings estimate in 60 seconds." />
   <meta name="twitter:image" content="https://debthelpform.com/og-cover.jpg" />
 
-  <!-- Additional helpful hints -->
-  <!-- SEO UPGRADE: consistent referrer policy for analytics; not required but tidy -->
+  <!-- Helpful/UX -->
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <!-- Optional brand color for mobile chrome (minor UX) -->
   <meta name="theme-color" content="#003366" />
+
+  <!-- =========================
+       CACHE HINTS (META)
+       ========================= -->
+  <!-- CACHE UPGRADE: meta hints (server headers still take precedence) -->
+  <meta http-equiv="Cache-Control" content="public, max-age=0, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
 
   <!-- Perf hints -->
   <link rel="dns-prefetch" href="//fonts.googleapis.com">
@@ -124,7 +121,7 @@
        STRUCTURED DATA (JSON-LD)
        ========================= -->
 
-  <!-- WebSite + SearchAction (kept) -->
+  <!-- WebSite + SearchAction -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -145,7 +142,7 @@
   }
   </script>
 
-  <!-- Breadcrumbs (kept) -->
+  <!-- Breadcrumbs -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -160,7 +157,7 @@
   }
   </script>
 
-  <!-- SEO UPGRADE: Organization (GFSR) + brand graph + U.S. areaServed -->
+  <!-- Organization (GFSR) -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -176,10 +173,7 @@
       "https://debtreliefguard.com/",
       "https://gatewaydebthelp.com/"
     ],
-    "areaServed":{
-      "@type":"Country",
-      "name":"United States"
-    },
+    "areaServed":{"@type":"Country","name":"United States"},
     "contactPoint":{
       "@type":"ContactPoint",
       "telephone":"+1-888-437-7141",
@@ -190,7 +184,7 @@
   }
   </script>
 
-  <!-- SEO UPGRADE: Financial Service (debt relief), ties to org via sameAs/@id -->
+  <!-- Financial Service -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -205,7 +199,7 @@
   }
   </script>
 
-  <!-- FAQ (kept + expanded with compliant, common intents) -->
+  <!-- FAQ -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -359,6 +353,141 @@
         else fetch('/ingest',{ method:'POST', body:blob, keepalive:true, headers:{'Content-Type':'application/json'} }).catch(()=>{});
       }catch(_){}
     })();
+  })();
+  </script>
+
+  <!-- =========================
+       DARPA-GRADE CACHING (SW)
+       ========================= -->
+  <script>
+  // CACHE UPGRADE: install a high-performance Service Worker without extra files.
+  (function(){
+    if (!('serviceWorker' in navigator)) return;
+
+    const swCode = `
+      const VERSION = 'dhf-sw-v1.0.0';
+      const HTML_CACHE = 'dhf-html-' + VERSION;
+      const ASSET_CACHE = 'dhf-asset-' + VERSION;
+      const API_CACHE = 'dhf-api-' + VERSION;
+
+      const PRECACHE_URLS = [
+        '/', '/relief.html', '/geo-debt-relief.html', '/debthelpform-pages-blog.html', '/contact.html', '/privacy.html'
+      ];
+
+      // Helper: classify
+      const isHTML = req => req.mode === 'navigate' || (req.headers.get('accept')||'').includes('text/html');
+      const isAsset = url => /\.(?:css|js|mjs|cjs|png|jpe?g|gif|svg|webp|ico|woff2?|ttf|otf)$/i.test(url.pathname);
+      const isThirdParty = url => location.origin !== url.origin;
+      const isBypassThirdParty = url =>
+        /(^|\.)leadconnectorhq\.com$/.test(url.hostname) ||
+        /(^|\.)msgsndr\.com$/.test(url.hostname);
+
+      self.addEventListener('install', event => {
+        event.waitUntil((async () => {
+          const cache = await caches.open(HTML_CACHE);
+          await cache.addAll(PRECACHE_URLS);
+          self.skipWaiting();
+        })());
+      });
+
+      self.addEventListener('activate', event => {
+        event.waitUntil((async () => {
+          const names = await caches.keys();
+          await Promise.all(names.map(n => {
+            if (!n.includes(VERSION)) return caches.delete(n);
+          }));
+          self.clients.claim();
+        })());
+      });
+
+      // Stale-While-Revalidate for HTML (instant navs, background freshness)
+      async function handleHTML(req) {
+        const cache = await caches.open(HTML_CACHE);
+        const cached = await cache.match(req, { ignoreSearch: true });
+        const fetchPromise = fetch(req, { credentials: 'same-origin' })
+          .then(resp => {
+            if (resp && resp.status === 200) cache.put(req, resp.clone());
+            return resp;
+          })
+          .catch(() => cached || Response.error());
+        return cached || fetchPromise;
+      }
+
+      // Cache-first for versioned/static assets
+      async function handleAsset(req, url) {
+        const cache = await caches.open(ASSET_CACHE);
+        const cached = await cache.match(req);
+        if (cached) return cached;
+
+        const resp = await fetch(req, { credentials: 'omit' }).catch(() => null);
+        if (resp && resp.status === 200) {
+          // Heuristic: long TTL for immutable assets
+          const headers = new Headers(resp.headers);
+          if (!headers.has('Cache-Control')) headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+          const body = await resp.blob();
+          const newResp = new Response(body, { status: resp.status, statusText: resp.statusText, headers });
+          await cache.put(req, newResp.clone());
+          return newResp;
+        }
+        return resp || Response.error();
+      }
+
+      // SWR for first-party APIs (short TTL)
+      async function handleAPI(req, url) {
+        const cache = await caches.open(API_CACHE);
+        const cached = await cache.match(req);
+        const revalidate = fetch(req, { credentials: 'same-origin' })
+          .then(resp => {
+            if (resp && resp.status === 200) cache.put(req, resp.clone());
+            return resp;
+          })
+          .catch(() => cached || Response.error());
+        return cached || revalidate;
+      }
+
+      self.addEventListener('fetch', event => {
+        const url = new URL(event.request.url);
+        const req = event.request;
+
+        // Bypass third-party iframes/APIs that shouldn't be cached
+        if (isThirdParty(url) && isBypassThirdParty(url)) return;
+
+        // Only handle GET
+        if (req.method !== 'GET') return;
+
+        if (isHTML(req)) {
+          event.respondWith(handleHTML(req));
+          return;
+        }
+
+        if (url.pathname.startsWith('/api/savings-message')) {
+          event.respondWith(handleAPI(req, url));
+          return;
+        }
+
+        if (isAsset(url)) {
+          event.respondWith(handleAsset(req, url));
+          return;
+        }
+
+        // Default: network-first with cache fallback
+        event.respondWith((async () => {
+          try {
+            const net = await fetch(req);
+            return net;
+          } catch {
+            const cache = await caches.open(ASSET_CACHE);
+            const hit = await cache.match(req);
+            return hit || Response.error();
+          }
+        })());
+      });
+    `;
+
+    try {
+      const blobURL = URL.createObjectURL(new Blob([swCode], { type: 'text/javascript' }));
+      navigator.serviceWorker.register(blobURL, { scope: '/' }).catch(()=>{});
+    } catch (_) {}
   })();
   </script>
 
