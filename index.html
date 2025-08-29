@@ -1,257 +1,281 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Charset & Viewport -->
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DebtHelpForm.com | Free Personalized Debt Relief Estimate</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- SEO Meta -->
-  <meta name="description" content="Get a secure, compliant, and free debt relief estimate.">
-  <meta name="keywords" content="debt help, debt relief, debt settlement, debt consolidation, GFSR, Gateway Financial Settlement Relief, GatewayDebtHelp.com, reduce debt, secure debt estimate, credit relief, DebtReliefGuard.com, debthelpform.com, trusted debt solutions, financial hardship help">
-  <meta name="author" content="DebtHelpForm.com">
-  <meta name="robots" content="index, follow">
+  <!-- Title (≤60 chars, primary keywords up front) -->
+  <title>Debt Help Form — Free Debt Relief Savings Estimate (Fast & Secure)</title>
 
-  <!-- Schema -->
+  <!-- Meta Description (≤160 chars, benefit + CTA) -->
+  <meta name="description" content="Get a secure, FTC-aligned debt relief savings estimate in 60 seconds. No pressure—just answers. Compare trusted options and start reducing debt today." />
+
+  <!-- Primary Keywords (support relevance; keep natural) -->
+  <meta name="keywords" content="debt relief, debt help, debt settlement, debt consolidation, credit card debt relief, free debt estimate, Gateway Financial Settlement Relief" />
+
+  <!-- Robots & Canonical -->
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="canonical" href="https://debthelpform.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://debthelpform.com/" />
+  <meta property="og:title" content="Debt Help Form — Free Debt Relief Savings Estimate" />
+  <meta property="og:description" content="Get a secure, FTC-aligned debt relief savings estimate in 60 seconds. No pressure—just answers." />
+  <meta property="og:site_name" content="DebtHelpForm.com" />
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Debt Help Form — Free Debt Relief Savings Estimate" />
+  <meta name="twitter:description" content="Fast, secure, and compliant. Get your debt relief savings estimate in 60 seconds." />
+
+  <!-- Preconnects (perf) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://api.leadconnectorhq.com" crossorigin>
+
+  <!-- Google Fonts (with swap) -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles (lightweight, mobile-first) -->
+  <style>
+    :root {
+      --brand: #003366;
+      --brand-2: #004488;
+      --cta: #2563eb;
+      --ok: #007b55;
+      --ink: #222;
+      --bg: #f9fafe;
+    }
+    * { box-sizing: border-box; }
+    html,body { margin:0; padding:0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+      padding-top: 76px; /* account for sticky nav */
+    }
+
+    /* Skip link (a11y) */
+    .skip-link {
+      position: absolute; left: -999px; top: auto; width: 1px; height: 1px; overflow: hidden;
+    }
+    .skip-link:focus {
+      position: fixed; left: 12px; top: 12px; padding: .5rem .75rem;
+      background: #000; color: #fff; z-index: 10000; border-radius: 6px;
+    }
+
+    /* Sticky Nav (optimized) */
+    .sticky-nav {
+      position: fixed; top:0; left:0; right:0;
+      background: var(--brand-2);
+      z-index: 9999; box-shadow: 0 2px 5px rgba(0,0,0,.08);
+    }
+    .sticky-nav ul {
+      display:flex; gap:.75rem; margin:0; padding:.75rem 1rem;
+      overflow-x:auto; white-space:nowrap; list-style:none;
+    }
+    .sticky-nav a {
+      color:#fff; font-weight:600; text-decoration:none; padding:.4rem .6rem; border-radius:6px;
+    }
+    .sticky-nav a:hover, .sticky-nav a:focus { text-decoration: underline; outline: none; }
+
+    /* Header / Hero */
+    header {
+      max-width: 960px; margin: 0 auto; text-align:center;
+      background: var(--brand); color:#fff; padding: 2rem 1rem 1.5rem; border-radius: 10px;
+    }
+    header h1 { margin: 0 0 .5rem; font-size: clamp(1.6rem, 3vw + 1rem, 2.4rem); }
+    header p { margin:.25rem 0 .5rem; }
+    header a { color: #ffdd00; font-weight:700; text-decoration:none; }
+    header a:hover { text-decoration: underline; }
+
+    /* Main Section */
+    section {
+      max-width: 960px; margin: 1.5rem auto; background:#fff; border-radius:10px;
+      padding: 1.25rem; box-shadow: 0 2px 12px rgba(0,0,0,.07);
+    }
+    section h2 { margin-top:0; font-size: clamp(1.25rem, 2vw + .8rem, 1.75rem); }
+    .lead { margin:.25rem 0 1rem; color:#444; }
+
+    /* Trust links */
+    .trust-links { margin-top: 1.25rem; font-size:.96rem; }
+    .trust-links ul { padding-left:1.1rem; }
+    .trust-links a { color:#0055aa; text-decoration:none; }
+    .trust-links a:hover { text-decoration: underline; }
+
+    /* Mobile call bar */
+    .mobile-call {
+      display:none; position: fixed; bottom:0; left:0; right:0;
+      background: var(--ok); color:#fff; text-align:center; padding: .9rem;
+      z-index: 9998;
+    }
+    .mobile-call a { color:#fff; font-weight:800; text-decoration:none; }
+    @media (max-width: 768px) { .mobile-call { display:block; } }
+
+    footer {
+      max-width: 960px; margin: 1.25rem auto 3.5rem; text-align:center; color:#666;
+    }
+    footer a { color:#0055aa; text-decoration:none; }
+    footer a:hover { text-decoration: underline; }
+  </style>
+
+  <!-- Structured Data: Website + Breadcrumbs + FAQ -->
   <script type="application/ld+json">
   {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "name": "DebtHelpForm.com",
-    "url": "https://debthelpform.com",
-    "description": "Get a personalized, secure debt relief estimate.",
-    "publisher": {
-      "@type": "Organization",
-      "name": "Gateway Financial Settlement Relief",
-      "url": "https://gatewayfinancialsettlementrelief.com"
+    "@context":"https://schema.org",
+    "@type":"WebSite",
+    "name":"DebtHelpForm.com",
+    "url":"https://debthelpform.com/",
+    "potentialAction":{
+      "@type":"SearchAction",
+      "target":"https://debthelpform.com/?q={search_term_string}",
+      "query-input":"required name=search_term_string"
+    },
+    "publisher":{
+      "@type":"Organization",
+      "name":"Gateway Financial Settlement Relief",
+      "url":"https://gatewayfinancialsettlementrelief.com"
     }
   }
   </script>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
-
-  <!-- Styles -->
-  <style>
-    body {
-      margin: 0;
-      padding-top: 80px;
-      font-family: 'Inter', sans-serif;
-      background: #f9fafe;
-      color: #222;
-    }
-
-    .sticky-nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: #004488;
-      z-index: 9999;
-      display: flex;
-      gap: 1rem;
-      padding: 1rem;
-      overflow-x: auto;
-      white-space: nowrap;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
-    .sticky-nav a {
-      color: #fff;
-      font-weight: 600;
-      text-decoration: none;
-      padding: 0.5rem 0.75rem;
-      flex: 0 0 auto;
-    }
-    .sticky-nav a:hover { text-decoration: underline; }
-    .sticky-nav::-webkit-scrollbar { display: none; }
-
-    .mobile-call {
-      display: none;
-      position: fixed;
-      bottom: 0;
-      width: 100%;
-      background: #007b55;
-      color: #fff;
-      text-align: center;
-      padding: 1rem;
-      z-index: 998;
-    }
-    @media (max-width: 768px) {
-      .mobile-call { display: block; }
-    }
-    .mobile-call a {
-      color: #fff;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    header {
-      max-width: 900px;
-      margin: 0 auto;
-      background: #003366;
-      color: #fff;
-      text-align: center;
-      padding: 2rem 1rem;
-    }
-    header a {
-      color: #ffdd00;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    section {
-      max-width: 900px;
-      margin: 2rem auto;
-      background: #fff;
-      border-radius: 10px;
-      padding: 2rem;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-    }
-
-    .trust-links {
-      margin-top: 2rem;
-      font-size: 0.95rem;
-    }
-    .trust-links ul {
-      padding-left: 1rem;
-      list-style: disc;
-    }
-    .trust-links a {
-      color: #0055aa;
-      text-decoration: none;
-    }
-    .trust-links a:hover {
-      text-decoration: underline;
-    }
-  </style>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"BreadcrumbList",
+    "itemListElement":[
+      { "@type":"ListItem", "position":1, "name":"Home", "item":"https://debthelpform.com/" },
+      { "@type":"ListItem", "position":2, "name":"Debt Relief Options", "item":"https://debthelpform.com/relief.html" },
+      { "@type":"ListItem", "position":3, "name":"State Programs", "item":"https://debthelpform.com/geo-debt-relief.html" },
+      { "@type":"ListItem", "position":4, "name":"Debt Help Blog", "item":"https://debthelpform.com/debthelpform-pages-blog.html" },
+      { "@type":"ListItem", "position":5, "name":"Contact", "item":"https://debthelpform.com/contact.html" }
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"How quickly can I get a debt relief savings estimate?","acceptedAnswer":{"@type":"Answer","text":"Most people receive a baseline estimate in under 60 seconds via our secure form. No pressure—just answers."}},
+      {"@type":"Question","name":"Will this affect my credit score?","acceptedAnswer":{"@type":"Answer","text":"Requesting an estimate here does not affect your credit score. We do not run a hard inquiry."}},
+      {"@type":"Question","name":"Is this aligned with FTC and TCPA compliance?","acceptedAnswer":{"@type":"Answer","text":"Yes. We follow FTC advertising guidelines and TCPA best practices. No misleading claims or fake testimonials."}}
+    ]
+  }
+  </script>
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to content</a>
 
-<!-- Sticky Nav -->
-<nav class="sticky-nav" role="navigation" aria-label="Main navigation">
-  <a href="/">Home</a>
-  <a href="/relief.html">Relief Options</a>
-  <a href="/geo-debt-relief.html">State Programs</a>
-  <a href="/debthelpform-pages-blog.html">Blog</a>
-  <a href="/contact.html">Contact</a>
-  <a href="/privacy.html">Privacy</a>
-  <a href="https://gatewaydebthelp.com" target="_blank" rel="noopener noreferrer">GatewayDebtHelp.com</a>
-  <a href="https://debtreliefguard.com" target="_blank" rel="noopener noreferrer">DebtReliefGuard.com</a>
-  <a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener noreferrer"><strong>Site Owner</strong></a>
-</nav>
+  <!-- Sticky Nav (optimized anchors & structure) -->
+  <nav class="sticky-nav" role="navigation" aria-label="Main navigation">
+    <ul>
+      <li><a href="/" title="Debt Help Form Home">Home</a></li>
+      <li><a href="/relief.html" title="Explore Debt Relief Options">Debt Relief Options</a></li>
+      <li><a href="/geo-debt-relief.html" title="State-Based Debt Relief Programs">State Programs</a></li>
+      <li><a href="/debthelpform-pages-blog.html" title="Debt Help Blog & Guides">Debt Help Blog</a></li>
+      <li><a href="/contact.html" title="Contact Debt Help Form">Contact Us</a></li>
+      <li><a href="/privacy.html" title="Privacy and Compliance Policy">Privacy Policy</a></li>
+      <li><a href="https://gatewaydebthelp.com" target="_blank" rel="noopener noreferrer" title="Gateway Debt Help">GatewayDebtHelp.com</a></li>
+      <li><a href="https://debtreliefguard.com" target="_blank" rel="noopener noreferrer" title="Debt Relief Guard Reviews">DebtReliefGuard.com</a></li>
+      <li><a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener noreferrer" title="Gateway Financial Settlement Relief Official"><strong>Site Owner</strong></a></li>
+    </ul>
+  </nav>
 
-<!-- Mobile Call -->
-<div class="mobile-call" aria-label="Tap to call 888-437-7141">
-  <a href="tel:+18884377141">📞 Tap to Call: 888-437-7141</a>
-</div>
+  <!-- Mobile Call -->
+  <div class="mobile-call" aria-label="Tap to call 888-437-7141">
+    <a href="tel:+18884377141">📞 Tap to Call: 888-437-7141</a>
+  </div>
 
-<!-- Header -->
-<header>
-  <h1>Get Your Free Debt Relief Savings Estimate</h1>
-  <p><a href="tel:+18884377141">📞 Call Now: 888-437-7141</a></p>
-</header>
+  <!-- Header / Hero -->
+  <header>
+    <!-- H1 tuned for primary intent + speed/benefit -->
+    <h1 id="ab-cta-text">Free Debt Relief Savings Estimate — Fast, Secure & FTC-Aligned</h1>
+    <p><a href="tel:+18884377141">📞 Call Now: 888-437-7141</a></p>
+  </header>
 
-<!-- Main Content -->
-<section>
-  <h2 id="ab-cta-text">Loading your free savings estimate message...</h2>
-  <p>Get a personalized debt relief estimate in under 60 seconds. No obligations, no pressure — just answers.</p>
+  <!-- Main Content -->
+  <main id="main">
+    <section>
+      <!-- H2 supports and repeats core intent naturally -->
+      <h2>See How Much You Could Save on Credit Card & Unsecured Debt</h2>
+      <p class="lead">Answer a few quick questions and get a personalized, no-pressure estimate. We compare trusted debt relief options so you can choose what fits best.</p>
 
-  <!-- Lead Form -->
-  <iframe src="https://api.leadconnectorhq.com/widget/form/A5c9I3HkyNd1puU4nJWl"
+      <!-- Lead Form (GoHighLevel) -->
+      <div id="lead-form" aria-label="Debt Relief Estimate Form">
+        <iframe
+          src="https://api.leadconnectorhq.com/widget/form/A5c9I3HkyNd1puU4nJWl"
           style="width:100%; height:1360px; border:none; border-radius:6px;"
           title="Debt Relief Estimate Form"
           loading="lazy"
-          alt="Debt Relief Form"
+          referrerpolicy="strict-origin-when-cross-origin"
           onload="trackConversion()"></iframe>
-  <script src="https://link.msgsndr.com/js/form_embed.js" defer></script>
+        <script src="https://link.msgsndr.com/js/form_embed.js" defer></script>
+      </div>
 
-  <!-- Trust Links -->
-  <div class="trust-links">
-    <h3>Helpful Government & Compliance Resources:</h3>
-    <ul>
-      <li><a href="https://consumer.ftc.gov" target="_blank" rel="noopener noreferrer">FTC – Federal Trade Commission</a></li>
-      <li><a href="https://consumerfinance.gov" target="_blank" rel="noopener noreferrer">CFPB – Consumer Financial Protection Bureau</a></li>
-      <li><a href="https://fcc.gov" target="_blank" rel="noopener noreferrer">FCC – Federal Communications Commission</a></li>
-      <li><a href="https://identitytheft.gov" target="_blank" rel="noopener noreferrer">IdentityTheft.gov – ID Theft Help</a></li>
-      <li><a href="https://usa.gov" target="_blank" rel="noopener noreferrer">USA.gov – Government Assistance Portal</a></li>
-      <li><a href="https://nfcc.org" target="_blank" rel="noopener noreferrer">NFCC – National Foundation for Credit Counseling</a></li>
-      <li><a href="https://bbb.org" target="_blank" rel="noopener noreferrer">BBB – Better Business Bureau</a></li>
-    </ul>
-  </div>
-</section>
+      <!-- Trust signals / internal links -->
+      <div class="trust-links">
+        <h3>Consumer-First Resources & Trust</h3>
+        <ul>
+          <li><a href="https://consumer.ftc.gov" target="_blank" rel="noopener">FTC — Advertising & Consumer Protection</a></li>
+          <li><a href="https://consumerfinance.gov" target="_blank" rel="noopener">CFPB — Debt Relief Guidance</a></li>
+          <li><a href="https://identitytheft.gov" target="_blank" rel="noopener">IdentityTheft.gov — ID Theft Help</a></li>
+          <li><a href="https://usa.gov" target="_blank" rel="noopener">USA.gov — Assistance Programs</a></li>
+          <li><a href="https://nfcc.org" target="_blank" rel="noopener">NFCC — Credit Counseling</a></li>
+          <li><a href="/debthelpform-pages-blog.html">Debt Relief Guides & Blog</a></li>
+        </ul>
+      </div>
+    </section>
+  </main>
 
-<!-- Footer -->
-<footer>
-  <p>&copy; 2025 DebtHelpForm.com. All rights reserved.</p>
-  <p>
-    Website owned and operated by
-    <a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener noreferrer">
-      Gateway Financial Settlement Relief
-    </a>
-  </p>
-  <p style="font-size:0.8rem; color:#ccc;">Last updated: July 31, 2025</p>
-</footer>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 DebtHelpForm.com. All rights reserved.</p>
+    <p>Website owned and operated by <a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener">Gateway Financial Settlement Relief</a></p>
+    <p style="font-size:.82rem; color:#999;">Last updated: August 2025</p>
+  </footer>
 
-<!-- Bot Protection -->
-<script>
-  const honeypot = document.createElement("input");
-  honeypot.type = "text";
-  honeypot.name = "website";
-  honeypot.style.display = "none";
-  document.body.appendChild(honeypot);
+  <!-- Bot Protection (lightweight heuristic; client-side only) -->
+  <script>
+    (function(){
+      const honeypot = document.createElement("input");
+      honeypot.type = "text"; honeypot.name = "website"; honeypot.autocomplete = "off";
+      honeypot.setAttribute("aria-hidden","true"); honeypot.hidden = true;
+      document.body.appendChild(honeypot);
 
-  let userInteracted = false;
-  window.addEventListener('mousemove', () => userInteracted = true);
-  window.addEventListener('keydown', () => userInteracted = true);
-  let timeOnPage = 0;
-  setInterval(() => timeOnPage++, 1000);
+      let u = false, t = 0;
+      addEventListener('mousemove', () => u = true, {passive:true});
+      addEventListener('keydown', () => u = true, {passive:true});
+      setInterval(() => t++, 1000);
+      window.validateBotProtections = () => (honeypot.value === "" && u && t >= 3);
+    })();
+  </script>
 
-  function validateBotProtections() {
-    if (honeypot.value !== "" || !userInteracted || timeOnPage < 3) {
-      alert("Submission blocked due to suspicious activity.");
-      return false;
-    }
-    return true;
-  }
-</script>
+  <!-- ✅ Hook to Worker 050: fetch savings message (relative path, works on both domains) -->
+  <script>
+    (async () => {
+      const el = document.getElementById("ab-cta-text");
+      const fallback = "Free Debt Relief Savings Estimate — Fast, Secure & FTC-Aligned";
+      if (!el) return;
 
-<!-- ✅ GPT-4o A/B Variant Logic + Conversion Tracker -->
-<script>
-(async () => {
-  try {
-    const stored = localStorage.getItem("variantVersion");
-    let variant = stored;
+      try {
+        const r = await fetch('/api/savings-message', { headers: { 'Accept': 'application/json' } });
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        const data = await r.json();
+        el.textContent = data?.message ?? fallback;
+      } catch (err) {
+        console.warn('Savings message fetch failed:', err);
+        el.textContent = fallback;
+      }
 
-    if (!stored) {
-      variant = Math.random() < 0.5 ? "A" : "B";
-      localStorage.setItem("variantVersion", variant);
-    }
+      // Conversion hook (no-op; server endpoints for ops are token-gated)
+      window.trackConversion = () => { /* no-op for now */ };
+    })();
+  </script>
 
-    const res = await fetch("https://debthelpform.com/ai-loop-optimizer/ab-variants");
-    const data = await res.json();
-    const text = variant === "A" ? data.variantA : data.variantB;
-
-    const el = document.getElementById("ab-cta-text");
-    if (el && text) el.innerText = text;
-
-    fetch("https://debthelpform.com/ai-loop-optimizer/ab-log", {
-      method: "POST",
-      body: JSON.stringify({ variant }),
-      headers: { "Content-Type": "application/json" }
-    });
-
-    window.trackConversion = () => {
-      fetch("https://debthelpform.com/ai-loop-optimizer/ab-convert", {
-        method: "POST",
-        body: JSON.stringify({ variant }),
-        headers: { "Content-Type": "application/json" }
-      });
-    };
-
-  } catch (e) {
-    console.error("A/B logic failed:", e);
-  }
-})();
-</script>
-
+  <!-- NOSCRIPT notice -->
+  <noscript><p style="text-align:center;color:#666">For the best experience, please enable JavaScript to load your personalized savings estimate.</p></noscript>
 </body>
 </html>
