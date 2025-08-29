@@ -120,8 +120,12 @@
     .mobile-est{background:var(--cta);color:#fff}
     @media(min-width:769px){.mobile-bar{display:none}}
 
-    /* Floating bottom sitemap */
-    .sticky-menu{position:fixed;left:0;right:0;bottom:calc(var(--callbar-h) + env(safe-area-inset-bottom));background:#004488;color:#fff;border-top:2px solid #2563eb;height:var(--sitemap-h);display:flex;align-items:center;z-index:9997}
+    /* Floating bottom sitemap (LOWERED SLIGHTLY) */
+    .sticky-menu{
+      position:fixed;left:0;right:0;
+      bottom: calc(var(--callbar-h) - 12px + env(safe-area-inset-bottom));
+      background:#004488;color:#fff;border-top:2px solid #2563eb;height:var(--sitemap-h);display:flex;align-items:center;z-index:9997
+    }
     .sticky-menu nav{display:flex;gap:1rem;overflow-x:auto;white-space:nowrap;padding:0 .75rem;width:100%;align-items:center}
     .sticky-menu nav a{color:#ffdd00;text-decoration:none;padding:.35rem .55rem;border-radius:6px;font-weight:700;font-size:.92rem;flex:0 0 auto}
     .sticky-menu nav a:hover{background:rgba(255,255,255,.1)}
@@ -279,7 +283,7 @@
     <a class="mobile-est" href="#lead-form">🔒 Start Estimate</a>
   </div>
 
-  <!-- Floating bottom sitemap -->
+  <!-- Floating bottom sitemap (lowered slightly) -->
   <footer class="sticky-menu" role="navigation" aria-label="Site map">
     <nav>
       <a href="/">Home</a>
