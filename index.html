@@ -115,13 +115,54 @@
     footer { max-width:960px; margin:1.25rem auto 3.5rem; text-align:center; color:#666; }
     footer a { color:#0055aa; text-decoration:none; }
     footer a:hover { text-decoration:underline; }
+
+    /* Chat widget styles (Worker 016) */
+    :root{ --chat-radius:16px; --chat-shadow:0 10px 30px rgba(0,0,0,.18); --chat-border:1px solid rgba(0,0,0,.06); }
+    .gfsr-chat-fab{ position:fixed; right:14px; bottom:14px; z-index:9999; display:inline-flex; align-items:center; gap:.5rem; padding:.8rem 1rem; border-radius:999px; border:var(--chat-border); background:#0b63f6; color:#fff; box-shadow:var(--chat-shadow); font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial; }
+    .gfsr-chat-fab:focus-visible{ outline:3px solid #b9d3ff; outline-offset:3px; }
+    .gfsr-chat-sheet{ position:fixed; inset:auto 0 0 0; margin:auto; width:100%; max-width:420px; right:12px; left:auto; border-radius:18px 18px 0 0; background:#fff; box-shadow:var(--chat-shadow); transform:translateY(110%); transition:transform .28s ease; border:var(--chat-border); z-index:10000; }
+    @media (min-width:720px){ .gfsr-chat-sheet{ bottom:auto; top:calc(12px + env(safe-area-inset-top)); right:12px; left:auto; border-radius:18px; max-height:78vh; width:380px; } }
+    .gfsr-chat-sheet.open{ transform:translateY(0); }
+    @media (min-width:720px){ .gfsr-chat-sheet.open{ transform:none; position:fixed; bottom:12px; } }
+    .gfsr-chat-head{ display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-bottom:var(--chat-border); background:#f9fafb; border-radius:inherit; }
+    .gfsr-chat-title{ font-weight:700; font-size:15px; }
+    .gfsr-chat-close{ background:transparent; border:none; padding:8px; border-radius:10px; cursor:pointer; }
+    .gfsr-chat-close:focus-visible{ outline:3px solid #0b63f6; }
+    .gfsr-chat-body{ display:flex; flex-direction:column; gap:8px; padding:12px; height:min(70vh, 520px); overflow:auto; -webkit-overflow-scrolling:touch; }
+    @media (min-width:720px){ .gfsr-chat-body{ height:56vh; } }
+    .gfsr-msg{ max-width:88%; padding:10px 12px; border-radius:14px; font-size:14px; line-height:1.35; }
+    .gfsr-msg.user{ margin-left:auto; background:#0b63f6; color:#fff; border-top-right-radius:4px; }
+    .gfsr-msg.bot{ background:#eef2ff; color:#111; border-top-left-radius:4px; }
+    .gfsr-msg.meta{ background:#f3f4f6; color:#444; font-size:12px; margin:4px auto; }
+    .gfsr-chat-input{ display:flex; gap:8px; padding:10px; border-top:var(--chat-border); background:#fff; border-radius:0 0 18px 18px; }
+    .gfsr-chat-input textarea{ flex:1; resize:none; min-height:42px; max-height:120px; padding:10px 12px; border:1px solid #e5e7eb; border-radius:12px; font-size:14px; line-height:1.35; }
+    .gfsr-chat-send{ background:#0b63f6; color:#fff; border:none; padding:12px 14px; border-radius:12px; font-weight:700; }
+    .gfsr-chat-send[disabled]{ opacity:.6; cursor:not-allowed; }
+    @media (prefers-reduced-motion:reduce){ .gfsr-chat-sheet{ transition:none; } }
+    @media (prefers-color-scheme:dark){
+      .gfsr-chat-sheet{ background:#0b0b0d; border-color:#1e1e22; }
+      .gfsr-chat-head{ background:#111216; color:#eaeaea; }
+      .gfsr-chat-body{ background:#0b0b0d; }
+      .gfsr-msg.bot{ background:#1a2236; color:#eaeaea; }
+      .gfsr-msg.meta{ background:#121318; color:#c9c9c9; }
+      .gfsr-chat-input{ background:#0b0b0d; border-color:#1e1e22; }
+      .gfsr-chat-input textarea{ background:#0f0f12; color:#eaeaea; border-color:#1f2532; }
+      .gfsr-chat-send{ background:#2d6bf6; }
+      .gfsr-chat-fab{ background:#2d6bf6; }
+    }
+    /* keep clear of the mobile call bar */
+    @media (max-width:768px){
+      .gfsr-chat-sheet{ margin-bottom:64px; }
+      .gfsr-chat-fab{ bottom:78px; }
+    }
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
   </style>
 
   <!-- =========================
        STRUCTURED DATA (JSON-LD)
        ========================= -->
 
-  <!-- WebSite + SearchAction -->
+  <!-- WebSite + SearchAction (publisher points to shared @id) -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -134,11 +175,7 @@
       "target":"https://debthelpform.com/?q={search_term_string}",
       "query-input":"required name=search_term_string"
     },
-    "publisher":{
-      "@type":"Organization",
-      "name":"Gateway Financial Settlement Relief",
-      "url":"https://gatewayfinancialsettlementrelief.com"
-    }
+    "publisher": { "@id": "https://gatewaydebthelp.com/#gfsr" }
   }
   </script>
 
@@ -157,41 +194,45 @@
   }
   </script>
 
-  <!-- Organization (GFSR) -->
+  <!-- Organization (GFSR) — unified @id used across ALL sites -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
-    "@type":"Organization",
-    "@id":"https://gatewayfinancialsettlementrelief.com#org",
-    "name":"Gateway Financial Settlement Relief",
-    "alternateName":["GFSR","Gateway Debt Help","Debt Relief Guard"],
-    "url":"https://gatewayfinancialsettlementrelief.com",
+    "@type":["Organization","FinancialService"],
+    "@id":"https://gatewaydebthelp.com/#gfsr",
+    "name":"Gateway Financial Settlement Relief, LLC",
+    "legalName":"Gateway Financial Settlement Relief, LLC",
+    "alternateName":["Gateway Debt Help","GFSR"],
+    "url":"https://gatewaydebthelp.com/",
     "logo":"https://debthelpform.com/og-cover.jpg",
     "telephone":"+1-888-437-7141",
+    "address":{"@type":"PostalAddress","addressCountry":"US","addressRegion":"FL"},
+    "areaServed":{"@type":"Country","name":"United States"},
     "sameAs":[
+      "https://gatewayfinancialsettlementrelief.com/",
       "https://debthelpform.com/",
       "https://debtreliefguard.com/",
       "https://gatewaydebthelp.com/"
     ],
-    "areaServed":{"@type":"Country","name":"United States"},
     "contactPoint":{
       "@type":"ContactPoint",
       "telephone":"+1-888-437-7141",
       "contactType":"customer service",
       "areaServed":"US",
       "availableLanguage":["English"]
-    }
+    },
+    "disambiguatingDescription":"Florida-operated, Wyoming-registered debt relief company using 'Gateway Debt Help' as a marketing tagline. Not affiliated with Gateway Debt Relief of Costa Mesa, CA."
   }
   </script>
 
-  <!-- Financial Service -->
+  <!-- Financial Service (provider points to shared @id) -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
     "@type":"FinancialService",
     "name":"Debt Relief Savings Estimate",
     "serviceType":"Debt relief consultation and savings estimate",
-    "provider":{"@id":"https://gatewayfinancialsettlementrelief.com#org"},
+    "provider":{"@id":"https://gatewaydebthelp.com/#gfsr"},
     "url":"https://debthelpform.com/",
     "areaServed":"US",
     "isAccessibleForFree":true,
@@ -282,6 +323,11 @@
     <p>&copy; 2025 DebtHelpForm.com. All rights reserved.</p>
     <p>Website owned and operated by <a href="https://gatewayfinancialsettlementrelief.com" target="_blank" rel="noopener">Gateway Financial Settlement Relief</a></p>
     <p style="font-size:.82rem; color:#999;">Last updated: August 2025</p>
+    <!-- New disambiguation line (visible, not cloaked) -->
+    <p style="font-size:.82rem; color:#999;">
+      “Gateway Debt Help” is the marketing brand of <strong>Gateway Financial Settlement Relief, LLC</strong>.
+      Not affiliated with “Gateway Debt Relief” of Costa Mesa, CA.
+    </p>
   </footer>
 
   <!-- Bot heuristic (simple honeypot) -->
@@ -379,8 +425,8 @@
       const isAsset = url => /\.(?:css|js|mjs|cjs|png|jpe?g|gif|svg|webp|ico|woff2?|ttf|otf)$/i.test(url.pathname);
       const isThirdParty = url => location.origin !== url.origin;
       const isBypassThirdParty = url =>
-        /(^|\.)leadconnectorhq\.com$/.test(url.hostname) ||
-        /(^|\.)msgsndr\.com$/.test(url.hostname);
+        /(^|\\.)leadconnectorhq\\.com$/.test(url.hostname) ||
+        /(^|\\.)msgsndr\\.com$/.test(url.hostname);
 
       self.addEventListener('install', event => {
         event.waitUntil((async () => {
@@ -492,48 +538,6 @@
   </script>
 
   <!-- Worker 016 Chat (sleek, accessible, mobile-first) -->
-  <style>
-    :root{ --chat-radius:16px; --chat-shadow:0 10px 30px rgba(0,0,0,.18); --chat-border:1px solid rgba(0,0,0,.06); }
-    .gfsr-chat-fab{ position:fixed; right:14px; bottom:14px; z-index:9999; display:inline-flex; align-items:center; gap:.5rem; padding:.8rem 1rem; border-radius:999px; border:var(--chat-border); background:#0b63f6; color:#fff; box-shadow:var(--chat-shadow); font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial; }
-    .gfsr-chat-fab:focus-visible{ outline:3px solid #b9d3ff; outline-offset:3px; }
-    .gfsr-chat-sheet{ position:fixed; inset:auto 0 0 0; margin:auto; width:100%; max-width:420px; right:12px; left:auto; border-radius:18px 18px 0 0; background:#fff; box-shadow:var(--chat-shadow); transform:translateY(110%); transition:transform .28s ease; border:var(--chat-border); z-index:10000; }
-    @media (min-width:720px){ .gfsr-chat-sheet{ bottom:auto; top:calc(12px + env(safe-area-inset-top)); right:12px; left:auto; border-radius:18px; max-height:78vh; width:380px; } }
-    .gfsr-chat-sheet.open{ transform:translateY(0); }
-    @media (min-width:720px){ .gfsr-chat-sheet.open{ transform:none; position:fixed; bottom:12px; } }
-    .gfsr-chat-head{ display:flex; align-items:center; justify-content:space-between; padding:12px 14px; border-bottom:var(--chat-border); background:#f9fafb; border-radius:inherit; }
-    .gfsr-chat-title{ font-weight:700; font-size:15px; }
-    .gfsr-chat-close{ background:transparent; border:none; padding:8px; border-radius:10px; cursor:pointer; }
-    .gfsr-chat-close:focus-visible{ outline:3px solid #0b63f6; }
-    .gfsr-chat-body{ display:flex; flex-direction:column; gap:8px; padding:12px; height:min(70vh, 520px); overflow:auto; -webkit-overflow-scrolling:touch; }
-    @media (min-width:720px){ .gfsr-chat-body{ height:56vh; } }
-    .gfsr-msg{ max-width:88%; padding:10px 12px; border-radius:14px; font-size:14px; line-height:1.35; }
-    .gfsr-msg.user{ margin-left:auto; background:#0b63f6; color:#fff; border-top-right-radius:4px; }
-    .gfsr-msg.bot{ background:#eef2ff; color:#111; border-top-left-radius:4px; }
-    .gfsr-msg.meta{ background:#f3f4f6; color:#444; font-size:12px; margin:4px auto; }
-    .gfsr-chat-input{ display:flex; gap:8px; padding:10px; border-top:var(--chat-border); background:#fff; border-radius:0 0 18px 18px; }
-    .gfsr-chat-input textarea{ flex:1; resize:none; min-height:42px; max-height:120px; padding:10px 12px; border:1px solid #e5e7eb; border-radius:12px; font-size:14px; line-height:1.35; }
-    .gfsr-chat-send{ background:#0b63f6; color:#fff; border:none; padding:12px 14px; border-radius:12px; font-weight:700; }
-    .gfsr-chat-send[disabled]{ opacity:.6; cursor:not-allowed; }
-    @media (prefers-reduced-motion:reduce){ .gfsr-chat-sheet{ transition:none; } }
-    @media (prefers-color-scheme:dark){
-      .gfsr-chat-sheet{ background:#0b0b0d; border-color:#1e1e22; }
-      .gfsr-chat-head{ background:#111216; color:#eaeaea; }
-      .gfsr-chat-body{ background:#0b0b0d; }
-      .gfsr-msg.bot{ background:#1a2236; color:#eaeaea; }
-      .gfsr-msg.meta{ background:#121318; color:#c9c9c9; }
-      .gfsr-chat-input{ background:#0b0b0d; border-color:#1e1e22; }
-      .gfsr-chat-input textarea{ background:#0f0f12; color:#eaeaea; border-color:#1f2532; }
-      .gfsr-chat-send{ background:#2d6bf6; }
-      .gfsr-chat-fab{ background:#2d6bf6; }
-    }
-    /* keep clear of the mobile call bar */
-    @media (max-width:768px){
-      .gfsr-chat-sheet{ margin-bottom:64px; }
-      .gfsr-chat-fab{ bottom:78px; }
-    }
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;}
-  </style>
-
   <button id="gfsrChatFab" class="gfsr-chat-fab" aria-haspopup="dialog" aria-expanded="false" aria-controls="gfsrChatSheet">💬 Chat</button>
 
   <section id="gfsrChatSheet" class="gfsr-chat-sheet" role="dialog" aria-modal="true" aria-labelledby="gfsrChatTitle" aria-describedby="gfsrChatDesc">
