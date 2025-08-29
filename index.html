@@ -5,121 +5,97 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Title (≤60 chars, primary keywords up front) -->
+  <!-- Title (≤60 chars) -->
   <title>Debt Help Form — Free Debt Relief Savings Estimate (Fast & Secure)</title>
 
-  <!-- Meta Description (≤160 chars, benefit + CTA) -->
+  <!-- Meta Description (≤160 chars) -->
   <meta name="description" content="Get a secure, FTC-aligned debt relief savings estimate in 60 seconds. No pressure—just answers. Compare trusted options and start reducing debt today." />
 
-  <!-- Primary Keywords (support relevance; keep natural) -->
+  <!-- Keywords (support relevance; keep natural) -->
   <meta name="keywords" content="debt relief, debt help, debt settlement, debt consolidation, credit card debt relief, free debt estimate, Gateway Financial Settlement Relief" />
 
   <!-- Robots & Canonical -->
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="canonical" href="https://debthelpform.com/" />
 
-  <!-- Open Graph -->
+  <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://debthelpform.com/" />
   <meta property="og:title" content="Debt Help Form — Free Debt Relief Savings Estimate" />
   <meta property="og:description" content="Get a secure, FTC-aligned debt relief savings estimate in 60 seconds. No pressure—just answers." />
   <meta property="og:site_name" content="DebtHelpForm.com" />
-
-  <!-- Twitter Cards -->
+  <meta property="og:image" content="https://debthelpform.com/og-cover.jpg" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Debt Help Form — Free Debt Relief Savings Estimate" />
   <meta name="twitter:description" content="Fast, secure, and compliant. Get your debt relief savings estimate in 60 seconds." />
+  <meta name="twitter:image" content="https://debthelpform.com/og-cover.jpg" />
 
-  <!-- Preconnects (perf) -->
+  <!-- Perf hints -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://api.leadconnectorhq.com" crossorigin>
-
-  <!-- Google Fonts (with swap) -->
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
 
-  <!-- Styles (lightweight, mobile-first) -->
+  <!-- Styles (mobile-first, lightweight) -->
   <style>
     :root {
-      --brand: #003366;
-      --brand-2: #004488;
-      --cta: #2563eb;
-      --ok: #007b55;
-      --ink: #222;
-      --bg: #f9fafe;
+      --brand:#003366; --brand-2:#004488; --cta:#2563eb; --ok:#007b55;
+      --ink:#222; --bg:#f9fafe;
     }
     * { box-sizing: border-box; }
-    html,body { margin:0; padding:0; }
+    html, body { margin:0; padding:0; }
     body {
       font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--ink);
-      line-height: 1.55;
-      padding-top: 76px; /* account for sticky nav */
+      background: var(--bg); color: var(--ink); line-height:1.55; padding-top:76px;
     }
+    .skip-link { position:absolute; left:-999px; top:auto; width:1px; height:1px; overflow:hidden; }
+    .skip-link:focus { position:fixed; left:12px; top:12px; padding:.5rem .75rem; background:#000; color:#fff; z-index:10000; border-radius:6px; }
 
-    /* Skip link (a11y) */
-    .skip-link {
-      position: absolute; left: -999px; top: auto; width: 1px; height: 1px; overflow: hidden;
-    }
-    .skip-link:focus {
-      position: fixed; left: 12px; top: 12px; padding: .5rem .75rem;
-      background: #000; color: #fff; z-index: 10000; border-radius: 6px;
-    }
+    /* Sticky Nav */
+    .sticky-nav { position:fixed; top:0; left:0; right:0; background:var(--brand-2); z-index:9999; box-shadow:0 2px 5px rgba(0,0,0,.08); }
+    .sticky-nav ul { display:flex; gap:.75rem; margin:0; padding:.75rem 1rem; overflow-x:auto; white-space:nowrap; list-style:none; }
+    .sticky-nav a { color:#fff; font-weight:600; text-decoration:none; padding:.4rem .6rem; border-radius:6px; }
+    .sticky-nav a:hover, .sticky-nav a:focus { text-decoration:underline; outline:none; }
 
-    /* Sticky Nav (optimized) */
-    .sticky-nav {
-      position: fixed; top:0; left:0; right:0;
-      background: var(--brand-2);
-      z-index: 9999; box-shadow: 0 2px 5px rgba(0,0,0,.08);
-    }
-    .sticky-nav ul {
-      display:flex; gap:.75rem; margin:0; padding:.75rem 1rem;
-      overflow-x:auto; white-space:nowrap; list-style:none;
-    }
-    .sticky-nav a {
-      color:#fff; font-weight:600; text-decoration:none; padding:.4rem .6rem; border-radius:6px;
-    }
-    .sticky-nav a:hover, .sticky-nav a:focus { text-decoration: underline; outline: none; }
-
-    /* Header / Hero */
-    header {
-      max-width: 960px; margin: 0 auto; text-align:center;
-      background: var(--brand); color:#fff; padding: 2rem 1rem 1.5rem; border-radius: 10px;
-    }
-    header h1 { margin: 0 0 .5rem; font-size: clamp(1.6rem, 3vw + 1rem, 2.4rem); }
+    /* Hero */
+    header { max-width:960px; margin:0 auto; text-align:center; background:var(--brand); color:#fff; padding:2rem 1rem 1.5rem; border-radius:10px; }
+    header h1 { margin:0 0 .5rem; font-size:clamp(1.6rem, 3vw + 1rem, 2.4rem); }
     header p { margin:.25rem 0 .5rem; }
-    header a { color: #ffdd00; font-weight:700; text-decoration:none; }
-    header a:hover { text-decoration: underline; }
+    header a { color:#ffdd00; font-weight:700; text-decoration:none; }
+    header a:hover { text-decoration:underline; }
 
-    /* Main Section */
-    section {
-      max-width: 960px; margin: 1.5rem auto; background:#fff; border-radius:10px;
-      padding: 1.25rem; box-shadow: 0 2px 12px rgba(0,0,0,.07);
-    }
-    section h2 { margin-top:0; font-size: clamp(1.25rem, 2vw + .8rem, 1.75rem); }
+    /* Section */
+    section { max-width:960px; margin:1.5rem auto; background:#fff; border-radius:10px; padding:1.25rem; box-shadow:0 2px 12px rgba(0,0,0,.07); }
+    section h2 { margin-top:0; font-size:clamp(1.25rem, 2vw + .8rem, 1.75rem); }
     .lead { margin:.25rem 0 1rem; color:#444; }
 
     /* Trust links */
-    .trust-links { margin-top: 1.25rem; font-size:.96rem; }
+    .trust-links { margin-top:1.25rem; font-size:.96rem; }
     .trust-links ul { padding-left:1.1rem; }
     .trust-links a { color:#0055aa; text-decoration:none; }
-    .trust-links a:hover { text-decoration: underline; }
+    .trust-links a:hover { text-decoration:underline; }
 
     /* Mobile call bar */
-    .mobile-call {
-      display:none; position: fixed; bottom:0; left:0; right:0;
-      background: var(--ok); color:#fff; text-align:center; padding: .9rem;
-      z-index: 9998;
-    }
+    .mobile-call { display:none; position:fixed; bottom:0; left:0; right:0; background:var(--ok); color:#fff; text-align:center; padding:.9rem; z-index:9998; }
     .mobile-call a { color:#fff; font-weight:800; text-decoration:none; }
-    @media (max-width: 768px) { .mobile-call { display:block; } }
+    @media (max-width:768px){ .mobile-call{ display:block; } }
 
-    footer {
-      max-width: 960px; margin: 1.25rem auto 3.5rem; text-align:center; color:#666;
-    }
+    footer { max-width:960px; margin:1.25rem auto 3.5rem; text-align:center; color:#666; }
     footer a { color:#0055aa; text-decoration:none; }
-    footer a:hover { text-decoration: underline; }
+    footer a:hover { text-decoration:underline; }
+
+    /* Chat widget */
+    #chatbox{position:fixed;bottom:20px;right:20px;width:320px;max-width:92vw;background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 12px 32px rgba(0,0,0,.16);overflow:hidden;font:14px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    #chatbox header{background:#003366;color:#fff;padding:.6rem .8rem;font-weight:700}
+    #chatlog{height:260px;overflow:auto;padding:.6rem .8rem;background:#fafafa}
+    #chatlog .msg{margin:.35rem 0;word-wrap:break-word}
+    #chatlog .user{text-align:right;color:#111}
+    #chatlog .ai{text-align:left;color:#111}
+    #chatform{display:flex;gap:.45rem;padding:.6rem;border-top:1px solid #e5e7eb;background:#fff}
+    #chatform input{flex:1;padding:.55rem .6rem;border:1px solid #e5e7eb;border-radius:8px}
+    #chatform button{padding:.55rem .8rem;background:#2563eb;color:#fff;border:0;border-radius:8px;font-weight:700;cursor:pointer}
+    #chatform button:disabled{opacity:.6;cursor:not-allowed}
+    @media (max-width:420px){#chatbox{right:12px;left:12px;width:auto}}
   </style>
 
   <!-- Structured Data: Website + Breadcrumbs + FAQ -->
@@ -134,11 +110,7 @@
       "target":"https://debthelpform.com/?q={search_term_string}",
       "query-input":"required name=search_term_string"
     },
-    "publisher":{
-      "@type":"Organization",
-      "name":"Gateway Financial Settlement Relief",
-      "url":"https://gatewayfinancialsettlementrelief.com"
-    }
+    "publisher":{"@type":"Organization","name":"Gateway Financial Settlement Relief","url":"https://gatewayfinancialsettlementrelief.com"}
   }
   </script>
   <script type="application/ld+json">
@@ -146,11 +118,11 @@
     "@context":"https://schema.org",
     "@type":"BreadcrumbList",
     "itemListElement":[
-      { "@type":"ListItem", "position":1, "name":"Home", "item":"https://debthelpform.com/" },
-      { "@type":"ListItem", "position":2, "name":"Debt Relief Options", "item":"https://debthelpform.com/relief.html" },
-      { "@type":"ListItem", "position":3, "name":"State Programs", "item":"https://debthelpform.com/geo-debt-relief.html" },
-      { "@type":"ListItem", "position":4, "name":"Debt Help Blog", "item":"https://debthelpform.com/debthelpform-pages-blog.html" },
-      { "@type":"ListItem", "position":5, "name":"Contact", "item":"https://debthelpform.com/contact.html" }
+      {"@type":"ListItem","position":1,"name":"Home","item":"https://debthelpform.com/"},
+      {"@type":"ListItem","position":2,"name":"Debt Relief Options","item":"https://debthelpform.com/relief.html"},
+      {"@type":"ListItem","position":3,"name":"State Programs","item":"https://debthelpform.com/geo-debt-relief.html"},
+      {"@type":"ListItem","position":4,"name":"Debt Help Blog","item":"https://debthelpform.com/debthelpform-pages-blog.html"},
+      {"@type":"ListItem","position":5,"name":"Contact","item":"https://debthelpform.com/contact.html"}
     ]
   }
   </script>
@@ -169,7 +141,7 @@
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
 
-  <!-- Sticky Nav (optimized anchors & structure) -->
+  <!-- Sticky Nav -->
   <nav class="sticky-nav" role="navigation" aria-label="Main navigation">
     <ul>
       <li><a href="/" title="Debt Help Form Home">Home</a></li>
@@ -191,15 +163,13 @@
 
   <!-- Header / Hero -->
   <header>
-    <!-- H1 tuned for primary intent + speed/benefit -->
     <h1 id="ab-cta-text">Free Debt Relief Savings Estimate — Fast, Secure & FTC-Aligned</h1>
     <p><a href="tel:+18884377141">📞 Call Now: 888-437-7141</a></p>
   </header>
 
-  <!-- Main Content -->
+  <!-- Main -->
   <main id="main">
     <section>
-      <!-- H2 supports and repeats core intent naturally -->
       <h2>See How Much You Could Save on Credit Card & Unsecured Debt</h2>
       <p class="lead">Answer a few quick questions and get a personalized, no-pressure estimate. We compare trusted debt relief options so you can choose what fits best.</p>
 
@@ -237,45 +207,137 @@
     <p style="font-size:.82rem; color:#999;">Last updated: August 2025</p>
   </footer>
 
-  <!-- Bot Protection (lightweight heuristic; client-side only) -->
+  <!-- Bot heuristic (simple honeypot) -->
   <script>
     (function(){
       const honeypot = document.createElement("input");
-      honeypot.type = "text"; honeypot.name = "website"; honeypot.autocomplete = "off";
-      honeypot.setAttribute("aria-hidden","true"); honeypot.hidden = true;
+      honeypot.type="text"; honeypot.name="website"; honeypot.autocomplete="off";
+      honeypot.hidden=true; honeypot.setAttribute("aria-hidden","true");
       document.body.appendChild(honeypot);
-
-      let u = false, t = 0;
-      addEventListener('mousemove', () => u = true, {passive:true});
-      addEventListener('keydown', () => u = true, {passive:true});
-      setInterval(() => t++, 1000);
-      window.validateBotProtections = () => (honeypot.value === "" && u && t >= 3);
+      let u=false,t=0; addEventListener('mousemove',()=>u=true,{passive:true});
+      addEventListener('keydown',()=>u=true,{passive:true});
+      setInterval(()=>t++,1000);
+      window.validateBotProtections=()=> (honeypot.value==="" && u && t>=3);
     })();
   </script>
 
-  <!-- ✅ Hook to Worker 050: fetch savings message (relative path, works on both domains) -->
+  <!-- Chatbot Widget (016) -->
+  <div id="chatbox" aria-live="polite" aria-label="Debt Relief Chatbot" hidden>
+    <header id="chatbox-header">Ask about debt relief</header>
+    <div id="chatlog" role="log" aria-label="Chat transcript"></div>
+    <form id="chatform" autocomplete="off">
+      <input id="chatinput" type="text" placeholder="Type your question…" aria-label="Chat input" maxlength="500"/>
+      <button id="chatsend" type="submit">Send</button>
+    </form>
+  </div>
+
+  <!-- Worker Integrations: 050 (headline), 016 (chat), 015 (telemetry) -->
   <script>
-    (async () => {
-      const el = document.getElementById("ab-cta-text");
-      const fallback = "Free Debt Relief Savings Estimate — Fast, Secure & FTC-Aligned";
-      if (!el) return;
+  (() => {
+    const now = () => Date.now();
+    const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+    const timeoutFetch = (url, opts={}, ms=5000) => {
+      const ctrl = new AbortController(); const to=setTimeout(()=>ctrl.abort(), ms);
+      return fetch(url, { ...opts, signal: ctrl.signal }).finally(()=>clearTimeout(to));
+    };
+    const safeText = (s) => (s ?? '').toString();
+
+    /* ===== 050: Savings message (GET /api/savings-message) with SWR cache + hardened retry ===== */
+    (async function loadSavingsMessage(){
+      const el = document.querySelector('#ab-cta-text'); if(!el) return;
+      const FALLBACK = el.textContent || "Free Debt Relief Savings Estimate — Fast, Secure & FTC-Aligned";
+      const CACHE_KEY = 'dhf:savings:v1'; const MAX_AGE_MS = 10 * 60 * 1000;
 
       try {
-        const r = await fetch('/api/savings-message', { headers: { 'Accept': 'application/json' } });
-        if (!r.ok) throw new Error(`HTTP ${r.status}`);
-        const data = await r.json();
-        el.textContent = data?.message ?? fallback;
-      } catch (err) {
-        console.warn('Savings message fetch failed:', err);
-        el.textContent = fallback;
-      }
+        const raw = localStorage.getItem(CACHE_KEY);
+        if (raw) {
+          const { ts, message } = JSON.parse(raw);
+          if (ts && (now()-ts) < MAX_AGE_MS && message) el.textContent = safeText(message);
+        }
+      } catch(_) {}
 
-      // Conversion hook (no-op; server endpoints for ops are token-gated)
-      window.trackConversion = () => { /* no-op for now */ };
+      let ok=false, data;
+      for(let attempt=0; attempt<2 && !ok; attempt++){
+        try{
+          let r = await timeoutFetch('/api/savings-message', {
+            headers: { 'Accept':'application/json', 'X-Requested-With':'XMLHttpRequest' },
+            cache:'no-store', credentials:'omit'
+          }, attempt ? 4500 : 3500);
+          if(!r.ok || !r.headers.get('content-type')?.includes('application/json')) throw new Error('HTTP '+r.status);
+          data = await r.json();
+          if(data && data.message){
+            el.textContent = safeText(data.message);
+            ok=true;
+            try{ localStorage.setItem(CACHE_KEY, JSON.stringify({ ts: now(), message: data.message })); }catch(_){}
+          }
+        }catch(e){ await sleep(200); }
+      }
+      if(!ok) el.textContent = FALLBACK;
     })();
+
+    /* ===== 016: Chatbot (POST /chat) — rate-limited, interaction-gated, AI reply truncation ===== */
+    (function initChat(){
+      const box = document.getElementById('chatbox');
+      const log = document.getElementById('chatlog');
+      const form= document.getElementById('chatform');
+      const input= document.getElementById('chatinput');
+      const send = document.getElementById('chatsend');
+      if (!box || !log || !form || !input || !send) return;
+      box.hidden = false;
+
+      let last=0, tokens=4; setInterval(()=>{ tokens = Math.min(4, tokens+1); }, 2000);
+      const add = (role, text) => {
+        const maxLen = 1200; // Truncate very long messages to prevent overflow in log
+        const d=document.createElement('div');
+        d.className='msg '+role;
+        d.textContent=safeText(text).slice(0,maxLen);
+        log.appendChild(d); log.scrollTop = log.scrollHeight;
+      };
+
+      let interacted=false;
+      addEventListener('mousemove',()=>interacted=true,{once:true,passive:true});
+      addEventListener('keydown', ()=>interacted=true,{once:true,passive:true});
+      const gate=()=>{ send.disabled = !interacted; };
+      gate(); const iv=setInterval(gate,400); addEventListener('click',()=>{ if(interacted) clearInterval(iv); }, {once:true});
+
+      form.addEventListener('submit', async (e)=>{
+        e.preventDefault();
+        let q=(input.value||'').trim().replace(/\s+/g,' '); if(!q) return;
+        const t=now(); if(tokens<=0 || (t-last)<1200){ add('ai','Please slow down a bit so I can help.'); return; }
+        tokens--; last=t;
+
+        add('user', q); input.value=''; send.disabled=true;
+        try{
+          const r = await timeoutFetch('/chat', {
+            method:'POST',
+            headers:{ 'Content-Type':'application/json', 'Accept':'application/json', 'X-Requested-With':'XMLHttpRequest' },
+            body: JSON.stringify({ messages:[{ role:'user', content:q }] })
+          }, 15000);
+          if(!r.ok){ add('ai','Sorry — chat is unavailable right now.'); return; }
+          const j = await r.json().catch(()=>({}));
+          const reply = (j.reply || j.message || '').toString().trim();
+          add('ai', reply || 'Thanks—how else can I help?');
+        }catch(err){
+          console.error('chat error', err);
+          add('ai','Network issue — try again.');
+        }finally{ send.disabled=false; }
+      });
+    })();
+
+    /* ===== 015: Telemetry ping (POST /ingest) — anonymous, session key ===== */
+    (function sendTelemetry(){
+      try{
+        const key='dhf:sess:v1'; let sid=sessionStorage.getItem(key);
+        if(!sid){ sid=crypto.randomUUID(); sessionStorage.setItem(key, sid); }
+        const payload={ v:1, ts:now(), sid, url:location.href, ref:document.referrer||null, w:innerWidth, h:innerHeight };
+        const blob=new Blob([JSON.stringify(payload)],{type:'application/json'});
+        if(navigator.sendBeacon) navigator.sendBeacon('/ingest', blob);
+        else fetch('/ingest',{ method:'POST', body:blob, keepalive:true, headers:{'Content-Type':'application/json'} }).catch(()=>{});
+      }catch(_){}
+    })();
+  })();
   </script>
 
-  <!-- NOSCRIPT notice -->
   <noscript><p style="text-align:center;color:#666">For the best experience, please enable JavaScript to load your personalized savings estimate.</p></noscript>
 </body>
 </html>
