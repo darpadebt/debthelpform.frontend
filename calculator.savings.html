@@ -34,6 +34,29 @@
   ]}
   </script>
 
+  <!-- Organization / FinancialService (brand disambiguation kept) -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":["Organization","FinancialService"],
+    "@id":"https://gatewaydebthelp.com/#gfsr",
+    "name":"Gateway Financial Settlement Relief, LLC",
+    "legalName":"Gateway Financial Settlement Relief, LLC",
+    "alternateName":["Gateway Debt Help","GFSR"],
+    "url":"https://gatewaydebthelp.com/",
+    "logo":"https://debthelpform.com/og-cover.jpg?v=20250830",
+    "telephone":"+1-888-437-7141",
+    "areaServed":{"@type":"Country","name":"United States"},
+    "sameAs":["https://debthelpform.com/","https://debtreliefguard.com/","https://gatewaydebthelp.com/"],
+    "disambiguatingDescription":"Not affiliated with Gateway Debt Relief of Costa Mesa, CA."
+  }
+  </script>
+
+  <!-- WebSite schema -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebSite","url":"https://debthelpform.com/","name":"DebtHelpForm","publisher":{"@id":"https://gatewaydebthelp.com/#gfsr"}}
+  </script>
+
   <style>
     :root{
       --ink:#222; --bg:#f9fafe; --brand:#004477; --brand-2:#003057;
@@ -197,7 +220,7 @@
     })();
   </script>
 
-  <!-- Calculator logic -->
+  <!-- Calculator logic (unchanged math) -->
   <script>
     function calculateCreditorRepayment(debtAmount, monthlyPayment, interestRate){
       const monthlyRate=(interestRate/100)/12; let balance=debtAmount,totalPaid=0,months=0;
