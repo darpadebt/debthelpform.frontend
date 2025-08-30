@@ -2,118 +2,124 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Privacy Policy | DebtHelpForm.com</title>
-  <meta name="description" content="Review the Privacy Policy for DebtHelpForm.com. Learn how your information is protected under TCPA, FTC, and FCC guidelines.">
-  <meta name="keywords" content="privacy policy, data protection, TCPA, FTC, FCC, debt relief privacy">
-  <meta name="author" content="DebtHelpForm.com">
-
-  <!-- Open Graph for SEO -->
-  <meta property="og:title" content="Privacy Policy | DebtHelpForm.com">
-  <meta property="og:description" content="See how DebtHelpForm.com protects your information under federal law.">
-  <meta property="og:url" content="https://debthelpform.com/privacy-policy">
-  <meta property="og:type" content="website">
-
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Privacy Policy | DebtHelpForm.com">
-  <meta name="twitter:description" content="Your privacy is protected under TCPA, FTC, and FCC compliance.">
-
-  <!-- Structured Data (Schema) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "PrivacyPolicy",
-    "name": "Privacy Policy | DebtHelpForm.com",
-    "url": "https://debthelpform.com/privacy-policy",
-    "inLanguage": "en-US",
-    "publisher": {
-      "@type": "Organization",
-      "name": "DebtHelpForm.com",
-      "url": "https://debthelpform.com"
-    },
-    "datePublished": "2025-01-01"
-  }
-  </script>
-
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Privacy Policy | DebtHelpForm</title>
+  <meta name="description" content="How we collect, use, protect, and share information at DebtHelpForm.com. Privacy-first, no upfront fees, opt-out friendly." />
+  <link rel="canonical" href="https://debthelpform.com/privacy.html" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    body {
-      margin: 0;
-      font-family: 'Inter', sans-serif;
-      background-color: #f8fbff;
-      color: #333;
-    }
-    header, footer {
-      background-color: #004488;
-      color: white;
-      padding: 2rem 1rem;
-      text-align: center;
-    }
-    header h1, footer h2 {
-      margin: 0;
-    }
-    nav a {
-      color: #ffdd00;
-      text-decoration: none;
-      margin: 0 10px;
-    }
-    .content {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 1.5rem;
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0,0,0,0.05);
-    }
-    h2 {
-      color: #004488;
-      margin-top: 2rem;
-    }
-    a {
-      color: #004488;
-      text-decoration: underline;
-    }
-    .mobile-call {
-      display: none;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: #007B55;
-      color: white;
-      text-align: center;
-      font-size: 1.2rem;
-      padding: 1rem;
-      z-index: 9999;
-    }
-    .mobile-call a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    @media (max-width: 768px) {
-      .mobile-call { display: block; }
-    }
+    :root{--ink:#222;--bg:#f9fafe;--brand:#004477;--brand-2:#003057;--cta:#0b63f6;--ok:#007b55;--card:#fff;--card-b:#e5e7eb;--shadow:0 10px 30px rgba(0,0,0,.12);--callbar-h:64px;--sitemap-h:52px}
+    *{box-sizing:border-box} html,body{margin:0;padding:0}
+    body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6;padding-top:76px;padding-bottom:calc(var(--sitemap-h)+14px)}
+    .container{max-width:960px;margin:0 auto;padding:1rem}
+    section{max-width:960px;margin:1.25rem auto;background:var(--card);border:1px solid var(--card-b);border-radius:12px;padding:1.1rem;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+    h1,h2{color:#003366}
+    ul{padding-left:1.1rem}
+    .sticky-nav{position:fixed;top:0;left:0;right:0;background:var(--brand-2);z-index:9999;box-shadow:0 2px 5px rgba(0,0,0,.08)}
+    .sticky-nav ul{display:flex;gap:.75rem;margin:0;padding:.75rem 1rem;list-style:none;overflow-x:auto;white-space:nowrap}
+    .sticky-nav a{color:#fff;text-decoration:none;font-weight:600;padding:.4rem .6rem;border-radius:6px}
+    .sticky-menu{position:fixed;left:0;right:0;bottom:calc(var(--callbar-h) + env(safe-area-inset-bottom));background:#004488;color:#fff;border-top:2px solid var(--cta);height:var(--sitemap-h);display:flex;align-items:center;z-index:9997}
+    @media(min-width:769px){.sticky-menu{bottom:0}}
+    .sticky-menu nav{display:flex;gap:1rem;overflow-x:auto;padding:0 .75rem;width:100%;align-items:center;scrollbar-width:none}
+    .sticky-menu nav::-webkit-scrollbar{display:none}
+    .sticky-menu nav a{color:#ffdd00;text-decoration:none;padding:.35rem .55rem;border-radius:6px;font-weight:700;font-size:.92rem;flex:0 0 auto}
+    .mobile-bar{position:fixed;left:0;right:0;bottom:0;background:#0b1220;color:#fff;display:flex;gap:8px;padding:.6rem;z-index:10000}
+    .mobile-bar a{flex:1;text-align:center;padding:.75rem;border-radius:10px;font-weight:900;text-decoration:none}
+    .mobile-call{background:var(--ok);color:#fff}.mobile-est{background:var(--cta);color:#fff}
+    @media(min-width:769px){.mobile-bar{display:none}}
   </style>
 </head>
 <body>
+  <nav class="sticky-nav" role="navigation" aria-label="Main navigation">
+    <ul>
+      <li><a href="/" title="Home">Home</a></li>
+      <li><a href="#lead-form" title="Start Estimate">Start Estimate</a></li>
+      <li><a href="/calculator.savings.html" title="Savings Calculator">Calculator</a></li>
+      <li><a href="/geo-debt-relief.html" title="State Programs">State Programs</a></li>
+      <li><a href="/relief.html" title="Debt Relief Options">Debt Relief Options</a></li>
+      <li><a href="/faq.html" title="FAQ">FAQ</a></li>
+      <li><a href="/contact.html" title="Contact">Contact</a></li>
+      <li><a href="/privacy.html" title="Privacy" aria-current="page">Privacy</a></li>
+      <li><a href="tel:+18884377141" title="Call Now">📞 888-437-7141</a></li>
+    </ul>
+  </nav>
 
-  <div class="mobile-call" aria-label="Call Now">
-    <a href="tel:8884377141">📞 Tap to Call: 888-437-7141</a>
-  </div>
-
-  <header>
+  <header class="container" style="text-align:center;background:#004477;color:#fff;padding:1.25rem;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.08)">
     <h1>Privacy Policy</h1>
-    <nav>
-      <a href="/">Home</a> |
-      <a href="/blog">Blog</a> |
-      <a href="/contact">Contact</a>
-    </nav>
+    <p style="margin:0;color:#eaf2ff">We respect your privacy and protect your information.</p>
   </header>
 
-  <div class="content">
-    <p><strong>Effective Date:</strong> January 1, 2025</p>
+  <main class="container">
+    <section>
+      <h2>Information We Collect</h2>
+      <ul>
+        <li>Contact information you provide (name, phone, email).</li>
+        <li>Debt profile details you share to generate an estimate.</li>
+        <li>Technical data (IP, device, pages)—used to secure and improve the site.</li>
+      </ul>
 
-    <p>DebtHelpForm.com is committed to protecting your privacy. This Privacy Policy explains how we collect, use, share, and safeguard your information in accordance with the <a href="https://www.ftc.gov/" target="_blank" rel="noopener">Federal Trade Commission (FTC)</a>, <a href="https://www.fcc.gov/" target="_blank" rel="noopener">Federal Communications Commission (FCC)</a>, and the <a href="https://www.fcc.gov/general/tele
+      <h2>How We Use Information</h2>
+      <ul>
+        <li>To provide estimates and connect you with compliant relief options.</li>
+        <li>To improve user experience and protect against fraud/abuse.</li>
+        <li>To communicate with you about your request (opt-out anytime).</li>
+      </ul>
+
+      <h2>Sharing</h2>
+      <p>We may share with trusted service providers to fulfill your request (e.g., secure form processing). We do not sell personal information.</p>
+
+      <h2>Security</h2>
+      <p>We use encryption, access controls, and monitoring to protect data. No method is 100% secure; please use strong device security.</p>
+
+      <h2>Your Choices</h2>
+      <ul>
+        <li>Opt-out of marketing by replying STOP or using provided links.</li>
+        <li>Request access, correction, or deletion where applicable.</li>
+      </ul>
+
+      <h2>State Availability</h2>
+      <p>Program availability varies by state. Some states may be restricted.</p>
+
+      <h2>Changes</h2>
+      <p>We may update this policy. Updates are posted with a revised “Last Updated” date.</p>
+
+      <h2>Contact</h2>
+      <p>Questions? Call <a href="tel:+18884377141">888-437-7141</a> or use the secure form below.</p>
+    </section>
+
+    <section id="lead-form" class="container" style="background:#fff;border:1px dashed #cbd5e1;border-radius:12px;padding:1rem;box-shadow:0 0 20px rgba(0,0,0,.05)">
+      <h2>Contact Us</h2>
+      <iframe src="https://api.leadconnectorhq.com/widget/form/A5c9I3HkyNd1puU4nJWl" title="Contact Form" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" height="1000" style="width:100%;border:none;border-radius:10px"></iframe>
+      <script src="https://link.msgsndr.com/js/form_embed.js" defer></script>
+    </section>
+  </main>
+
+  <div id="dhpMobileBar" class="mobile-bar" aria-label="Quick actions">
+    <a class="mobile-call" href="tel:+18884377141">📞 Call 888-437-7141</a>
+    <a class="mobile-est" href="#lead-form">🔒 Start Secure Estimate</a>
+  </div>
+
+  <footer class="sticky-menu" role="navigation" aria-label="Site map">
+    <nav>
+      <a href="/">Home</a>
+      <a href="#lead-form">Start Estimate</a>
+      <a href="/calculator.savings.html">Calculator</a>
+      <a href="/geo-debt-relief.html">State Programs</a>
+      <a href="/relief.html">Debt Relief Options</a>
+      <a href="/faq.html">FAQ</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy.html" aria-current="page">Privacy</a>
+      <a href="/terms.html">Terms</a>
+      <a href="https://debtreliefguard.com" target="_blank" rel="noopener">DebtReliefGuard.com</a>
+      <a href="https://gatewaydebthelp.com" target="_blank" rel="noopener">GatewayDebtHelp.com</a>
+    </nav>
+  </footer>
+
+  <script>
+    (function(){const root=document.documentElement,mb=document.getElementById('dhpMobileBar')||document.querySelector('.mobile-bar');function setH(){const v=mb&&getComputedStyle(mb).display!=='none';root.style.setProperty('--callbar-h',(v?mb.offsetHeight:0)+'px');}setH();addEventListener('resize',setH,{passive:true});setTimeout(setH,250);setTimeout(setH,1000);})();
+  </script>
+</body>
+</html>
