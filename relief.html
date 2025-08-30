@@ -1,26 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- ===================================================================
-       Charset & Viewport
-  ==================================================================== -->
+  <!-- Charset & Viewport -->
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- ===================================================================
-       Page Title & Description (CTR-focused)
-  ==================================================================== -->
+  <!-- Title & Description -->
   <title>Debt Relief Options — Settle, Consolidate, or Find Real Financial Help</title>
   <meta name="description" content="Understand debt settlement, consolidation, and hardship plans. Discover how GatewayDebtHelp and DebtReliefGuard help reduce your debt — legally and safely." />
   <meta name="robots" content="index,follow,max-image-preview:large" />
-
-  <!-- Canonical URL -->
   <link rel="canonical" href="https://debthelpform.com/relief.html" />
 
-  <!-- ===================================================================
-       Open Graph / Twitter
-  ==================================================================== -->
+  <!-- Open Graph / Twitter -->
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://debthelpform.com/relief.html" />
   <meta property="og:title" content="Debt Relief Options — Settle, Consolidate, or Find Real Financial Help" />
@@ -32,29 +24,18 @@
   <meta name="twitter:description" content="Understand your options and pick the best path — settlement, consolidation, or hardship." />
   <meta name="twitter:image" content="https://debthelpform.com/og-cover.jpg" />
 
-  <!-- ===================================================================
-       Fonts / Perf Hints
-  ==================================================================== -->
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- ===================================================================
-       A/B hook
-  ==================================================================== -->
+  <!-- A/B hook -->
   <meta name="x-ai-optimizer-page" content="dhf:relief" />
-  <script>
-    window.__ab = { pageKey: 'dhf:relief', slots: { headline: '#ab-cta-text' }, defaults: {} };
-  </script>
+  <script>window.__ab={pageKey:'dhf:relief',slots:{headline:'#ab-cta-text'},defaults:{}};</script>
 
-  <!-- ===================================================================
-       Schema: Breadcrumb + Organization/FinancialService + WebSite
-  ==================================================================== -->
+  <!-- Schema: WebSite + Organization/FinancialService + Breadcrumb + FAQPage -->
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
-    {"@type":"ListItem","position":1,"name":"Home","item":"https://debthelpform.com/"},
-    {"@type":"ListItem","position":2,"name":"Debt Relief Options","item":"https://debthelpform.com/relief.html"}
-  ]}
+  {"@context":"https://schema.org","@type":"WebSite","url":"https://debthelpform.com/","name":"DebtHelpForm","publisher":{"@id":"https://gatewaydebthelp.com/#gfsr"}}
   </script>
   <script type="application/ld+json">
   {
@@ -73,18 +54,28 @@
   }
   </script>
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"WebSite","url":"https://debthelpform.com/","name":"DebtHelpForm","publisher":{"@id":"https://gatewaydebthelp.com/#gfsr"}}
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+    {"@type":"ListItem","position":1,"name":"Home","item":"https://debthelpform.com/"},
+    {"@type":"ListItem","position":2,"name":"Debt Relief Options","item":"https://debthelpform.com/relief.html"}
+  ]}
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org","@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"Will this hurt my credit?","acceptedAnswer":{"@type":"Answer","text":"Debt settlement can affect credit in the short term; consolidation may have less impact if paid as agreed. We’ll explain tradeoffs before you decide."}},
+      {"@type":"Question","name":"How fast can I see lower payments?","acceptedAnswer":{"@type":"Answer","text":"Timelines vary by creditor, balance, and program—no guarantees. Your estimate shows payment range and timeline so you can plan."}},
+      {"@type":"Question","name":"What debts qualify?","acceptedAnswer":{"@type":"Answer","text":"Unsecured debts such as credit cards and personal loans often qualify. Secured debts and federal student loans typically do not."}}
+    ]
+  }
   </script>
 
-  <!-- ===================================================================
-       Theme Styles (matches family components)
-  ==================================================================== -->
+  <!-- Theme styles -->
   <style>
     :root {
-      --ink:#222; --bg:#f9fafe;
-      --brand:#004477; --brand-2:#003057;
-      --cta:#0b63f6; --ok:#007b55;
-      --card:#fff; --card-b:#e5e7eb; --shadow:0 10px 30px rgba(0,0,0,.12);
+      --ink:#222; --bg:#f9fafe; --brand:#004477; --brand-2:#003057;
+      --cta:#0b63f6; --ok:#007b55; --card:#fff; --card-b:#e5e7eb;
+      --shadow:0 10px 30px rgba(0,0,0,.12);
       --callbar-h:64px; --sitemap-h:52px;
       --chat-shadow:0 10px 30px rgba(0,0,0,.18); --chat-border:1px solid rgba(0,0,0,.06);
     }
@@ -92,36 +83,33 @@
     body{
       font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
       background:var(--bg); color:var(--ink); line-height:1.6;
-      padding-top:78px; /* a touch more breathing room under sticky nav */
-      padding-bottom:calc(var(--sitemap-h) + 14px);
+      padding-top:78px; padding-bottom:calc(var(--sitemap-h) + 14px);
     }
-    /* Accessibility helper */
     .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
     .sr-only:focus{position:fixed;left:12px;top:12px;padding:.5rem .75rem;background:#000;color:#fff;z-index:10000;border-radius:6px}
 
-    /* Top sticky nav */
+    /* Top nav */
     .sticky-nav{position:fixed;top:0;left:0;right:0;background:var(--brand-2);z-index:9999;box-shadow:0 2px 5px rgba(0,0,0,.08)}
     .sticky-nav ul{display:flex;gap:.75rem;margin:0;padding:.75rem 1rem;list-style:none;overflow-x:auto;white-space:nowrap}
     .sticky-nav a{color:#fff;text-decoration:none;font-weight:600;padding:.4rem .6rem;border-radius:6px}
     .sticky-nav a:hover,.sticky-nav a:focus{text-decoration:underline;outline:none}
 
-    /* Header card (higher contrast for small text) */
+    /* Header (readability) */
     header{
       max-width:960px;margin:0 auto 1rem;text-align:center;
-      background:var(--brand);color:#fff;padding:1.6rem 1rem;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.08)
+      background:var(--brand); color:#fff; padding:1.6rem 1rem;
+      border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,.08)
     }
-    header h1{margin:.2rem 0 .45rem;font-size:clamp(1.6rem,3vw + 1rem,2.3rem);font-weight:800;color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.15)}
-    header .sub{
-      margin:0 0 .8rem;color:#f5f9ff;line-height:1.6;text-shadow:0 1px 0 rgba(0,0,0,.15)
-    }
+    header h1{margin:.2rem 0 .45rem; font-size:clamp(1.6rem,3vw + 1rem,2.3rem); font-weight:800; color:#fff; text-shadow:0 1px 0 rgba(0,0,0,.15)}
+    header .sub{margin:0 0 .8rem; color:#f5f9ff; line-height:1.6; text-shadow:0 1px 0 rgba(0,0,0,.15)}
 
-    /* Section cards */
+    /* Cards */
     section{max-width:960px;margin:1.25rem auto;background:var(--card);padding:1.1rem;border:1px solid var(--card-b);border-radius:12px;box-shadow:0 2px 12px rgba(0,0,0,.06)}
     .lead{margin:.25rem 0 1rem;color:#444}
     .option-card{margin-bottom:1.5rem;padding:.9rem;background:#fafafa;border:1px dashed #d1d5db;border-radius:12px}
     .cta-button{background:var(--ok);color:#fff;padding:.9rem 1.4rem;border-radius:10px;font-weight:800;text-decoration:none;display:inline-block;box-shadow:var(--shadow)}
 
-    /* Bottom sticky sitemap */
+    /* Bottom sitemap */
     .sticky-menu{position:fixed;left:0;right:0;bottom:calc(var(--callbar-h) + env(safe-area-inset-bottom));background:#004488;color:#fff;border-top:2px solid var(--cta);height:var(--sitemap-h);display:flex;align-items:center;z-index:9997}
     @media (min-width:769px){.sticky-menu{bottom:0}}
     .sticky-menu nav{display:flex;gap:1rem;overflow-x:auto;padding:0 .75rem;width:100%;align-items:center;scrollbar-width:none}
@@ -129,7 +117,7 @@
     .sticky-menu nav a{color:#ffdd00;text-decoration:none;padding:.35rem .55rem;border-radius:6px;font-weight:700;font-size:.92rem;flex:0 0 auto}
     .sticky-menu nav a:hover,.sticky-menu nav a:focus{background:rgba(255,255,255,.1);outline:none}
 
-    /* Mobile dual-action bar */
+    /* Mobile CTA bar */
     .mobile-bar{position:fixed;left:0;right:0;bottom:0;background:#0b1220;color:#fff;display:flex;gap:8px;padding:.6rem;z-index:10000}
     .mobile-bar a{flex:1;text-align:center;padding:.75rem;border-radius:10px;font-weight:900;text-decoration:none}
     .mobile-call{background:var(--ok);color:#fff}
@@ -144,7 +132,7 @@
 <body>
   <a href="#main" class="sr-only">Skip to content</a>
 
-  <!-- Sticky Top Navigation (global, repo filenames) -->
+  <!-- Top nav (repo filenames) -->
   <nav class="sticky-nav" role="navigation" aria-label="Main navigation">
     <ul>
       <li><a href="/" title="Home">Home</a></li>
@@ -158,7 +146,7 @@
       <li><a href="/terms.html" title="Terms">Terms</a></li>
       <li><a href="tel:+18884377141" title="Call Now">📞 888-437-7141</a></li>
       <li><a href="https://debtreliefguard.com" target="_blank" rel="noopener" title="DebtReliefGuard">DebtReliefGuard</a></li>
-      <li><a href="https://gatewaydebthelp.com" target="_blank" rel="noopener" title="Gateway Debt Help">GatewayDebtHelp</a></li>
+      <li><a href="https://gatewaydebthelp.com" target="_blank" rel="noopener" title="GatewayDebtHelp">GatewayDebtHelp</a></li>
     </ul>
   </nav>
 
@@ -212,6 +200,8 @@
         </ul>
       </div>
 
+      <p class="lead">Prefer to compare numbers first? Try the <a href="/calculator.savings.html">Debt Savings Calculator</a> or browse our <a href="/geo-debt-relief.html">State Programs</a>.</p>
+
       <a href="/contact.html" class="cta-button">📞 Speak With a Specialist Now</a>
     </section>
 
@@ -261,7 +251,7 @@
     <a class="mobile-est"  href="#lead-form">🔒 Start Secure Estimate</a>
   </div>
 
-  <!-- Sticky Bottom Sitemap (global; repo filenames) -->
+  <!-- Sticky Bottom Sitemap -->
   <footer class="sticky-menu" role="navigation" aria-label="Site map">
     <nav>
       <a href="/">Home</a>
@@ -278,7 +268,7 @@
     </nav>
   </footer>
 
-  <!-- Regular footer + Legal disclaimer -->
+  <!-- Regular footer + Legal -->
   <footer>
     <p>&copy; <span id="year"></span> DebtHelpForm.com</p>
     <div style="text-align:left; max-width:960px; margin:0 auto; font-size:.86rem; color:#6b7280; line-height:1.45">
@@ -306,7 +296,7 @@
   })();
   </script>
 
-  <!-- 015: Telemetry beacon -->
+  <!-- Telemetry beacon -->
   <script>
   (() => {
     try {
@@ -329,9 +319,7 @@
       </div>
       <button id="gfsrChatClose" class="gfsr-chat-close" aria-label="Close chat">✕</button>
     </header>
-
     <div id="gfsrChatBody" class="gfsr-chat-body" tabindex="0"></div>
-
     <form id="gfsrChatForm" class="gfsr-chat-input">
       <label class="sr-only" for="gfsrChatInput">Type your message</label>
       <textarea id="gfsrChatInput" rows="1" placeholder="Type a message…" aria-label="Message"></textarea>
@@ -361,7 +349,7 @@
   })();
   </script>
 
-  <!-- Dynamic spacing: measure mobile bar and update --callbar-h -->
+  <!-- Mobile bar spacing -->
   <script>
     (function(){
       const root=document.documentElement;
