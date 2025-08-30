@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Charset & Viewport -->
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
@@ -8,19 +9,19 @@
   <title>Debt Savings Calculator — Estimate Monthly Payment & Payoff | DebtHelpForm</title>
   <meta name="description" content="Use our FTC-aligned debt savings calculator to estimate your monthly payment and payoff timeline under a verified relief plan—private, no-pressure, no upfront fees." />
   <meta name="robots" content="index,follow,max-image-preview:large" />
-  <link rel="canonical" href="https://debthelpform.com/savings.calculator.html" />
+  <link rel="canonical" href="https://debthelpform.com/calculator.savings.html" />
 
   <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://debthelpform.com/savings.calculator.html" />
+  <meta property="og:url" content="https://debthelpform.com/calculator.savings.html" />
   <meta property="og:title" content="Debt Savings Calculator — Estimate Monthly Payment & Payoff" />
   <meta property="og:description" content="Estimate your monthly payment and timeline under a verified debt relief plan. Secure, private, FTC-aligned." />
   <meta property="og:site_name" content="DebtHelpForm.com" />
-  <meta property="og:image" content="https://debthelpform.com/og-cover.jpg?v=20250830" />
+  <meta property="og:image" content="https://debthelpform.com/og-cover.jpg" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Debt Savings Calculator — Estimate Monthly Payment & Payoff" />
   <meta name="twitter:description" content="Fast, private, and compliant. See a plan in minutes." />
-  <meta name="twitter:image" content="https://debthelpform.com/og-cover.jpg?v=20250830" />
+  <meta name="twitter:image" content="https://debthelpform.com/og-cover.jpg" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
@@ -30,11 +31,11 @@
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
     {"@type":"ListItem","position":1,"name":"Home","item":"https://debthelpform.com/"},
-    {"@type":"ListItem","position":2,"name":"Calculator","item":"https://debthelpform.com/savings.calculator.html"}
+    {"@type":"ListItem","position":2,"name":"Calculator","item":"https://debthelpform.com/calculator.savings.html"}
   ]}
   </script>
 
-  <!-- Organization / FinancialService (brand disambiguation kept) -->
+  <!-- Organization / FinancialService -->
   <script type="application/ld+json">
   {
     "@context":"https://schema.org",
@@ -44,7 +45,7 @@
     "legalName":"Gateway Financial Settlement Relief, LLC",
     "alternateName":["Gateway Debt Help","GFSR"],
     "url":"https://gatewaydebthelp.com/",
-    "logo":"https://debthelpform.com/og-cover.jpg?v=20250830",
+    "logo":"https://debthelpform.com/og-cover.jpg",
     "telephone":"+1-888-437-7141",
     "areaServed":{"@type":"Country","name":"United States"},
     "sameAs":["https://debthelpform.com/","https://debtreliefguard.com/","https://gatewaydebthelp.com/"],
@@ -57,6 +58,11 @@
   {"@context":"https://schema.org","@type":"WebSite","url":"https://debthelpform.com/","name":"DebtHelpForm","publisher":{"@id":"https://gatewaydebthelp.com/#gfsr"}}
   </script>
 
+  <!-- WebApplication descriptor for the calculator -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebApplication","name":"Debt Savings Calculator","url":"https://debthelpform.com/calculator.savings.html","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
+  </script>
+
   <style>
     :root{
       --ink:#222; --bg:#f9fafe; --brand:#004477; --brand-2:#003057;
@@ -65,7 +71,7 @@
       --chat-shadow:0 10px 30px rgba(0,0,0,.18); --chat-border:1px solid rgba(0,0,0,.06);
     }
     *{box-sizing:border-box} html,body{margin:0;padding:0}
-    body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;padding-top:76px;padding-bottom:calc(var(--sitemap-h) + 14px)}
+    body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;padding-top:78px;padding-bottom:calc(var(--sitemap-h) + 14px)}
     .container{max-width:820px;margin:1.25rem auto;background:#fff;border:1px solid var(--card-b);border-radius:12px;padding:1.25rem;box-shadow:0 2px 12px rgba(0,0,0,.06)}
     h1{margin:.2rem 0 .4rem;font-size:clamp(1.6rem,3vw + 1rem,2.1rem);font-weight:800;text-align:center}
     .sub{margin:0 0 1rem;text-align:center;color:#444}
@@ -77,17 +83,27 @@
     .result{margin-top:1.25rem;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:10px;padding:1rem}
     .hidden{display:none}
 
+    /* Accessibility helper */
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .sr-only:focus{position:fixed;left:12px;top:12px;padding:.5rem .75rem;background:#000;color:#fff;z-index:10000;border-radius:6px}
+
     /* Top nav */
     .sticky-nav{position:fixed;top:0;left:0;right:0;background:var(--brand-2);z-index:9999;box-shadow:0 2px 5px rgba(0,0,0,.08)}
     .sticky-nav ul{display:flex;gap:.75rem;margin:0;padding:.75rem 1rem;list-style:none;overflow-x:auto;white-space:nowrap}
     .sticky-nav a{color:#fff;text-decoration:none;font-weight:600;padding:.4rem .6rem;border-radius:6px}
     .sticky-nav a:hover,.sticky-nav a:focus{text-decoration:underline;outline:none}
 
+    /* Hero (readability bump) */
+    header{max-width:960px;margin:0 auto;text-align:center;background:#004477;color:#fff;padding:1.35rem 1rem;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.08)}
+    header .badge{display:inline-flex;gap:.35rem;align-items:center;justify-content:center;background:#0f172a;color:#f1f5f9;border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:.35rem .6rem;font-size:.82rem}
+    header h1{color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.15)}
+    header p{color:#f5f9ff !important;text-shadow:0 1px 0 rgba(0,0,0,.15)}
+
     /* Mobile dual-action bar */
     .mobile-bar{position:fixed;left:0;right:0;bottom:0;background:#0b1220;color:#fff;display:flex;gap:8px;padding:.6rem;z-index:10000}
     .mobile-bar a{flex:1;text-align:center;border-radius:10px;padding:.75rem .5rem;font-weight:900;text-decoration:none}
     .mobile-call{background:var(--ok);color:#fff}
-    .mobile-est{background:var(--cta);color:#fff}
+    .mobile-est{background:#0b63f6;color:#fff}
     @media (min-width:769px){.mobile-bar{display:none}}
 
     /* Bottom sitemap */
@@ -105,16 +121,18 @@
 <body>
   <a href="#main" class="sr-only">Skip to content</a>
 
-  <!-- Top nav (includes State Programs; marks Calculator current) -->
+  <!-- Top nav (repo filenames; marks Calculator current) -->
   <nav class="sticky-nav" role="navigation" aria-label="Main navigation">
     <ul>
       <li><a href="/" title="Home">Home</a></li>
       <li><a href="#lead-form" title="Start Estimate">Start Estimate</a></li>
-      <li><a href="/savings.calculator.html" title="Savings Calculator" aria-current="page">Calculator</a></li>
-      <li><a href="/geo-debt-relief/" title="State Programs">State Programs</a></li>
-      <li><a href="/faq.index.html" title="FAQ">FAQ</a></li>
-      <li><a href="/privacy.policy.index.html" title="Privacy">Privacy</a></li>
-      <li><a href="/terms.index.html" title="Terms">Terms</a></li>
+      <li><a href="/calculator.savings.html" title="Savings Calculator" aria-current="page">Calculator</a></li>
+      <li><a href="/geo-debt-relief.html" title="State Programs">State Programs</a></li>
+      <li><a href="/relief.html" title="Debt Relief Options">Debt Relief Options</a></li>
+      <li><a href="/faq.html" title="FAQ">FAQ</a></li>
+      <li><a href="/contact.html" title="Contact">Contact</a></li>
+      <li><a href="/privacy.html" title="Privacy">Privacy</a></li>
+      <li><a href="/terms.html" title="Terms">Terms</a></li>
       <li><a href="tel:+18884377141" title="Call Now">📞 888-437-7141</a></li>
       <li><a href="https://debtreliefguard.com" target="_blank" rel="noopener" title="DebtReliefGuard">DebtReliefGuard</a></li>
       <li><a href="https://gatewaydebthelp.com" target="_blank" rel="noopener" title="GatewayDebtHelp">GatewayDebtHelp</a></li>
@@ -122,10 +140,10 @@
   </nav>
 
   <!-- Hero -->
-  <header style="max-width:960px;margin:0 auto;text-align:center;background:#004477;color:#fff;padding:1.25rem 1rem;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.08)">
-    <span class="badge" style="display:inline-flex;gap:.35rem;align-items:center;justify-content:center;background:#0f172a;color:#e5e7eb;border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:.35rem .6rem;font-size:.82rem">🛡️ Secure • FTC-Aligned • No Upfront Fees</span>
-    <h1 id="ab-cta-text" style="color:#fff">Debt Savings Calculator — See a Plan Before You Commit</h1>
-    <p class="sub" style="color:#f1f5f9">Private, fast, and transparent. Estimate your monthly payment and timeline, then decide with confidence.</p>
+  <header>
+    <span class="badge">🛡️ Secure • FTC-Aligned • No Upfront Fees</span>
+    <h1 id="ab-cta-text">Debt Savings Calculator — See a Plan Before You Commit</h1>
+    <p class="sub">Private, fast, and transparent. Estimate your monthly payment and timeline, then decide with confidence.</p>
   </header>
 
   <!-- Calculator -->
@@ -177,16 +195,18 @@
     <a class="mobile-est" href="#lead-form">🔒 Start Secure Estimate</a>
   </div>
 
-  <!-- Bottom sitemap (includes State Programs) -->
+  <!-- Bottom sitemap (global) -->
   <footer class="sticky-menu" role="navigation" aria-label="Site map">
     <nav>
       <a href="/">Home</a>
       <a href="#lead-form">Start Estimate</a>
-      <a href="/savings.calculator.html" aria-current="page">Calculator</a>
-      <a href="/geo-debt-relief/">State Programs</a>
-      <a href="/faq.index.html">FAQ</a>
-      <a href="/privacy.policy.index.html">Privacy</a>
-      <a href="/terms.index.html">Terms</a>
+      <a href="/calculator.savings.html" aria-current="page">Calculator</a>
+      <a href="/geo-debt-relief.html">State Programs</a>
+      <a href="/relief.html">Debt Relief Options</a>
+      <a href="/faq.html">FAQ</a>
+      <a href="/contact.html">Contact</a>
+      <a href="/privacy.html">Privacy</a>
+      <a href="/terms.html">Terms</a>
       <a href="https://debtreliefguard.com" target="_blank" rel="noopener">DebtReliefGuard.com</a>
       <a href="https://gatewaydebthelp.com" target="_blank" rel="noopener">GatewayDebtHelp.com</a>
     </nav>
