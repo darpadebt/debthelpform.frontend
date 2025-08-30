@@ -39,7 +39,7 @@
     };
   </script>
 
-  <!-- Schema: WebSite + Organization/FinancialService + Breadcrumb + FinancialService (estimate) -->
+  <!-- Schema: WebSite + Organization/FinancialService + Breadcrumb + FinancialService(estimate) + FAQPage -->
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"WebSite","name":"DebtHelpForm","url":"https://debthelpform.com/","publisher":{"@id":"https://gatewaydebthelp.com/#gfsr"}}
   </script>
@@ -66,6 +66,17 @@
   </script>
   <script type="application/ld+json">
   {"@context":"https://schema.org","@type":"FinancialService","name":"Debt Relief Savings Estimate","serviceType":"Debt relief consultation and savings estimate","provider":{"@id":"https://gatewaydebthelp.com/#gfsr"},"url":"https://debthelpform.com/","areaServed":"United States","isAccessibleForFree":true}
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"FAQPage",
+    "mainEntity":[
+      {"@type":"Question","name":"How fast can I see lower payments?","acceptedAnswer":{"@type":"Answer","text":"Timelines vary by creditor, balance, and program type—no guarantees. Your estimate shows a payment range and timeline so you can plan."}},
+      {"@type":"Question","name":"Will this hurt my credit?","acceptedAnswer":{"@type":"Answer","text":"Settlement can affect credit in the short term; consolidation may have less impact if paid as agreed. We’ll explain tradeoffs before you decide."}},
+      {"@type":"Question","name":"What debts qualify?","acceptedAnswer":{"@type":"Answer","text":"Unsecured debts such as credit cards and personal loans often qualify. Secured debts and federal student loans typically do not."}}
+    ]
+  }
   </script>
 
   <!-- Styles (DRG-aligned theme) -->
@@ -116,13 +127,9 @@
       margin:.35rem 0 .45rem;font-size:clamp(1.7rem,3vw + 1rem,2.4rem);
       font-weight:800;color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.15)
     }
-    /* >>> Contrast fix for small paragraph in blue box <<< */
+    /* contrast fix for small paragraph in blue box */
     header p{
-      color:#f5f9ff !important;           /* pure light text */
-      font-size:1.05rem;                   /* slightly larger */
-      line-height:1.6;                     /* more breathing room */
-      text-shadow:0 1px 0 rgba(0,0,0,.15); /* subtle lift on OLED */
-      margin:0 0 .6rem;
+      color:#f5f9ff !important; font-size:1.05rem; line-height:1.6; text-shadow:0 1px 0 rgba(0,0,0,.15); margin:0 0 .6rem;
     }
 
     /* Bottom sitemap */
@@ -163,6 +170,7 @@
       <li><a href="/faq.html" title="FAQ">FAQ</a></li>
       <li><a href="/contact.html" title="Contact">Contact</a></li>
       <li><a href="/privacy.html" title="Privacy">Privacy</a></li>
+      <li><a href="/terms.html" title="Terms">Terms</a></li>
       <li><a href="tel:+18884377141" title="Call Now">📞 888-437-7141</a></li>
       <li><a href="https://debtreliefguard.com" target="_blank" rel="noopener" title="DebtReliefGuard">DebtReliefGuard</a></li>
       <li><a href="https://gatewaydebthelp.com" target="_blank" rel="noopener" title="GatewayDebtHelp">GatewayDebtHelp</a></li>
