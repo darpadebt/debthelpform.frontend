@@ -13,13 +13,13 @@
   ==================================================================== -->
   <title>Debt Relief Options — Settle, Consolidate, or Find Real Financial Help</title>
   <meta name="description" content="Understand debt settlement, consolidation, and hardship plans. Discover how GatewayDebtHelp and DebtReliefGuard help reduce your debt — legally and safely." />
-  <meta name="keywords" content="debt relief, debt settlement, debt consolidation, hardship plan, GFSR, GatewayDebtHelp, DebtHelpForm, DebtReliefGuard, reduce debt legally, stop collection calls" />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
 
   <!-- Canonical URL -->
   <link rel="canonical" href="https://debthelpform.com/relief.html" />
 
   <!-- ===================================================================
-       Open Graph / Twitter (richer shares)
+       Open Graph / Twitter
   ==================================================================== -->
   <meta property="og:type" content="article" />
   <meta property="og:url" content="https://debthelpform.com/relief.html" />
@@ -27,7 +27,6 @@
   <meta property="og:description" content="Compare settlement, consolidation, and hardship plans. Learn the pros/cons and see your best next step." />
   <meta property="og:site_name" content="DebtHelpForm.com" />
   <meta property="og:image" content="https://debthelpform.com/og-cover.jpg" />
-
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Debt Relief Options — Settle, Consolidate, or Find Real Financial Help" />
   <meta name="twitter:description" content="Understand your options and pick the best path — settlement, consolidation, or hardship." />
@@ -45,11 +44,36 @@
   ==================================================================== -->
   <meta name="x-ai-optimizer-page" content="dhf:relief" />
   <script>
-    window.__ab = {
-      pageKey: 'dhf:relief',
-      slots: { headline: '#ab-cta-text' },
-      defaults: {}
-    };
+    window.__ab = { pageKey: 'dhf:relief', slots: { headline: '#ab-cta-text' }, defaults: {} };
+  </script>
+
+  <!-- ===================================================================
+       Schema: Breadcrumb + Organization/FinancialService + WebSite
+  ==================================================================== -->
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
+    {"@type":"ListItem","position":1,"name":"Home","item":"https://debthelpform.com/"},
+    {"@type":"ListItem","position":2,"name":"Debt Relief Options","item":"https://debthelpform.com/relief.html"}
+  ]}
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":["Organization","FinancialService"],
+    "@id":"https://gatewaydebthelp.com/#gfsr",
+    "name":"Gateway Financial Settlement Relief, LLC",
+    "legalName":"Gateway Financial Settlement Relief, LLC",
+    "alternateName":["Gateway Debt Help","GFSR"],
+    "url":"https://gatewaydebthelp.com/",
+    "logo":"https://debthelpform.com/og-cover.jpg",
+    "telephone":"+1-888-437-7141",
+    "areaServed":{"@type":"Country","name":"United States"},
+    "sameAs":["https://debthelpform.com/","https://debtreliefguard.com/","https://gatewaydebthelp.com/"],
+    "disambiguatingDescription":"Not affiliated with Gateway Debt Relief of Costa Mesa, CA."
+  }
+  </script>
+  <script type="application/ld+json">
+  {"@context":"https://schema.org","@type":"WebSite","url":"https://debthelpform.com/","name":"DebtHelpForm","publisher":{"@id":"https://gatewaydebthelp.com/#gfsr"}}
   </script>
 
   <!-- ===================================================================
@@ -75,7 +99,7 @@
     .skip-link{position:absolute;left:-999px;top:auto;width:1px;height:1px;overflow:hidden}
     .skip-link:focus{position:fixed;left:12px;top:12px;padding:.5rem .75rem;background:#000;color:#fff;z-index:10000;border-radius:6px}
 
-    /* Top sticky nav (match calculator page order & look) */
+    /* Top sticky nav */
     .sticky-nav{position:fixed;top:0;left:0;right:0;background:var(--brand-2);z-index:9999;box-shadow:0 2px 5px rgba(0,0,0,.08)}
     .sticky-nav ul{display:flex;gap:.75rem;margin:0;padding:.75rem 1rem;list-style:none;overflow-x:auto;white-space:nowrap}
     .sticky-nav a{color:#fff;text-decoration:none;font-weight:600;padding:.4rem .6rem;border-radius:6px}
@@ -110,27 +134,18 @@
     /* Chat FAB */
     .gfsr-chat-fab{position:fixed;right:14px;bottom:calc(var(--callbar-h) + var(--sitemap-h) + 14px);background:var(--cta);color:#fff;padding:.8rem 1rem;border-radius:999px;border:var(--chat-border);box-shadow:var(--chat-shadow);z-index:10003;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial}
   </style>
-
-  <!-- ===================================================================
-       Breadcrumb structured data
-  ==================================================================== -->
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
-    {"@type":"ListItem","position":1,"name":"Home","item":"https://debthelpform.com/"},
-    {"@type":"ListItem","position":2,"name":"Debt Relief Options","item":"https://debthelpform.com/relief.html"}
-  ]}
-  </script>
 </head>
 
 <body>
   <a href="#main" class="skip-link">Skip to content</a>
 
-  <!-- Sticky Top Navigation (matched to calculator page) -->
+  <!-- Sticky Top Navigation (global) -->
   <nav class="sticky-nav" role="navigation" aria-label="Main navigation">
     <ul>
       <li><a href="/" title="Home">Home</a></li>
       <li><a href="#lead-form" title="Start Estimate">Start Estimate</a></li>
       <li><a href="/savings.calculator.html" title="Savings Calculator">Calculator</a></li>
+      <li><a href="/geo-debt-relief/" title="State Programs">State Programs</a></li>
       <li><a href="/faq.index.html" title="FAQ">FAQ</a></li>
       <li><a href="/privacy.policy.index.html" title="Privacy">Privacy</a></li>
       <li><a href="/terms.index.html" title="Terms">Terms</a></li>
@@ -239,12 +254,13 @@
     <a class="mobile-est"  href="#lead-form">🔒 Start Secure Estimate</a>
   </div>
 
-  <!-- Sticky Bottom Sitemap -->
+  <!-- Sticky Bottom Sitemap (global; includes State Programs) -->
   <footer class="sticky-menu" role="navigation" aria-label="Site map">
     <nav>
       <a href="/">Home</a>
       <a href="#lead-form">Start Estimate</a>
       <a href="/savings.calculator.html">Calculator</a>
+      <a href="/geo-debt-relief/">State Programs</a>
       <a href="/faq.index.html">FAQ</a>
       <a href="/privacy.policy.index.html">Privacy</a>
       <a href="/terms.index.html">Terms</a>
