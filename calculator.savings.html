@@ -117,6 +117,23 @@
     /* Chat FAB */
     .gfsr-chat-fab{position:fixed;right:14px;bottom:calc(var(--callbar-h) + var(--sitemap-h) + 14px);background:var(--cta);color:#fff;padding:.8rem 1rem;border-radius:999px;border:var(--chat-border);box-shadow:var(--chat-shadow);z-index:10003;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial}
   </style>
+
+  <!-- 015/050: A/B + Optimizer page identity (non-visual) -->
+  <meta name="x-ai-optimizer-page" content="dhf:calc" />
+  <script>
+    window.__ab = {
+      pageKey: 'dhf:calc',
+      slots: {
+        headline:  '#ab-cta-text',
+        primaryCta: '.btn.btn-primary',
+        phoneCta:   '.btn.btn-outline'
+      },
+      defaults: {
+        primaryCtaText: '🔒 Start Secure Estimate',
+        primaryCtaHref: '#lead-form'
+      }
+    };
+  </script>
 </head>
 <body>
   <a href="#main" class="sr-only">Skip to content</a>
@@ -128,7 +145,7 @@
       <li><a href="#lead-form" title="Start Estimate">Start Estimate</a></li>
       <li><a href="/calculator.savings.html" title="Savings Calculator" aria-current="page">Calculator</a></li>
       <li><a href="/geo-debt-relief.html" title="State Programs">State Programs</a></li>
-      <li><a href="/relief.html" title="Debt Relief Options">Debt Relief Options</a></li>
+      <li><a href="/relief.html" title="Debt Relief Options">Relief Options</a></li>
       <li><a href="/faq.html" title="FAQ">FAQ</a></li>
       <li><a href="/contact.html" title="Contact">Contact</a></li>
       <li><a href="/privacy.html" title="Privacy">Privacy</a></li>
@@ -274,6 +291,129 @@
       function setH(){ const vis=mb&&getComputedStyle(mb).display!=='none'; root.style.setProperty('--callbar-h',(vis?mb.offsetHeight:0)+'px'); }
       setH(); addEventListener('resize',setH,{passive:true}); setTimeout(setH,250); setTimeout(setH,1000);
     })();
+  </script>
+
+  <!-- 057: Telemetry session beacon (non-visual) -->
+  <script>
+  (() => { try {
+    const k='dhf:sess:v1';
+    let sid=sessionStorage.getItem(k);
+    if(!sid){ sid=crypto.randomUUID(); sessionStorage.setItem(k, sid); }
+
+    const payload={
+      v:1, ts:Date.now(), sid,
+      url:location.href,
+      ref:document.referrer||null,
+      w:innerWidth, h:innerHeight
+    };
+    const blob=new Blob([JSON.stringify(payload)],{type:'application/json'});
+
+    if(navigator.sendBeacon){
+      navigator.sendBeacon('/ingest', blob);
+    }else{
+      fetch('/ingest',{ method:'POST', body:blob, keepalive:true, headers:{'Content-Type':'application/json'} }).catch(()=>{});
+    }
+  } catch(_){ } })();
+  </script>
+
+  <!-- 057: CTA intent events (Start / Call) -->
+  <script>
+  (() => {
+    function send(name, data){
+      try{
+        const b=new Blob([JSON.stringify({ name, ts:Date.now(), ...data })],{type:'application/json'});
+        if(navigator.sendBeacon) navigator.sendBeacon('/ingest', b);
+        else fetch('/ingest',{ method:'POST', body:b, keepalive:true, headers:{'Content-Type':'application/json'} }).catch(()=>{});
+      }catch{}
+    }
+    document.addEventListener('click', e => {
+      const a = e.target.closest('a,button');
+      if(!a) return;
+      if(a.matches('.btn.btn-primary, .mobile-est')) send('cta:start_click', { url: location.href });
+      if(a.matches('.btn.btn-outline, .mobile-call')) send('cta:call_click', { url: location.href });
+    }, { passive:true });
+  })();
+  </script>
+
+  <!-- 016: Chatbot FAB + Panel (non-visual until clicked) -->
+  <button id="gfsrChatFab" class="gfsr-chat-fab" aria-haspopup="dialog"
+          aria-expanded="false" aria-controls="gfsrChatSheet">💬 Chat</button>
+  <section id="gfsrChatSheet" class="gfsr-chat-sheet" role="dialog" aria-modal="true" hidden>
+    <header class="gfsr-chat-head">
+      <div class="gfsr-chat-title">Debt Help Assistant</div>
+      <button id="gfsrChatClose" class="gfsr-chat-close" aria-label="Close chat">✕</button>
+    </header>
+    <div id="gfsrChatBody" class="gfsr-chat-body"></div>
+    <form id="gfsrChatForm" class="gfsr-chat-input">
+      <textarea id="gfsrChatInput" placeholder="Type a message…" aria-label="Message"></textarea>
+      <button id="gfsrChatSend" type="submit" class="gfsr-chat-send">Send</button>
+    </form>
+  </section>
+
+  <!-- 016: Chat script (guarded) -->
+  <script>
+  (() => {
+    const el = {
+      fab:   document.getElementById('gfsrChatFab'),
+      sheet: document.getElementById('gfsrChatSheet'),
+      close: document.getElementById('gfsrChatClose'),
+      body:  document.getElementById('gfsrChatBody'),
+      form:  document.getElementById('gfsrChatForm'),
+      input: document.getElementById('gfsrChatInput'),
+      send:  document.getElementById('gfsrChatSend')
+    };
+    if(!(el.fab && el.sheet && el.close && el.body && el.form && el.input && el.send)) return;
+
+    const openChat = () => {
+      el.sheet.hidden=false;
+      el.sheet.classList.add('open');
+      el.fab.setAttribute('aria-expanded','true');
+      setTimeout(()=>el.input.focus(),120);
+    };
+    const closeChat = () => {
+      el.sheet.classList.remove('open');
+      el.fab.setAttribute('aria-expanded','false');
+      el.sheet.hidden=true;
+      el.fab.focus();
+    };
+    el.fab.addEventListener('click', openChat);
+    el.close.addEventListener('click', closeChat);
+    addEventListener('keydown', e => { if(e.key==='Escape' && !el.sheet.hidden) closeChat(); });
+
+    el.form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const msg=(el.input.value||'').trim();
+      if(!msg) return;
+
+      const add = (text, who='bot') => {
+        const d=document.createElement('div');
+        d.className='gfsr-msg ' + who;
+        d.textContent=text;
+        el.body.appendChild(d);
+        el.body.scrollTop = el.body.scrollHeight;
+      };
+
+      add(msg,'user'); el.input.value='';
+
+      try{
+        const r = await fetch('/chat', {
+          method:'POST',
+          headers:{'Content-Type':'application/json','Accept':'application/json'},
+          body: JSON.stringify({ messages:[{ role:'user', content: msg }], source:'frontend', url: location.href })
+        });
+        let reply = 'Thanks — how else can I help?';
+        if (r.ok) {
+          const ct=r.headers.get('content-type')||'';
+          reply = ct.includes('application/json') ? ((await r.json()).reply || reply) : (await r.text()) || reply;
+        } else {
+          reply = 'Sorry — service error.';
+        }
+        add(reply,'bot');
+      }catch{
+        add('Network error — please try again.','meta');
+      }
+    });
+  })();
   </script>
 
   <noscript><p style="text-align:center;color:#666">Enable JavaScript to use the calculator and secure form.</p></noscript>
