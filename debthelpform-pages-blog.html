@@ -149,6 +149,17 @@
       .gfsr-chat-sheet{right:0;left:0;max-width:100%;border-left:none;border-right:none}
     }
   </style>
+
+  <!-- Chat mobile enhancements (only chat-related) -->
+  <style>
+    @media (max-width:768px){
+      /* Prevent iOS zoom, keep input visible over keyboard/safe area */
+      .gfsr-chat-input{position:sticky;bottom:env(safe-area-inset-bottom);padding-bottom:calc(env(safe-area-inset-bottom) + 8px)}
+      .gfsr-chat-input textarea{font-size:16px}
+      /* Slightly taller body when keyboard not up */
+      .gfsr-chat-body{max-height:calc(70vh - 56px)}
+    }
+  </style>
 </head>
 
 <body>
@@ -197,7 +208,7 @@
     <!-- Optional embedded form (kept consistent with site) -->
     <section id="lead-form" style="margin-top:1.25rem;background:#fff;border:1px dashed #cbd5e1;border-radius:12px;padding:1rem">
       <h2 style="margin:.2rem 0 .5rem;font-weight:800">Start your secure estimate</h2>
-      <!-- CHANGED: use direct iframe embed so the secure form loads reliably -->
+      <!-- CHANGED earlier: direct iframe embed -->
       <iframe
         src="https://api.leadconnectorhq.com/widget/form/A5c9I3HkyNd1puU4nJWl"
         title="Debt Relief Estimate Form"
@@ -270,8 +281,6 @@
   })();
   </script>
 
-  <!-- REMOVED: script-loader block that previously replaced #ghl-embed and showed the error -->
-
   <!-- 050: Headline updater (Worker 050) -->
   <script>
   (async () => {
@@ -338,7 +347,10 @@
     const open=()=>{el.sheet.removeAttribute('hidden');el.sheet.style.transform='translateY(0)';el.fab.setAttribute('aria-expanded','true');setTimeout(()=>el.input.focus(),120);};
     const close=()=>{el.sheet.style.transform='translateY(110%)';el.fab.setAttribute('aria-expanded','false');setTimeout(()=>el.sheet.setAttribute('hidden',''),250);el.fab.focus();};
     el.fab.onclick=open; el.close.onclick=close; addEventListener('keydown',e=>{if(e.key==='Escape'&&!el.sheet.hasAttribute('hidden'))close();});
-    el.form.onsubmit=async e=>{e.preventDefault();const msg=(el.input.value||'').trim();if(!msg)return;add(msg,'user');el.input.value='';
+    /* Mobile-friendly: auto-grow textarea & keep input visible */
+    const autoresize=()=>{el.input.style.height='42px';el.input.style.height=Math.min(el.input.scrollHeight,140)+'px';};
+    el.input.addEventListener('input',autoresize,{passive:true}); autoresize();
+    el.form.onsubmit=async e=>{e.preventDefault();const msg=(el.input.value||'').trim();if(!msg)return;add(msg,'user');el.input.value='';autoresize();
       try{const r=await fetch('/chat',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({messages:[{role:'user',content:msg}],source:'frontend',url:location.href})});
         const ct=r.headers.get('content-type')||'';const reply=r.ok?(ct.includes('application/json')?((await r.json()).reply||''):(await r.text())):'';add(reply||'Thanks — how else can I help?','bot');}
       catch{add('Network error — please try again.','meta');}};
