@@ -368,6 +368,15 @@
   })();
   </script>
 
+  <!-- Mobile bar spacing (sets --callbar-h) -->
+  <script>
+    (function(){
+      const root=document.documentElement, mb=document.getElementById('dhpMobileBar');
+      function setH(){ const vis=mb && getComputedStyle(mb).display!=='none'; root.style.setProperty('--callbar-h',(vis?mb.offsetHeight:0)+'px'); }
+      setH(); addEventListener('resize',setH,{passive:true}); setTimeout(setH,250); setTimeout(setH,1000);
+    })();
+  </script>
+
   <noscript><p style="text-align:center;color:#666">Enable JavaScript to browse posts and use quick actions.</p></noscript>
 </body>
 </html>
