@@ -197,7 +197,15 @@
     <!-- Optional embedded form (kept consistent with site) -->
     <section id="lead-form" style="margin-top:1.25rem;background:#fff;border:1px dashed #cbd5e1;border-radius:12px;padding:1rem">
       <h2 style="margin:.2rem 0 .5rem;font-weight:800">Start your secure estimate</h2>
-      <div id="ghl-embed" style="min-height:520px;border-radius:12px;overflow:hidden;background:#f8fafc;display:flex;align-items:center;justify-content:center;color:#64748b">Loading secure form…</div>
+      <!-- CHANGED: use direct iframe embed so the secure form loads reliably -->
+      <iframe
+        src="https://api.leadconnectorhq.com/widget/form/A5c9I3HkyNd1puU4nJWl"
+        title="Debt Relief Estimate Form"
+        loading="lazy"
+        referrerpolicy="strict-origin-when-cross-origin"
+        height="1360"
+        style="width:100%;border:none;border-radius:12px;box-shadow:0 0 20px rgba(0,0,0,.05)"></iframe>
+      <script src="https://link.msgsndr.com/js/form_embed.js" defer></script>
     </section>
   </main>
 
@@ -262,21 +270,7 @@
   })();
   </script>
 
-  <!-- GoHighLevel embed loader (ensures secure form loads) -->
-  <script>
-    (function(){
-      const mount = document.getElementById('ghl-embed');
-      const url = "https://api.leadconnectorhq.com/widget/form/A5c9I3HkyNd1puU4nJWl";
-      if (!mount) return;
-      const helper = document.createElement("script");
-      helper.src = "https://link.msgsndr.com/js/form_embed.js"; helper.defer = true;
-      document.body.appendChild(helper);
-      const s = document.createElement("script");
-      s.src = url; s.async = true;
-      s.onerror = ()=>{ mount.textContent = "Unable to load the secure form. Please try again or call 888-437-7141."; };
-      mount.innerHTML = ""; document.body.appendChild(s);
-    })();
-  </script>
+  <!-- REMOVED: script-loader block that previously replaced #ghl-embed and showed the error -->
 
   <!-- 050: Headline updater (Worker 050) -->
   <script>
