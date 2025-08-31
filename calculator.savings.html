@@ -116,6 +116,24 @@
 
     /* Chat FAB */
     .gfsr-chat-fab{position:fixed;right:14px;bottom:calc(var(--callbar-h) + var(--sitemap-h) + 14px);background:var(--cta);color:#fff;padding:.8rem 1rem;border-radius:999px;border:var(--chat-border);box-shadow:var(--chat-shadow);z-index:10003;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial}
+
+    /* ✅ Chat sheet styles (missing before) */
+    .gfsr-chat-sheet{
+      position:fixed; inset:auto 0 0 0; margin:auto; width:100%; max-width:420px;
+      right:12px; left:auto; border-radius:18px 18px 0 0; background:#fff;
+      box-shadow:var(--chat-shadow); transform:translateY(110%); transition:transform .28s ease;
+      border:var(--chat-border); z-index:10004
+    }
+    .gfsr-chat-sheet.open{ transform:translateY(0) }
+    .gfsr-chat-head{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid rgba(0,0,0,.06);background:#f9fafb;border-radius:inherit}
+    .gfsr-chat-body{display:flex;flex-direction:column;gap:8px;padding:12px;height:min(70vh,520px);overflow:auto;-webkit-overflow-scrolling:touch}
+    .gfsr-chat-input{display:flex;gap:8px;padding:10px;border-top:1px solid rgba(0,0,0,.06);background:#fff;border-radius:0 0 18px 18px}
+    .gfsr-chat-input textarea{flex:1;resize:none;min-height:42px;max-height:120px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:12px;font-size:14px;line-height:1.35}
+    .gfsr-chat-send{background:#0b63f6;color:#fff;border:none;padding:12px 14px;border-radius:12px;font-weight:700}
+    .gfsr-msg{max-width:88%;padding:10px 12px;border-radius:14px;font-size:14px;line-height:1.35}
+    .gfsr-msg.user{margin-left:auto;background:#0b63f6;color:#fff;border-top-right-radius:4px}
+    .gfsr-msg.bot{background:#eef2ff;color:#111;border-top-left-radius:4px}
+    .gfsr-msg.meta{background:#f3f4f6;color:#444;font-size:12px;margin:4px auto}
   </style>
 
   <!-- 015/050: A/B + Optimizer page identity (non-visual) -->
@@ -367,15 +385,17 @@
     if(!(el.fab && el.sheet && el.close && el.body && el.form && el.input && el.send)) return;
 
     const openChat = () => {
-      el.sheet.hidden=false;
+      el.sheet.hidden = false;
       el.sheet.classList.add('open');
+      el.sheet.style.transform = 'translateY(0)';       // explicit for safety
       el.fab.setAttribute('aria-expanded','true');
       setTimeout(()=>el.input.focus(),120);
     };
     const closeChat = () => {
       el.sheet.classList.remove('open');
+      el.sheet.style.transform = 'translateY(110%)';    // slide down
       el.fab.setAttribute('aria-expanded','false');
-      el.sheet.hidden=true;
+      el.sheet.hidden = true;
       el.fab.focus();
     };
     el.fab.addEventListener('click', openChat);
