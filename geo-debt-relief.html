@@ -360,30 +360,24 @@
       const h1 = document.getElementById('geoHeadline');
       if(h1){ h1.textContent = `${pretty} Debt Relief — Free Estimate in 60 Seconds`; }
 
-      // Update <title> for users (note: crawlers may not execute JS)
       try{ document.title = `Debt Relief Estimate in ${pretty} | Lower Your Payments Today`; }catch{}
 
-      // Find matching target element by several id patterns
       const candidates = [
-        `state-${pretty.toLowerCase().replace(/\s+/g,'-')}`, // #state-texas
-        pretty,                                             // #Texas
-        norm(pretty)                                        // #NewYork
+        `state-${pretty.toLowerCase().replace(/\s+/g,'-')}`,
+        pretty,
+        norm(pretty)
       ];
       let target=null;
       for(const id of candidates){ target = document.getElementById(id); if(target) break; }
-
-      // Scroll to target and mark link
       if(target){
         target.scrollIntoView({behavior:'smooth', block:'start'});
         target.setAttribute('tabindex','-1'); target.focus?.();
       }
-
-      // Highlight the state link in the grid if present
       document.querySelectorAll('.states-grid a').forEach(a=>{
         const hash = (a.hash||'').toLowerCase();
         if(!hash) return;
         const key = `#${norm(pretty).toLowerCase()}`;
-        const key2 = `#${pretty.toLowerCase()}`; // with space removed by browser in anchor ids we used exact capitalization
+        const key2 = `#${pretty.toLowerCase()}`;
         if(hash.includes(key) || hash.includes(key2)){ a.setAttribute('aria-current','page'); }
         else{ a.removeAttribute('aria-current'); }
       });
@@ -410,6 +404,99 @@
     })();
   </script>
 
+  <!-- === Core 4 additions (non-visual) === -->
+
+  <!-- 015/050: A/B + optimizer page identity -->
+  <meta name="x-ai-optimizer-page" content="dhf:geo" />
+  <script>
+    window.__ab = {
+      pageKey: 'dhf:geo',
+      slots: {
+        headline:  '#geoHeadline',
+        primaryCta: '.mobile-est',
+        phoneCta:   '.mobile-call, .btn.btn-call, a[href^="tel:"]'
+      },
+      defaults: { primaryCtaText: '🔒 Start Secure Estimate', primaryCtaHref: '#lead-form' }
+    };
+  </script>
+
+  <!-- 057: Telemetry session beacon -->
+  <script>
+  (() => { try {
+    const k='dhf:geo:sid';
+    let sid=sessionStorage.getItem(k); if(!sid){ sid=crypto.randomUUID(); sessionStorage.setItem(k, sid); }
+    const payload={ v:1, ts:Date.now(), sid, url:location.href, ref:document.referrer||null, w:innerWidth, h:innerHeight };
+    const blob=new Blob([JSON.stringify(payload)],{type:'application/json'});
+    if(navigator.sendBeacon) navigator.sendBeacon('/ingest', blob);
+    else fetch('/ingest',{ method:'POST', body:blob, keepalive:true, headers:{'Content-Type':'application/json'} }).catch(()=>{});
+  } catch(_){} })();
+  </script>
+
+  <!-- 057: CTA click-intent events -->
+  <script>
+  (() => {
+    function send(name, data){
+      try{
+        const b=new Blob([JSON.stringify({ name, ts:Date.now(), ...data })],{type:'application/json'});
+        if(navigator.sendBeacon) navigator.sendBeacon('/ingest', b);
+        else fetch('/ingest',{ method:'POST', body:b, keepalive:true, headers:{'Content-Type':'application/json'} }).catch(()=>{});
+      }catch{}
+    }
+    document.addEventListener('click', e => {
+      const a=e.target.closest('a,button'); if(!a) return;
+      if(a.matches('.mobile-est')) send('cta:start_click', { url: location.href });
+      if(a.matches('.mobile-call, .btn.btn-call, a[href^="tel:"]')) send('cta:call_click', { url: location.href });
+    }, { passive:true });
+  })();
+  </script>
+
+  <!-- 016: Chatbot FAB + Panel + guarded script -->
+  <button id="gfsrChatFab" class="gfsr-chat-fab" aria-haspopup="dialog"
+          aria-expanded="false" aria-controls="gfsrChatSheet">💬 Chat</button>
+  <section id="gfsrChatSheet" class="gfsr-chat-sheet" role="dialog" aria-modal="true" hidden>
+    <header class="gfsr-chat-head">
+      <div class="gfsr-chat-title">Debt Help Assistant</div>
+      <button id="gfsrChatClose" class="gfsr-chat-close" aria-label="Close chat">✕</button>
+    </header>
+    <div id="gfsrChatBody" class="gfsr-chat-body" tabindex="0"></div>
+    <form id="gfsrChatForm" class="gfsr-chat-input">
+      <label class="sr-only" for="gfsrChatInput">Type your message</label>
+      <textarea id="gfsrChatInput" rows="1" placeholder="Type a message…" aria-label="Message"></textarea>
+      <button id="gfsrChatSend" class="gfsr-chat-send" type="submit">Send</button>
+    </form>
+  </section>
+  <script>
+  (() => {
+    const el={fab:document.getElementById('gfsrChatFab'),sheet:document.getElementById('gfsrChatSheet'),close:document.getElementById('gfsrChatClose'),body:document.getElementById('gfsrChatBody'),form:document.getElementById('gfsrChatForm'),input:document.getElementById('gfsrChatInput'),send:document.getElementById('gfsrChatSend')};
+    if(!(el.fab && el.sheet && el.close && el.body && el.form && el.input && el.send)) return;
+    const openChat=()=>{el.sheet.hidden=false; el.sheet.classList.add('open'); el.fab.setAttribute('aria-expanded','true'); setTimeout(()=>el.input.focus(),120);};
+    const closeChat=()=>{el.sheet.classList.remove('open'); el.sheet.hidden=true; el.fab.setAttribute('aria-expanded','false'); el.fab.focus();};
+    el.fab.addEventListener('click',openChat);
+    el.close.addEventListener('click',closeChat);
+    addEventListener('keydown',e=>{ if(e.key==='Escape' && !el.sheet.hidden) closeChat(); });
+
+    const addMsg=(t,w='bot')=>{ const d=document.createElement('div'); d.className=`gfsr-msg ${w}`; d.textContent=(t??'').toString(); el.body.appendChild(d); el.body.scrollTop=el.body.scrollHeight; };
+
+    const KEY='dhf:geo:chat'; try{ (JSON.parse(localStorage.getItem(KEY)||'[]')).slice(-20).forEach(m=>addMsg(m.text,m.who)); } catch {}
+    const remember=(t,w)=>{ try{ const h=JSON.parse(localStorage.getItem(KEY)||'[]'); h.push({text:t,who:w,t:Date.now()}); localStorage.setItem(KEY, JSON.stringify(h).slice(-8000)); } catch {} };
+
+    const API=`${location.origin}/chat`; let busy=false;
+    el.form.addEventListener('submit', async (e) => {
+      e.preventDefault(); if(busy) return;
+      const msg=(el.input.value||'').trim(); if(!msg) return;
+      addMsg(msg,'user'); remember(msg,'user'); el.input.value=''; busy=true; el.send.disabled=true;
+      try{
+        const r=await fetch(API,{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({messages:[{role:'user',content:msg}],source:'frontend',url:location.href})});
+        if(!r.ok){ addMsg(`Service error ${r.status}.`,'meta'); return; }
+        const ct=r.headers.get('content-type')||''; const reply=ct.includes('application/json')?((await r.json()).reply||''):(await r.text());
+        addMsg(reply||'Thanks — how else can I help?','bot'); remember(reply||'','bot');
+      }catch{ addMsg('Network error — please try again.','meta'); }
+      finally{ busy=false; el.send.disabled=false; el.input.focus(); }
+    });
+  })();
+  </script>
+
+  <!-- keep your custom heatmap and spacing utilities above -->
   <noscript><p style="text-align:center;color:#666">Enable JavaScript to use the secure form and quick actions.</p></noscript>
 </body>
 </html>
