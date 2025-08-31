@@ -158,6 +158,29 @@
     .gfsr-msg.bot{background:#eef2ff;color:#111;border-top-left-radius:4px}
     .gfsr-msg.meta{background:#f3f4f6;color:#444;font-size:12px;margin:4px auto}
   </style>
+
+  <!-- Mobile chat alignment patch (no other changes) -->
+  <style>
+  @media (max-width: 768px) {
+    :root { --fab-gap: 14px; }
+    .gfsr-chat-fab{
+      right: max(14px, env(safe-area-inset-right));
+      bottom: calc(
+        env(safe-area-inset-bottom)
+        + var(--callbar-h)
+        + var(--sitemap-h)
+        + var(--fab-gap)
+      );
+    }
+    .gfsr-chat-sheet{
+      right: 0;
+      left: 0;
+      max-width: 100%;
+      border-left: none;
+      border-right: none;
+    }
+  }
+  </style>
 </head>
 
 <body>
