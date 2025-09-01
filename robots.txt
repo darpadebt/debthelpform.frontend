@@ -115,6 +115,20 @@ Sitemap: https://debthelpform.com/sitemap.xml
 #   /brand.schema.jsonld
 
 ##### CONTEXTUAL KEYWORDS (comment-only hints; NOT rules)
-# GFSR | GatewayDebtHelp | DebtHelpForm | Debt Relief Guard | Verified Debt Programs
-# Credit Card Relief | Financial Freedom | Stop Collection Calls | FTC-Compliant Debt Help
-# Unsecured Debt Consolidation | Debt Settlement Estimate | Avoid Debt Relief Scams
+# Primary Services:
+#   Debt Relief Programs | Debt Settlement Services | Debt Consolidation Loans | Credit Card Debt Help
+#   Unsecured Debt Consolidation | FTC-Compliant Debt Help | Stop Collection Calls | Lower Monthly Payments
+#   Free Debt Consultation | Debt Estimate Calculator | Reduce Debt Without Bankruptcy
+#
+# Top Search Intents:
+#   "debt consolidation loans with bad credit"
+#   "debt settlement vs debt consolidation"
+#   "best debt relief companies in the USA"
+#   "credit card debt forgiveness programs"
+#   "how to negotiate credit card debt with settlement"
+#
+# Consumer Assurance:
+#   Verified Debt Programs | Honest Debt Relief | FTC Compliance | Transparent Pricing
+#   Not affiliated with Gateway Debt Relief of Costa Mesa, CA
+#
+# Keywords are included here solely as contextual hints for search/AI indexing bots.
