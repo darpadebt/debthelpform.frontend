@@ -38,6 +38,31 @@
       defaults: { primaryCtaText: '🔒 Start Secure Estimate', primaryCtaHref: '#lead-form' }
     };
   </script>
+  <script>
+(function(){
+  const ready = (fn)=>document.readyState!=='loading'?fn():document.addEventListener('DOMContentLoaded',fn);
+  ready(async function(){
+    const h1 = document.querySelector('#ab-cta-text');
+    const btn = document.querySelector('.hero-ctas .btn.btn-primary');
+    if(!h1) return;
+
+    // Use alias if you've added it to 050's wrangler; otherwise use the mesh path
+    const url = '/api/savings-message?v=' + Date.now(); // or '/api/mesh/050-ai-loop-optimizer/savings-message?v='+Date.now()
+
+    try{
+      const r = await fetch(url, { cache:'no-store', credentials:'omit', headers:{'Accept':'application/json'} });
+      if(!r.ok) return;
+      const data = await r.json();
+
+      const hero = (data?.message || data?.hero || '').toString();
+      if (hero) h1.textContent = hero;
+
+      if (btn && data?.primaryCtaText) btn.textContent = data.primaryCtaText;
+      if (btn && data?.primaryCtaHref) btn.href       = data.primaryCtaHref;
+    }catch(_){ /* keep defaults */ }
+  });
+})();
+</script>
 
   <!-- Schema: WebSite + Organization/FinancialService + Breadcrumb + FinancialService(estimate) + FAQPage -->
   <script type="application/ld+json">
