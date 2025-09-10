@@ -42,6 +42,60 @@
 (function(){
   const ready = (fn)=>document.readyState!=='loading'?fn():document.addEventListener('DOMContentLoaded',fn);
   ready(async function(){
+    const h1  = document.querySelector('#ab-cta-text');
+    const btn = document.querySelector('.hero-ctas .btn.btn-primary');
+    if(!h1) return;
+
+    // Choose ONE:
+    // If you've added alias routes in 050 wrangler:
+    const url = '/api/savings-message?v=' + Date.now();
+    // Otherwise (no alias yet), comment the line above and use the mesh path:
+    // const url = '/api/mesh/050-ai-loop-optimizer/savings-message?v=' + Date.now();
+
+    // Light local cache (10 min) so returning visitors don’t flicker
+    const KEY = 'dhf:savings:v1'; const MAX_AGE = 10*60*1000;
+    try {
+      const raw = localStorage.getItem(KEY);
+      if (raw) {
+        const { ts, hero, primaryCtaText, primaryCtaHref } = JSON.parse(raw);
+        if (ts && (Date.now() - ts) < MAX_AGE) {
+          if (hero) h1.textContent = String(hero);
+          if (btn && primaryCtaText) btn.textContent = String(primaryCtaText);
+          if (btn && primaryCtaHref) btn.href = String(primaryCtaHref);
+        }
+      }
+    } catch {}
+
+    try{
+      const r = await fetch(url, { cache:'no-store', credentials:'omit', headers:{ 'Accept':'application/json' } });
+      if(!r.ok) return;
+      const data = await r.json();
+
+      // Accept either shape: {hero, primaryCtaText, primaryCtaHref} or {message, ...}
+      const hero = (data?.hero ?? data?.message ?? '').toString();
+      if (hero) h1.textContent = hero;
+
+      if (btn && data?.primaryCtaText) btn.textContent = data.primaryCtaText;
+      if (btn && data?.primaryCtaHref) btn.href       = data.primaryCtaHref;
+
+      try {
+        localStorage.setItem(KEY, JSON.stringify({
+          ts: Date.now(),
+          hero,
+          primaryCtaText: data?.primaryCtaText || null,
+          primaryCtaHref: data?.primaryCtaHref || null
+        }));
+      } catch {}
+    }catch{
+      /* keep defaults */
+    }
+  });
+})();
+</script>
+  <script>
+(function(){
+  const ready = (fn)=>document.readyState!=='loading'?fn():document.addEventListener('DOMContentLoaded',fn);
+  ready(async function(){
     const h1 = document.querySelector('#ab-cta-text');
     const btn = document.querySelector('.hero-ctas .btn.btn-primary');
     if(!h1) return;
@@ -494,44 +548,7 @@
   })();
   </script>
 
-  <!-- ====== 050: Savings/Headline loader (A/B content) ====== -->
-  <script>
-    (function(){
-      const el = document.querySelector('#ab-cta-text'); if(!el) return;
-      const FALLBACK = el.textContent || '';
-      const KEY = 'dhf:savings:v1'; const MAX_AGE = 10*60*1000;
 
-      try{
-        const raw = localStorage.getItem(KEY);
-        if(raw){
-          const { ts, message } = JSON.parse(raw);
-          if(ts && (Date.now()-ts) < MAX_AGE && message) el.textContent = (message ?? '').toString();
-        }
-      }catch{}
-
-      (async ()=>{
-        const sleep = ms => new Promise(r=>setTimeout(r,ms));
-        const attempt = async (to=4000) => {
-          const ctrl=new AbortController(); const t=setTimeout(()=>ctrl.abort(), to);
-          try{
-            const r=await fetch('/api/savings-message',{headers:{'Accept':'application/json','X-Requested-With':'XMLHttpRequest'},cache:'no-store',credentials:'omit',signal:ctrl.signal});
-            clearTimeout(t);
-            if(!r.ok || !((r.headers.get('content-type')||'').includes('application/json'))) throw new Error();
-            const data=await r.json();
-            if(data && data.message){
-              el.textContent=(data.message??'').toString();
-              try{ localStorage.setItem(KEY, JSON.stringify({ ts:Date.now(), message:data.message })); }catch{}
-              return true;
-            }
-          }catch{}
-          return false;
-        };
-        let ok = await attempt(3500);
-        if(!ok){ await sleep(150); ok = await attempt(4500); }
-        if(!ok) el.textContent = FALLBACK;
-      })();
-    })();
-  </script>
 
   <!-- ====== 015: Optimizer bridge (exposes page + helpers to workers) ====== -->
   <script>
