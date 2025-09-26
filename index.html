@@ -300,8 +300,24 @@
       const step2form = document.getElementById('step2form');
       if (step2form) step2form.addEventListener('submit', async (e)=>{ e.preventDefault(); const name=$('#name').value.trim(), email=$('#email').value.trim(), phone=$('#phone').value.trim(); if(!name||!email||!phone) return; 
         const payload={event:'lead_submit',site:'DHF',source:'homepage_calc',page:'index',zip:$('#zip').value.trim(),debt:+$('#debt').value,accounts:+$('#accounts').value,hardship:$('#hardship').value,name,email,phone,ts:Date.now()};
-        try{ const r=await fetch(ENDPOINTS.thirtysix.ingest,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload),keepalive:true}); if(!r.ok) console.warn('036 ingest non-200', r.status); }catch(err){ console.error('036 ingest error', err); }
-        document.getElementById('step2form').hidden=true; document.getElementById('done').hidden=false;
+        try{
+  const r = await fetch(ENDPOINTS.thirtysix.ingest,{
+    method:'POST',
+    headers:{'content-type':'application/json'},
+    body:JSON.stringify({ ...payload, site:'DHF' }),
+    keepalive:true
+  });
+  const data = await r.json().catch(()=>null);
+  if (!r.ok || !data || data.status !== 'accepted') {
+    alert('We could not submit your request. Please try again.');
+    return; // stop if not accepted
+  }
+}catch(err){
+  alert('Network issue submitting your request. Please try again.');
+  return;
+}
+document.getElementById('step2form').hidden = true;
+document.getElementById('done').hidden = false;
       });
 
       // Sticky bar CTA
