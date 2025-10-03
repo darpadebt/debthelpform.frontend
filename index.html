@@ -3,378 +3,314 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Debt Help Form — Calculator-First Savings Estimate (A/B Variant)</title>
-  <meta name="description" content="See your estimated payment, timeline, and savings in minutes. No hard credit check. No upfront fees. FTC-aligned. Then get your personalized plan in 2 quick steps." />
-  <link rel="canonical" href="https://debthelpform.com/" />
-  <meta name="theme-color" content="#0a5cff" />
-  <meta name="x-ai-optimizer-page" content="dhf:index:calc-first" />
-
-  <!-- Brand schema (single canonical @id across all sites) -->
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":["Organization","FinancialService"],"@id":"https://gatewaydebthelp.com/#gfsr","name":"Gateway Financial Settlement Relief, LLC","alternateName":["GFSR","Gateway Debt Help","Debt Help Form"],"url":"https://debthelpform.com/","telephone":"+1-888-437-7141","sameAs":["https://debthelpform.com/","https://debtreliefguard.com/","https://gatewaydebthelp.com/","https://gatewayfinancialsettlementrelief.com/"],"disambiguatingDescription":"Not affiliated with Gateway Debt Relief of Costa Mesa, CA."}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","url":"https://debthelpform.com/","name":"DebtHelpForm","publisher":{"@id":"https://gatewaydebthelp.com/#gfsr"}}</script>
-  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://debthelpform.com/"}]}</script>
-
+  <title>DHF — 60‑Second Consolidation Loan Eligibility Check</title>
+  <meta name="description" content="Answer a few quick questions to see if you may qualify for a debt consolidation loan. Secure & confidential. No obligation." />
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <style>
-    :root{--brand:#0a5cff;--brand2:#072a86;--bg:#0b1220;--card:#0f1730;--ink:#e6ecf8;--muted:#8aa3d3;--ok:#079455;--warn:#f59e0b}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
-    a{color:inherit}
-    .wrap{max-width:1080px;margin:0 auto;padding:0 16px}
-    header.top{position:sticky;top:0;z-index:60;background:rgba(11,18,32,.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
-    header .row{display:flex;align-items:center;gap:10px;padding:10px 0}
-    .brand{display:flex;align-items:center;gap:8px;font-weight:900;text-decoration:none}
-    .logo{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:linear-gradient(180deg,var(--brand),var(--brand2));font-size:12px}
-    nav.pills{display:flex;gap:8px}
-    .btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;text-decoration:none}
-    .btn.primary{background:linear-gradient(180deg,var(--brand),var(--brand2));color:white;box-shadow:0 6px 18px rgba(10,92,255,.35)}
-    .btn.ghost{background:transparent;color:var(--ink);border:1px solid rgba(255,255,255,.15)}
-    .call{margin-left:auto}
-    @media(max-width:640px){nav.pills{overflow-x:auto}nav.pills::-webkit-scrollbar{display:none}}
+    :root{ --bg:#f8fafc; --surface:#ffffff; --text:#0f172a; --muted:#475569; --brand:#0ea5e9; --brand-2:#22c55e; --ring: rgba(14,165,233,.25); --radius: 18px; --shadow: 0 10px 30px rgba(2,6,23,.08); }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--text)}
+    .shell{max-width:1000px;margin:0 auto;padding:10px 16px 120px}
 
-    .ftc{background:#0d1530;border-bottom:1px solid rgba(255,255,255,.06)}
-    .ftc .row{display:flex;align-items:center;gap:10px;padding:8px 0;color:#cfe0ff;font-size:13px}
-    .dot{width:6px;height:6px;border-radius:50%;background:#fff}
+    /* === Pilled Top Nav (horizontal, scrollable) — fixed & accessible === */
+    .pillnav{
+      position:sticky;
+      top:0;
+      /* keep it out from under OS/browser chrome */
+      margin-top:calc(10px + env(safe-area-inset-top, 0px));
+      z-index:1000;
+      background:rgba(255,255,255,.98);
+      backdrop-filter:saturate(120%) blur(6px);
+      border:1px solid #e2e8f0;
+      border-radius:9999px;
+      padding:8px 10px;
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin-bottom:14px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+    .pillnav .brand{font-weight:800;text-decoration:none;color:var(--text);flex:0 0 auto}
+    .pillnav .links{
+      display:flex;
+      flex-wrap:nowrap;
+      gap:8px;
+      margin-left:6px;
+      overflow-x:auto;
+      white-space:nowrap;
+      scroll-snap-type:x mandatory;
+      -webkit-overflow-scrolling:touch;
+      padding:6px 2px;
+      /* critical for visibility on small screens */
+      flex:1 1 auto;
+      min-width:0;
+    }
+    .pillnav .links::-webkit-scrollbar{display:none}
+    .pillnav .links a{
+      display:inline-flex;align-items:center;justify-content:center;
+      padding:8px 12px;border-radius:9999px;background:#f1f5f9;color:#0f172a;
+      text-decoration:none;font-weight:600;font-size:14px;border:1px solid #e2e8f0;
+      scroll-snap-align:center;flex:0 0 auto
+    }
+    .pillnav .links a:hover{background:#e2e8f0}
+    .pillnav .links a:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:8px}
+    .pillnav .meta{margin-left:auto;display:flex;align-items:center;gap:6px}
+    .pillnav .meta a{font-size:12px;color:var(--muted);text-decoration:none}
+    .pillnav .meta a:hover{text-decoration:underline}
+    .pillnav .navbtn{border:none;background:transparent;font-size:18px;line-height:1;padding:10px;cursor:pointer}
+    .pillnav .navbtn[disabled]{opacity:.4;cursor:default}
+    @media (max-width:640px){ .pillnav .meta{ display:none; } }
 
-    .hero{padding:10px 0}
-    .card{background:linear-gradient(180deg,var(--card),#111a35);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
-    .pad{padding:16px}
-    h1{font-size:clamp(22px,4.5vw,36px);line-height:1.2;margin:0 0 8px;text-align:center}
-    .sub{color:var(--muted);font-size:15px;text-align:center;margin:0 0 12px}
-    .mini{font-size:12px;color:#9ab0db}
-
-    .calc{display:grid;gap:14px}
-    @media(min-width:900px){.calc{grid-template-columns:1.2fr .8fr;align-items:start}}
-    label{font-weight:800;font-size:.95rem}
-    input,select{width:100%;background:#0b142b;color:#e8f2ff;border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:.7rem .8rem}
-    .row2{display:grid;gap:10px}
-    @media(min-width:640px){.row2{grid-template-columns:1fr 1fr}}
-
-    .out{background:#0c1531;border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px}
-    .out h3{margin:0 0 6px}
-    .grid2{display:grid;gap:8px}
-    @media(min-width:640px){.grid2{grid-template-columns:1fr 1fr}}
-
-    .trust{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;color:#c9d6f5;font-size:13px;margin:10px 0}
-    .trust a[href^="tel:"]{color:#ffdd00;text-decoration:underline;font-weight:900}
-
-    .bot{position:sticky;bottom:0;background:rgba(11,18,32,.95);backdrop-filter:blur(8px);border-top:1px solid rgba(255,255,255,.06);z-index:55}
-    .bot .row{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 0}
-    .bot .btn.primary{font-size:18px;padding:14px 22px}
-
-    footer{padding:22px 0;color:#9db2e2}
-
-    .sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    header.hero{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin:12px 0}
+    header .h1{font-size:26px;line-height:1.2;margin:0 0 8px;font-weight:800}
+    header .sub{color:var(--muted);font-size:15px;margin-bottom:16px}
+    .badges{display:flex;gap:10px;flex-wrap:wrap}
+    .badge{font-size:12px;padding:6px 10px;border-radius:999px;background:#e2f2fb;color:#0369a1;text-decoration:none}
+    .primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(90deg,var(--brand),#38bdf8);color:#fff;border:none;border-radius:999px;padding:14px 18px;font-weight:700;font-size:16px;cursor:pointer;box-shadow:0 8px 18px var(--ring)}
+    .primary:active{transform:translateY(1px)}
+    .progress{height:6px;background:#e2e8f0;border-radius:999px;margin:18px 0 6px;overflow:hidden}
+    .progress>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand-2))}
+    .card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin:12px 0}
+    .prompt{font-size:20px;font-weight:700;margin:8px 0 16px}
+    .muted{color:var(--muted);font-size:13px}
+    .choices{display:grid;grid-template-columns:1fr;gap:10px}
+    .choice{border:1px solid #e2e8f0;border-radius:14px;padding:14px 12px;font-weight:600;background:#fff;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+    .choice:hover{border-color:#bae6fd}
+    .choice.active{border-color:#38bdf8;background:#f0f9ff}
+    .controls{display:flex;gap:10px;margin-top:14px}
+    .next{background:var(--brand);color:#fff;border:none;border-radius:12px;padding:12px 14px;font-weight:700;width:100%}
+    .range{width:100%}
+    .range input[type="range"]{width:100%}
+    .range-labels{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin-top:6px}
+    .footer-sticky{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.98);backdrop-filter:saturate(120%) blur(6px);border-top:1px solid #e2e8f0;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .trust{display:flex;align-items:center;gap:8px;color:#0369a1;font-weight:600;font-size:13px}
+    .callnow{font-weight:800;color:#fff;background:var(--brand-2);border:none;border-radius:999px;padding:10px 14px;text-decoration:none}
+    form{display:grid;gap:10px}
+    input,select{width:100%;padding:12px 14px;border:1px solid #e2e8f0;border-radius:12px;font-size:16px}
+    input:focus,select:focus{outline:none;border-color:#38bdf8;box-shadow:0 0 0 4px var(--ring)}
+    .legal{font-size:12px;color:var(--muted)}
+    .hidden{display:none}
+    .center{text-align:center}
+    .calc{display:grid;gap:10px}
+    .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef2ff;color:#3730a3;font-weight:700;font-size:12px}
   </style>
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":["Organization","FinancialService"],"@id":"https://gatewaydebthelp.com/#gfsr","name":"Gateway Financial Settlement Relief, LLC","alternateName":["GFSR","Gateway Debt Help","Debt Help Form"],"url":"https://debthelpform.com/","telephone":"+1-888-437-7141","sameAs":["https://debthelpform.com/","https://debtreliefguard.com/","https://gatewaydebthelp.com/","https://gatewayfinancialsettlementrelief.com/"],"disambiguatingDescription":"Not affiliated with Gateway Debt Relief of Costa Mesa, CA."}
+  </script>
 </head>
 <body>
-  <header class="top">
-    <div class="wrap"><div class="row">
-      <a class="brand" href="/"><span class="logo">DHF</span><span>Debt Help Form</span></a>
-      <nav class="pills" aria-label="Primary">
-        <a class="btn ghost" href="/">Home</a>
-        <a class="btn ghost" href="/relief.html">Relief Options</a>
-        <a class="btn ghost" href="/faq.html">FAQ</a>
-        <a class="btn ghost" href="/debthelpform-pages-blog.html">Blog</a>
-        <a class="btn ghost" href="/contact.html">Contact</a>
-      </nav>
-      <div class="call"><a class="btn primary" href="tel:+18884377141">Call</a></div>
-    </div></div>
-    <div class="ftc"><div class="wrap"><div class="row"><div class="dot"></div> FTC-aligned • No upfront fees • Transparent savings estimates</div></div></div>
-  </header>
+  <div class="shell">
 
-  <!-- CALCULATOR-FIRST HERO -->
-  <section class="hero">
-    <div class="wrap">
-      <aside class="card pad" aria-labelledby="h1">
-        <h1 id="h1">Estimate your payment & timeline before you decide</h1>
-        <p class="sub">Private, fast, and transparent. See consolidation vs. settlement side-by-side — then finish in 2 quick steps.</p>
+    <nav class="pillnav" role="navigation" aria-label="Primary">
+      <button class="navbtn" id="navLeft" aria-label="Scroll left" aria-controls="navLinks">◀</button>
+      <a class="brand" href="/">DebtHelpForm</a>
+      <!-- focusable, scrollable link strip -->
+      <div class="links" id="navLinks" tabindex="0" aria-label="Primary navigation links">
+        <a href="/">Home</a>
+        <a href="/how-it-works.index.html">How it works</a>
+        <a href="/compare.index.html">Compare</a>
+        <a href="/faq.index.html">FAQ</a>
+        <a href="/contact.index.html">Contact</a>
+      </div>
+      <div class="meta" id="navMeta">
+        <a href="/privacy.policy.index.html">Privacy</a>
+        <span aria-hidden="true">•</span>
+        <a href="/terms.index.html">Terms</a>
+      </div>
+      <button class="navbtn" id="navRight" aria-label="Scroll right" aria-controls="navLinks">▶</button>
+    </nav>
 
-        <div class="calc">
-          <!-- Inputs -->
-          <form id="calcForm">
-            <div class="row2">
-              <div>
-                <label for="amount">Total unsecured debt</label>
-                <input id="amount" type="number" min="1000" step="100" value="15000" placeholder="e.g., 15000" required />
-              </div>
-              <div>
-                <label for="apr">Current average APR (%)</label>
-                <input id="apr" type="number" min="0" step="0.1" value="22" placeholder="e.g., 22" required />
-              </div>
-            </div>
-            <div class="row2">
-              <div>
-                <label for="term">Consolidation loan term</label>
-                <select id="term">
-                  <option value="36">36 months</option>
-                  <option value="48">48 months</option>
-                  <option value="60" selected>60 months</option>
-                  <option value="72">72 months</option>
-                </select>
-              </div>
-              <div>
-                <label for="loanApr">Expected consolidation APR (%)</label>
-                <input id="loanApr" type="number" min="4" step="0.1" value="12.9" />
-              </div>
-            </div>
-            <div class="row2">
-              <div>
-                <label for="settlePct">Settlement target (% of debt)</label>
-                <input id="settlePct" type="number" min="30" max="70" step="1" value="50" />
-              </div>
-              <div>
-                <label for="months">Settlement timeline (months)</label>
-                <select id="months">
-                  <option value="24">24 months</option>
-                  <option value="36" selected>36 months</option>
-                  <option value="48">48 months</option>
-                </select>
-              </div>
-            </div>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
-              <button id="calcLoanBtn" class="btn primary" type="button">Calculate Consolidation</button>
-              <button id="calcSettleBtn" class="btn ghost" type="button">Calculate Settlement</button>
-              <button id="calcBothBtn" class="btn ghost" type="submit">Recalculate Both</button>
-              <a class="btn ghost" href="#get-started">Finish & get my plan →</a>
-            </div>
-          </form>
+    <header class="hero" id="entry">
+      <div class="h1">See if you may qualify for a debt consolidation loan — in about 60 seconds</div>
+      <div class="sub">Answer a few quick questions to preview your options. Secure & confidential. No obligation.</div>
+      <button class="primary" id="startBtn">Start my free eligibility check</button>
+      <div class="badges" style="margin-top:12px">
+        <span class="badge">Secure & Confidential</span>
+        <span class="badge">No Obligation</span>
+        <span class="badge">Mobile Friendly</span>
+      </div>
+    </header>
 
-          <!-- Outputs -->
-          <div class="out" aria-live="polite">
-            <h3 style="margin-top:0">Your quick estimate</h3>
-            <div class="grid2">
-              <div>
-                <div class="mini">Consolidation monthly</div>
-                <div id="outLoanPay" style="font-weight:900;font-size:1.2rem">$—</div>
-                <div class="mini">Rate <span id="outLoanApr">—%</span> • Term <span id="outTerm">— mo</span></div>
-              </div>
-              <div>
-                <div class="mini">Settlement program</div>
-                <div id="outSettlePay" style="font-weight:900;font-size:1.2rem">$—</div>
-                <div class="mini">Target <span id="outSettlePct">—%</span> • <span id="outMonths">— mo</span></div>
-              </div>
-            </div>
-            <div style="margin-top:8px" class="mini">Estimated savings vs. minimums: <strong id="outSavings">$—</strong> (range only; not guaranteed)</div>
-            <div class="trust" style="margin-top:10px">
-              <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener">BBB Profile — <strong>A– rating</strong></a>
-              <span>•</span>
-              <a href="tel:+18884377141">📞 888-437-7141</a>
-            </div>
-          </div>
-        </div>
-      </aside>
+    <!-- Trust row with BBB link (non-member profile) -->
+    <div class="card" aria-label="Trust signals">
+      <div class="muted" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener nofollow" class="badge" style="background:#eef2ff;color:#1e3a8a">BBB Profile — A– rating</a>
+        <span class="badge">FTC‑aligned • No upfront fees</span>
+        <span class="badge">Secure & Confidential</span>
+      </div>
     </div>
-  </section>
 
-  <!-- GET STARTED (Step 1/2) -->
-  <section id="get-started" class="wrap" style="padding:8px 0 16px">
-    <div class="card pad">
-      <h2 style="margin:0 0 8px;text-align:center">Finish in 2 quick steps</h2>
-      <p class="sub" style="text-align:center;margin:0 0 10px">We’ll confirm and send your personalized plan. No hard credit checks. No upfront fees.</p>
+    <div class="card hidden" id="survey">
+      <div class="progress"><i id="progressBar"></i></div>
+      <div class="muted" id="stepLabel">Step 1 of 5</div>
+      <div id="stepMount"></div>
+      <div class="muted" style="margin-top:8px">Secure & confidential. No obligation.</div>
+    </div>
 
-      <form id="step1" novalidate>
-        <input type="text" name="website" id="hp1" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;opacity:0" aria-hidden="true" />
-        <div class="row2">
-          <div>
-            <label for="zip">ZIP Code</label>
-            <input id="zip" inputmode="numeric" pattern="^[0-9]{5}$" placeholder="e.g., 33601" required />
-          </div>
-          <div>
-            <label for="debt">Total debt</label>
-            <input id="debt" type="number" min="1000" step="100" value="15000" required />
-          </div>
-        </div>
-        <div class="row2">
-          <div>
-            <label for="accounts"># of accounts</label>
-            <input id="accounts" type="number" min="1" step="1" value="3" required />
-          </div>
-          <div>
-            <label for="hardship">Recent hardship?</label>
-            <select id="hardship"><option value="none">Prefer not to say</option><option value="job">Job loss / income drop</option><option value="medical">Medical</option><option value="other">Other</option></select>
-          </div>
-        </div>
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
-          <button id="continue1" class="btn primary" type="submit">Continue →</button>
-          <a class="btn ghost" href="tel:+18884377141">📞 Call instead</a>
-        </div>
+    <div class="card hidden" id="leadGate">
+      <div class="prompt">Thanks! Based on your answers, you may qualify for a consolidation loan.</div>
+      <div class="muted">Where should we send your free results?</div>
+      <form id="leadForm" autocomplete="on">
+        <input type="text" name="first" placeholder="First name" required />
+        <input type="email" name="email" placeholder="Email" required inputmode="email" />
+        <input type="tel" name="phone" placeholder="Phone" required inputmode="tel" />
+        <input type="text" name="zip" placeholder="ZIP code" required inputmode="numeric" pattern="\d{5}" />
+        <input type="text" name="hp" id="hp" class="hidden" tabindex="-1" autocomplete="off" />
+        <input type="hidden" name="form_ts" id="form_ts" />
+        <button class="primary" type="submit">See my options</button>
+        <div class="legal">By submitting, you agree to our Terms and Privacy Policy. Your information is kept confidential. No spam.</div>
       </form>
+    </div>
 
-      <div id="step2" hidden>
-        <form id="step2form" novalidate>
-          <div class="row2">
-            <div><label for="name">Full name</label><input id="name" placeholder="Jane Doe" required /></div>
-            <div><label for="email">Email</label><input id="email" type="email" placeholder="you@example.com" required /></div>
-          </div>
-          <div class="row2">
-            <div><label for="phone">Phone</label><input id="phone" inputmode="tel" placeholder="555-555-5555" required /></div>
-            <div><label for="best">Best time to reach you</label><select id="best"><option>Anytime</option><option>Morning</option><option>Afternoon</option><option>Evening</option></select></div>
-          </div>
-          <button id="submit2" class="btn primary" type="submit">Get My Personalized Plan →</button>
-          <p class="mini" style="text-align:center;margin-top:8px">By submitting, you agree to our <a href="/terms.html">Terms</a> & <a href="/privacy.html">Privacy</a>. No upfront fees. FTC-aligned.</p>
-        </form>
-        <div id="done" hidden>
-          <h3>Thanks! You’re all set.</h3>
-          <p class="sub">A specialist will reach out with your options and savings estimate. Watch for SMS & email confirmations.</p>
-          <div style="display:flex;gap:10px;justify-content:center"><a class="btn ghost" href="tel:+18884377141">📞 Call now</a></div>
+    <div class="card hidden" id="results">
+      <div class="prompt">Here’s what people like you often see when consolidating</div>
+      <div class="calc">
+        <div><span class="pill" id="calcDebt">$—</span> total debt</div>
+        <div>Estimated consolidated payment range: <strong id="calcPayment">$— / mo</strong></div>
+        <div class="muted">Estimates are examples, not guarantees. Your terms depend on lender review.</div>
+        <div class="controls">
+          <a id="callCta" class="callnow" href="#">Call now</a>
+          <button class="next" id="doneBtn">Back to start</button>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Sticky bottom bar (mobile) -->
-  <div class="bot">
-    <div class="wrap"><div class="row">
-      <div class="mini" id="stickyLabel">Calculator ready</div>
-      <div style="display:flex;gap:10px;align-items:center">
-        <a class="btn ghost" href="#top">Back to top</a>
-        <a id="stickyContinue" class="btn primary" href="#get-started">Continue →</a>
-      </div>
-    </div></div>
   </div>
 
-  <footer>
-    <div class="wrap" style="padding-top:8px">
-      <p class="mini">Our network: 
-        <a href="https://debthelpform.com/" target="_blank" rel="noopener">DebtHelpForm.com</a> • 
-        <a href="https://debtreliefguard.com/" target="_blank" rel="noopener">DebtReliefGuard.com</a> • 
-        <a href="https://gatewaydebthelp.com/" target="_blank" rel="noopener">GatewayDebtHelp.com</a> • 
-        <a href="https://gatewayfinancialsettlementrelief.com/" target="_blank" rel="noopener">Gateway Financial Settlement Relief, LLC</a>
-      </p>
+  <div class="footer-sticky">
+    <div class="trust">🔒 Secure & Confidential</div>
+    <a class="callnow" id="stickyCall" href="tel:+18884377141">Call Now</a>
+    <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener nofollow" class="muted" style="font-size:12px;text-decoration:none">BBB Profile</a>
+  </div>
+
+  <footer class="card" style="max-width:1000px;margin:10px auto 140px;padding:14px">
+    <div class="muted" style="font-size:12px;line-height:1.5">
+      © <span id="y"></span> DebtHelpForm.com — a service of Gateway Financial Settlement Relief, LLC (GFSR). Not affiliated with “Gateway Debt Relief” of Costa Mesa, CA.
+      <span style="margin-left:6px">•</span>
+      <a href="/privacy.policy.index.html" class="muted" style="text-decoration:underline">Privacy</a>
+      <span>•</span>
+      <a href="/terms.index.html" class="muted" style="text-decoration:underline">Terms</a>
+      <span>•</span>
+      <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener nofollow" class="muted" style="text-decoration:underline">BBB Profile (A–)</a>
     </div>
   </footer>
 
-  <!-- A/B hook for AI loop (optional) -->
-  <script>window.__ab={pageKey:'dhf:index:calc-first',slots:{headline:'#h1',primary:'#continue1,#submit2,#stickyContinue'},defaults:{}};</script>
-
-  <!-- Preview safety: keep tel: from firing in preview; open externals in new tab -->
-  <script>(function(){try{var isPreview=(/chatgpt\.com$/i.test(location.hostname)||location.hostname.indexOf('chatgpt')>-1);if(!isPreview)return;document.addEventListener('click',function(e){var a=e.target.closest('a');if(!a)return;if(a.href && a.protocol!=='tel:'){a.target='_blank';a.rel='noopener';}if(a.protocol==='tel:'){e.preventDefault();alert('Tap-to-call is blocked in preview. On your live site this will dial 888-437-7141.');}},true);}catch(e){}})();</script>
-
-  <!-- Core app + ONLY 016 & 036 calls -->
   <script>
-    document.addEventListener('DOMContentLoaded', function(){
-      // Endpoints
-      const ENDPOINTS={ sixteen:{health:'/api/mesh/016-persona-evolution-engine/health',chat:'/chat'}, thirtysix:{ingest:'/api/mesh/036-lead-router/ingest'} };
+  const CONFIG = { LEAD_ENDPOINT: "/api/mesh/036-lead-router/ingest", SITE_TAG: "DHF", CALL_NUMBER: "+1 (888) 437-7141" };
+  const state = { step: 0, answers: { debt_amount: null, debt_type: [], payment_status: null, credit_band: null, state: null, income_band: null } };
 
-      // Helpers
-      const $=s=>document.querySelector(s); const fmt=n=>new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n||0);
+  // === Horizontal nav scroll controls + swipe drag + keyboard (accessible) ===
+  (function(){
+    const box   = document.getElementById('navLinks');
+    const left  = document.getElementById('navLeft');
+    const right = document.getElementById('navRight');
+    if(!box || !left || !right) return;
 
-      // ---------- DRG-style endpoint auto-discovery helper ----------
-      const PRIMARY_API_URL = `${location.origin}/api/mesh/036-lead-router/ingest`;
-      const ALT_API_URLS = [
-        `${location.origin}/api/mesh/036-lead-router`,
-        `${location.origin}/036-lead-router/ingest`,
-        `${location.origin}/api/mesh/036/ingest`,
-        `${location.origin}/036/ingest`,
-        `${location.origin}/api/036-lead-router/ingest`
-      ];
-      let RESOLVED_API_URL = null;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const step = 160;
 
-      async function post036(payload){
-        const headers = { 'content-type':'application/json' };
-        const candidates = RESOLVED_API_URL ? [RESOLVED_API_URL] : [PRIMARY_API_URL, ...ALT_API_URLS];
-        let last = { r:null, url:candidates[0], bodyText:'' };
-        for (const url of candidates){
-          try{
-            const r = await fetch(url, { method:'POST', headers, body: JSON.stringify(payload), keepalive:true });
-            if (r.ok){ RESOLVED_API_URL = url; return { r, url }; }
-            let bodyText=''; try{ bodyText = await r.clone().text(); }catch(_){}
-            last = { r, url, bodyText };
-            const fallbackable = (r.status===404 && /not_found/i.test(bodyText||'') || r.status===405 || r.status===400);
-            if (!fallbackable) return last;
-          }catch(_){ /* try next */ }
-        }
-        return last;
-      }
-      // --------------------------------------------------------------
+    function scrollByStep(dx){
+      box.scrollBy({ left: dx, behavior: prefersReduced ? 'auto' : 'smooth' });
+    }
 
-      // Calculator math (simple reference model; not a quote)
-      function calcLoanPayment(P, annualRate, months){ const r=annualRate/100/12; return r===0? P/months : P*r/(1-Math.pow(1+r,-months)); }
-      function computeAll(){
-        const amount=+$('#amount').value||0, apr=+$('#apr').value||0, term=+$('#term').value||60, loanApr=+$('#loanApr').value||12.9, settlePct=+$('#settlePct').value||50, months=+$('#months').value||36;
-        const minPay = calcLoanPayment(amount, apr, 360); // approximate min pay
-        const loanPay = calcLoanPayment(amount, loanApr, term);
-        const settleTotal = amount*(settlePct/100);
-        const settlePay = Math.max(0, settleTotal/months);
-        const savings = Math.max(0, Math.round((minPay*60) - Math.min(loanPay*term, settleTotal)));
-        // outputs
-        $('#outLoanPay').textContent=fmt(loanPay); $('#outLoanApr').textContent=loanApr.toFixed(1); $('#outTerm').textContent=term;
-        $('#outSettlePay').textContent=fmt(settlePay); $('#outSettlePct').textContent=settlePct; $('#outMonths').textContent=months;
-        $('#outSavings').textContent=fmt(savings);
-      }
+    function updateArrows(){
+      const atStart = box.scrollLeft <= 0;
+      const atEnd   = Math.ceil(box.scrollLeft + box.clientWidth) >= box.scrollWidth;
+      left.disabled  = atStart;
+      right.disabled = atEnd;
+      left.setAttribute('aria-disabled', atStart ? 'true' : 'false');
+      right.setAttribute('aria-disabled', atEnd ? 'true' : 'false');
+    }
 
-      // Initial compute
-      computeAll();
+    left.addEventListener('click',  () => scrollByStep(-step));
+    right.addEventListener('click', () => scrollByStep(step));
+    box.addEventListener('scroll', updateArrows);
+    window.addEventListener('resize', updateArrows);
 
-      // Buttons (existence guarded)
-      const calcForm = document.getElementById('calcForm');
-      const loanBtn  = document.getElementById('calcLoanBtn');
-      const setBtn   = document.getElementById('calcSettleBtn');
-      const bothBtn  = document.getElementById('calcBothBtn');
-
-      if (calcForm) calcForm.addEventListener('input', ()=>{ const s=document.getElementById('stickyLabel'); if(s) s.textContent='Values changed — press a Calculate button'; });
-      if (loanBtn)  loanBtn.addEventListener('click', ()=>{ computeAll(); const s=document.getElementById('stickyLabel'); if(s) s.textContent='Consolidation calculated'; });
-      if (setBtn)   setBtn.addEventListener('click', ()=>{ computeAll(); const s=document.getElementById('stickyLabel'); if(s) s.textContent='Settlement calculated'; });
-      if (bothBtn)  calcForm.addEventListener('submit', (e)=>{ e.preventDefault(); computeAll(); const s=document.getElementById('stickyLabel'); if(s) s.textContent='Both recalculated'; });
-
-      // Step 1 → Step 2
-      const step1 = document.getElementById('step1');
-      if (step1) step1.addEventListener('submit', async (e)=>{ e.preventDefault(); const zip=$('#zip').value.trim(); if(!/^\d{5}$/.test(zip)) return $('#zip').focus();
-        const payload={event:'lead_progress',step:1,site:'DHF',page:'index:calc',zip,debt:+$('#debt').value,accounts:+$('#accounts').value,hardship:$('#hardship').value,ts:Date.now()};
-        try{ navigator.sendBeacon && navigator.sendBeacon(ENDPOINTS.thirtysix.ingest, new Blob([JSON.stringify(payload)],{type:'application/json'})); }catch(_){ }
-        document.getElementById('step1').hidden=true; document.getElementById('step2').hidden=false; document.getElementById('name').focus();
-      });
-
-      // Final submit → 036 (using DRG-style post036 helper)
-      const step2form = document.getElementById('step2form');
-      if (step2form) step2form.addEventListener('submit', async (e)=>{ 
-        e.preventDefault(); 
-        const name=$('#name').value.trim(), email=$('#email').value.trim(), phone=$('#phone').value.trim(); 
-        if(!name||!email||!phone) return; 
-        const payload={
-          event:'lead_submit',site:'DHF',source:'homepage_calc',page:'index',
-          zip:$('#zip').value.trim(),debt:+$('#debt').value,accounts:+$('#accounts').value,
-          hardship:$('#hardship').value,name,email,phone,ts:Date.now()
-        };
-        try{
-          const { r, url, bodyText } = await post036(payload);
-          if (!r || !r.ok) {
-            const status = r ? r.status : 'fetch_error';
-            alert(`We could not submit your request.\n\nStatus: ${status}\nEndpoint: ${url || '(unknown)'}\nResponse: ${(bodyText||'').slice(0,300) || '(empty)'}`);
-            return;
-          }
-        }catch(_){
-          alert('Network issue submitting your request. Please try again.');
-          return;
-        }
-        document.getElementById('step2form').hidden = true;
-        document.getElementById('done').hidden = false;
-      });
-
-      // Sticky bar CTA
-      const sticky = document.getElementById('stickyContinue');
-      if (sticky) sticky.addEventListener('click', (e)=>{ e.preventDefault(); document.getElementById('get-started').scrollIntoView({behavior:'smooth'}); });
-
-      // 016 presence ping
-      try{ fetch(ENDPOINTS.sixteen.health,{method:'GET',mode:'no-cors'}); }catch(_){ }
-
-      // Pageview beacon → 036
-      try{ navigator.sendBeacon && navigator.sendBeacon(ENDPOINTS.thirtysix.ingest, new Blob([JSON.stringify({event:'page_view',site:'DHF',page:'index:calc',ts:Date.now()})],{type:'application/json'})); }catch(_){ }
-
-      // Year
-      const year=document.getElementById('y'); if(year) year.textContent = new Date().getFullYear();
-
-      // ---- Self-tests (lightweight) ----
-      (function selfTests(){
-        const mustHave=['calcForm','calcLoanBtn','calcSettleBtn','outLoanPay','outSettlePay','outSavings','step1','step2form','stickyContinue'];
-        const missing = mustHave.filter(id=>!document.getElementById(id));
-        if(missing.length){ console.error('[DHF calc-first] Missing elements:', missing); }
-        // Smoke test: compute once and assert numbers render
-        computeAll();
-        const ok1 = document.getElementById('outLoanPay').textContent.trim() !== '$—';
-        const ok2 = document.getElementById('outSettlePay').textContent.trim() !== '$—';
-        if(!(ok1&&ok2)) console.error('[DHF calc-first] Output not computed on load');
-      })();
+    // Drag-to-scroll (pointer events)
+    let isDown=false, startX=0, startScroll=0;
+    box.addEventListener('pointerdown', e => {
+      isDown = true; startX = e.clientX; startScroll = box.scrollLeft; box.setPointerCapture(e.pointerId);
     });
+    box.addEventListener('pointermove', e => {
+      if(!isDown) return;
+      box.scrollLeft = startScroll - (e.clientX - startX);
+    });
+    ['pointerup','pointercancel','pointerleave'].forEach(t => box.addEventListener(t, () => isDown=false));
+
+    // Keyboard: arrow keys to scroll when the strip has focus
+    box.addEventListener('keydown', (e) => {
+      if(e.key === 'ArrowLeft'){ e.preventDefault(); scrollByStep(-step); }
+      if(e.key === 'ArrowRight'){ e.preventDefault(); scrollByStep(step); }
+      if(e.key === 'Home'){ e.preventDefault(); box.scrollTo({ left: 0, behavior: prefersReduced ? 'auto' : 'smooth' }); }
+      if(e.key === 'End'){ e.preventDefault(); box.scrollTo({ left: box.scrollWidth, behavior: prefersReduced ? 'auto' : 'smooth' }); }
+    });
+
+    // Initialize
+    updateArrows();
+  })();
+
+  const steps = [
+    function mountDebtAmount($){ $.innerHTML = `
+      <div class="prompt">About how much debt are you looking to roll into one payment?</div>
+      <div class="range">
+        <input id="rngDebt" type="range" min="0" max="4" step="1" value="1" />
+        <div class="range-labels"><span>Under $10k</span><span>$10–20k</span><span>$20–40k</span><span>$40–60k</span><span>$60k+</span></div>
+      </div>
+      <div class="controls"><button class="next" id="next">Next</button></div>`;
+      document.getElementById('next').onclick = ()=>{ const v = +document.getElementById('rngDebt').value; state.answers.debt_amount = ["<10k","10-20k","20-40k","40-60k",">60k"][v]; advance(); } },
+    function mountDebtType($){ $.innerHTML = `
+      <div class="prompt">Which debts do you want to combine into one simpler payment?</div>
+      <div class="choices" id="choices"></div>
+      <div class="controls"><button class="next" id="next" disabled>Next</button></div>`;
+      const items = ["Credit cards","Personal loans","Medical bills","Other unsecured debt"]; const sel = new Set(); const box = document.getElementById('choices'); const nextBtn = document.getElementById('next');
+      items.forEach(label=>{ const el = document.createElement('div'); el.className = 'choice'; el.textContent = label; el.onclick = ()=>{ if(sel.has(label)){ sel.delete(label); el.classList.remove('active'); } else { sel.add(label); el.classList.add('active'); } nextBtn.disabled = sel.size===0; }; box.appendChild(el); });
+      nextBtn.onclick = ()=>{ state.answers.debt_type = Array.from(sel); advance(); } },
+    function mountPayCredit($){ $.innerHTML = `
+      <div class="prompt">Are you mostly keeping up with payments, or have you missed some?</div>
+      <div class="choices" id="pay"></div>
+      <div class="prompt" style="margin-top:18px">If you know your credit score, which range sounds about right?</div>
+      <div class="choices" id="cred"></div>
+      <div class="controls"><button class="next" id="next">Next</button></div>`;
+      const pay = ["I’m current on payments","Missed 1–2 months","3+ months behind"], cred = ["720+","660–719","600–659","Below 600","Not sure"]; let payPick=null, credPick=null;
+      function radio(id, items, on){ const box = document.getElementById(id); items.forEach(label=>{ const el = document.createElement('div'); el.className='choice'; el.textContent=label; el.onclick=()=>{ Array.from(box.children).forEach(c=>c.classList.remove('active')); el.classList.add('active'); on(label); }; box.appendChild(el); }); }
+      radio('pay', pay, v=> payPick=v); radio('cred', cred, v=> credPick=v);
+      document.getElementById('next').onclick = ()=>{ state.answers.payment_status = payPick; state.answers.credit_band = credPick; advance(); } },
+    function mountState($){ $.innerHTML = `
+      <div class="prompt">Where do you live?</div>
+      <select id="selState" required></select>
+      <div class="controls"><button class="next" id="next">Next</button></div>`;
+      const states = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"];
+      const sel = document.getElementById('selState'); sel.innerHTML = '<option value="" disabled selected>Select your state</option>' + states.map(s=>`<option>${s}</option>`).join('');
+      document.getElementById('next').onclick = ()=>{ state.answers.state = sel.value || null; showLeadGate(); } }
+  ];
+
+  const entry = document.getElementById('entry'); const survey = document.getElementById('survey'); const mount = document.getElementById('stepMount'); const stepLabel = document.getElementById('stepLabel'); const bar = document.getElementById('progressBar'); const leadGate = document.getElementById('leadGate'); const results = document.getElementById('results');
+  document.getElementById('startBtn').onclick = ()=> startSurvey();
+  function startSurvey(){ entry.classList.add('hidden'); survey.classList.remove('hidden'); state.step = 0; updateProgress(); steps[state.step](mount); document.getElementById('form_ts').value = Date.now().toString(); }
+  function advance(){ state.step++; if(state.step < steps.length){ updateProgress(); steps[state.step](mount);} else { showLeadGate(); } }
+  function updateProgress(){ const total = steps.length; const n = state.step + 1; stepLabel.textContent = `Step ${n} of ${total}`; bar.style.width = `${(n/total)*100}%`; }
+  function showLeadGate(){ survey.classList.add('hidden'); leadGate.classList.remove('hidden'); }
+
+  // Lead submit -> 036 router
+  const form = document.getElementById('leadForm');
+  form.addEventListener('submit', async (e)=>{
+    e.preventDefault();
+    const fd = new FormData(form);
+    const phone = (fd.get('phone')||'').toString().replace(/[^\d+]/g,'');
+    const payload = { name: (fd.get('first')||'').toString().trim(), email: (fd.get('email')||'').toString().trim(), phone, zip: (fd.get('zip')||'').toString().trim(), source: "survey", site: CONFIG.SITE_TAG, hp: (fd.get('hp')||'').toString(), form_ts: Number(fd.get('form_ts')||Date.now()), survey: state.answers, test: false };
+    try{ const res = await fetch(CONFIG.LEAD_ENDPOINT, { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(payload) }); if(!res.ok){ console.warn('Lead POST failed', res.status); } } catch(err){ console.warn('Lead POST error (preview likely):', err?.message||err); }
+    showResults();
+  });
+
+  function showResults(){ leadGate.classList.add('hidden'); results.classList.remove('hidden'); const map = { "<10k": 8000, "10-20k":15000, "20-40k":30000, "40-60k":50000, ">60k":70000 }; const debtNum = map[state.answers.debt_amount] || 15000; document.getElementById('calcDebt').textContent = new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(debtNum); const apr=0.17, termMonths=60, rate=apr/12; const pmt=(debtNum*rate)/(1-Math.pow(1+rate,-termMonths)); const low=Math.round(pmt*0.75), high=Math.round(pmt*1.05); document.getElementById('calcPayment').textContent = `${fmt(low)} – ${fmt(high)}`; const telHref = `tel:${CONFIG.CALL_NUMBER.replace(/[^\d+]/g,'')}`; document.getElementById('callCta').setAttribute('href', telHref); document.getElementById('stickyCall').setAttribute('href', telHref); }
+  function fmt(n){ return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n); }
+  document.getElementById('doneBtn').onclick = ()=>{ results.classList.add('hidden'); entry.classList.remove('hidden'); };
+  document.getElementById('y').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
