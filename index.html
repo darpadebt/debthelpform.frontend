@@ -309,8 +309,10 @@
   function updateProgress(){ const total = steps.length; const n = state.step + 1; stepLabel.textContent = `Step ${n} of ${total}`; bar.style.width = `${(n/total)*100}%`; }
   function showLeadGate(){ survey.classList.add('hidden'); leadGate.classList.remove('hidden'); }
 
-  // Lead submit -> 036 router
+ // Lead submit -> 036 router
   const form = document.getElementById('leadForm');
+  const DEBT_RANGE_MAP = { "<10k": 8000, "10-20k":15000, "20-40k":30000, "40-60k":50000, ">60k":70000 };
+
   form.addEventListener('submit', async (e)=>{
     e.preventDefault();
     const fd = new FormData(form);
@@ -320,12 +322,34 @@
       marketing: fd.get('consent_marketing') === 'on',
       timestamp: new Date().toISOString()
     };
-    const payload = { name: (fd.get('first')||'').toString().trim(), email: (fd.get('email')||'').toString().trim(), phone, zip: (fd.get('zip')||'').toString().trim(), source: "survey", site: CONFIG.SITE_TAG, hp: (fd.get('hp')||'').toString(), form_ts: Number(fd.get('form_ts')||Date.now()), survey: state.answers, consent, test: false };
+    const { state: stateAnswer, debt_amount: debtRange, ...restAnswers } = state.answers;
+    const debtAmount = DEBT_RANGE_MAP[debtRange] || null;
+    const payload = {
+      name: (fd.get('first')||'').toString().trim(),
+      email: (fd.get('email')||'').toString().trim(),
+      phone,
+      zip: (fd.get('zip')||'').toString().trim(),
+      source: "survey",
+      site: CONFIG.SITE_TAG,
+      hp: (fd.get('hp')||'').toString(),
+      form_ts: Number(fd.get('form_ts')||Date.now()),
+      state: stateAnswer || null,
+      debt_amount: debtAmount,
+      meta: {
+        survey: {
+          ...restAnswers,
+          debt_amount_range: debtRange || null,
+          state: stateAnswer || null
+        }
+      },
+      consent,
+      test: false
+    };
     try{ const res = await fetch(CONFIG.LEAD_ENDPOINT, { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(payload) }); if(!res.ok){ console.warn('Lead POST failed', res.status); } } catch(err){ console.warn('Lead POST error (preview likely):', err?.message||err); }
     showResults();
   });
 
-  function showResults(){ leadGate.classList.add('hidden'); results.classList.remove('hidden'); const map = { "<10k": 8000, "10-20k":15000, "20-40k":30000, "40-60k":50000, ">60k":70000 }; const debtNum = map[state.answers.debt_amount] || 15000; document.getElementById('calcDebt').textContent = new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(debtNum); const apr=0.17, termMonths=60, rate=apr/12; const pmt=(debtNum*rate)/(1-Math.pow(1+rate,-termMonths)); const low=Math.round(pmt*0.75), high=Math.round(pmt*1.05); document.getElementById('calcPayment').textContent = `${fmt(low)} – ${fmt(high)}`; const telHref = `tel:${CONFIG.CALL_NUMBER.replace(/[^\d+]/g,'')}`; document.getElementById('callCta').setAttribute('href', telHref); document.getElementById('stickyCall').setAttribute('href', telHref); }
+      function showResults(){ leadGate.classList.add('hidden'); results.classList.remove('hidden'); const debtNum = DEBT_RANGE_MAP[state.answers.debt_amount] || 15000; document.getElementById('calcDebt').textContent = new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(debtNum); const apr=0.17, termMonths=60, rate=apr/12; const pmt=(debtNum*rate)/(1-Math.pow(1+rate,-termMonths)); const low=Math.round(pmt*0.75), high=Math.round(pmt*1.05); document.getElementById('calcPayment').textContent = `${fmt(low)} – ${fmt(high)}`; const telHref = `tel:${CONFIG.CALL_NUMBER.replace(/[^\d+]/g,'')}`; document.getElementById('callCta').setAttribute('href', telHref); document.getElementById('stickyCall').setAttribute('href', telHref); }
   function fmt(n){ return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n); }
   document.getElementById('doneBtn').onclick = ()=>{ results.classList.add('hidden'); entry.classList.remove('hidden'); };
   document.getElementById('y').textContent = new Date().getFullYear();
