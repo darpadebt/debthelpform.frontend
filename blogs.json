@@ -1,21 +1,36 @@
 [
   {
+    "slug": "your-guide-to-debt-relief-navigating-debt-consolidation-and-settlement",
     "title": "Your Guide to Debt Relief: Navigating Debt Consolidation and Settlement",
-    "slug": "2025-08-07-your-guide-to-debt-relief-navigating-debt-consolidation-and-settlement",
-    "url": "/blog/2025-08-07-your-guide-to-debt-relief-navigating-debt-consolidation-and-settlement.html",
-    "image": "/images/guide-thumb.png",
-    "date_published": "2025-08-07",
     "excerpt": "Understand consolidation vs settlement, pros/cons, costs, timelines, and how to choose safe help.",
-    "tags": ["Debt Relief","Consolidation","Settlement"]
+    "published_at": "2025-08-07T00:00:00Z",
+    "date_published": "2025-08-07T00:00:00Z",
+    "thumbnail": "/images/guide-thumb.png",
+    "image": "/images/guide-thumb.png",
+    "site": "debthelpform",
+    "url": "/blog/your-guide-to-debt-relief-navigating-debt-consolidation-and-settlement.html",
+    "content_url": "/blog/2025-08-07-your-guide-to-debt-relief-navigating-debt-consolidation-and-settlement.html",
+    "tags": [
+      "Debt Relief",
+      "Consolidation",
+      "Settlement"
+    ]
   },
   {
+    "slug": "debt-relief-your-path-to-financial-freedom",
     "title": "Debt Relief: Your Path to Financial Freedom",
-    "slug": "2025-08-03-debt-relief-your-path-to-financial-freedom",
-    "url": "/blog/2025-08-03-debt-relief-your-path-to-financial-freedom.html",
-    "image": "/images/guide-thumb.png",
-    "date_published": "2025-08-03",
     "excerpt": "A clear primer on consolidation and settlement with practical steps to get started.",
-    "tags": ["Guide","How To"]
+    "published_at": "2025-08-03T00:00:00Z",
+    "date_published": "2025-08-03T00:00:00Z",
+    "thumbnail": "/images/guide-thumb.png",
+    "image": "/images/guide-thumb.png",
+    "site": "debthelpform",
+    "url": "/blog/debt-relief-your-path-to-financial-freedom.html",
+    "content_url": "/blog/2025-08-03-debt-relief-your-path-to-financial-freedom.html",
+    "tags": [
+      "Guide",
+      "How To"
+    ]
   }
 ]
 
