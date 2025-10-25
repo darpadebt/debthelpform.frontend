@@ -6,8 +6,11 @@
   <title>Debt Help Form — Frequently Asked Questions</title>
   <meta name="description" content="Answers to common questions about debt consolidation and settlement. Learn how Debt Help Form works, costs, timelines, and credit impact." />
   <link rel="canonical" href="https://debthelpform.com/faq.html" />
-  <meta name="theme-color" content="#0a5cff" />
+  <meta name="theme-color" content="#0ea5e9" />
   <meta name="x-ai-optimizer-page" content="dhf:faq" />
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 
   <!-- Schema -->
   <script type="application/ld+json">{
@@ -29,148 +32,267 @@
       {"@type":"Question","name":"Do you work nationwide?","acceptedAnswer":{"@type":"Answer","text":"Yes — we serve clients across the United States, except where state rules prohibit certain programs."}},
       {"@type":"Question","name":"Who is Debt Help Form?","acceptedAnswer":{"@type":"Answer","text":"DebtHelpForm.com is a service of Gateway Financial Settlement Relief, LLC (GFSR). We’re FTC‑aligned, consumer‑first, and BBB accredited with an A– rating. Not affiliated with Gateway Debt Relief of Costa Mesa, CA."}}
     ]
-  }</script>
+  }}</script>
 
   <style>
-    :root{--brand:#0a5cff;--brand2:#072a86;--bg:#0b1220;--card:#0f1730;--ink:#e6ecf8;--muted:#8aa3d3;--ok:#079455}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
-    a{color:inherit}
-    .wrap{max-width:1080px;margin:0 auto;padding:0 16px}
-    header.top{position:sticky;top:0;z-index:60;background:rgba(11,18,32,.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
-    header .row{display:flex;align-items:center;gap:10px;padding:10px 0}
-    .brand{display:flex;align-items:center;gap:8px;font-weight:900;text-decoration:none}
-    .logo{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:linear-gradient(180deg,var(--brand),var(--brand2));font-size:12px}
-    nav.pills{display:flex;gap:8px}
-    .btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;text-decoration:none}
-    .btn.primary{background:linear-gradient(180deg,var(--brand),var(--brand2));color:white;box-shadow:0 6px 18px rgba(10,92,255,.35)}
-    .btn.ghost{background:transparent;color:var(--ink);border:1px solid rgba(255,255,255,.15)}
-    .call{margin-left:auto}
-    @media(max-width:640px){nav.pills{overflow-x:auto}nav.pills::-webkit-scrollbar{display:none}}
+    :root{ --bg:#f8fafc; --surface:#ffffff; --text:#0f172a; --muted:#475569; --brand:#0ea5e9; --brand-2:#22c55e; --ring: rgba(14,165,233,.25); --radius: 18px; --shadow: 0 10px 30px rgba(2,6,23,.08); }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--text)}
+    body.nav-open{overflow:hidden}
+    a{color:var(--brand);text-decoration:none;font-weight:600}
+    a:hover{text-decoration:underline}
+    .shell{max-width:1000px;margin:0 auto;padding:10px 16px 140px}
 
-    .ftc{background:#0d1530;border-bottom:1px solid rgba(255,255,255,.06)}
-    .ftc .row{display:flex;align-items:center;gap:10px;padding:8px 0;color:#cfe0ff;font-size:13px}
-    .dot{width:6px;height:6px;border-radius:50%;background:#fff}
+    .site-nav{position:sticky;top:0;margin-top:calc(10px + env(safe-area-inset-top, 0px));z-index:1000;background:rgba(255,255,255,.98);backdrop-filter:saturate(120%) blur(6px);border:1px solid #e2e8f0;border-radius:24px;padding:10px 14px;display:flex;align-items:center;gap:14px;margin-bottom:16px;box-shadow:var(--shadow)}
+    .site-nav .brand{font-weight:800;text-decoration:none;color:var(--text);font-size:17px;display:flex;align-items:center;gap:6px;flex:0 0 auto}
+    .site-nav .brand img{height:52px;width:auto;display:block}
+    .site-nav .links{display:flex;align-items:center;gap:10px;flex:1 1 auto;flex-wrap:wrap;margin-left:auto;justify-content:flex-end}
+    .site-nav .links a{display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border-radius:12px;background:#f1f5f9;color:var(--text);text-decoration:none;font-weight:600;font-size:14px;border:1px solid #e2e8f0;transition:background .15s ease, color .15s ease, border-color .15s ease}
+    .site-nav .links a:hover{background:#e2e8f0}
+    .site-nav .links a:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:10px}
+    .site-nav .links a.call{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;border-color:transparent;font-weight:700;box-shadow:0 8px 18px var(--ring)}
+    .site-nav .links a.call:hover{opacity:.95}
+    .site-nav .links a.active{background:#dbeafe;border-color:#93c5fd}
+    .menu-toggle{border:none;background:#0f172a;color:#fff;border-radius:10px;padding:8px 10px;font-weight:700;font-size:14px;cursor:pointer;display:none;margin-left:auto}
+    .menu-toggle:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
 
-    .card{background:linear-gradient(180deg,var(--card),#111a35);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
-    .pad{padding:16px}
-    h1{font-size:clamp(22px,4.5vw,36px);line-height:1.2;margin:0 0 8px;text-align:center}
-    .sub{color:var(--muted);font-size:15px;text-align:center;margin:0 0 12px}
-    .faq-item{margin-bottom:14px}
-    .faq-item h3{margin:0 0 6px}
-    .faq-item p{margin:0}
-    .trust{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;color:#c9d6f5;font-size:13px;margin:20px 0}
-    .trust a[href^="tel:"]{color:#ffdd00;text-decoration:underline;font-weight:900}
+    header.hero{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;margin:32px 0 18px}
+    header .h1{font-size:28px;line-height:1.2;margin:0 0 10px;font-weight:800}
+    header .sub{color:var(--muted);font-size:16px;margin:0 0 16px}
+    .badges{display:flex;gap:10px;flex-wrap:wrap}
+    .badge{font-size:13px;padding:6px 12px;border-radius:999px;background:#e2f2fb;color:#0369a1;text-decoration:none;font-weight:600}
 
-    footer{padding:22px 0;color:#9db2e2}
+    .card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin:18px 0}
+    .muted{color:var(--muted);font-size:14px;line-height:1.6}
+
+    .faq-card{margin-top:12px}
+    .faq-list{display:grid;gap:14px}
+    details.faq-item{border:1px solid #e2e8f0;border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow);overflow:hidden}
+    details.faq-item summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 22px;cursor:pointer;font-weight:600;font-size:16px;color:var(--text)}
+    details.faq-item summary::-webkit-details-marker{display:none}
+    details.faq-item summary::after{content:'+';font-size:22px;font-weight:500;color:var(--brand)}
+    details.faq-item[open] summary::after{content:'−'}
+    details.faq-item[open] summary{border-bottom:1px solid #e2e8f0}
+    details.faq-item summary:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:var(--radius)}
+    details.faq-item h3{margin:0;font-size:16px;font-weight:700}
+    details.faq-item > *:not(summary){padding:0 22px 22px;font-size:15px;line-height:1.6;color:var(--muted)}
+    details.faq-item p{margin:12px 0 0}
+    details.faq-item p:first-of-type{margin-top:0}
+    details.faq-item a.primary{margin-top:12px}
+
+    .primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(90deg,var(--brand),#38bdf8);color:#fff;border:none;border-radius:999px;padding:14px 18px;font-weight:700;font-size:16px;cursor:pointer;box-shadow:0 8px 18px var(--ring)}
+    .primary:hover{text-decoration:none;opacity:.95}
+    .primary:active{transform:translateY(1px)}
+
+    .faq-contact{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .faq-contact .badge{background:#eef2ff;color:#1e3a8a}
+    .faq-contact .call-badge{background:#dcfce7;color:#166534}
+
+    .trust-card .badge{font-size:12px}
+
+    .footer-sticky{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.98);backdrop-filter:saturate(120%) blur(6px);border-top:1px solid #e2e8f0;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+    .footer-sticky .muted{font-size:13px;color:#0369a1;font-weight:600}
+    .callnow{font-weight:800;color:#fff;background:var(--brand-2);border:none;border-radius:999px;padding:10px 14px;text-decoration:none;box-shadow:0 8px 18px rgba(34,197,94,.25)}
+
+    footer.site-footer{margin:28px 0 0;padding:18px;font-size:12px;color:var(--muted);line-height:1.6}
+    footer.site-footer a{color:var(--brand);text-decoration:underline;font-weight:600}
+    .network-links{margin-top:10px;display:flex;flex-wrap:wrap;gap:6px}
+    .network-links span{color:#cbd5f5}
+
+    @media (max-width:860px){
+      .site-nav{flex-wrap:wrap;gap:10px}
+      .site-nav .links{order:3;width:100%;display:none;flex-direction:column;align-items:stretch;justify-content:flex-start;margin-left:0;border-radius:18px;background:#fff;padding:8px 4px;border:1px solid #e2e8f0;box-shadow:var(--shadow)}
+      .site-nav .links.open{display:flex}
+      .site-nav .links a{justify-content:flex-start;font-size:15px;background:transparent;border:none;padding:10px 14px;border-radius:10px}
+      .site-nav .links a:hover{background:#f1f5f9}
+      .site-nav .links a.call{justify-content:center;border:none}
+      .menu-toggle{display:inline-flex;align-items:center;gap:6px}
+      header.hero{margin-top:18px}
+    }
+
+    @media (max-width:640px){
+      .site-nav{border-radius:20px;padding:10px 12px}
+      header.hero{padding:22px}
+      details.faq-item summary{padding:16px 18px;font-size:15px}
+      details.faq-item > *:not(summary){padding:0 18px 18px}
+      .footer-sticky{flex-direction:column;align-items:stretch;text-align:center}
+      .footer-sticky .muted{justify-content:center}
+    }
   </style>
 </head>
 <body>
-  <!-- Header -->
-  <header class="top">
-    <div class="wrap"><div class="row">
-      <a class="brand" href="/"><span class="logo">DHF</span><span>Debt Help Form</span></a>
-      <nav class="pills" aria-label="Primary">
-        <a class="btn ghost" href="/">Home</a>
-        <a class="btn ghost" href="/relief.html">Relief Options</a>
-        <a class="btn ghost" href="/faq.html" aria-current="page">FAQ</a>
-        <a class="btn ghost" href="/debthelpform-pages-blog.html">Blog</a>
-        <a class="btn ghost" href="/contact.html">Contact</a>
-      </nav>
-      <div class="call"><a class="btn primary" href="tel:+18884377141">Call</a></div>
-    </div></div>
-    <div class="ftc"><div class="wrap"><div class="row"><div class="dot"></div> FTC‑aligned • No upfront fees • Transparent savings estimates</div></div></div>
-  </header>
+  <div class="shell">
+    <nav class="site-nav" role="navigation" aria-label="Primary">
+      <a class="brand" href="/" aria-label="Gateway Debt Help">
+        <img src="/gatewaylego.webp" alt="Gateway Debt Help logo" loading="lazy" />
+      </a>
+      <button class="menu-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
+      <div class="links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/relief.html">Relief Options</a>
+        <a href="/about.html">About</a>
+        <a href="/faq.html" class="active" aria-current="page">FAQ</a>
+        <a href="/debthelpform-pages-blog.html">Blog</a>
+        <a href="/blog.index.html">Blog Index</a>
+        <a href="/calculator.savings.html">Debt Calculator</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a class="call" href="tel:+18884377141">Call +1 (888) 437-7141</a>
 
-  <main class="wrap" style="padding:16px 0 24px">
-    <aside class="card pad">
-      <h1>Frequently Asked Questions</h1>
-      <p class="sub">Quick answers about debt consolidation and settlement with Debt Help Form.</p>
+    <header class="hero" id="entry">
+      <div class="h1">Frequently Asked Questions</div>
+      <div class="sub">Quick answers about debt consolidation and settlement with Debt Help Form.</div>
+    </header>
 
-      <!-- Accordion FAQ: first three open by default with CTA -->
-      <details class="faq-item" open>
-        <summary><h3 style="display:inline">Will this hurt my credit?</h3></summary>
-        <p>A consolidation loan requires a credit check and on‑time payments can help rebuild scores. Settlement programs may cause temporary dips as accounts are negotiated, but many clients recover scores after debts are resolved.</p>
-        <p style="margin-top:8px"><a class="btn primary" href="/#get-started">Start My Estimate →</a></p>
-      </details>
-      <details class="faq-item" open>
-        <summary><h3 style="display:inline">What do these programs cost?</h3></summary>
-        <p>With consolidation, you pay interest on the new loan. With settlement, fees are only charged after a debt is successfully resolved — no upfront fees.</p>
-        <p style="margin-top:8px"><a class="btn primary" href="/#get-started">Start My Estimate →</a></p>
-      </details>
-      <details class="faq-item" open>
-        <summary><h3 style="display:inline">How long does it take?</h3></summary>
-        <p>Consolidation loans typically run 36–72 months. Settlement programs usually finish in ~24–48 months.</p>
-        <p style="margin-top:8px"><a class="btn primary" href="/#get-started">Start My Estimate →</a></p>
-      </details>
-
-      <!-- Remaining FAQs collapsed by default -->
-      <details class="faq-item">
-        <summary><h3 style="display:inline">Is there a minimum debt amount?</h3></summary>
-        <p>Most programs start at $10,000 of unsecured debt (credit cards, personal loans, medical bills).</p>
-      </details>
-      <details class="faq-item">
-        <summary><h3 style="display:inline">What types of debt qualify?</h3></summary>
-        <p>Unsecured debts like credit cards, personal loans, medical bills, and certain lines of credit qualify. Secured debts (mortgages, auto loans) aren’t eligible for consolidation or settlement through us.</p>
-      </details>
-      <details class="faq-item">
-        <summary><h3 style="display:inline">Can I include medical bills or personal loans?</h3></summary>
-        <p>Yes — as long as they are unsecured, they can usually be included in a consolidation loan or a settlement program.</p>
-      </details>
-      <details class="faq-item">
-        <summary><h3 style="display:inline">Will I still owe interest and late fees?</h3></summary>
-        <p>For consolidation loans, you’ll pay a fixed interest rate disclosed upfront. For settlement, interest and late fees stop accruing once an account is successfully negotiated.</p>
-      </details>
-      <details class="faq-item">
-        <summary><h3 style="display:inline">What happens if I miss a payment?</h3></summary>
-        <p>For consolidation, missing payments could impact your credit and loan terms. For settlement, consistency is key — missed drafts can delay settlements.</p>
-      </details>
-      <details class="faq-item">
-        <summary><h3 style="display:inline">Can debt relief help me avoid bankruptcy?</h3></summary>
-        <p>Often, yes. Consolidation and settlement are bankruptcy alternatives that may resolve debts without filing, depending on your situation.</p>
-      </details>
-      <details class="faq-item">
-        <summary><h3 style="display:inline">Is Debt Help Form regulated?</h3></summary>
-        <p>We follow FTC rules, provide transparent estimates, and never charge upfront fees. We are BBB accredited with an A– rating.</p>
-      </details>
-      <details class="faq-item">
-        <summary><h3 style="display:inline">Am I locked into a contract?</h3></summary>
-        <p>No. You can cancel at any time if you’re not satisfied or if your circumstances change.</p>
-      </details>
-      <details class="faq-item">
-        <summary><h3 style="display:inline">How much debt do I need to qualify?</h3></summary>
-        <p>Most programs begin at around $10,000 of unsecured debt. Higher balances often see the greatest benefit.</p>
-      </details>
-      <details class="faq-item">
-        <summary><h3 style="display:inline">Do you work nationwide?</h3></summary>
-        <p>Yes — we serve clients across the United States, except where state rules prohibit certain programs.</p>
-      </details>
-
-      <div class="trust">
-        <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener">BBB Profile — <strong>A– rating</strong></a>
-        <span>•</span>
-        <a href="tel:+18884377141">📞 888‑437‑7141</a>
-      </div>
-    </aside>
-  </main>
-
-  <footer>
-    <div class="wrap">
-      <p class="mini">© <span id="y"></span> DebtHelpForm.com — a service of Gateway Financial Settlement Relief, LLC (GFSR). Not affiliated with “Gateway Debt Relief” of Costa Mesa, CA.</p>
-      <div class="trust" style="margin-top:8px">
-        <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener">BBB Profile — See our <strong>A–</strong> rating</a>
-        <span>•</span>
-        <a href="tel:+18884377141" style="color:#ffdd00;font-weight:900;text-decoration:underline">📞 888‑437‑7141</a>
-      </div>
-      <div class="wrap" style="padding-top:8px">
-        <p class="mini">Our network: 
-          <a href="https://debthelpform.com/" target="_blank" rel="noopener">DebtHelpForm.com</a> • 
-          <a href="https://debtreliefguard.com/" target="_blank" rel="noopener">DebtReliefGuard.com</a> • 
-          <a href="https://gatewaydebthelp.com/" target="_blank" rel="noopener">GatewayDebtHelp.com</a> • 
-          <a href="https://gatewayfinancialsettlementrelief.com/" target="_blank" rel="noopener">Gateway Financial Settlement Relief, LLC</a>
-        </p>
+    <div class="card trust-card" aria-label="Trust signals">
+      <div class="muted" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener nofollow" class="badge" style="background:#eef2ff;color:#1e3a8a">BBB Profile — A– rating</a>
+        <span class="badge">FTC-aligned • No upfront fees</span>
+        <span class="badge">Transparent savings estimates</span>
       </div>
     </div>
-  </footer>
+
+    <main aria-labelledby="entry">
+      <section class="card faq-card">
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary><h3>Will this hurt my credit?</h3></summary>
+            <p>A consolidation loan requires a credit check and on-time payments can help rebuild scores. Settlement programs may cause temporary dips as accounts are negotiated, but many clients recover scores after debts are resolved.</p>
+            <p><a class="primary" href="/#get-started">Start My Estimate →</a></p>
+          </details>
+          <details class="faq-item" open>
+            <summary><h3>What do these programs cost?</h3></summary>
+            <p>With consolidation, you pay interest on the new loan. With settlement, fees are only charged after a debt is successfully resolved — no upfront fees.</p>
+            <p><a class="primary" href="/#get-started">Start My Estimate →</a></p>
+          </details>
+          <details class="faq-item" open>
+            <summary><h3>How long does it take?</h3></summary>
+            <p>Consolidation loans typically run 36–72 months. Settlement programs usually finish in ~24–48 months.</p>
+            <p><a class="primary" href="/#get-started">Start My Estimate →</a></p>
+          </details>
+          <details class="faq-item">
+            <summary><h3>Is there a minimum debt amount?</h3></summary>
+            <p>Most programs start at $10,000 of unsecured debt (credit cards, personal loans, medical bills).</p>
+          </details>
+          <details class="faq-item">
+            <summary><h3>What types of debt qualify?</h3></summary>
+            <p>Unsecured debts like credit cards, personal loans, medical bills, and certain lines of credit qualify. Secured debts (mortgages, auto loans) aren’t eligible for consolidation or settlement through us.</p>
+          </details>
+          <details class="faq-item">
+            <summary><h3>Can I include medical bills or personal loans?</h3></summary>
+            <p>Yes — as long as they are unsecured, they can usually be included in a consolidation loan or a settlement program.</p>
+          </details>
+          <details class="faq-item">
+            <summary><h3>Will I still owe interest and late fees?</h3></summary>
+            <p>For consolidation loans, you’ll pay a fixed interest rate disclosed upfront. For settlement, interest and late fees stop accruing once an account is successfully negotiated.</p>
+          </details>
+          <details class="faq-item">
+            <summary><h3>What happens if I miss a payment?</h3></summary>
+            <p>For consolidation, missing payments could impact your credit and loan terms. For settlement, consistency is key — missed drafts can delay settlements.</p>
+          </details>
+          <details class="faq-item">
+            <summary><h3>Can debt relief help me avoid bankruptcy?</h3></summary>
+            <p>Often, yes. Consolidation and settlement are bankruptcy alternatives that may resolve debts without filing, depending on your situation.</p>
+          </details>
+          <details class="faq-item">
+            <summary><h3>Is Debt Help Form regulated?</h3></summary>
+            <p>We follow FTC rules, provide transparent estimates, and never charge upfront fees. We are BBB accredited with an A– rating.</p>
+          </details>
+          <details class="faq-item">
+            <summary><h3>Am I locked into a contract?</h3></summary>
+            <p>No. You can cancel at any time if you’re not satisfied or if your circumstances change.</p>
+          </details>
+          <details class="faq-item">
+            <summary><h3>How much debt do I need to qualify?</h3></summary>
+            <p>Most programs begin at around $10,000 of unsecured debt. Higher balances often see the greatest benefit.</p>
+          </details>
+          <details class="faq-item">
+            <summary><h3>Do you work nationwide?</h3></summary>
+            <p>Yes — we serve clients across the United States, except where state rules prohibit certain programs.</p>
+          </details>
+        </div>
+        <div class="faq-contact">
+          <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener nofollow" class="badge">BBB Profile — A– rating</a>
+          <a href="tel:+18884377141" class="badge call-badge">📞 888‑437‑7141</a>
+        </div>
+      </section>
+    </main>
+
+    <footer class="card site-footer">
+      <div>© <span id="y"></span> DebtHelpForm.com — a service of Gateway Financial Settlement Relief, LLC (GFSR). Not affiliated with “Gateway Debt Relief” of Costa Mesa, CA.</div>
+      <div class="network-links">
+        <span>Our network:</span>
+        <a href="https://debthelpform.com/" target="_blank" rel="noopener">DebtHelpForm.com</a>
+        <span>•</span>
+        <a href="https://debtreliefguard.com/" target="_blank" rel="noopener">DebtReliefGuard.com</a>
+        <span>•</span>
+        <a href="https://gatewaydebthelp.com/" target="_blank" rel="noopener">GatewayDebtHelp.com</a>
+        <span>•</span>
+        <a href="https://gatewayfinancialsettlementrelief.com/" target="_blank" rel="noopener">Gateway Financial Settlement Relief, LLC</a>
+      </div>
+    </footer>
+  </div>
+
+  <div class="footer-sticky">
+    <div class="muted">🔒 Secure & Confidential</div>
+    <a class="callnow" href="tel:+18884377141">Call Now</a>
+    <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener nofollow" class="muted" style="font-size:12px;text-decoration:none">BBB Profile</a>
+  </div>
+
+  <script>
+    (function(){
+      const toggle = document.getElementById('navToggle');
+      const links  = document.getElementById('navLinks');
+      if(!toggle || !links) return;
+
+      function setOpen(open){
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        links.classList.toggle('open', open);
+        document.body.classList.toggle('nav-open', open);
+      }
+
+      toggle.addEventListener('click', () => {
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        setOpen(!isOpen);
+      });
+
+      links.addEventListener('click', (event) => {
+        const target = event.target;
+        if(target instanceof HTMLElement && target.tagName === 'A'){
+          setOpen(false);
+        }
+      });
+
+      document.addEventListener('click', (event) => {
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        if(!isOpen) return;
+        if(event.target instanceof Node && !links.contains(event.target) && event.target !== toggle){
+          setOpen(false);
+        }
+      });
+
+      document.addEventListener('keydown', (event) => {
+        if(event.key === 'Escape'){
+          setOpen(false);
+        }
+      });
+
+      window.matchMedia('(min-width: 861px)').addEventListener('change', (mq) => {
+        if(mq.matches){
+          setOpen(false);
+        }
+      });
+    })();
+
+    (function(){
+      const year = document.getElementById('y');
+      if(year){
+        year.textContent = new Date().getFullYear();
+      }
+    })();
+  </script>
 
   <!-- ONLY 036 send + receive -->
   <script>
@@ -182,3 +304,6 @@
       try{
         const r = await fetch(ENDPOINTS.thirtysix.config,{headers:{'Accept':'application/json'},cache:'no-store'});
         if(r.ok){
+
+</body>
+</html>
