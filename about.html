@@ -1,25 +1,26 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>About Us | DebtHelpForm.com</title>
-  <meta name="description" content="Discover how DebtHelpForm.com helps real people reduce debt with honest, secure, and personalized support—no gimmicks, no pressure.">
-  <meta name="keywords" content="about debthelpform, who we are, debt relief team, secure debt help, honest debt support">
-  <meta name="author" content="DebtHelpForm.com">
+  <meta name="description" content="Discover how DebtHelpForm.com helps real people reduce debt with honest, secure, and personalized support—no gimmicks, no pressure." />
+  <meta name="keywords" content="about debthelpform, who we are, debt relief team, secure debt help, honest debt support" />
+  <meta name="author" content="DebtHelpForm.com" />
+  <link rel="canonical" href="https://debthelpform.com/about.html" />
 
   <!-- Open Graph -->
-  <meta property="og:title" content="About Us | DebtHelpForm.com">
-  <meta property="og:description" content="We help Americans find honest, secure debt relief — with no gimmicks or pressure.">
-  <meta property="og:url" content="https://debthelpform.com/about">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="https://debthelpform.com/wp-content/uploads/2024/01/about-page-preview.jpg">
+  <meta property="og:title" content="About Us | DebtHelpForm.com" />
+  <meta property="og:description" content="We help Americans find honest, secure debt relief — with no gimmicks or pressure." />
+  <meta property="og:url" content="https://debthelpform.com/about" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://debthelpform.com/wp-content/uploads/2024/01/about-page-preview.jpg" />
 
   <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="About Us | DebtHelpForm.com">
-  <meta name="twitter:description" content="Built on trust. DebtHelpForm.com helps people reduce debt legally and securely.">
-  <meta name="twitter:image" content="https://debthelpform.com/wp-content/uploads/2024/01/about-page-preview.jpg">
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="About Us | DebtHelpForm.com" />
+  <meta name="twitter:description" content="Built on trust. DebtHelpForm.com helps people reduce debt legally and securely." />
+  <meta name="twitter:image" content="https://debthelpform.com/wp-content/uploads/2024/01/about-page-preview.jpg" />
 
   <!-- Schema Markup -->
   <script type="application/ld+json">
@@ -37,141 +38,443 @@
   }
   </script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      background: #f4f9ff;
-      color: #222;
-      line-height: 1.6;
+    :root{
+      --bg:#f8fafc;
+      --surface:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --brand:#0ea5e9;
+      --brand-2:#22c55e;
+      --ring:rgba(14,165,233,.25);
+      --radius:18px;
+      --shadow:0 10px 30px rgba(2,6,23,.08);
+      --callbar-h:0px;
     }
-    header, footer {
-      background: #004488;
-      color: white;
-      padding: 2rem 1rem;
-      text-align: center;
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.55;
     }
-    header h1 {
-      margin: 0;
-      font-size: 2rem;
+    body.nav-open{overflow:hidden}
+    a{color:inherit}
+    a:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:10px}
+    .shell{max-width:1000px;margin:0 auto;padding:10px 16px calc(120px + var(--callbar-h, 0px))}
+
+    /* Site navigation */
+    .site-nav{
+      position:sticky;
+      top:0;
+      margin-top:calc(10px + env(safe-area-inset-top, 0px));
+      z-index:1000;
+      background:rgba(255,255,255,.98);
+      backdrop-filter:saturate(120%) blur(6px);
+      border:1px solid #e2e8f0;
+      border-radius:24px;
+      padding:10px 14px;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:16px;
+      box-shadow:var(--shadow);
     }
-    nav[aria-label="Main navigation"] a {
-      color: #ffdd00;
-      margin: 0 1rem;
-      text-decoration: none;
-      font-weight: bold;
+    .site-nav .brand{
+      font-weight:800;
+      text-decoration:none;
+      color:var(--text);
+      font-size:17px;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex:0 0 auto;
     }
-    main {
-      max-width: 800px;
-      margin: auto;
-      padding: 2rem 1rem;
-      background: white;
+    .site-nav .brand img{height:52px;width:auto;display:block}
+    .site-nav .links{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex:1 1 auto;
+      flex-wrap:wrap;
+      margin-left:auto;
+      justify-content:flex-end;
     }
-    h2 {
-      color: #004488;
-      margin-top: 2rem;
+    .site-nav .links a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 12px;
+      border-radius:12px;
+      background:#f1f5f9;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:600;
+      font-size:14px;
+      border:1px solid #e2e8f0;
+      transition:background .15s ease,color .15s ease;
     }
-    a {
-      color: #004488;
-      text-decoration: underline;
+    .site-nav .links a:hover{background:#e2e8f0}
+    .site-nav .links a.call{
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      color:#fff;
+      border-color:transparent;
+      font-weight:700;
+      box-shadow:0 8px 18px var(--ring);
     }
-    .cta {
-      background: #007B55;
-      color: white;
-      padding: 1rem;
-      margin-top: 2rem;
-      text-align: center;
-      font-weight: bold;
-      border-radius: 8px;
+    .site-nav .links a.call:hover{opacity:.95}
+    .menu-toggle{
+      border:none;
+      background:#0f172a;
+      color:#fff;
+      border-radius:10px;
+      padding:8px 10px;
+      font-weight:700;
+      font-size:14px;
+      cursor:pointer;
+      display:none;
+      margin-left:auto;
     }
-    .cta a {
-      color: white;
-      font-size: 1.2rem;
-      text-decoration: none;
+    .menu-toggle:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+    @media (max-width:860px){
+      .site-nav{flex-wrap:wrap;gap:10px}
+      .site-nav .links{order:3;width:100%;display:none;flex-direction:column;align-items:stretch;justify-content:flex-start;margin-left:0;border-radius:18px;background:#fff;padding:8px 4px;border:1px solid #e2e8f0;box-shadow:var(--shadow)}
+      .site-nav .links.open{display:flex}
+      .site-nav .links a{justify-content:flex-start;font-size:15px;background:transparent;border:none;padding:10px 14px;border-radius:10px}
+      .site-nav .links a:hover{background:#f1f5f9}
+      .site-nav .links a.call{justify-content:center;border:none}
+      .menu-toggle{display:inline-flex;align-items:center;gap:6px}
     }
-    .mobile-call {
-      display: none;
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      background: #007B55;
-      color: white;
-      text-align: center;
-      font-size: 1.2rem;
-      padding: 1rem;
-      z-index: 9999;
+    @media (max-width:640px){
+      .site-nav{border-radius:20px;padding:10px 12px}
     }
-    .mobile-call a {
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
+
+    main.page{display:block}
+    .page-header{
+      background:var(--surface);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:26px 26px 28px;
+      margin:32px 0 18px;
     }
-    @media (max-width: 768px) {
-      .mobile-call { display: block; }
+    .page-header h1{
+      font-size:32px;
+      line-height:1.2;
+      margin:0 0 8px;
+      font-weight:800;
     }
-    iframe {
-      width: 100%;
-      border: none;
-      border-radius: 8px;
-      margin-top: 2rem;
+    .page-header p{margin:0 0 18px;color:var(--muted);font-size:15px}
+    .page-header .badges{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 12px;
+      border-radius:999px;
+      background:#e2f2fb;
+      color:#0369a1;
+      font-size:13px;
+      font-weight:600;
+    }
+    .page-header .buttons{display:flex;flex-wrap:wrap;gap:10px}
+
+    .button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 18px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:15px;
+      text-decoration:none;
+      transition:transform .15s ease,box-shadow .15s ease,opacity .15s ease;
+    }
+    .button.primary{
+      background:linear-gradient(90deg,var(--brand),#38bdf8);
+      color:#fff;
+      border:none;
+      box-shadow:0 8px 18px var(--ring);
+    }
+    .button.primary:active{transform:translateY(1px)}
+    .button.ghost{
+      background:#e2f2fb;
+      color:#0369a1;
+      border:1px solid #bae6fd;
+    }
+
+    .page-card{
+      background:var(--surface);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:24px 26px;
+      margin:18px 0;
+    }
+    .page-card h2{margin-top:0;margin-bottom:12px;font-size:24px}
+    .page-card p{margin:0 0 14px;color:var(--muted)}
+    .page-card a{color:var(--brand);font-weight:600;text-decoration:none}
+    .page-card a:hover{text-decoration:underline}
+    .page-card ul{margin:0 0 14px 18px;color:var(--muted);padding:0}
+    .page-card li{margin-bottom:8px}
+
+    .values-grid{display:grid;gap:16px;margin-top:14px}
+    @media (min-width:720px){.values-grid{grid-template-columns:repeat(3,1fr)}}
+    .value-card{
+      background:#f1f5f9;
+      border-radius:16px;
+      padding:16px 18px;
+      border:1px solid #e2e8f0;
+      box-shadow:inset 0 0 0 1px rgba(148,163,184,.12);
+    }
+    .value-card h3{margin:0 0 8px;font-size:18px;color:var(--text)}
+    .value-card p{margin:0;font-size:14px;color:var(--muted)}
+
+    .cta-block{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+      align-items:flex-start;
+    }
+
+    iframe{
+      width:100%;
+      border:none;
+      border-radius:14px;
+      background:#fff;
+      box-shadow:inset 0 0 0 1px #e2e8f0;
+      min-height:720px;
+    }
+
+    .footer-sticky{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      background:rgba(255,255,255,.98);
+      backdrop-filter:saturate(120%) blur(6px);
+      border-top:1px solid #e2e8f0;
+      padding:10px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      box-shadow:0 -10px 30px rgba(2,6,23,.05);
+    }
+    .trust{display:flex;align-items:center;gap:8px;color:#0369a1;font-weight:600;font-size:13px}
+    .callnow{
+      font-weight:800;
+      color:#fff;
+      background:var(--brand-2);
+      border:none;
+      border-radius:999px;
+      padding:10px 14px;
+      text-decoration:none;
+      box-shadow:0 8px 18px rgba(34,197,94,.25);
+    }
+    .callnow:hover{opacity:.95}
+
+    .site-footer{
+      text-align:center;
+      margin:48px 0 24px;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .site-footer a{color:var(--brand);font-weight:600;text-decoration:none}
+    .site-footer a:hover{text-decoration:underline}
+
+    @media (max-width:640px){
+      .page-header{padding:22px}
+      .page-header h1{font-size:26px}
+      .button{width:100%}
+      .page-card{padding:20px}
+      iframe{min-height:640px}
     }
   </style>
 </head>
 <body>
+  <div class="shell">
+    <nav class="site-nav" role="navigation" aria-label="Primary">
+      <a class="brand" href="/" aria-label="Gateway Debt Help">
+        <img src="/gatewaylego.webp" alt="Gateway Debt Help logo" loading="lazy" />
+      </a>
+      <button class="menu-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
+      <div class="links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/relief.html">Relief Options</a>
+        <a href="/about.html" aria-current="page">About</a>
+        <a href="/faq.html">FAQ</a>
+        <a href="/debthelpform-pages-blog.html">Blog</a>
+        <a href="/blog.index.html">Blog Index</a>
+        <a href="/calculator.savings.html">Debt Calculator</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a class="call" href="tel:+18884377141">Call +1 (888) 437‑7141</a>
+      </div>
+    </nav>
 
-  <!-- Mobile Call CTA -->
-  <div class="mobile-call" aria-label="Call Now">
-    <a href="tel:8884377141">📞 Tap to Call: 888-437-7141</a>
+    <main class="page" id="main">
+      <header class="page-header">
+        <h1>About DebtHelpForm.com</h1>
+        <p>Real people. Real relief. We guide you through secure, compliant debt solutions without pressure or gimmicks.</p>
+        <div class="badges" aria-label="Trust badges">
+          <span class="badge">🔒 Secure & Confidential</span>
+          <span class="badge">FTC & TCPA Aligned</span>
+          <span class="badge">No Upfront Fees</span>
+        </div>
+        <div class="buttons">
+          <a class="button primary" data-role="estimate" href="/#get-started">🔒 Start Secure Estimate</a>
+          <a class="button ghost" data-role="call" href="tel:+18884377141">📞 Call 888‑437‑7141</a>
+        </div>
+      </header>
+
+      <section class="page-card" aria-labelledby="real-relief">
+        <h2 id="real-relief">Real Help, Real Relief</h2>
+        <p>At <strong>DebtHelpForm.com</strong>, we help individuals reduce financial stress and take back control with clarity, privacy, and no pressure. Our mission is simple: connect people with trustworthy, proven debt relief options they can actually use.</p>
+        <ul>
+          <li>Personalized guidance rooted in your goals and budget.</li>
+          <li>Transparent explanations of each program before you commit.</li>
+          <li>Support from a team that respects your time, your inbox, and your privacy.</li>
+        </ul>
+      </section>
+
+  
+  <section class="page-card" aria-labelledby="built-on-trust">
+        <h2 id="built-on-trust">Built on Trust</h2>
+        <p>We believe in transparency, respect, and keeping your information secure. Our services are built in accordance with <a href="https://www.ftc.gov/" target="_blank" rel="noopener noreferrer">FTC</a>, <a href="https://www.fcc.gov/" target="_blank" rel="noopener noreferrer">FCC</a>, and <a href="https://www.tcpacompliance.com/" target="_blank" rel="noopener noreferrer">TCPA</a> standards — and we are committed to ongoing compliance, data protection, and user empowerment.</p>
+        <div class="values-grid" role="list">
+          <div class="value-card" role="listitem">
+            <h3>Respect for Your Data</h3>
+            <p>No reselling. No surprises. Just secure handling that keeps you in control.</p>
+          </div>
+          <div class="value-card" role="listitem">
+            <h3>Clear, Honest Guidance</h3>
+            <p>We explain relief programs in plain language so you can choose what fits.</p>
+          </div>
+          <div class="value-card" role="listitem">
+            <h3>Compliance First</h3>
+            <p>Every outreach, script, and form is reviewed against federal and state requirements.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-card" aria-labelledby="cta" style="background:linear-gradient(135deg,#0ea5e9,#38bdf8 55%,#22c55e);color:#fff">
+        <div class="cta-block">
+          <h2 id="cta" style="margin:0;font-size:26px">Ready to take control?</h2>
+          <p style="margin:0 0 12px;font-size:16px;max-width:520px;color:rgba(255,255,255,.9)">Start your free estimate to see which debt relief options fit your situation. No cost, no obligation.</p>
+          <a class="button primary" data-role="estimate" href="/#get-started" style="background:rgba(15,23,42,.9);box-shadow:0 8px 18px rgba(15,23,42,.35)">Start Your Free Debt Relief Estimate</a>
+        </div>
+      </section>
+
+      <section class="page-card" aria-label="Free debt relief form">
+        <h2 style="margin-bottom:16px">Secure Relief Request Form</h2>
+        <p>Answer a few quick questions below and we’ll follow up with options tailored to you.</p>
+        <iframe
+          src="https://api.leadconnectorhq.com/widget/form/A5c9I3HkyNd1puU4nJWl"
+          height="1360"
+          data-form-id="A5c9I3HkyNd1puU4nJWl"
+          title="Free Debt Help Form"
+          loading="lazy"
+          allowtransparency="true">
+        </iframe>
+      </section>
+    </main>
   </div>
 
-  <!-- Header -->
-  <header>
-    <h1>About DebtHelpForm.com</h1>
-    <nav aria-label="Main navigation">
-      <a href="/">Home</a>
-      <a href="/debt-help-blog-expert-tips-relief-options-financial-freedom/">Blog</a>
-      <a href="https://gatewaydebthelp.com" target="_blank" rel="noopener noreferrer">GatewayDebtHelp.com</a>
-      <a href="https://debtreliefguard.com" target="_blank" rel="noopener noreferrer">DebtReliefGuard.com</a>
-    </nav>
-  </header>
+  <div class="footer-sticky">
+    <div class="trust">🔒 Secure & Confidential</div>
+    <a class="callnow" data-role="call" href="tel:+18884377141">Call Now</a>
+    <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener nofollow" class="muted" style="font-size:12px;text-decoration:none">BBB Profile</a>
+  </div>
 
-  <!-- Main Content -->
-  <main>
-    <section>
-      <h2>Real Help, Real Relief</h2>
-      <p>At <strong>DebtHelpForm.com</strong>, we help individuals reduce financial stress and take back control with clarity, privacy, and no pressure. Our mission is simple: connect people with trustworthy, proven debt relief options they can actually use.</p>
-    </section>
-
-    <section>
-      <h2>Built on Trust</h2>
-      <p>We believe in transparency, respect, and keeping your information secure. Our services are built in accordance with <a href="https://www.ftc.gov/" target="_blank" rel="noopener noreferrer">FTC</a>, <a href="https://www.fcc.gov/" target="_blank" rel="noopener noreferrer">FCC</a>, and <a href="https://www.tcpacompliance.com/" target="_blank" rel="noopener noreferrer">TCPA</a> standards — and we are committed to ongoing compliance, data protection, and user empowerment.</p>
-    </section>
-
-    <!-- Call-to-Action -->
-    <div class="cta">
-      Ready to take control? <a href="/">Start Your Free Debt Relief Estimate</a>
+    <footer class="site-footer">
+    <div class="muted">
+      © <span id="y"></span> DebtHelpForm.com — a service of Gateway Financial Settlement Relief, LLC (GFSR). Not affiliated with “Gateway Debt Relief” of Costa Mesa, CA.
+      <span style="margin-left:6px">•</span>
+      <a href="/privacy.html">Privacy</a>
+      <span>•</span>
+      <a href="/terms.html">Terms</a>
+      <span>•</span>
+      <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener nofollow">BBB Profile (A–)</a>
     </div>
-
-    <!-- GHL Embedded Form -->
-    <iframe
-      src="https://api.leadconnectorhq.com/widget/form/A5c9I3HkyNd1puU4nJWl"
-      height="1360"
-      data-form-id="A5c9I3HkyNd1puU4nJWl"
-      title="Free Debt Help Form"
-      loading="lazy"
-      allowtransparency="true">
-    </iframe>
-
-  </main>
-
-  <!-- Footer -->
-  <footer>
-    &copy; <script>document.write(new Date().getFullYear());</script> DebtHelpForm.com | Built with ❤️ for those ready to break free.
   </footer>
 
-  <!-- ChatGPT Tracking Scripts -->
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+    (function(){
+      const toggle = document.getElementById('navToggle');
+      const links  = document.getElementById('navLinks');
+      if(!toggle || !links) return;
+      function setOpen(open){
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        links.classList.toggle('open', open);
+        document.body.classList.toggle('nav-open', open);
+      }
+      toggle.addEventListener('click', () => {
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        setOpen(!isOpen);
+      });
+      links.addEventListener('click', (event) => {
+        const target = event.target;
+        if(target instanceof HTMLElement && target.tagName === 'A'){
+          setOpen(false);
+        }
+      });
+      document.addEventListener('click', (event) => {
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        if(!isOpen) return;
+        if(event.target instanceof Node && !links.contains(event.target) && event.target !== toggle){
+          setOpen(false);
+        }
+      });
+      document.addEventListener('keydown', (event) => {
+        if(event.key === 'Escape'){
+          setOpen(false);
+        }
+      });
+      window.matchMedia('(min-width: 861px)').addEventListener('change', (mq) => {
+        if(mq.matches){
+          setOpen(false);
+        }
+      });
+    })();
+  </script>
+  <script>
+    (function(){
+      const root = document.documentElement;
+      const bar = document.querySelector('.footer-sticky');
+      function setHeight(){
+        const h = bar ? bar.offsetHeight : 0;
+        root.style.setProperty('--callbar-h', h + 'px');
+      }
+      setHeight();
+      window.addEventListener('resize', setHeight, {passive:true});
+    })();
+  </script>
+  <script>
+    (() => {
+      function send(name, data){
+        try{
+          const blob = new Blob([JSON.stringify({ name, ts:Date.now(), ...data })],{type:'application/json'});
+          if(navigator.sendBeacon) navigator.sendBeacon('/ingest', blob);
+          else fetch('/ingest',{ method:'POST', body:blob, keepalive:true, headers:{'Content-Type':'application/json'} }).catch(() =>{});
+        }catch{}
+      }
+      document.addEventListener('click', (event) => {
+        const target = event.target.closest('a,button');
+        if(!target) return;
+        if(target.matches('[data-role="estimate"]')) send('cta:start_click', { url: location.href });
+        if(target.matches('[data-role="call"]') || target.matches('a[href^="tel:"]')) send('cta:call_click', { url: location.href });
+      }, { passive:true });
+    })();
+  </script>
   <script>
     // Heatmap + Engagement Tracker
     fetch("https://debthelpform.com/backend/heatmap-tracker.php", {
@@ -196,6 +499,5 @@
       })
     }).catch(() => {});
   </script>
-
 </body>
 </html>
