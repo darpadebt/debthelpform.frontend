@@ -44,7 +44,7 @@
       flex:0 0 auto;
     }
     .site-nav .brand img{
-      height:32px;
+      height:40px;
       width:auto;
       display:block;
     }
@@ -54,6 +54,8 @@
       gap:10px;
       flex:1 1 auto;
       flex-wrap:wrap;
+      margin-left:auto;
+      justify-content:flex-end;
     }
     .site-nav .links a{
       display:inline-flex;
@@ -93,7 +95,7 @@
     .menu-toggle:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
     @media (max-width:860px){
       .site-nav{flex-wrap:wrap;gap:10px}
-      .site-nav .links{order:3;width:100%;display:none;flex-direction:column;align-items:stretch;border-radius:18px;background:#fff;padding:8px 4px;border:1px solid #e2e8f0;box-shadow:var(--shadow)}
+      .site-nav .links{order:3;width:100%;display:none;flex-direction:column;align-items:stretch;justify-content:flex-start;margin-left:0;border-radius:18px;background:#fff;padding:8px 4px;border:1px solid #e2e8f0;box-shadow:var(--shadow)}
       .site-nav .links.open{display:flex}
       .site-nav .links a{justify-content:flex-start;font-size:15px;background:transparent;border:none;padding:10px 14px;border-radius:10px}
       .site-nav .links a:hover{background:#f1f5f9}
@@ -104,7 +106,7 @@
       .site-nav{border-radius:20px;padding:10px 12px}
     }
 
-    header.hero{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin:12px 0}
+    header.hero{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin:32px 0 12px}
     header .h1{font-size:26px;line-height:1.2;margin:0 0 8px;font-weight:800}
     header .sub{color:var(--muted);font-size:15px;margin-bottom:16px}
     .badges{display:flex;gap:10px;flex-wrap:wrap}
