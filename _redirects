@@ -1,4 +1,6 @@
-# Pretty blog slugs to dated HTML files
+# Pretty blog slugs to dated HTML files.
+# Keep in sync with the latest entries emitted by 033-blog-auto-committer
+# (blogs.json -> content_url).
 /blog/your-guide-to-debt-relief-navigating-debt-consolidation-and-settlement.html /blog/2025-08-07-your-guide-to-debt-relief-navigating-debt-consolidation-and-settlement.html 301
 /blog/debt-relief-your-path-to-financial-freedom.html /blog/2025-08-03-debt-relief-your-path-to-financial-freedom.html 301
 
