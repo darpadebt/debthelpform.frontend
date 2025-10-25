@@ -129,21 +129,28 @@
         const res=await fetch('/blogs.json',{cache:'no-store'});
         if(!res.ok) throw new Error('Failed to load blogs');
         const list=await res.json();
-        const posts=(Array.isArray(list)?list:[]).filter(p=>p && (!p.site || p.site==='debthelpform'));
+        const posts=(Array.isArray(list)?list:[])
+          .filter(p=>p && (!p.site || p.site==='debthelpform'))
+          .sort((a,b)=>{
+            const da=new Date(a.date_published||a.published_at||0).getTime();
+            const db=new Date(b.date_published||b.published_at||0).getTime();
+            return isNaN(db)-isNaN(da) || db-da;
+          });
         if(!posts.length){
           empty.style.display='block';
           return;
         }
         grid.innerHTML=posts.map(p=>{
-          const href=p.url||(p.slug?`/blog/${p.slug}.html`:'#');
-          const date=p.date_published?new Date(p.date_published).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'}):'';
+          const href=p.url||p.content_url||(p.slug?`/blog/${p.slug}.html`:'#');
+          const displayDate=p.date_published||p.published_at;
+          const date=displayDate?new Date(displayDate).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'}):'';
           const img=p.image||p.thumbnail||'/og-cover.jpg';
           const title=p.title||'Untitled';
           const ex=p.excerpt||'';
           const tags=Array.isArray(p.tags)?p.tags.slice(0,3):[];
           const tagMarkup=tags.length?` · ${tags.join(' · ')}`:'';
           return `<article class="card">
-            <a href="${href}"><img alt="" src="${img}" loading="lazy" decoding="async"></a>
+            <a href="${href}"${p.content_url?` data-content-url="${p.content_url}"`:''}><img alt="" src="${img}" loading="lazy" decoding="async"></a>
             <div class="card-body">
               <h2><a href="${href}">${title}</a></h2>
               <div class="meta">${date}${tagMarkup}</div>
