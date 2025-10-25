@@ -1,0 +1,7 @@
+# Pretty blog slugs to dated HTML files
+/blog/your-guide-to-debt-relief-navigating-debt-consolidation-and-settlement.html /blog/2025-08-07-your-guide-to-debt-relief-navigating-debt-consolidation-and-settlement.html 301
+/blog/debt-relief-your-path-to-financial-freedom.html /blog/2025-08-03-debt-relief-your-path-to-financial-freedom.html 301
+
+# Blog index convenience routes
+/blog /blog.index.html 200
+/blog/ /blog.index.html 200
