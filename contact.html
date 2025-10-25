@@ -6,126 +6,430 @@
   <title>Contact Us | Debt Help Form</title>
   <meta name="description" content="Contact Debt Help Form — speak with a specialist about debt consolidation and settlement. Call 888‑437‑7141 or send a secure message." />
   <link rel="canonical" href="https://debthelpform.com/contact.html" />
-  <meta name="theme-color" content="#0a5cff" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <meta name="x-ai-optimizer-page" content="dhf:contact" />
   <style>
-    :root{--brand:#0a5cff;--brand2:#072a86;--bg:#0b1220;--card:#0f1730;--ink:#e6ecf8;--muted:#8aa3d3;--ok:#079455}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial}
+    :root{
+      --bg:#f8fafc;
+      --surface:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --brand:#0ea5e9;
+      --brand-2:#22c55e;
+      --ring:rgba(14,165,233,.25);
+      --radius:18px;
+      --shadow:0 10px 30px rgba(2,6,23,.08);
+      --callbar-h:0px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    body.nav-open{overflow:hidden}
     a{color:inherit}
-    .wrap{max-width:1080px;margin:0 auto;padding:0 16px}
-    header.top{position:sticky;top:0;z-index:60;background:rgba(11,18,32,.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
-    header .row{display:flex;align-items:center;gap:10px;padding:10px 0}
-    .brand{display:flex;align-items:center;gap:8px;font-weight:900;text-decoration:none}
-    .logo{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:linear-gradient(180deg,var(--brand),var(--brand2));font-size:12px}
-    nav.pills{display:flex;gap:8px}
-    .btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;text-decoration:none}
-    .btn.primary{background:linear-gradient(180deg,var(--brand),var(--brand2));color:white;box-shadow:0 6px 18px rgba(10,92,255,.35)}
-    .btn.ghost{background:transparent;color:var(--ink);border:1px solid rgba(255,255,255,.15)}
-    .call{margin-left:auto}
-    @media(max-width:640px){nav.pills{overflow-x:auto}nav.pills::-webkit-scrollbar{display:none}}
+    a:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:10px}
+    .shell{max-width:1000px;margin:0 auto;padding:10px 16px calc(120px + var(--callbar-h, 0px))}
 
-    .ftc{background:#0d1530;border-bottom:1px solid rgba(255,255,255,.06)}
-    .ftc .row{display:flex;align-items:center;gap:10px;padding:8px 0;color:#cfe0ff;font-size:13px}
-    .dot{width:6px;height:6px;border-radius:50%;background:#fff}
+    .site-nav{
+      position:sticky;
+      top:0;
+      margin-top:calc(10px + env(safe-area-inset-top, 0px));
+      z-index:1000;
+      background:rgba(255,255,255,.98);
+      backdrop-filter:saturate(120%) blur(6px);
+      border:1px solid #e2e8f0;
+      border-radius:24px;
+      padding:10px 14px;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:16px;
+      box-shadow:var(--shadow);
+    }
+    .site-nav .brand{
+      font-weight:800;
+      text-decoration:none;
+      color:var(--text);
+      font-size:17px;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex:0 0 auto;
+    }
+    .site-nav .brand img{height:52px;width:auto;display:block}
+    .site-nav .links{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex:1 1 auto;
+      flex-wrap:wrap;
+      margin-left:auto;
+      justify-content:flex-end;
+    }
+    .site-nav .links a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 12px;
+      border-radius:12px;
+      background:#f1f5f9;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:600;
+      font-size:14px;
+      border:1px solid #e2e8f0;
+      transition:background .15s ease,color .15s ease;
+    }
+    .site-nav .links a:hover{background:#e2e8f0}
+    .site-nav .links a.call{
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      color:#fff;
+      border-color:transparent;
+      font-weight:700;
+      box-shadow:0 8px 18px var(--ring);
+    }
+    .site-nav .links a.call:hover{opacity:.95}
+    .menu-toggle{
+      border:none;
+      background:#0f172a;
+      color:#fff;
+      border-radius:10px;
+      padding:8px 10px;
+      font-weight:700;
+      font-size:14px;
+      cursor:pointer;
+      display:none;
+      margin-left:auto;
+    }
+    .menu-toggle:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+    @media (max-width:860px){
+      .site-nav{flex-wrap:wrap;gap:10px}
+      .site-nav .links{order:3;width:100%;display:none;flex-direction:column;align-items:stretch;justify-content:flex-start;margin-left:0;border-radius:18px;background:#fff;padding:8px 4px;border:1px solid #e2e8f0;box-shadow:var(--shadow)}
+      .site-nav .links.open{display:flex}
+      .site-nav .links a{justify-content:flex-start;font-size:15px;background:transparent;border:none;padding:10px 14px;border-radius:10px}
+      .site-nav .links a:hover{background:#f1f5f9}
+      .site-nav .links a.call{justify-content:center;border:none}
+      .menu-toggle{display:inline-flex;align-items:center;gap:6px}
+    }
+    @media (max-width:640px){
+      .site-nav{border-radius:20px;padding:10px 12px}
+    }
 
-    .card{background:linear-gradient(180deg,var(--card),#111a35);border:1px solid rgba(255,255,255,.08);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.35)}
-    .pad{padding:16px}
-    h1{font-size:clamp(22px,4.5vw,36px);line-height:1.2;margin:0 0 8px;text-align:center}
-    .sub{color:var(--muted);font-size:15px;text-align:center;margin:0 0 12px}
-    .row2{display:grid;gap:10px}
-    @media(min-width:720px){.row2{grid-template-columns:1fr 1fr}}
-    label{font-weight:800;font-size:.95rem}
-    input,textarea{width:100%;background:#0b142b;color:#e8f2ff;border:1px solid rgba(255,255,255,.15);border-radius:10px;padding:.7rem .8rem}
-    textarea{min-height:120px}
-    .btn.submit{background:var(--brand);color:#fff;border:none;border-radius:10px;padding:.8rem 1rem;font-weight:900;text-align:center;cursor:pointer}
-    .trust{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;color:#c9d6f5;font-size:13px;margin:20px 0}
-    .trust a[href^="tel:"]{color:#ffdd00;text-decoration:underline;font-weight:900}
-    footer{padding:22px 0;color:#9db2e2}
+    main.page{display:block}
+    .page-header{
+      background:var(--surface);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:26px 26px 28px;
+      margin:32px 0 18px;
+    }
+    .page-header h1{
+      font-size:32px;
+      line-height:1.2;
+      margin:0 0 8px;
+      font-weight:800;
+    }
+    .page-header p{margin:0 0 18px;color:var(--muted);font-size:15px}
+    .page-header .buttons{display:flex;flex-wrap:wrap;gap:10px}
+
+    .button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 18px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:15px;
+      text-decoration:none;
+      transition:transform .15s ease,box-shadow .15s ease,opacity .15s ease;
+    }
+    .button.primary{
+      background:linear-gradient(90deg,var(--brand),#38bdf8);
+      color:#fff;
+      border:none;
+      box-shadow:0 8px 18px var(--ring);
+    }
+    .button.primary:active{transform:translateY(1px)}
+    .button.ghost{
+      background:#e2f2fb;
+      color:#0369a1;
+      border:1px solid #bae6fd;
+    }
+
+    .page-card{
+      background:var(--surface);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:24px 26px;
+      margin:18px 0;
+    }
+    .page-card h2{margin-top:0;margin-bottom:12px;font-size:24px}
+    .page-card p{margin:0 0 14px;color:var(--muted)}
+    .page-card a{color:var(--brand);font-weight:600;text-decoration:none}
+    .page-card a:hover{text-decoration:underline}
+
+    form{display:grid;gap:16px;margin-top:14px}
+    .form-grid{display:grid;gap:12px}
+    @media (min-width:720px){.form-grid{grid-template-columns:1fr 1fr}}
+    label{font-weight:700;font-size:15px;color:var(--text);display:block;margin-bottom:6px}
+    input,textarea{
+      width:100%;
+      padding:12px 14px;
+      border:1px solid #e2e8f0;
+      border-radius:12px;
+      font-size:16px;
+      background:#fff;
+      color:var(--text);
+      transition:border-color .15s ease,box-shadow .15s ease;
+    }
+    textarea{min-height:140px;resize:vertical}
+    input:focus,textarea:focus{outline:none;border-color:#38bdf8;box-shadow:0 0 0 4px var(--ring)}
+    .button.submit{
+      border:none;
+      cursor:pointer;
+    }
+    #formMsg{min-height:1.2em;font-size:14px;color:var(--muted)}
+
+    .footer-sticky{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      background:rgba(255,255,255,.98);
+      backdrop-filter:saturate(120%) blur(6px);
+      border-top:1px solid #e2e8f0;
+      padding:10px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      box-shadow:0 -10px 30px rgba(2,6,23,.05);
+    }
+    .trust{display:flex;align-items:center;gap:8px;color:#0369a1;font-weight:600;font-size:13px}
+    .callnow{
+      font-weight:800;
+      color:#fff;
+      background:var(--brand-2);
+      border:none;
+      border-radius:999px;
+      padding:10px 14px;
+      text-decoration:none;
+      box-shadow:0 8px 18px rgba(34,197,94,.25);
+    }
+    .callnow:hover{opacity:.95}
+
+    .site-footer{
+      text-align:center;
+      margin:48px 0 24px;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .site-footer a{color:var(--brand);font-weight:600;text-decoration:none}
+    .site-footer a:hover{text-decoration:underline}
+
+    @media (max-width:640px){
+      .page-header{padding:22px}
+      .page-header h1{font-size:26px}
+      .button{width:100%}
+      .page-card{padding:20px}
+    }
   </style>
 </head>
 <body>
-  <header class="top">
-    <div class="wrap"><div class="row">
-      <a class="brand" href="/"><span class="logo">DHF</span><span>Debt Help Form</span></a>
-      <nav class="pills" aria-label="Primary">
-        <a class="btn ghost" href="/">Home</a>
-        <a class="btn ghost" href="/relief.html">Relief Options</a>
-        <a class="btn ghost" href="/faq.html">FAQ</a>
-        <a class="btn ghost" href="/debthelpform-pages-blog.html">Blog</a>
-        <a class="btn ghost" href="/contact.html" aria-current="page">Contact</a>
-      </nav>
-      <div class="call"><a class="btn primary" href="tel:+18884377141">Call</a></div>
-    </div></div>
-    <div class="ftc"><div class="wrap"><div class="row"><div class="dot"></div> FTC‑aligned • No upfront fees • Transparent savings estimates</div></div></div>
-  </header>
-
-  <main class="wrap" style="padding:16px 0 24px">
-    <aside class="card pad">
-      <h1>Contact Debt Help Form</h1>
-      <p class="sub">Call us now or send a secure message. Prefer the phone? 📞 888‑437‑7141</p>
-
-      <div class="trust">
-        <a class="btn primary" href="tel:+18884377141">📞 Call 888‑437‑7141</a>
-        <a class="btn ghost" href="/#get-started">🔒 Start Secure Estimate</a>
+  <div class="shell">
+    <nav class="site-nav" role="navigation" aria-label="Primary">
+      <a class="brand" href="/" aria-label="Gateway Debt Help">
+        <img src="/gatewaylego.webp" alt="Gateway Debt Help logo" loading="lazy" />
+      </a>
+      <button class="menu-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
+      <div class="links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/relief.html">Relief Options</a>
+        <a href="/about.html">About</a>
+        <a href="/faq.html">FAQ</a>
+        <a href="/debthelpform-pages-blog.html">Blog</a>
+        <a href="/blog.index.html">Blog Index</a>
+        <a href="/calculator.savings.html">Debt Calculator</a>
+        <a href="/contact.html" aria-current="page">Contact</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a class="call" href="tel:+18884377141">Call +1 (888) 437‑7141</a>
       </div>
+    </nav>
 
-      <form id="contactForm">
-        <div class="row2">
-          <div><label for="name">Your Name</label><input id="name" required /></div>
-          <div><label for="email">Email</label><input id="email" type="email" required /></div>
+      <main class="page" id="main">
+      <header class="page-header">
+        <h1>Contact Debt Help Form</h1>
+        <p>Call us now or send a secure message. Prefer the phone? 888‑437‑7141.</p>
+        <div class="buttons">
+          <a class="button primary" data-role="estimate" href="/#get-started">🔒 Start Secure Estimate</a>
+          <a class="button ghost" data-role="call" href="tel:+18884377141">📞 Call 888‑437‑7141</a>
         </div>
-        <div class="row2">
-          <div><label for="phone">Phone</label><input id="phone" inputmode="tel" placeholder="(555) 555‑5555" /></div>
-          <div><label for="topic">Topic</label><input id="topic" placeholder="Estimate, Billing, Other" /></div>
-        </div>
-        <div><label for="message">Message</label><textarea id="message" required></textarea></div>
-        <p class="sub">By contacting us, you agree to our <a href="/privacy.html">Privacy Policy</a>. We never sell your information.</p>
-        <button type="submit" class="btn submit">Send Message</button>
-        <div id="formMsg" role="status" style="min-height:1.2em;margin-top:8px"></div>
-      </form>
-    </aside>
-  </main>
+        </header>
 
-  <footer>
-    <div class="wrap">
-      <p class="mini">© <span id="y"></span> DebtHelpForm.com — a service of Gateway Financial Settlement Relief, LLC (GFSR). Not affiliated with “Gateway Debt Relief” of Costa Mesa, CA.</p>
-      <div class="trust" style="margin-top:8px">
-        <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener">BBB Profile — <strong>A– rating</strong></a>
-        <span>•</span>
-        <a href="tel:+18884377141" style="color:#ffdd00;font-weight:900;text-decoration:underline">📞 888‑437‑7141</a>
-      </div>
-      <div class="wrap" style="padding-top:8px">
-        <p class="mini">Our network: 
-          <a href="https://debthelpform.com/" target="_blank" rel="noopener">DebtHelpForm.com</a> • 
-          <a href="https://debtreliefguard.com/" target="_blank" rel="noopener">DebtReliefGuard.com</a> • 
-          <a href="https://gatewaydebthelp.com/" target="_blank" rel="noopener">GatewayDebtHelp.com</a> • 
-          <a href="https://gatewayfinancialsettlementrelief.com/" target="_blank" rel="noopener">Gateway Financial Settlement Relief, LLC</a>
-        </p>
-      </div>
+  <section class="page-card" aria-label="Contact form">
+        <h2>Send us a secure message</h2>
+        <p>Prefer writing? Share a few details below and we’ll respond promptly.</p>
+        <form id="contactForm">
+          <div class="form-grid">
+            <div>
+              <label for="name">Your Name</label>
+              <input id="name" required />
+            </div>
+            <div>
+              <label for="email">Email</label>
+              <input id="email" type="email" required />
+            </div>
+          </div>
+          <div class="form-grid">
+            <div>
+              <label for="phone">Phone</label>
+              <input id="phone" inputmode="tel" placeholder="(555) 555‑5555" />
+            </div>
+            <div>
+              <label for="topic">Topic</label>
+              <input id="topic" placeholder="Estimate, Billing, Other" />
+            </div>
+          </div>
+          <div>
+            <label for="message">Message</label>
+            <textarea id="message" required></textarea>
+          </div>
+          <p>By contacting us, you agree to our <a href="/privacy.html">Privacy Policy</a>. We never sell your information.</p>
+          <button type="submit" class="button primary submit">Send Message</button>
+          <div id="formMsg" role="status"></div>
+        </form>
+      </section>
+    </main>
+  </div>
+
+  <div class="footer-sticky">
+    <div class="trust">🔒 Secure & Confidential</div>
+    <a class="callnow" data-role="call" href="tel:+18884377141">Call Now</a>
+    <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener nofollow" class="muted" style="font-size:12px;text-decoration:none">BBB Profile</a>
+  </div>
+
+  <footer class="site-footer">
+    <div class="muted">
+      © <span id="y"></span> DebtHelpForm.com — a service of Gateway Financial Settlement Relief, LLC (GFSR). Not affiliated with “Gateway Debt Relief” of Costa Mesa, CA.
+      <span style="margin-left:6px">•</span>
+      <a href="/privacy.html">Privacy</a>
+      <span>•</span>
+      <a href="/terms.html">Terms</a>
+      <span>•</span>
+      <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener nofollow">BBB Profile (A–)</a>
     </div>
   </footer>
 
-  <!-- ONLY 036 send + receive -->
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+    (function(){
+      const toggle = document.getElementById('navToggle');
+      const links  = document.getElementById('navLinks');
+      if(!toggle || !links) return;
+      function setOpen(open){
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        links.classList.toggle('open', open);
+        document.body.classList.toggle('nav-open', open);
+      }
+      toggle.addEventListener('click', () => {
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        setOpen(!isOpen);
+      });
+      links.addEventListener('click', (event) => {
+        const target = event.target;
+        if(target instanceof HTMLElement && target.tagName === 'A'){
+          setOpen(false);
+        }
+      });
+      document.addEventListener('click', (event) => {
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        if(!isOpen) return;
+        if(event.target instanceof Node && !links.contains(event.target) && event.target !== toggle){
+          setOpen(false);
+        }
+      });
+      document.addEventListener('keydown', (event) => {
+        if(event.key === 'Escape'){
+          setOpen(false);
+        }
+      });
+      window.matchMedia('(min-width: 861px)').addEventListener('change', (mq) => {
+        if(mq.matches){
+          setOpen(false);
+        }
+      });
+    })();
+  </script>
+  <script>
+    (function(){
+      const root = document.documentElement;
+      const bar = document.querySelector('.footer-sticky');
+      function setHeight(){
+        const h = bar ? bar.offsetHeight : 0;
+        root.style.setProperty('--callbar-h', h + 'px');
+      }
+      setHeight();
+      window.addEventListener('resize', setHeight, {passive:true});
+    })();
+  </script>
+  <script>
+    (() => {
+      function send(name, data){
+        try{
+          const blob = new Blob([JSON.stringify({ name, ts:Date.now(), ...data })],{type:'application/json'});
+          if(navigator.sendBeacon) navigator.sendBeacon('/ingest', blob);
+          else fetch('/ingest',{ method:'POST', body:blob, keepalive:true, headers:{'Content-Type':'application/json'} }).catch(() =>{});
+        }catch{}
+      }
+      document.addEventListener('click', (event) => {
+        const target = event.target.closest('a,button');
+        if(!target) return;
+        if(target.matches('[data-role="estimate"]')) send('cta:start_click', { url: location.href });
+        if(target.matches('[data-role="call"]') || target.matches('a[href^="tel:"]')) send('cta:call_click', { url: location.href });
+      }, { passive:true });
+    })();
+  </script>
   <script>
     document.addEventListener('DOMContentLoaded', async function(){
       const ENDPOINTS={ thirtysix:{ingest:'/api/mesh/036-lead-router/ingest',config:'/api/mesh/036-lead-router/config'} };
-      // send: pageview
-      try{ navigator.sendBeacon && navigator.sendBeacon(ENDPOINTS.thirtysix.ingest,new Blob([JSON.stringify({event:'page_view',site:'DHF',page:'contact',ts:Date.now()})],{type:'application/json'})); }catch(_){ }
-      // receive: config (optional headline/cta overrides)
+      try{
+        if(navigator.sendBeacon){
+          navigator.sendBeacon(ENDPOINTS.thirtysix.ingest,new Blob([JSON.stringify({event:'page_view',site:'DHF',page:'contact',ts:Date.now()})],{type:'application/json'}));
+        }
+      
       try{
         const r = await fetch(ENDPOINTS.thirtysix.config,{headers:{'Accept':'application/json'},cache:'no-store'});
-        if(r.ok){ const data=await r.json().catch(()=>null); const man=data?.config?.manifest||null; if(man){
-          const h=document.querySelector('h1'); if(h && man.hero) h.textContent=man.hero;
-        }}
+        if(r.ok){
+          const data=await r.json().catch(()=>null);
+          const man=data?.config?.manifest||null;
+          if(man){
+            const h=document.querySelector('.page-header h1');
+            if(h && man.hero) h.textContent=man.hero;
+          }
+        }
       }catch(_){ }
       const form=document.getElementById('contactForm');
-      if(form) form.addEventListener('submit',async e=>{e.preventDefault();
+      if(form) form.addEventListener('submit',async e=>{
+        e.preventDefault();
         const payload={event:'contact_submit',site:'DHF',page:'contact',name:document.getElementById('name').value,email:document.getElementById('email').value,phone:document.getElementById('phone').value,topic:document.getElementById('topic').value,message:document.getElementById('message').value,ts:Date.now()};
-        try{ const r=await fetch(ENDPOINTS.thirtysix.ingest,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload),keepalive:true});
+        try{
+          const r=await fetch(ENDPOINTS.thirtysix.ingest,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload),keepalive:true});
           document.getElementById('formMsg').textContent=r.ok?"✅ Message sent! We’ll reply soon.":"❌ Error sending message.";
-        }catch(err){ document.getElementById('formMsg').textContent="❌ Error sending message."; }
+        }catch(err){
+          document.getElementById('formMsg').textContent="❌ Error sending message.";
+        }
       });
-      const y=document.getElementById('y'); if(y) y.textContent=new Date().getFullYear();
+      
     });
   </script>
 </body>
