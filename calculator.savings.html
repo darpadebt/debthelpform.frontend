@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <!-- Charset & Viewport -->
+
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
@@ -11,7 +11,6 @@
   <meta name="robots" content="index,follow,max-image-preview:large" />
   <link rel="canonical" href="https://debthelpform.com/calculator.savings.html" />
 
-  <!-- Open Graph / Twitter -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://debthelpform.com/calculator.savings.html" />
   <meta property="og:title" content="Debt Savings Calculator — Estimate Monthly Payment & Payoff" />
@@ -23,245 +22,536 @@
   <meta name="twitter:description" content="Fast, private, and compliant. See a plan in minutes." />
   <meta name="twitter:image" content="https://debthelpform.com/og-cover.jpg" />
 
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 
-  <!-- Breadcrumbs -->
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[
-    {"@type":"ListItem","position":1,"name":"Home","item":"https://debthelpform.com/"},
-    {"@type":"ListItem","position":2,"name":"Calculator","item":"https://debthelpform.com/calculator.savings.html"}
-  ]}
-  </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://debthelpform.com/"},{"@type":"ListItem","position":2,"name":"Calculator","item":"https://debthelpform.com/calculator.savings.html"}]} </script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":["Organization","FinancialService"],"@id":"https://gatewaydebthelp.com/#gfsr","name":"Gateway Financial Settlement Relief, LLC","legalName":"Gateway Financial Settlement Relief, LLC","alternateName":["Gateway Debt Help","GFSR"],"url":"https://gatewaydebthelp.com/","logo":"https://debthelpform.com/og-cover.jpg","telephone":"+1-888-437-7141","areaServed":{"@type":"Country","name":"United States"},"sameAs":["https://debthelpform.com/","https://debtreliefguard.com/","https://gatewaydebthelp.com/"],"disambiguatingDescription":"Not affiliated with Gateway Debt Relief of Costa Mesa, CA."}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","url":"https://debthelpform.com/","name":"DebtHelpForm","publisher":{"@id":"https://gatewaydebthelp.com/#gfsr"}}</script>
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Debt Savings Calculator","url":"https://debthelpform.com/calculator.savings.html","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}} </script>
 
-  <!-- Organization / FinancialService -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":["Organization","FinancialService"],
-    "@id":"https://gatewaydebthelp.com/#gfsr",
-    "name":"Gateway Financial Settlement Relief, LLC",
-    "legalName":"Gateway Financial Settlement Relief, LLC",
-    "alternateName":["Gateway Debt Help","GFSR"],
-    "url":"https://gatewaydebthelp.com/",
-    "logo":"https://debthelpform.com/og-cover.jpg",
-    "telephone":"+1-888-437-7141",
-    "areaServed":{"@type":"Country","name":"United States"},
-    "sameAs":["https://debthelpform.com/","https://debtreliefguard.com/","https://gatewaydebthelp.com/"],
-    "disambiguatingDescription":"Not affiliated with Gateway Debt Relief of Costa Mesa, CA."
-  }
-  </script>
-
-  <!-- WebSite schema -->
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"WebSite","url":"https://debthelpform.com/","name":"DebtHelpForm","publisher":{"@id":"https://gatewaydebthelp.com/#gfsr"}}
-  </script>
-
-  <!-- WebApplication descriptor for the calculator -->
-  <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"WebApplication","name":"Debt Savings Calculator","url":"https://debthelpform.com/calculator.savings.html","applicationCategory":"FinanceApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"}}
-  </script>
-
-  <style>
-    :root{
-      --ink:#222; --bg:#f9fafe; --brand:#004477; --brand-2:#003057;
-      --cta:#0b63f6; --ok:#007b55; --card:#fff; --card-b:#e5e7eb;
-      --shadow:0 10px 30px rgba(0,0,0,.12); --callbar-h:64px; --sitemap-h:52px;
-      --chat-shadow:0 10px 30px rgba(0,0,0,.18); --chat-border:1px solid rgba(0,0,0,.06);
-    }
-    *{box-sizing:border-box} html,body{margin:0;padding:0}
-    body{font-family:'Inter',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.55;padding-top:78px;padding-bottom:calc(var(--sitemap-h) + 14px)}
-    .container{max-width:820px;margin:1.25rem auto;background:#fff;border:1px solid var(--card-b);border-radius:12px;padding:1.25rem;box-shadow:0 2px 12px rgba(0,0,0,.06)}
-    h1{margin:.2rem 0 .4rem;font-size:clamp(1.6rem,3vw + 1rem,2.1rem);font-weight:800;text-align:center}
-    .sub{margin:0 0 1rem;text-align:center;color:#444}
-    label{font-weight:700;display:block;margin-top:.6rem}
-    input,select{width:100%;padding:.65rem;border:1px solid #d1d5db;border-radius:10px;margin-top:.35rem}
-    .btn{display:inline-flex;align-items:center;justify-content:center;gap:.4rem;border-radius:10px;padding:.7rem 1.05rem;font-weight:800;text-decoration:none;cursor:pointer}
-    .btn-primary{background:var(--cta);color:#fff;box-shadow:var(--shadow);border:none}
-    .btn-outline{background:transparent;color:#0b63f6;border:2px solid #0b63f6}
-    .result{margin-top:1.25rem;background:#f1f5f9;border:1px solid #e2e8f0;border-radius:10px;padding:1rem}
-    .hidden{display:none}
-
-    /* Accessibility helper */
-    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-    .sr-only:focus{position:fixed;left:12px;top:12px;padding:.5rem .75rem;background:#000;color:#fff;z-index:10000;border-radius:6px}
-
-    /* Top nav */
-    .sticky-nav{position:fixed;top:0;left:0;right:0;background:var(--brand-2);z-index:9999;box-shadow:0 2px 5px rgba(0,0,0,.08)}
-    .sticky-nav ul{display:flex;gap:.75rem;margin:0;padding:.75rem 1rem;list-style:none;overflow-x:auto;white-space:nowrap}
-    .sticky-nav a{color:#fff;text-decoration:none;font-weight:600;padding:.4rem .6rem;border-radius:6px}
-    .sticky-nav a:hover,.sticky-nav a:focus{text-decoration:underline;outline:none}
-
-    /* Hero (readability bump) */
-    header{max-width:960px;margin:0 auto;text-align:center;background:#004477;color:#fff;padding:1.35rem 1rem;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,.08)}
-    header .badge{display:inline-flex;gap:.35rem;align-items:center;justify-content:center;background:#0f172a;color:#f1f5f9;border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:.35rem .6rem;font-size:.82rem}
-    header h1{color:#fff;text-shadow:0 1px 0 rgba(0,0,0,.15)}
-    header p{color:#f5f9ff !important;text-shadow:0 1px 0 rgba(0,0,0,.15)}
-
-    /* Mobile dual-action bar */
-    .mobile-bar{position:fixed;left:0;right:0;bottom:0;background:#0b1220;color:#fff;display:flex;gap:8px;padding:.6rem;z-index:10000}
-    .mobile-bar a{flex:1;text-align:center;border-radius:10px;padding:.75rem .5rem;font-weight:900;text-decoration:none}
-    .mobile-call{background:var(--ok);color:#fff}
-    .mobile-est{background:#0b63f6;color:#fff}
-    @media (min-width:769px){.mobile-bar{display:none}}
-
-    /* Bottom sitemap */
-    .sticky-menu{position:fixed;left:0;right:0;bottom:calc(var(--callbar-h) + env(safe-area-inset-bottom));background:#004488;color:#fff;border-top:2px solid var(--cta);height:var(--sitemap-h);display:flex;align-items:center;z-index:9997}
-    @media (min-width:769px){.sticky-menu{bottom:0}}
-    .sticky-menu nav{display:flex;gap:1rem;overflow-x:auto;padding:0 .75rem;width:100%;align-items:center;scrollbar-width:none}
-    .sticky-menu nav::-webkit-scrollbar{display:none}
-    .sticky-menu nav a{color:#ffdd00;text-decoration:none;padding:.35rem .55rem;border-radius:6px;font-weight:700;font-size:.92rem;flex:0 0 auto}
-    .sticky-menu nav a:hover,.sticky-menu nav a:focus{background:rgba(255,255,255,.1);outline:none}
-
-    /* Chat FAB */
-    .gfsr-chat-fab{position:fixed;right:14px;bottom:calc(var(--callbar-h) + var(--sitemap-h) + 14px);background:var(--cta);color:#fff;padding:.8rem 1rem;border-radius:999px;border:var(--chat-border);box-shadow:var(--chat-shadow);z-index:10003;font:600 14px/1.1 system-ui,-apple-system,Segoe UI,Roboto,Arial}
-
-    /* ✅ Chat sheet styles (missing before) */
-    .gfsr-chat-sheet{
-      position:fixed; inset:auto 0 0 0; margin:auto; width:100%; max-width:420px;
-      right:12px; left:auto; border-radius:18px 18px 0 0; background:#fff;
-      box-shadow:var(--chat-shadow); transform:translateY(110%); transition:transform .28s ease;
-      border:var(--chat-border); z-index:10004
-    }
-    .gfsr-chat-sheet.open{ transform:translateY(0) }
-    .gfsr-chat-head{display:flex;align-items:center;justify-content:space-between;padding:12px 14px;border-bottom:1px solid rgba(0,0,0,.06);background:#f9fafb;border-radius:inherit}
-    .gfsr-chat-body{display:flex;flex-direction:column;gap:8px;padding:12px;height:min(70vh,520px);overflow:auto;-webkit-overflow-scrolling:touch}
-    .gfsr-chat-input{display:flex;gap:8px;padding:10px;border-top:1px solid rgba(0,0,0,.06);background:#fff;border-radius:0 0 18px 18px}
-    .gfsr-chat-input textarea{flex:1;resize:none;min-height:42px;max-height:120px;padding:10px 12px;border:1px solid #e5e7eb;border-radius:12px;font-size:14px;line-height:1.35}
-    .gfsr-chat-send{background:#0b63f6;color:#fff;border:none;padding:12px 14px;border-radius:12px;font-weight:700}
-    .gfsr-msg{max-width:88%;padding:10px 12px;border-radius:14px;font-size:14px;line-height:1.35}
-    .gfsr-msg.user{margin-left:auto;background:#0b63f6;color:#fff;border-top-right-radius:4px}
-    .gfsr-msg.bot{background:#eef2ff;color:#111;border-top-left-radius:4px}
-    .gfsr-msg.meta{background:#f3f4f6;color:#444;font-size:12px;margin:4px auto}
-  </style>
-
-  <!-- 015/050: A/B + Optimizer page identity (non-visual) -->
   <meta name="x-ai-optimizer-page" content="dhf:calc" />
   <script>
     window.__ab = {
       pageKey: 'dhf:calc',
       slots: {
-        headline:  '#ab-cta-text',
-        primaryCta: '.btn.btn-primary',
-        phoneCta:   '.btn.btn-outline'
+        headline: '.page-header h1',
+        primaryCta: '.page-header .button.primary',
+        phoneCta: '.page-header .button.ghost'
       },
       defaults: {
         primaryCtaText: '🔒 Start Secure Estimate',
-        primaryCtaHref: '#lead-form'
+        primaryCtaHref: '/#get-started'
       }
     };
   </script>
+
+  <style>
+    :root{
+      --bg:#f8fafc;
+      --surface:#ffffff;
+      --text:#0f172a;
+      --muted:#475569;
+      --brand:#0ea5e9;
+      --brand-2:#22c55e;
+      --ring:rgba(14,165,233,.25);
+      --radius:18px;
+      --shadow:0 10px 30px rgba(2,6,23,.08);
+      --callbar-h:0px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+      background:var(--bg);
+      color:var(--text);
+      line-height:1.55;
+    }
+    body.nav-open{overflow:hidden}
+    a{color:inherit}
+    a:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:10px}
+    .shell{max-width:1000px;margin:0 auto;padding:10px 16px calc(120px + var(--callbar-h, 0px))}
+
+    .skip-link{
+      position:absolute;
+      left:-999px;
+      top:auto;
+      width:1px;
+      height:1px;
+      overflow:hidden;
+      white-space:nowrap;
+    }
+    .skip-link:focus{
+      left:16px;
+      top:16px;
+      width:auto;
+      height:auto;
+      padding:10px 14px;
+      background:#0f172a;
+      color:#fff;
+      border-radius:12px;
+      z-index:10000;
+      box-shadow:0 10px 30px rgba(15,23,42,.25);
+    }
+
+    .site-nav{
+      position:sticky;
+      top:0;
+      margin-top:calc(10px + env(safe-area-inset-top, 0px));
+      z-index:1000;
+      background:rgba(255,255,255,.98);
+      backdrop-filter:saturate(120%) blur(6px);
+      border:1px solid #e2e8f0;
+      border-radius:24px;
+      padding:10px 14px;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      margin-bottom:16px;
+      box-shadow:var(--shadow);
+    }
+    .site-nav .brand{
+      font-weight:800;
+      text-decoration:none;
+      color:var(--text);
+      font-size:17px;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex:0 0 auto;
+    }
+    .site-nav .brand img{height:52px;width:auto;display:block}
+    .site-nav .links{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex:1 1 auto;
+      flex-wrap:wrap;
+      margin-left:auto;
+      justify-content:flex-end;
+    }
+    .site-nav .links a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 12px;
+      border-radius:12px;
+      background:#f1f5f9;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:600;
+      font-size:14px;
+      border:1px solid #e2e8f0;
+      transition:background .15s ease,color .15s ease;
+    }
+    .site-nav .links a:hover{background:#e2e8f0}
+    .site-nav .links a[aria-current="page"]{background:#e0f2fe;color:#0369a1;border-color:#bae6fd}
+    .site-nav .links a.call{
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      color:#fff;
+      border-color:transparent;
+      font-weight:700;
+      box-shadow:0 8px 18px var(--ring);
+    }
+    .site-nav .links a.call:hover{opacity:.95}
+    .menu-toggle{
+      border:none;
+      background:#0f172a;
+      color:#fff;
+      border-radius:10px;
+      padding:8px 10px;
+      font-weight:700;
+      font-size:14px;
+      cursor:pointer;
+      display:none;
+      margin-left:auto;
+    }
+    .menu-toggle:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+    @media (max-width:860px){
+      .site-nav{flex-wrap:wrap;gap:10px}
+      .site-nav .links{order:3;width:100%;display:none;flex-direction:column;align-items:stretch;justify-content:flex-start;margin-left:0;border-radius:18px;background:#fff;padding:8px 4px;border:1px solid #e2e8f0;box-shadow:var(--shadow)}
+      .site-nav .links.open{display:flex}
+      .site-nav .links a{justify-content:flex-start;font-size:15px;background:transparent;border:none;padding:10px 14px;border-radius:10px}
+      .site-nav .links a:hover{background:#f1f5f9}
+      .site-nav .links a.call{justify-content:center;border:none}
+      .menu-toggle{display:inline-flex;align-items:center;gap:6px}
+    }
+    @media (max-width:640px){
+      .site-nav{border-radius:20px;padding:10px 12px}
+    }
+
+    main.page{display:block}
+    .page-header{
+      background:var(--surface);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:26px 26px 28px;
+      margin:32px 0 18px;
+    }
+    .page-header h1{
+      font-size:32px;
+      line-height:1.2;
+      margin:0 0 8px;
+      font-weight:800;
+    }
+    .page-header p{margin:0 0 18px;color:var(--muted);font-size:15px}
+    .page-header .buttons{display:flex;flex-wrap:wrap;gap:10px}
+    .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .badge{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      background:#e2f2fb;
+      color:#0369a1;
+      text-decoration:none;
+      font-weight:600;
+    }
+
+    .button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 18px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:15px;
+      text-decoration:none;
+      transition:transform .15s ease,box-shadow .15s ease,opacity .15s ease;
+    }
+    .button.primary{
+      background:linear-gradient(90deg,var(--brand),#38bdf8);
+      color:#fff;
+      border:none;
+      box-shadow:0 8px 18px var(--ring);
+    }
+    .button.primary:active{transform:translateY(1px)}
+    .button.ghost{
+      background:#e2f2fb;
+      color:#0369a1;
+      border:1px solid #bae6fd;
+    }
+
+    .page-card{
+      background:var(--surface);
+      border-radius:var(--radius);
+      box-shadow:var(--shadow);
+      padding:24px 26px;
+      margin:18px 0;
+    }
+    .page-card h2{margin-top:0;margin-bottom:12px;font-size:24px}
+    .page-card p{margin:0 0 14px;color:var(--muted)}
+    .page-card a{color:var(--brand);font-weight:600;text-decoration:none}
+    .page-card a:hover{text-decoration:underline}
+
+    .calculator-card{display:grid;gap:24px}
+    .calculator-lead{margin:0;color:var(--muted)}
+    .calculator-form{display:grid;gap:16px}
+    .field{display:flex;flex-direction:column;gap:6px}
+    label{font-weight:700;font-size:15px;color:var(--text)}
+    input,select{
+      width:100%;
+      padding:12px 14px;
+      border:1px solid #e2e8f0;
+      border-radius:12px;
+      font-size:16px;
+      background:#fff;
+      color:var(--text);
+      transition:border-color .15s ease,box-shadow .15s ease;
+      appearance:none;
+    }
+    select{background-image:url('data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="12" height="8" fill="none" viewBox="0 0 12 8"%3E%3Cpath fill="%230f172a" d="M10.59.59 6 5.17 1.41.59 0 2l6 6 6-6L10.59.59Z"/%3E%3C/svg%3E');background-repeat:no-repeat;background-position:right 12px center;background-size:12px}
+    input:focus,select:focus{outline:none;border-color:#38bdf8;box-shadow:0 0 0 4px var(--ring)}
+    .form-note{font-size:14px;color:var(--muted)}
+
+    #results{display:grid;gap:18px}
+    #results[hidden]{display:none}
+    .result-card{
+      border:1px solid #e2e8f0;
+      border-radius:16px;
+      padding:18px 20px;
+      background:#f8fafc;
+    }
+    .result-card h3{margin:0 0 10px;font-size:18px;font-weight:700;color:var(--text)}
+    .result-card p{margin:0 0 12px;color:var(--muted)}
+    .result-metrics strong{display:block;font-size:18px;color:var(--text)}
+    .cta-row{display:flex;flex-wrap:wrap;gap:10px}
+    .cta-row .button{flex:1 1 180px;justify-content:center}
+
+    #lead-form{padding:22px 24px;background:#f9fafb;border:1px dashed #cbd5e1;border-radius:16px}
+    #lead-form h3{margin:0 0 12px;font-size:20px;color:var(--text)}
+    #ghl-embed{min-height:520px;border-radius:14px;overflow:hidden;background:#fff;display:flex;align-items:center;justify-content:center;color:#64748b;border:1px solid #e2e8f0}
+
+    .muted{color:var(--muted);font-size:13px}
+
+    .gfsr-chat-fab{
+      position:fixed;
+      right:18px;
+      bottom:calc(var(--callbar-h) + 18px);
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      color:#fff;
+      border:none;
+      border-radius:999px;
+      padding:12px 18px;
+      font-weight:700;
+      font-size:14px;
+      box-shadow:0 14px 30px rgba(14,165,233,.25);
+      cursor:pointer;
+      z-index:1100;
+    }
+    .gfsr-chat-fab:focus-visible{outline:2px solid #fff;outline-offset:2px}
+    .gfsr-chat-sheet{
+      position:fixed;
+      inset:auto 0 0 auto;
+      right:18px;
+      width:100%;
+      max-width:420px;
+      border-radius:20px 20px 0 0;
+      background:#fff;
+      box-shadow:0 -10px 40px rgba(2,6,23,.18);
+      transform:translateY(110%);
+      transition:transform .28s ease;
+      border:1px solid #e2e8f0;
+      z-index:1100;
+    }
+    .gfsr-chat-sheet.open{transform:translateY(0)}
+    .gfsr-chat-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid #e2e8f0;background:#f8fafc;border-radius:inherit}
+    .gfsr-chat-body{display:flex;flex-direction:column;gap:8px;padding:12px;height:min(70vh,520px);overflow:auto;-webkit-overflow-scrolling:touch}
+    .gfsr-chat-input{display:flex;gap:8px;padding:10px;border-top:1px solid #e2e8f0;background:#fff;border-radius:0 0 20px 20px}
+    .gfsr-chat-input textarea{flex:1;resize:none;min-height:42px;max-height:120px;padding:10px 12px;border:1px solid #e2e8f0;border-radius:12px;font-size:14px;line-height:1.35}
+    .gfsr-chat-send{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;border:none;padding:12px 14px;border-radius:12px;font-weight:700;cursor:pointer}
+    .gfsr-msg{max-width:88%;padding:10px 12px;border-radius:14px;font-size:14px;line-height:1.35}
+    .gfsr-msg.user{margin-left:auto;background:#0ea5e9;color:#fff;border-top-right-radius:4px}
+    .gfsr-msg.bot{background:#e0f2fe;color:#0f172a;border-top-left-radius:4px}
+    .gfsr-msg.meta{background:#e2e8f0;color:#475569;font-size:12px;margin:4px auto;border-radius:999px;padding:6px 10px}
+    @media (max-width:640px){
+      .gfsr-chat-fab{right:12px}
+      .gfsr-chat-sheet{right:0;left:0;margin:0 auto;max-width:none;border-radius:22px 22px 0 0}
+    }
+
+    .footer-sticky{
+      position:fixed;
+      left:0;
+      right:0;
+      bottom:0;
+      background:rgba(255,255,255,.98);
+      backdrop-filter:saturate(120%) blur(6px);
+      border-top:1px solid #e2e8f0;
+      padding:10px 14px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:8px;
+      box-shadow:0 -10px 30px rgba(2,6,23,.05);
+    }
+    .trust{display:flex;align-items:center;gap:8px;color:#0369a1;font-weight:600;font-size:13px}
+    .callnow{
+      font-weight:800;
+      color:#fff;
+      background:var(--brand-2);
+      border:none;
+      border-radius:999px;
+      padding:10px 14px;
+      text-decoration:none;
+      box-shadow:0 8px 18px rgba(34,197,94,.25);
+    }
+    .callnow:hover{opacity:.95}
+
+    .site-footer{
+      text-align:center;
+      margin:48px 0 24px;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .site-footer a{color:var(--brand);font-weight:600;text-decoration:none}
+    .site-footer a:hover{text-decoration:underline}
+
+    @media (max-width:640px){
+      .page-header{padding:22px}
+      .page-header h1{font-size:26px}
+      .button{width:100%}
+      .page-card{padding:20px}
+      .cta-row .button{flex:1 1 100%}
+    }
+  </style>
 </head>
 <body>
-  <a href="#main" class="sr-only">Skip to content</a>
-
-  <!-- Top nav (repo filenames; marks Calculator current) -->
-  <nav class="sticky-nav" role="navigation" aria-label="Main navigation">
-    <ul>
-      <li><a href="/" title="Home">Home</a></li>
-      <li><a href="#lead-form" title="Start Estimate">Start Estimate</a></li>
-      <li><a href="/calculator.savings.html" title="Savings Calculator" aria-current="page">Calculator</a></li>
-      <li><a href="/debthelpform-pages-blog.html" title="Blog">Blog</a></li>
-      <li><a href="/geo-debt-relief.html" title="State Programs">State Programs</a></li>
-      <li><a href="/relief.html" title="Debt Relief Options">Relief Options</a></li>
-      <li><a href="/faq.html" title="FAQ">FAQ</a></li>
-      <li><a href="/contact.html" title="Contact">Contact</a></li>
-      <li><a href="/privacy.html" title="Privacy">Privacy</a></li>
-      <li><a href="/terms.html" title="Terms">Terms</a></li>
-      <li><a href="tel:+18884377141" title="Call Now">📞 888-437-7141</a></li>
-      <li><a href="https://debtreliefguard.com" target="_blank" rel="noopener" title="DebtReliefGuard">DebtReliefGuard</a></li>
-      <li><a href="https://gatewaydebthelp.com" target="_blank" rel="noopener" title="GatewayDebtHelp">GatewayDebtHelp</a></li>
-    </ul>
-  </nav>
-
-  <!-- Hero -->
-  <header>
-    <span class="badge">🛡️ Secure • FTC-Aligned • No Upfront Fees</span>
-    <h1 id="ab-cta-text">Debt Savings Calculator — See a Plan Before You Commit</h1>
-    <p class="sub">Private, fast, and transparent. Estimate your monthly payment and timeline, then decide with confidence.</p>
-  </header>
-
-  <!-- Calculator -->
-  <main id="main">
-    <section class="container" aria-labelledby="calcTitle">
-      <h2 id="calcTitle" class="sub" style="font-weight:800;font-size:1.2rem">Estimate your plan in minutes</h2>
-      <p class="sub">No hard credit checks. Your inputs never leave this page.</p>
-
-      <form id="calculator-form" aria-describedby="calcNote">
-        <label for="debtAmount">Total Debt Amount (minimum $10,000)</label>
-        <input type="number" id="debtAmount" min="0" inputmode="decimal" placeholder="Enter your total unsecured debt" required />
-        <label for="accountCount">How many accounts is this spread across?</label>
-        <select id="accountCount" required>
-          <option value="">Select...</option>
-          <option value="1">1 Account</option>
-          <option value="2">2 Accounts</option>
-          <option value="3">3 or more Accounts</option>
-        </select>
-        <label for="currentMonthly">Your current monthly debt payment (estimated)</label>
-        <input type="number" id="currentMonthly" min="0" inputmode="decimal" placeholder="Optional — helps improve accuracy" />
-        <label for="interestRate">Your average interest rate (APR)</label>
-        <input type="number" id="interestRate" min="0" step="0.1" inputmode="decimal" placeholder="Optional — e.g., 18%" />
-        <button class="btn btn-primary" type="submit" aria-label="Calculate my estimate">Calculate My Estimate</button>
-        <p id="calcNote" class="sub" style="margin-top:.5rem;font-size:.9rem;color:#64748b">For education only; results are estimates and not guarantees.</p>
-      </form>
-
-      <div id="results" class="result hidden" aria-live="polite">
-        <h2 style="font-weight:800;margin:.2rem 0 .6rem">Your Estimated Debt Relief Plan</h2>
-        <p id="newPlan"></p>
-        <h3 style="font-weight:700;margin:1rem 0 .4rem">Your Current Path (Estimate)</h3>
-        <p id="currentPlan"></p>
-        <div style="display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-top:1rem">
-          <a class="btn btn-primary" href="#lead-form">🔒 Start Secure Estimate</a>
-          <a class="btn btn-outline" href="tel:+18884377141">📞 Talk to a Specialist</a>
-        </div>
-
-        <!-- Lead form embed directly below results -->
-        <section id="lead-form" style="margin-top:1.25rem;background:#fff;border:1px dashed #cbd5e1;border-radius:12px;padding:1rem">
-          <h3 style="margin:.2rem 0 .5rem;font-weight:800">Start your secure estimate</h3>
-          <div id="ghl-embed" style="min-height:520px;border-radius:12px;overflow:hidden;background:#f8fafc;display:flex;align-items:center;justify-content:center;color:#64748b">Loading secure form…</div>
-        </section>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <div class="shell">
+    <nav class="site-nav" role="navigation" aria-label="Primary">
+      <a class="brand" href="/" aria-label="Gateway Debt Help">
+        <img src="/gatewaylego.webp" alt="Gateway Debt Help logo" loading="lazy" />
+      </a>
+      <button class="menu-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
+      <div class="links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/relief.html">Relief Options</a>
+        <a href="/about.html">About</a>
+        <a href="/faq.html">FAQ</a>
+        <a href="/debthelpform-pages-blog.html">Blog</a>
+        <a href="/blog.index.html">Blog Index</a>
+        <a href="/calculator.savings.html" aria-current="page">Debt Calculator</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a class="call" href="tel:+18884377141">Call +1 (888) 437‑7141</a>
       </div>
-    </section>
-  </main>
+    </nav>
 
-  <!-- Mobile dual-action bar -->
-  <div id="dhpMobileBar" class="mobile-bar" aria-label="Quick actions">
-    <a class="mobile-call" href="tel:+18884377141">📞 Call 888-437-7141</a>
-    <a class="mobile-est" href="#lead-form">🔒 Start Secure Estimate</a>
+    <main class="page" id="main">
+      <header class="page-header">
+        <h1 id="ab-cta-text">Debt Savings Calculator — See a Plan Before You Commit</h1>
+        <p>Private, fast, and transparent. Estimate your monthly payment and timeline, then decide with confidence.</p>
+        <div class="buttons">
+          <a class="button primary" data-role="estimate" href="/#get-started">🔒 Start Secure Estimate</a>
+          <a class="button ghost" data-role="call" href="tel:+18884377141">📞 Call 888‑437‑7141</a>
+        </div>
+        <div class="badges">
+          <span class="badge">Secure & Confidential</span>
+          <span class="badge">No Upfront Fees</span>
+          <span class="badge">FTC‑Aligned Guidance</span>
+        </div>
+      </header>
+
+        <section class="page-card calculator-card" aria-labelledby="calcTitle">
+        <div>
+          <h2 id="calcTitle">Estimate your plan in minutes</h2>
+          <p class="calculator-lead">No hard credit checks. Your inputs never leave this page.</p>
+        </div>
+        <form id="calculator-form" class="calculator-form" aria-describedby="calcNote">
+          <div class="field">
+            <label for="debtAmount">Total Debt Amount (minimum $10,000)</label>
+            <input type="number" id="debtAmount" min="0" inputmode="decimal" placeholder="Enter your total unsecured debt" required />
+          </div>
+          <div class="field">
+            <label for="accountCount">How many accounts is this spread across?</label>
+            <select id="accountCount" required>
+              <option value="">Select…</option>
+              <option value="1">1 Account</option>
+              <option value="2">2 Accounts</option>
+              <option value="3">3 or more Accounts</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="currentMonthly">Your current monthly debt payment (estimated)</label>
+            <input type="number" id="currentMonthly" min="0" inputmode="decimal" placeholder="Optional — helps improve accuracy" />
+          </div>
+          <div class="field">
+            <label for="interestRate">Your average interest rate (APR)</label>
+            <input type="number" id="interestRate" min="0" step="0.1" inputmode="decimal" placeholder="Optional — e.g., 18%" />
+          </div>
+          <button class="button primary" type="submit" aria-label="Calculate my estimate">Calculate My Estimate</button>
+          <p id="calcNote" class="form-note">For education only; results are estimates and not guarantees.</p>
+        </form>
+
+        <div id="results" aria-live="polite" hidden>
+          <div class="result-card">
+            <h3>Your Estimated Debt Relief Plan</h3>
+            <p id="newPlan" class="result-metrics"></p>
+          </div>
+          <div class="result-card">
+            <h3>Your Current Path (Estimate)</h3>
+            <p id="currentPlan"></p>
+          </div>
+          <div class="cta-row">
+            <a class="button primary" data-role="estimate" href="/#get-started">🔒 Start Secure Estimate</a>
+            <a class="button ghost" data-role="call" href="tel:+18884377141">📞 Talk to a Specialist</a>
+          </div>
+          <section id="lead-form">
+            <h3>Ready for a private, no-pressure review?</h3>
+            <div id="ghl-embed">Loading secure form…</div>
+          </section>
+        </div>
+      </section>
+    </main>
   </div>
 
-  <!-- Bottom sitemap (global) -->
-  <footer class="sticky-menu" role="navigation" aria-label="Site map">
-    <nav>
-      <a href="/">Home</a>
-      <a href="#lead-form">Start Estimate</a>
-      <a href="/calculator.savings.html" aria-current="page">Calculator</a>
-      <a href="/debthelpform-pages-blog.html">Blog</a>
-      <a href="/geo-debt-relief.html">State Programs</a>
-      <a href="/relief.html">Debt Relief Options</a>
-      <a href="/faq.html">FAQ</a>
-      <a href="/contact.html">Contact</a>
-      <a href="/privacy.html">Privacy</a>
-      <a href="/terms.html">Terms</a>
-      <a href="https://debtreliefguard.com" target="_blank" rel="noopener">DebtReliefGuard.com</a>
-      <a href="https://gatewaydebthelp.com" target="_blank" rel="noopener">GatewayDebtHelp.com</a>
-    </nav>
-  </footer>
+  <button id="gfsrChatFab" class="gfsr-chat-fab" aria-haspopup="dialog" aria-expanded="false" aria-controls="gfsrChatSheet">💬 Chat</button>
+  <section id="gfsrChatSheet" class="gfsr-chat-sheet" role="dialog" aria-modal="true" hidden>
+    <header class="gfsr-chat-head">
+      <div class="gfsr-chat-title" style="font-weight:700;color:#0f172a">Debt Help Assistant</div>
+      <button id="gfsrChatClose" class="gfsr-chat-close" aria-label="Close chat" style="background:transparent;border:none;padding:8px;border-radius:10px;cursor:pointer">✕</button>
+    </header>
+    <div id="gfsrChatBody" class="gfsr-chat-body"></div>
+    <form id="gfsrChatForm" class="gfsr-chat-input">
+      <textarea id="gfsrChatInput" placeholder="Type a message…" aria-label="Message"></textarea>
+      <button id="gfsrChatSend" type="submit" class="gfsr-chat-send">Send</button>
+    </form>
+  </section>
 
-  <!-- Footer + legal -->
-  <footer style="max-width:960px;margin:1rem auto 5.5rem;text-align:center;color:#666">
-    <p>&copy; 2025 DebtHelpForm.com — Fast, Secure, No-Pressure Estimate.</p>
-    <div style="text-align:left;max-width:960px;margin:0 auto;font-size:.86rem;color:#6b7280;line-height:1.45">
-      <strong>Important Disclosures:</strong> The savings calculator provides educational estimates only and does not constitute a guarantee, offer, or commitment.
-      Actual terms depend on your circumstances, enrolled debts, creditor policies, and state regulations. Availability varies by state.
-      Fees, if any, are disclosed before enrollment and typically assessed only after a settlement you approve.
-      Participation may impact credit and could involve collection activity. Do not stop paying creditors unless instructed by your provider.
-      We do not provide tax, legal, or investment advice—consult qualified professionals.
+  <div class="footer-sticky">
+    <div class="trust">🔒 Secure & Confidential</div>
+    <a class="callnow" data-role="call" href="tel:+18884377141">Call Now</a>
+    <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener nofollow" class="muted" style="font-size:12px;text-decoration:none">BBB Profile</a>
+  </div>
+
+  <footer class="site-footer">
+    <div class="muted">
+      © <span id="y"></span> DebtHelpForm.com — a service of Gateway Financial Settlement Relief, LLC (GFSR). Not affiliated with “Gateway Debt Relief” of Costa Mesa, CA.
+      <span style="margin-left:6px">•</span>
+      <a href="/privacy.html">Privacy</a>
+      <span>•</span>
+      <a href="/terms.html">Terms</a>
+      <span>•</span>
+      <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener nofollow">BBB Profile (A–)</a>
     </div>
   </footer>
 
-  <!-- GoHighLevel embed loader -->
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+  <script>
+    (function(){
+      const toggle = document.getElementById('navToggle');
+      const links  = document.getElementById('navLinks');
+      if(!toggle || !links) return;
+      function setOpen(open){
+        toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+        links.classList.toggle('open', open);
+        document.body.classList.toggle('nav-open', open);
+      }
+      toggle.addEventListener('click', () => {
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        setOpen(!isOpen);
+      });
+      links.addEventListener('click', (event) => {
+        const target = event.target;
+        if(target instanceof HTMLElement && target.tagName === 'A'){
+          setOpen(false);
+        }
+      });
+      document.addEventListener('click', (event) => {
+        const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+        if(!isOpen) return;
+        if(event.target instanceof Node && !links.contains(event.target) && event.target !== toggle){
+          setOpen(false);
+        }
+      });
+      document.addEventListener('keydown', (event) => {
+        if(event.key === 'Escape'){
+          setOpen(false);
+        }
+      });
+      window.matchMedia('(min-width: 861px)').addEventListener('change', (mq) => {
+        if(mq.matches){
+          setOpen(false);
+        }
+      });
+    })();
+  </script>
+  <script>
+    (function(){
+      const root = document.documentElement;
+      const bar = document.querySelector('.footer-sticky');
+      function setHeight(){
+        const h = bar ? bar.offsetHeight : 0;
+        root.style.setProperty('--callbar-h', h + 'px');
+      }
+      setHeight();
+      window.addEventListener('resize', setHeight, {passive:true});
+    })();
+  </script>
   <script>
     (function(){
       const mount = document.getElementById('ghl-embed');
@@ -277,7 +567,6 @@
     })();
   </script>
 
-  <!-- Calculator logic (unchanged math) -->
   <script>
     function calculateCreditorRepayment(debtAmount, monthlyPayment, interestRate){
       const monthlyRate=(interestRate/100)/12; let balance=debtAmount,totalPaid=0,months=0;
@@ -300,151 +589,122 @@
       const currentRepayment=calculateCreditorRepayment(debt,currentMonthly,interest);
       document.getElementById('newPlan').innerHTML=`<strong>Estimated Monthly Payment:</strong> $${estimatedMonthlyPayment.toLocaleString()}<br><strong>Estimated Term:</strong> ${termMonths} months<br><strong>Total Repayment:</strong> ~$${estimatedTotalPayment.toLocaleString()}`;
       document.getElementById('currentPlan').innerHTML=`<strong>Estimated Total Repayment at ${interest}% APR:</strong><br>~$${currentRepayment.totalPaid.toLocaleString()} over ~${currentRepayment.months} months`;
-      const res=document.getElementById('results'); res.classList.remove('hidden'); res.scrollIntoView({behavior:'smooth',block:'start'});
+      const res=document.getElementById('results'); res.hidden = false; res.scrollIntoView({behavior:'smooth',block:'start'});
     });
   </script>
 
-  <!-- Mobile bar height sync (keeps sitemap flush) -->
   <script>
-    (function(){
-      const root=document.documentElement, mb=document.getElementById('dhpMobileBar');
-      function setH(){ const vis=mb&&getComputedStyle(mb).display!=='none'; root.style.setProperty('--callbar-h',(vis?mb.offsetHeight:0)+'px'); }
-      setH(); addEventListener('resize',setH,{passive:true}); setTimeout(setH,250); setTimeout(setH,1000);
+    (() => {
+      function send(name, data){
+        try{
+          const blob = new Blob([JSON.stringify({ name, ts:Date.now(), ...data })],{type:'application/json'});
+          if(navigator.sendBeacon) navigator.sendBeacon('/ingest', blob);
+          else fetch('/ingest',{ method:'POST', body:blob, keepalive:true, headers:{'Content-Type':'application/json'} }).catch(() =>{});
+        }catch{}
+      }
+      document.addEventListener('click', (event) => {
+        const target = event.target.closest('a,button');
+        if(!target) return;
+        if(target.matches('[data-role="estimate"]')) send('cta:start_click', { url: location.href });
+        if(target.matches('[data-role="call"]') || target.matches('a[href^="tel:"]')) send('cta:call_click', { url: location.href });
+      }, { passive:true });
     })();
   </script>
 
-  <!-- 057: Telemetry session beacon (non-visual) -->
-  <script>
-  (() => { try {
-    const k='dhf:sess:v1';
-    let sid=sessionStorage.getItem(k);
-    if(!sid){ sid=crypto.randomUUID(); sessionStorage.setItem(k, sid); }
-
-    const payload={
-      v:1, ts:Date.now(), sid,
-      url:location.href,
-      ref:document.referrer||null,
-      w:innerWidth, h:innerHeight
-    };
-    const blob=new Blob([JSON.stringify(payload)],{type:'application/json'});
-
-    if(navigator.sendBeacon){
-      navigator.sendBeacon('/ingest', blob);
-    }else{
-      fetch('/ingest',{ method:'POST', body:blob, keepalive:true, headers:{'Content-Type':'application/json'} }).catch(()=>{});
-    }
-  } catch(_){ } })();
-  </script>
-
-  <!-- 057: CTA intent events (Start / Call) -->
   <script>
   (() => {
-    function send(name, data){
-      try{
-        const b=new Blob([JSON.stringify({ name, ts:Date.now(), ...data })],{type:'application/json'});
-        if(navigator.sendBeacon) navigator.sendBeacon('/ingest', b);
-        else fetch('/ingest',{ method:'POST', body:b, keepalive:true, headers:{'Content-Type':'application/json'} }).catch(()=>{});
-      }catch{}
-    }
-    document.addEventListener('click', e => {
-      const a = e.target.closest('a,button');
-      if(!a) return;
-      if(a.matches('.btn.btn-primary, .mobile-est')) send('cta:start_click', { url: location.href });
-      if(a.matches('.btn.btn-outline, .mobile-call')) send('cta:call_click', { url: location.href });
-    }, { passive:true });
-  })();
-  </script>
-
-  <!-- 016: Chatbot FAB + Panel (non-visual until clicked) -->
-  <button id="gfsrChatFab" class="gfsr-chat-fab" aria-haspopup="dialog"
-          aria-expanded="false" aria-controls="gfsrChatSheet">💬 Chat</button>
-  <section id="gfsrChatSheet" class="gfsr-chat-sheet" role="dialog" aria-modal="true" hidden>
-    <header class="gfsr-chat-head">
-      <div class="gfsr-chat-title">Debt Help Assistant</div>
-      <button id="gfsrChatClose" class="gfsr-chat-close" aria-label="Close chat">✕</button>
-    </header>
-    <div id="gfsrChatBody" class="gfsr-chat-body"></div>
-    <form id="gfsrChatForm" class="gfsr-chat-input">
-      <textarea id="gfsrChatInput" placeholder="Type a message…" aria-label="Message"></textarea>
-      <button id="gfsrChatSend" type="submit" class="gfsr-chat-send">Send</button>
-    </form>
-  </section>
-
-  <!-- 016: Chat script (guarded) -->
-  <script>
-  (() => {
-    const el = {
-      fab:   document.getElementById('gfsrChatFab'),
-      sheet: document.getElementById('gfsrChatSheet'),
-      close: document.getElementById('gfsrChatClose'),
-      body:  document.getElementById('gfsrChatBody'),
-      form:  document.getElementById('gfsrChatForm'),
-      input: document.getElementById('gfsrChatInput'),
-      send:  document.getElementById('gfsrChatSend')
-    };
-    if(!(el.fab && el.sheet && el.close && el.body && el.form && el.input && el.send)) return;
-
-    const openChat = () => {
-      el.sheet.hidden = false;
-      el.sheet.classList.add('open');
-      el.sheet.style.transform = 'translateY(0)';       // explicit for safety
-      el.fab.setAttribute('aria-expanded','true');
-      setTimeout(()=>el.input.focus(),120);
-    };
-    const closeChat = () => {
-      el.sheet.classList.remove('open');
-      el.sheet.style.transform = 'translateY(110%)';    // slide down
-      el.fab.setAttribute('aria-expanded','false');
-      el.sheet.hidden = true;
-      el.fab.focus();
-    };
-    el.fab.addEventListener('click', openChat);
-    el.close.addEventListener('click', closeChat);
-    addEventListener('keydown', e => { if(e.key==='Escape' && !el.sheet.hidden) closeChat(); });
-
-    el.form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const msg=(el.input.value||'').trim();
-      if(!msg) return;
-
-      const add = (text, who='bot') => {
-        const d=document.createElement('div');
-        d.className='gfsr-msg ' + who;
-        d.textContent=text;
-        el.body.appendChild(d);
-        el.body.scrollTop = el.body.scrollHeight;
+      const el = {
+        fab:   document.getElementById('gfsrChatFab'),
+        sheet: document.getElementById('gfsrChatSheet'),
+        close: document.getElementById('gfsrChatClose'),
+        body:  document.getElementById('gfsrChatBody'),
+        form:  document.getElementById('gfsrChatForm'),
+        input: document.getElementById('gfsrChatInput'),
+        send:  document.getElementById('gfsrChatSend')
       };
+      if(!(el.fab && el.sheet && el.close && el.body && el.form && el.input && el.send)) return;
 
-      add(msg,'user'); el.input.value='';
+      const openChat = () => {
+        el.sheet.hidden = false;
+        el.sheet.classList.add('open');
+        el.sheet.style.transform = 'translateY(0)';
+        el.fab.setAttribute('aria-expanded','true');
+        setTimeout(()=>el.input.focus(),120);
+      };
+      const closeChat = () => {
+        el.sheet.classList.remove('open');
+        el.sheet.style.transform = 'translateY(110%)';
+        el.fab.setAttribute('aria-expanded','false');
+        el.sheet.hidden = true;
+        el.fab.focus();
+      };
+      el.fab.addEventListener('click', openChat);
+      el.close.addEventListener('click', closeChat);
+      addEventListener('keydown', e => { if(e.key==='Escape' && !el.sheet.hidden) closeChat(); });
 
-      try{
-        const r = await fetch('/chat', {
-          method:'POST',
-          headers:{'Content-Type':'application/json','Accept':'application/json'},
-          body: JSON.stringify({ messages:[{ role:'user', content: msg }], source:'frontend', url: location.href })
-        });
-        let reply = 'Thanks — how else can I help?';
-        if (r.ok) {
-          const ct=r.headers.get('content-type')||'';
-          reply = ct.includes('application/json') ? ((await r.json()).reply || reply) : (await r.text()) || reply;
-        } else {
-          reply = 'Sorry — service error.';
+      el.form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const msg=(el.input.value||'').trim();
+        if(!msg) return;
+
+        const add = (text, who='bot') => {
+          const d=document.createElement('div');
+          d.className='gfsr-msg ' + who;
+          d.textContent=text;
+          el.body.appendChild(d);
+          el.body.scrollTop = el.body.scrollHeight;
+        };
+
+  add(msg,'user'); el.input.value='';
+
+        try{
+          const r = await fetch('/chat', {
+            method:'POST',
+            headers:{'Content-Type':'application/json','Accept':'application/json'},
+            body: JSON.stringify({ messages:[{ role:'user', content: msg }], source:'frontend', url: location.href })
+          });
+          let reply = 'Thanks — how else can I help?';
+          if (r.ok) {
+            const ct=r.headers.get('content-type')||'';
+            reply = ct.includes('application/json') ? ((await r.json()).reply || reply) : (await r.text()) || reply;
+          } else {
+            reply = 'Sorry — service error.';
+          }
+          add(reply,'bot');
+        }catch{
+          add('Network error — please try again.','meta');
         }
-        add(reply,'bot');
-      }catch{
-        add('Network error — please try again.','meta');
-      }
-    });
-  })();
+      });
+    })();
   </script>
 
-  <!-- ===== 050: Savings/Headline loader (A/B content) ===== -->
   <script>
-    (function(){
+  (() => {
+      try {
+        const k='dhf:sess:v1';
+        let sid=sessionStorage.getItem(k);
+        if(!sid){ sid=crypto.randomUUID(); sessionStorage.setItem(k, sid); }
+        const payload={
+          v:1, ts:Date.now(), sid,
+          url:location.href,
+          ref:document.referrer||null,
+          w:innerWidth, h:innerHeight
+        };
+        const blob=new Blob([JSON.stringify(payload)],{type:'application/json'});
+        if(navigator.sendBeacon){
+          navigator.sendBeacon('/ingest', blob);
+        }else{
+          fetch('/ingest',{ method:'POST', body:blob, keepalive:true, headers:{'Content-Type':'application/json'} }).catch(()=>{});
+        }
+        } catch(_){ }
+    })();
+  </script>
+
+  <script>
+    (() => {
       const el = document.querySelector('#ab-cta-text'); if(!el) return;
       const FALLBACK = el.textContent || '';
       const KEY = 'dhf:savings:v1'; const MAX_AGE = 10*60*1000;
-
       try{
         const raw = localStorage.getItem(KEY);
         if(raw){
@@ -452,7 +712,6 @@
           if(ts && (Date.now()-ts) < MAX_AGE && message) el.textContent = (message ?? '').toString();
         }
       }catch{}
-
       (async ()=>{
         const sleep = ms => new Promise(r=>setTimeout(r,ms));
         const attempt = async (to=4000) => {
@@ -477,17 +736,16 @@
     })();
   </script>
 
-  <!-- ===== 015: Optimizer bridge (exposes page + helpers to workers) ===== -->
   <script>
-    (function(){
+    (() => {
       if (window.GFSR && window.GFSR.bridgeReady) return;
       const $ = s => document.querySelector(s);
       const api = {
         bridgeReady: true,
         page: document.querySelector('meta[name="x-ai-optimizer-page"]')?.content || null,
         slots: (window.__ab && window.__ab.slots) ? window.__ab.slots : {},
-        setHeadline(txt){ const h=$('#ab-cta-text'); if(h && typeof txt==='string') h.textContent = txt; },
-        setPrimaryCta({text, href}={}){ const a=document.querySelector('.btn.btn-primary'); if(a){ if(typeof text==='string') a.textContent=text; if(typeof href==='string') a.href=href; } },
+        setHeadline(txt){ const h=$('.page-header h1'); if(h && typeof txt==='string') h.textContent = txt; },
+        setPrimaryCta({text, href}={}){ const a=document.querySelector('.page-header .button.primary'); if(a){ if(typeof text==='string') a.textContent=text; if(typeof href==='string') a.href=href; } },
         log(name, data={}){
           try{
             const b=new Blob([JSON.stringify({ name, ts:Date.now(), url:location.href, ...data })],{type:'application/json'});
