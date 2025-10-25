@@ -43,16 +43,10 @@
       gap:6px;
       flex:0 0 auto;
     }
-    .site-nav .brand span{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      width:24px;height:24px;
-      border-radius:8px;
-      background:linear-gradient(135deg,var(--brand),var(--brand-2));
-      color:#fff;
-      font-size:12px;
-      font-weight:700;
+    .site-nav .brand img{
+      height:32px;
+      width:auto;
+      display:block;
     }
     .site-nav .links{
       display:flex;
@@ -155,7 +149,9 @@
   <div class="shell">
 
     <nav class="site-nav" role="navigation" aria-label="Primary">
-      <a class="brand" href="/"><span aria-hidden="true">DHF</span><strong>DebtHelpForm</strong></a>
+      <a class="brand" href="/" aria-label="Gateway Debt Help">
+        <img src="/gatewaylego.webp" alt="Gateway Debt Help logo" loading="lazy" />
+      </a>
       <button class="menu-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
       <div class="links" id="navLinks">
         <a href="/">Home</a>
