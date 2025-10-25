@@ -6,108 +6,160 @@
   <title>Debt Help Form — Blog &amp; Guides</title>
   <meta name="description" content="Debt Help Form blog — FTC‑aligned guides about debt consolidation and settlement. Learn how to compare options, timelines, and protections." />
   <link rel="canonical" href="https://debthelpform.com/blog/" />
-  <meta name="theme-color" content="#0a5cff" />
+  <meta name="theme-color" content="#0ea5e9" />
   <meta name="x-ai-optimizer-page" content="dhf:blog" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
-    :root{--bg:#0b1220; --card:#0f1730; --ink:#e6ecf8; --muted:#9fb1d6; --brand:#0a5cff; --brand2:#072a86; --ok:#2ecc71; --sitemap-h:52px; --callbar-h:0px; --max:1080px;}
+    :root{--bg:#f8fafc;--surface:#ffffff;--text:#0f172a;--muted:#475569;--brand:#0ea5e9;--brand-2:#22c55e;--ring:rgba(14,165,233,.25);--radius:18px;--shadow:0 10px 30px rgba(2,6,23,.08)}
     *{box-sizing:border-box}
-    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial;overflow-x:hidden}
-    a{color:#cfe0ff;text-decoration:none}
-    a:hover{opacity:.95;text-decoration:underline}
-    header.top{position:sticky;top:0;z-index:60;background:rgba(11,18,32,.92);backdrop-filter:blur(8px);border-bottom:1px solid rgba(255,255,255,.06)}
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 16px}
-    .row{display:flex;align-items:center;gap:10px;padding:10px 0}
-    .brand{display:flex;align-items:center;gap:8px;font-weight:800;color:#fff;text-decoration:none}
-    .logo{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:8px;background:linear-gradient(180deg,var(--brand),var(--brand2));font-size:12px}
-    nav.pills{display:flex;gap:8px;margin-left:8px;flex-wrap:wrap}
-    .btn{display:inline-flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:8px 14px;font-weight:800;cursor:pointer;text-decoration:none}
-    .btn.ghost{background:transparent;color:#dbe6ff;border:1px solid rgba(255,255,255,.15)}
-    .btn.primary{background:linear-gradient(180deg,var(--brand),var(--brand2));color:white;box-shadow:0 6px 18px rgba(10,92,255,.35)}
-    .call{margin-left:auto}
-    .ftc{border-top:1px solid rgba(255,255,255,.06);font-weight:700;color:#cfe0ff;background:#0c1b3d}
-    .ftc .row{display:flex;gap:8px;align-items:center}
-    .dot{width:7px;height:7px;border-radius:999px;background:#22c55e;display:inline-block}
-    main{max-width:var(--max);margin:0 auto;padding:14px 16px calc(var(--sitemap-h) + 100px)}
-    h1{margin:.8rem 0 .25rem;font-size:2rem}
-    p.sub{margin:0 0 1rem;color:var(--muted)}
-    .layout{display:grid;grid-template-columns:1fr;gap:16px}
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;line-height:1.55;min-height:100%}
+    body.nav-open{overflow:hidden}
+    a{color:var(--brand);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .shell{max-width:1000px;margin:0 auto;padding:10px 16px 140px}
+    .site-nav{position:sticky;top:0;margin-top:calc(10px + env(safe-area-inset-top,0px));z-index:1000;background:rgba(255,255,255,.98);backdrop-filter:saturate(120%) blur(6px);border:1px solid #e2e8f0;border-radius:24px;padding:10px 14px;display:flex;align-items:center;gap:14px;margin-bottom:20px;box-shadow:var(--shadow)}
+    .site-nav .brand{font-weight:800;text-decoration:none;color:var(--text);font-size:17px;display:flex;align-items:center;gap:6px;flex:0 0 auto}
+    .site-nav .brand img{height:52px;width:auto;display:block}
+    .site-nav .links{display:flex;align-items:center;gap:10px;flex:1 1 auto;flex-wrap:wrap;margin-left:auto;justify-content:flex-end}
+    .site-nav .links a{display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border-radius:12px;background:#f1f5f9;color:var(--text);text-decoration:none;font-weight:600;font-size:14px;border:1px solid #e2e8f0;transition:background .15s ease,color .15s ease,box-shadow .15s ease}
+    .site-nav .links a:hover{background:#e2e8f0}
+    .site-nav .links a:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:10px}
+    .site-nav .links a.call{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;border-color:transparent;font-weight:700;box-shadow:0 8px 18px var(--ring)}
+    .site-nav .links a.call:hover{opacity:.95}
+    .menu-toggle{border:none;background:#0f172a;color:#fff;border-radius:10px;padding:8px 10px;font-weight:700;font-size:14px;cursor:pointer;display:none;margin-left:auto}
+    .menu-toggle:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+    @media (max-width:860px){
+      .site-nav{flex-wrap:wrap;gap:10px}
+      .site-nav .links{order:3;width:100%;display:none;flex-direction:column;align-items:stretch;justify-content:flex-start;margin-left:0;border-radius:18px;background:#fff;padding:8px 4px;border:1px solid #e2e8f0;box-shadow:var(--shadow)}
+      .site-nav .links.open{display:flex}
+      .site-nav .links a{justify-content:flex-start;font-size:15px;background:transparent;border:none;padding:10px 14px;border-radius:10px}
+      .site-nav .links a:hover{background:#f1f5f9}
+      .site-nav .links a.call{justify-content:center;border:none}
+      .menu-toggle{display:inline-flex;align-items:center;gap:6px}
+    }
+    @media (max-width:640px){.site-nav{border-radius:20px;padding:10px 12px}}
+    .page-hero{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:28px;margin:18px 0 24px}
+    .page-hero > .badge{margin-bottom:12px}
+    .page-hero h1{margin:0 0 8px;font-size:26px;line-height:1.25;font-weight:800;color:var(--text)}
+    .page-hero .sub{margin:0 0 16px;color:var(--muted);font-size:15px}
+    .badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+    .badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:6px 10px;border-radius:999px;background:#e2f2fb;color:#1e3a8a;font-weight:600;text-decoration:none}
+    main{display:block}
+    .layout{display:grid;grid-template-columns:1fr;gap:20px}
     @media(min-width:980px){.layout{grid-template-columns:2fr 1fr}}
-    .grid{display:grid;grid-template-columns:1fr;gap:14px}
+    .grid{display:grid;grid-template-columns:1fr;gap:18px}
     @media(min-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
-    @media(min-width:980px){.grid{grid-template-columns:repeat(3,1fr)}}
-    .card{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:14px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.12)}
-    .card img{width:100%;height:180px;object-fit:cover;background:#111827}
-    .card-body{padding:14px}
-    .card h2{margin:0 0 6px;font-size:18px;line-height:1.35}
-    .meta{font-size:12px;color:#9fb1d6}
-    .excerpt{color:#cbd5e1;font-size:.95rem}
-    .inline-cta{display:flex;justify-content:space-between;align-items:center;margin-top:8px;border-top:1px dashed rgba(255,255,255,.12);padding-top:8px}
-    .inline-cta a{font-weight:900}
-    aside.sidebar{position:sticky;top:92px;display:grid;gap:12px;height:fit-content}
-    .sidecard{background:var(--card);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px}
-    .sidecard h3{margin:0 0 6px}
-    .bbb{display:flex;align-items:center;gap:8px;font-size:14px;color:#cbd5e1}
-    .mobile-bar{position:fixed;left:0;right:0;bottom:0;background:#0b1220;color:#fff;display:flex;gap:8px;padding:.6rem;z-index:10000}
-    .mobile-bar a{flex:1;text-align:center;border-radius:10px;padding:.75rem .5rem;font-weight:900;text-decoration:none}
-    .mobile-call{background:var(--ok);color:#fff}
-    .mobile-est{background:var(--brand);color:#fff}
+    @media(min-width:1100px){.grid{grid-template-columns:repeat(3,1fr)}}
+    .card{background:var(--surface);border-radius:var(--radius);border:1px solid #e2e8f0;box-shadow:var(--shadow);overflow:hidden}
+    .card img{width:100%;height:180px;object-fit:cover;background:#f8fafc}
+    .card-body{padding:18px}
+    .card h2{margin:0 0 10px;font-size:18px;line-height:1.35}
+    .card h2 a{color:var(--text);text-decoration:none}
+    .card h2 a:hover{text-decoration:underline}
+    .meta{font-size:12px;color:var(--muted);margin-bottom:10px}
+    .excerpt{color:var(--muted);font-size:14px;margin:0}
+    .inline-cta{display:flex;justify-content:space-between;align-items:center;margin-top:18px;padding-top:12px;border-top:1px dashed #cbd5f5;gap:12px}
+    .inline-cta a:first-child{font-weight:700;color:var(--brand)}
+    .inline-cta a:last-child{display:inline-flex;align-items:center;justify-content:center;padding:10px 16px;border-radius:999px;background:linear-gradient(135deg,var(--brand),#38bdf8);color:#fff;font-weight:700;box-shadow:0 8px 18px var(--ring);white-space:nowrap}
+    .inline-cta a:last-child:hover{opacity:.95;text-decoration:none}
+    .inline-cta a:last-child:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+    aside.sidebar{position:sticky;top:120px;display:grid;gap:16px;height:fit-content}
+    .sidecard{background:var(--surface);border-radius:var(--radius);border:1px solid #e2e8f0;box-shadow:var(--shadow);padding:18px}
+    .sidecard h3{margin:0 0 10px;font-size:18px;font-weight:700;color:var(--text)}
+    .sidecard .sub{margin:0 0 14px;color:var(--muted);font-size:14px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:12px 18px;font-weight:700;font-size:15px;text-decoration:none;border:1px solid transparent;transition:transform .15s ease,box-shadow .15s ease,background .15s ease}
+    .btn.primary{background:linear-gradient(135deg,var(--brand),#38bdf8);color:#fff;box-shadow:0 8px 18px var(--ring)}
+    .btn.primary:hover{opacity:.95;text-decoration:none}
+    .btn.primary:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+    .btn.ghost{background:#f1f5f9;color:var(--text);border-color:#e2e8f0;font-weight:600}
+    .btn.ghost:hover{background:#e2e8f0;text-decoration:none}
+    .sidecard.bbb{background:#e2f2fb;border-color:#bae6fd;color:#0369a1;display:flex;align-items:center;gap:10px;font-weight:600;font-size:14px}
+    .sidecard.bbb strong{color:#0f172a}
+    #emptyState{display:none}
+    #emptyState h3{margin:0 0 8px;font-size:18px;font-weight:700}
+    #emptyState p{margin:0 0 12px}
+    .mobile-bar{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.98);backdrop-filter:saturate(120%) blur(6px);color:var(--text);display:flex;gap:10px;padding:12px 14px;z-index:10000;border-top:1px solid #e2e8f0;box-shadow:0 -10px 30px rgba(15,23,42,.12)}
+    .mobile-bar a{flex:1;text-align:center;border-radius:999px;padding:12px 14px;font-weight:700;text-decoration:none;font-size:15px}
+    .mobile-call{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;box-shadow:0 8px 18px var(--ring)}
+    .mobile-est{background:#f1f5f9;color:var(--text);border:1px solid #e2e8f0}
+    .mobile-est:hover{text-decoration:none;background:#e2e8f0}
     @media (min-width:769px){.mobile-bar{display:none}}
-    footer.sticky-menu{position:fixed;left:0;right:0;bottom:calc(var(--callbar-h) + env(safe-area-inset-bottom));background:#003a84;color:#fff;border-top:2px solid #2563eb;height:var(--sitemap-h);display:flex;align-items:center;z-index:9997}
-    @media(min-width:769px){footer.sticky-menu{bottom:0}}
-    footer.sticky-menu nav{display:flex;gap:10px;overflow-x:auto;white-space:nowrap;padding:0 .75rem;width:100%;align-items:center;scrollbar-width:none;scroll-snap-type:x mandatory}
+    footer.sticky-menu{position:fixed;left:0;right:0;bottom:calc(env(safe-area-inset-bottom));background:rgba(255,255,255,.98);backdrop-filter:saturate(120%) blur(6px);color:var(--text);border-top:1px solid #e2e8f0;padding:12px 16px;display:flex;align-items:center;justify-content:center;z-index:9997;box-shadow:0 -10px 30px rgba(15,23,42,.12)}
+    footer.sticky-menu nav{display:flex;gap:10px;overflow-x:auto;white-space:nowrap;width:100%;justify-content:center;scrollbar-width:none}
     footer.sticky-menu nav::-webkit-scrollbar{display:none}
-    footer.sticky-menu nav a{color:#ffdd00;text-decoration:none;padding:.35rem .55rem;border-radius:6px;font-weight:800;font-size:.92rem;flex:0 0 auto;scroll-snap-align:center}
-    footer.sticky-menu nav a:hover{background:rgba(255,255,255,.1)}
+    footer.sticky-menu nav a{color:var(--text);text-decoration:none;padding:8px 12px;border-radius:12px;background:#f1f5f9;border:1px solid #e2e8f0;font-weight:600;flex:0 0 auto}
+    footer.sticky-menu nav a:hover{background:#e2e8f0}
+    footer.sticky-menu nav a[aria-current="page"]{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;border-color:transparent;box-shadow:0 8px 18px var(--ring)}
+    @media(min-width:769px){footer.sticky-menu{bottom:0}}
+    @media(max-width:600px){.shell{padding-bottom:180px}}
   </style>
 </head>
 <body>
-  <header class="top" role="banner">
-    <div class="wrap"><div class="row">
-      <a class="brand" href="/"><span class="logo">DHF</span><span>Debt Help Form</span></a>
-      <nav class="pills" aria-label="Primary">
-        <a class="btn ghost" href="/">Home</a>
-        <a class="btn ghost" href="/relief.html">Relief Options</a>
-        <a class="btn ghost" href="/faq.html">FAQ</a>
-        <a class="btn ghost" href="/blog.index.html" aria-current="page">Blog</a>
-        <a class="btn ghost" href="/contact.html">Contact</a>
-      </nav>
-      <div class="call"><a class="btn primary" href="tel:+18884377141" aria-label="Call now: 888-437-7141">📞 Call 888‑437‑7141</a></div>
-    </div></div>
-    <div class="ftc"><div class="wrap"><div class="row"><span class="dot"></span> <strong>FTC‑aligned</strong> • No upfront fees • Transparent savings estimates</div></div></div>
-  </header>
-
-  <main id="main" role="main" class="wrap">
-    <h1 id="ab-cta-text">Latest Articles</h1>
-    <p class="sub">Guides to help you compare consolidation vs settlement and choose confidently.</p>
-    <section class="layout" aria-label="Blog list and sidebar">
-      <div>
-        <div id="blogGrid" class="grid" aria-live="polite" aria-busy="true"></div>
-        <div id="emptyState" class="sidecard" style="display:none;margin-top:10px">
-          <h3>Guides coming soon</h3>
-          <p class="sub">Meanwhile, see how much you can save today.</p>
-          <p><a class="btn primary" href="/#get-started">🔒 Start Secure Estimate</a></p>
-        </div>
+  <div class="shell">
+    <nav class="site-nav" role="navigation" aria-label="Primary">
+      <a class="brand" href="/" aria-label="Gateway Debt Help">
+        <img src="/gatewaylego.webp" alt="Gateway Debt Help logo" loading="lazy" />
+      </a>
+      <button class="menu-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
+      <div class="links" id="navLinks">
+        <a href="/">Home</a>
+        <a href="/relief.html">Relief Options</a>
+        <a href="/about.html">About</a>
+        <a href="/faq.html">FAQ</a>
+        <a href="/debthelpform-pages-blog.html">Blog</a>
+        <a href="/blog.index.html" aria-current="page">Blog Index</a>
+        <a href="/calculator.savings.html">Debt Calculator</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/privacy.html">Privacy</a>
+        <a href="/terms.html">Terms</a>
+        <a class="call" href="tel:+18884377141">Call +1 (888) 437‑7141</a>
       </div>
+    </nav>
+
+  <header class="page-hero" role="banner">
+      <span class="badge">Debt Help Form Blog</span>
+      <h1 id="ab-cta-text">Latest Articles</h1>
+      <p class="sub">Guides to help you compare consolidation vs settlement and choose confidently.</p>
+      <div class="badges">
+        <a class="badge" href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener nofollow">BBB Profile — A– rating</a>
+        <span class="badge">FTC‑aligned • No upfront fees</span>
+        <span class="badge">Secure & Confidential</span>
+      </div>
+      </header>
+
+    <main id="main" role="main">
+      <section class="layout" aria-label="Blog list and sidebar">
+        <div>
+          <div id="blogGrid" class="grid" aria-live="polite" aria-busy="true"></div>
+          <div id="emptyState" class="sidecard" style="margin-top:12px">
+            <h3>Guides coming soon</h3>
+            <p class="sub">Meanwhile, see how much you can save today.</p>
+            <p><a class="btn primary" href="/#get-started">🔒 Start Secure Estimate</a></p>
+          </div>
+        </div>
       <aside class="sidebar" aria-label="Helpful actions">
-        <div class="sidecard">
-          <h3>Estimate Your Savings</h3>
-          <p class="sub">Private, fast, no hard credit check.</p>
-          <p><a class="btn primary" href="/#get-started">Get Free Estimate</a></p>
-        </div>
-        <div class="sidecard">
-          <h3>Talk to a Specialist</h3>
-          <p class="sub">Prefer the phone? We’re here to help.</p>
-          <p><a class="btn ghost" style="color:#ffdd00;font-weight:900;text-decoration:underline" href="tel:+18884377141">📞 888‑437‑7141</a></p>
-        </div>
-        <div class="sidecard bbb">
-          <span>BBB Accredited • <strong>A– rating</strong></span>
-        </div>
-      </aside>
-    </section>
-  </main>
+          <div class="sidecard">
+            <h3>Estimate Your Savings</h3>
+            <p class="sub">Private, fast, no hard credit check.</p>
+            <p><a class="btn primary" href="/#get-started">Get Free Estimate</a></p>
+          </div>
+          <div class="sidecard">
+            <h3>Talk to a Specialist</h3>
+            <p class="sub">Prefer the phone? We’re here to help.</p>
+            <p><a class="btn ghost" href="tel:+18884377141">📞 Call 888‑437‑7141</a></p>
+          </div>
+          <div class="sidecard bbb">
+            <span>BBB Accredited • <strong>A– rating</strong></span>
+          </div>
+        </aside>
+      </section>
+    </main>
+  </div>
 
   <div id="dhfMobileBar" class="mobile-bar" aria-label="Quick actions">
-    <a class="mobile-call" style="color:#fff" href="tel:+18884377141">📞 Call 888‑437‑7141</a>
+    <a class="mobile-call" href="tel:+18884377141">📞 Call 888‑437‑7141</a>
     <a class="mobile-est" href="/#get-started">🔒 Start Secure Estimate</a>
   </div>
 
@@ -120,6 +172,42 @@
       <a href="/contact.html">Contact</a>
     </nav>
   </footer>
+
+  <script>
+    (function(){
+      const toggle=document.getElementById('navToggle');
+      const links=document.getElementById('navLinks');
+      if(!toggle||!links) return;
+      function setOpen(open){
+        toggle.setAttribute('aria-expanded',open?'true':'false');
+        links.classList.toggle('open',open);
+        document.body.classList.toggle('nav-open',open);
+      }
+      toggle.addEventListener('click',()=>{
+        const isOpen=toggle.getAttribute('aria-expanded')==='true';
+        setOpen(!isOpen);
+      });
+      links.addEventListener('click',event=>{
+        const target=event.target;
+        if(target instanceof HTMLElement && target.tagName==='A'){
+          setOpen(false);
+        }
+      });
+      document.addEventListener('click',event=>{
+        const isOpen=toggle.getAttribute('aria-expanded')==='true';
+        if(!isOpen) return;
+        if(event.target instanceof Node && !links.contains(event.target) && event.target!==toggle){
+          setOpen(false);
+        }
+      });
+      document.addEventListener('keydown',event=>{
+        if(event.key==='Escape') setOpen(false);
+      });
+      window.matchMedia('(min-width: 861px)').addEventListener('change',mq=>{
+        if(mq.matches) setOpen(false);
+      });
+    })();
+  </script>
 
   <script>
     (async function(){
