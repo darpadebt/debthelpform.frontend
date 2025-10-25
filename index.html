@@ -13,57 +13,102 @@
     *{box-sizing:border-box}
     html,body{height:100%}
     body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--text)}
+    body.nav-open{overflow:hidden}
     .shell{max-width:1000px;margin:0 auto;padding:10px 16px 120px}
 
-    /* === Pilled Top Nav (horizontal, scrollable) — fixed & accessible === */
-    .pillnav{
+    /* === Responsive site navigation === */
+    .site-nav{
       position:sticky;
       top:0;
-      /* keep it out from under OS/browser chrome */
       margin-top:calc(10px + env(safe-area-inset-top, 0px));
       z-index:1000;
       background:rgba(255,255,255,.98);
       backdrop-filter:saturate(120%) blur(6px);
       border:1px solid #e2e8f0;
-      border-radius:9999px;
-      padding:8px 10px;
+      border-radius:24px;
+      padding:10px 14px;
       display:flex;
       align-items:center;
-      gap:8px;
-      margin-bottom:14px;
+      gap:14px;
+      margin-bottom:16px;
       box-shadow:var(--shadow);
-      overflow:hidden;
     }
-    .pillnav .brand{font-weight:800;text-decoration:none;color:var(--text);flex:0 0 auto}
-    .pillnav .links{
+    .site-nav .brand{
+      font-weight:800;
+      text-decoration:none;
+      color:var(--text);
+      font-size:17px;
       display:flex;
-      flex-wrap:nowrap;
-      gap:8px;
-      margin-left:6px;
-      overflow-x:auto;
-      white-space:nowrap;
-      scroll-snap-type:x mandatory;
-      -webkit-overflow-scrolling:touch;
-      padding:6px 2px;
-      /* critical for visibility on small screens */
+      align-items:center;
+      gap:6px;
+      flex:0 0 auto;
+    }
+    .site-nav .brand span{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:24px;height:24px;
+      border-radius:8px;
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      color:#fff;
+      font-size:12px;
+      font-weight:700;
+    }
+    .site-nav .links{
+      display:flex;
+      align-items:center;
+      gap:10px;
       flex:1 1 auto;
-      min-width:0;
+      flex-wrap:wrap;
     }
-    .pillnav .links::-webkit-scrollbar{display:none}
-    .pillnav .links a{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:8px 12px;border-radius:9999px;background:#f1f5f9;color:#0f172a;
-      text-decoration:none;font-weight:600;font-size:14px;border:1px solid #e2e8f0;
-      scroll-snap-align:center;flex:0 0 auto
+    .site-nav .links a{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:8px 12px;
+      border-radius:12px;
+      background:#f1f5f9;
+      color:var(--text);
+      text-decoration:none;
+      font-weight:600;
+      font-size:14px;
+      border:1px solid #e2e8f0;
+      transition:background .15s ease, color .15s ease;
     }
-    .pillnav .links a:hover{background:#e2e8f0}
-    .pillnav .links a:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:8px}
-    .pillnav .meta{margin-left:auto;display:flex;align-items:center;gap:6px}
-    .pillnav .meta a{font-size:12px;color:var(--muted);text-decoration:none}
-    .pillnav .meta a:hover{text-decoration:underline}
-    .pillnav .navbtn{border:none;background:transparent;font-size:18px;line-height:1;padding:10px;cursor:pointer}
-    .pillnav .navbtn[disabled]{opacity:.4;cursor:default}
-    @media (max-width:640px){ .pillnav .meta{ display:none; } }
+    .site-nav .links a:hover{background:#e2e8f0}
+    .site-nav .links a:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:10px}
+    .site-nav .links a.call{
+      background:linear-gradient(135deg,var(--brand),var(--brand-2));
+      color:#fff;
+      border-color:transparent;
+      font-weight:700;
+      box-shadow:0 8px 18px var(--ring);
+    }
+    .site-nav .links a.call:hover{opacity:.95}
+    .menu-toggle{
+      border:none;
+      background:#0f172a;
+      color:#fff;
+      border-radius:10px;
+      padding:8px 10px;
+      font-weight:700;
+      font-size:14px;
+      cursor:pointer;
+      display:none;
+    }
+    .menu-toggle:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+    @media (max-width:860px){
+      .site-nav{flex-wrap:wrap;gap:10px}
+      .site-nav .links{order:3;width:100%;display:none;flex-direction:column;align-items:stretch;border-radius:18px;background:#fff;padding:8px 4px;border:1px solid #e2e8f0;box-shadow:var(--shadow)}
+      .site-nav .links.open{display:flex}
+      .site-nav .links a{justify-content:flex-start;font-size:15px;background:transparent;border:none;padding:10px 14px;border-radius:10px}
+      .site-nav .links a:hover{background:#f1f5f9}
+      .site-nav .links a.call{justify-content:center;border:none}
+      .menu-toggle{display:inline-flex;align-items:center;gap:6px}
+    }
+    @media (max-width:640px){
+      .site-nav{border-radius:20px;padding:10px 12px}
+    }
 
     header.hero{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin:12px 0}
     header .h1{font-size:26px;line-height:1.2;margin:0 0 8px;font-weight:800}
@@ -109,23 +154,22 @@
 <body>
   <div class="shell">
 
-    <nav class="pillnav" role="navigation" aria-label="Primary">
-      <button class="navbtn" id="navLeft" aria-label="Scroll left" aria-controls="navLinks">◀</button>
-      <a class="brand" href="/">DebtHelpForm</a>
-      <!-- focusable, scrollable link strip -->
-      <div class="links" id="navLinks" tabindex="0" aria-label="Primary navigation links">
+    <nav class="site-nav" role="navigation" aria-label="Primary">
+      <a class="brand" href="/"><span aria-hidden="true">DHF</span><strong>DebtHelpForm</strong></a>
+      <button class="menu-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
+      <div class="links" id="navLinks">
         <a href="/">Home</a>
         <a href="/relief.html">Relief Options</a>
-        <a href="/debthelpform-pages-blog.html">Blog</a>
+        <a href="/about.html">About</a>
         <a href="/faq.html">FAQ</a>
+        <a href="/debthelpform-pages-blog.html">Blog</a>
+        <a href="/blog.index.html">Blog Index</a>
+        <a href="/calculator.savings.html">Debt Calculator</a>
         <a href="/contact.html">Contact</a>
-      </div>
-      <div class="meta" id="navMeta">
         <a href="/privacy.html">Privacy</a>
-        <span aria-hidden="true">•</span>
         <a href="/terms.html">Terms</a>
+        <a class="call" href="tel:+18884377141">Call +1 (888) 437‑7141</a>
       </div>
-      <button class="navbtn" id="navRight" aria-label="Scroll right" aria-controls="navLinks">▶</button>
     </nav>
 
     <header class="hero" id="entry">
@@ -216,55 +260,49 @@
   const CONFIG = { LEAD_ENDPOINT: "/api/mesh/036-lead-router/ingest", SITE_TAG: "DHF", CALL_NUMBER: "+1 (888) 437-7141" };
   const state = { step: 0, answers: { debt_amount: null, debt_type: [], payment_status: null, credit_band: null, state: null, income_band: null } };
 
-  // === Horizontal nav scroll controls + swipe drag + keyboard (accessible) ===
+  // === Responsive navigation toggle ===
   (function(){
-    const box   = document.getElementById('navLinks');
-    const left  = document.getElementById('navLeft');
-    const right = document.getElementById('navRight');
-    if(!box || !left || !right) return;
+    const toggle = document.getElementById('navToggle');
+    const links  = document.getElementById('navLinks');
+    if(!toggle || !links) return;
 
-    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const step = 160;
-
-    function scrollByStep(dx){
-      box.scrollBy({ left: dx, behavior: prefersReduced ? 'auto' : 'smooth' });
+    function setOpen(open){
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      links.classList.toggle('open', open);
+      document.body.classList.toggle('nav-open', open);
     }
 
-    function updateArrows(){
-      const atStart = box.scrollLeft <= 0;
-      const atEnd   = Math.ceil(box.scrollLeft + box.clientWidth) >= box.scrollWidth;
-      left.disabled  = atStart;
-      right.disabled = atEnd;
-      left.setAttribute('aria-disabled', atStart ? 'true' : 'false');
-      right.setAttribute('aria-disabled', atEnd ? 'true' : 'false');
-    }
-
-    left.addEventListener('click',  () => scrollByStep(-step));
-    right.addEventListener('click', () => scrollByStep(step));
-    box.addEventListener('scroll', updateArrows);
-    window.addEventListener('resize', updateArrows);
-
-    // Drag-to-scroll (pointer events)
-    let isDown=false, startX=0, startScroll=0;
-    box.addEventListener('pointerdown', e => {
-      isDown = true; startX = e.clientX; startScroll = box.scrollLeft; box.setPointerCapture(e.pointerId);
-    });
-    box.addEventListener('pointermove', e => {
-      if(!isDown) return;
-      box.scrollLeft = startScroll - (e.clientX - startX);
-    });
-    ['pointerup','pointercancel','pointerleave'].forEach(t => box.addEventListener(t, () => isDown=false));
-
-    // Keyboard: arrow keys to scroll when the strip has focus
-    box.addEventListener('keydown', (e) => {
-      if(e.key === 'ArrowLeft'){ e.preventDefault(); scrollByStep(-step); }
-      if(e.key === 'ArrowRight'){ e.preventDefault(); scrollByStep(step); }
-      if(e.key === 'Home'){ e.preventDefault(); box.scrollTo({ left: 0, behavior: prefersReduced ? 'auto' : 'smooth' }); }
-      if(e.key === 'End'){ e.preventDefault(); box.scrollTo({ left: box.scrollWidth, behavior: prefersReduced ? 'auto' : 'smooth' }); }
+    toggle.addEventListener('click', () => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      setOpen(!isOpen);
     });
 
-    // Initialize
-    updateArrows();
+    links.addEventListener('click', (event) => {
+      const target = event.target;
+      if(target instanceof HTMLElement && target.tagName === 'A'){
+        setOpen(false);
+      }
+    });
+    
+    document.addEventListener('click', (event) => {
+      const isOpen = toggle.getAttribute('aria-expanded') === 'true';
+      if(!isOpen) return;
+      if(event.target instanceof Node && !links.contains(event.target) && event.target !== toggle){
+        setOpen(false);
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if(event.key === 'Escape'){
+        setOpen(false);
+      }
+    });
+
+    window.matchMedia('(min-width: 861px)').addEventListener('change', (mq) => {
+      if(mq.matches){
+        setOpen(false);
+      }
+    });
   })();
 
   const steps = [
