@@ -360,7 +360,47 @@
   ];
 
   const entry = document.getElementById('entry'); const survey = document.getElementById('survey'); const mount = document.getElementById('stepMount'); const stepLabel = document.getElementById('stepLabel'); const bar = document.getElementById('progressBar'); const leadGate = document.getElementById('leadGate'); const results = document.getElementById('results');
-  document.getElementById('startBtn').onclick = ()=> startSurvey();
+  const BASE_UTM = Object.keys(UTM_PARAMS).length ? UTM_PARAMS : undefined;
+
+  async function postJSON(payload){
+    try {
+      const res = await fetch(CONFIG.LEAD_ENDPOINT, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      if(!res.ok){
+        console.warn('POST to lead endpoint failed', res.status);
+      }
+    } catch(err){
+      console.warn('Lead endpoint error (likely preview):', err?.message || err);
+    }
+  }
+
+  function sendTelemetry(event_type, data = {}){
+    const payload = {
+      event_type,
+      source: CONFIG.SITE_TAG,
+      landing: LANDING_CONTEXT,
+      utm: BASE_UTM,
+      ...data
+    };
+    return postJSON(payload);
+  }
+
+  sendTelemetry('pageview');
+
+  const startBtn = document.getElementById('startBtn');
+  const callCta = document.getElementById('callCta');
+  const stickyCall = document.getElementById('stickyCall');
+
+  if(callCta){ callCta.addEventListener('click', ()=> sendTelemetry('cta_click', { cta: 'call_results' })); }
+  if(stickyCall){ stickyCall.addEventListener('click', ()=> sendTelemetry('cta_click', { cta: 'call_sticky' })); }
+
+  startBtn.addEventListener('click', ()=>{
+    sendTelemetry('cta_click', { cta: 'start_survey' });
+    startSurvey();
+  });
   function startSurvey(){ entry.classList.add('hidden'); survey.classList.remove('hidden'); state.step = 0; updateProgress(); steps[state.step](mount); document.getElementById('form_ts').value = Date.now().toString(); }
   function advance(){ state.step++; if(state.step < steps.length){ updateProgress(); steps[state.step](mount);} else { showLeadGate(); } }
   function updateProgress(){ const total = steps.length; const n = state.step + 1; stepLabel.textContent = `Step ${n} of ${total}`; bar.style.width = `${(n/total)*100}%`; }
@@ -402,19 +442,22 @@
             state: stateAnswer || null
           }
         };
-        if (Object.keys(UTM_PARAMS).length) {
-          meta.utm_snapshot = UTM_PARAMS;
+        if (BASE_UTM) {
+          meta.utm_snapshot = BASE_UTM;
         }
-      return meta;
+        return meta;
       })(),
-      utm: Object.keys(UTM_PARAMS).length ? UTM_PARAMS : undefined,
+      utm: BASE_UTM,
       consent
     };
-    try{ const res = await fetch(CONFIG.LEAD_ENDPOINT, { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(payload) }); if(!res.ok){ console.warn('Lead POST failed', res.status); } } catch(err){ console.warn('Lead POST error (preview likely):', err?.message||err); }
+    await postJSON({
+      event_type: 'lead_submit',
+      ...payload
+    });
     showResults();
   });
 
-      function showResults(){ leadGate.classList.add('hidden'); results.classList.remove('hidden'); const debtNum = DEBT_RANGE_MAP[state.answers.debt_amount] || 15000; document.getElementById('calcDebt').textContent = new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(debtNum); const apr=0.17, termMonths=60, rate=apr/12; const pmt=(debtNum*rate)/(1-Math.pow(1+rate,-termMonths)); const low=Math.round(pmt*0.75), high=Math.round(pmt*1.05); document.getElementById('calcPayment').textContent = `${fmt(low)} – ${fmt(high)}`; const telHref = `tel:${CONFIG.CALL_NUMBER.replace(/[^\d+]/g,'')}`; document.getElementById('callCta').setAttribute('href', telHref); document.getElementById('stickyCall').setAttribute('href', telHref); }
+      function showResults(){ leadGate.classList.add('hidden'); results.classList.remove('hidden'); const debtNum = DEBT_RANGE_MAP[state.answers.debt_amount] || 15000; document.getElementById('calcDebt').textContent = new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(debtNum); const apr=0.17, termMonths=60, rate=apr/12; const pmt=(debtNum*rate)/(1-Math.pow(1+rate,-termMonths)); const low=Math.round(pmt*0.75), high=Math.round(pmt*1.05); document.getElementById('calcPayment').textContent = `${fmt(low)} – ${fmt(high)}`; const telHref = `tel:${CONFIG.CALL_NUMBER.replace(/[^\d+]/g,'')}`; if(callCta){ callCta.setAttribute('href', telHref); } if(stickyCall){ stickyCall.setAttribute('href', telHref); } }
   function fmt(n){ return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n); }
   document.getElementById('doneBtn').onclick = ()=>{ results.classList.add('hidden'); entry.classList.remove('hidden'); };
   document.getElementById('y').textContent = new Date().getFullYear();
