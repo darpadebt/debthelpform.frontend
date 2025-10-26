@@ -143,6 +143,9 @@
     .center{text-align:center}
     .calc{display:grid;gap:10px}
     .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:#eef2ff;color:#3730a3;font-weight:700;font-size:12px}
+    #leadStatus{margin:6px 0 0}
+    #leadStatus[data-mode="error"]{color:#dc2626}
+    #leadStatus[data-mode="warn"]{color:#b45309}
   </style>
   <script type="application/ld+json">
     {"@context":"https://schema.org","@type":["Organization","FinancialService"],"@id":"https://gatewaydebthelp.com/#gfsr","name":"Gateway Financial Settlement Relief, LLC","alternateName":["GFSR","Gateway Debt Help","Debt Help Form"],"url":"https://debthelpform.com/","telephone":"+1-888-437-7141","sameAs":["https://debthelpform.com/","https://debtreliefguard.com/","https://gatewaydebthelp.com/","https://gatewayfinancialsettlementrelief.com/"],"disambiguatingDescription":"Not affiliated with Gateway Debt Relief of Costa Mesa, CA."}
@@ -219,6 +222,7 @@
           <span>It’s okay to contact me about debt relief options by phone, email, or text.</span>
         </label>
         <button class="primary" type="submit">See my options</button>
+        <p class="muted hidden" id="leadStatus" role="status" aria-live="polite"></p>
       </form>
     </div>
 
@@ -362,43 +366,21 @@
   const entry = document.getElementById('entry'); const survey = document.getElementById('survey'); const mount = document.getElementById('stepMount'); const stepLabel = document.getElementById('stepLabel'); const bar = document.getElementById('progressBar'); const leadGate = document.getElementById('leadGate'); const results = document.getElementById('results');
   const BASE_UTM = Object.keys(UTM_PARAMS).length ? UTM_PARAMS : undefined;
 
-  async function postJSON(payload){
-    try {
-      const res = await fetch(CONFIG.LEAD_ENDPOINT, {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify(payload)
-      });
-      if(!res.ok){
-        console.warn('POST to lead endpoint failed', res.status);
-      }
-    } catch(err){
-      console.warn('Lead endpoint error (likely preview):', err?.message || err);
-    }
+  function trackEvent(event_type, data = {}){
+    console.debug('[telemetry]', event_type, data);
   }
 
-  function sendTelemetry(event_type, data = {}){
-    const payload = {
-      event_type,
-      source: CONFIG.SITE_TAG,
-      landing: LANDING_CONTEXT,
-      utm: BASE_UTM,
-      ...data
-    };
-    return postJSON(payload);
-  }
-
-  sendTelemetry('pageview');
+  trackEvent('pageview');
 
   const startBtn = document.getElementById('startBtn');
   const callCta = document.getElementById('callCta');
   const stickyCall = document.getElementById('stickyCall');
 
-  if(callCta){ callCta.addEventListener('click', ()=> sendTelemetry('cta_click', { cta: 'call_results' })); }
-  if(stickyCall){ stickyCall.addEventListener('click', ()=> sendTelemetry('cta_click', { cta: 'call_sticky' })); }
+  if(callCta){ callCta.addEventListener('click', ()=> trackEvent('cta_click', { cta: 'call_results' })); }
+  if(stickyCall){ stickyCall.addEventListener('click', ()=> trackEvent('cta_click', { cta: 'call_sticky' })); }
 
   startBtn.addEventListener('click', ()=>{
-    sendTelemetry('cta_click', { cta: 'start_survey' });
+    trackEvent('cta_click', { cta: 'start_survey' });
     startSurvey();
   });
   function startSurvey(){ entry.classList.add('hidden'); survey.classList.remove('hidden'); state.step = 0; updateProgress(); steps[state.step](mount); document.getElementById('form_ts').value = Date.now().toString(); }
@@ -408,10 +390,40 @@
 
  // Lead submit -> 036 router
   const form = document.getElementById('leadForm');
+  const statusEl = document.getElementById('leadStatus');
   const DEBT_RANGE_MAP = { "<10k": 8000, "10-20k":15000, "20-40k":30000, "40-60k":50000, ">60k":70000 };
+
+  function setStatus(message, mode = 'info'){
+    if(!statusEl) return;
+    statusEl.textContent = message || '';
+    statusEl.classList.toggle('hidden', !message);
+    statusEl.dataset.mode = mode;
+  }
+
+  async function submitLead(payload){
+    const res = await fetch(CONFIG.LEAD_ENDPOINT, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    let data = null;
+    try {
+      data = await res.json();
+    } catch(err){
+      console.warn('Lead router response parse error', err);
+    }
+    if(!res.ok){
+      const reason = data?.reason || data?.error || `HTTP ${res.status}`;
+      throw new Error(reason);
+    }
+    return data;
+  }
 
   form.addEventListener('submit', async (e)=>{
     e.preventDefault();
+    const submitBtn = form.querySelector('button[type="submit"]');
+    submitBtn?.setAttribute('disabled', 'true');
+    setStatus('Submitting your details securely...');
     const fd = new FormData(form);
     const phone = (fd.get('phone')||'').toString().replace(/[^\d+]/g,'');
     const consent = {
@@ -450,11 +462,25 @@
       utm: BASE_UTM,
       consent
     };
-    await postJSON({
-      event_type: 'lead_submit',
-      ...payload
-    });
-    showResults();
+    try {
+      const res = await submitLead(payload);
+      const status = res?.status || 'accepted';
+      if(status === 'accepted' || status === 'duplicate'){
+        trackEvent('lead_router_result', { status, id: res?.id || null, variant: res?.variant || null });
+        setStatus('');
+        showResults();
+      } else if (status === 'limited') {
+        setStatus('We received your request but are temporarily limiting submissions. Please try again shortly.', 'warn');
+      } else {
+        const reason = res?.reason || 'Your request could not be completed. Please call us to finish your review.';
+        setStatus(reason, 'error');
+      }
+    } catch(err){
+      console.error('Lead router submission failed', err);
+      setStatus('We could not submit your details. Please check your connection and try again.', 'error');
+    } finally {
+      submitBtn?.removeAttribute('disabled');
+    }
   });
 
       function showResults(){ leadGate.classList.add('hidden'); results.classList.remove('hidden'); const debtNum = DEBT_RANGE_MAP[state.answers.debt_amount] || 15000; document.getElementById('calcDebt').textContent = new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(debtNum); const apr=0.17, termMonths=60, rate=apr/12; const pmt=(debtNum*rate)/(1-Math.pow(1+rate,-termMonths)); const low=Math.round(pmt*0.75), high=Math.round(pmt*1.05); document.getElementById('calcPayment').textContent = `${fmt(low)} – ${fmt(high)}`; const telHref = `tel:${CONFIG.CALL_NUMBER.replace(/[^\d+]/g,'')}`; if(callCta){ callCta.setAttribute('href', telHref); } if(stickyCall){ stickyCall.setAttribute('href', telHref); } }
