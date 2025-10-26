@@ -259,6 +259,26 @@
   const CONFIG = { LEAD_ENDPOINT: "/api/mesh/036-lead-router/ingest", SITE_TAG: "DHF", CALL_NUMBER: "+1 (888) 437-7141" };
   const state = { step: 0, answers: { debt_amount: null, debt_type: [], payment_status: null, credit_band: null, state: null, income_band: null } };
 
+  const UTM_PARAMS = (() => {
+    const params = new URLSearchParams(window.location.search);
+    const out = {};
+    params.forEach((value, key) => {
+      if (!value) return;
+      const normalizedKey = key.trim().toLowerCase();
+      if (!normalizedKey) return;
+      if (/^(utm_[a-z0-9_]+|gclid|msclkid|fbclid|ttclid|yclid)$/.test(normalizedKey)) {
+        out[normalizedKey] = value.trim();
+      }
+    });
+    return out;
+  })();
+
+  const LANDING_CONTEXT = {
+    path: window.location.pathname,
+    query: window.location.search || "",
+    referrer: document.referrer || null
+  };
+    
   // === Responsive navigation toggle ===
   (function(){
     const toggle = document.getElementById('navToggle');
@@ -366,21 +386,29 @@
       email: (fd.get('email')||'').toString().trim(),
       phone,
       zip: (fd.get('zip')||'').toString().trim(),
-      source: "survey",
-      site: CONFIG.SITE_TAG,
+      source: CONFIG.SITE_TAG,
       hp: (fd.get('hp')||'').toString(),
       form_ts: Number(fd.get('form_ts')||Date.now()),
       state: stateAnswer || null,
       debt_amount: debtAmount,
-      meta: {
-        survey: {
-          ...restAnswers,
-          debt_amount_range: debtRange || null,
-          state: stateAnswer || null
+      meta: (() => {
+        const meta = {
+          entrypoint: 'home_survey',
+          site_tag: CONFIG.SITE_TAG,
+          landing: LANDING_CONTEXT,
+          survey: {
+            ...restAnswers,
+            debt_amount_range: debtRange || null,
+            state: stateAnswer || null
+          }
+        };
+        if (Object.keys(UTM_PARAMS).length) {
+          meta.utm_snapshot = UTM_PARAMS;
         }
-      },
-      consent,
-      test: false
+      return meta;
+      })(),
+      utm: Object.keys(UTM_PARAMS).length ? UTM_PARAMS : undefined,
+      consent
     };
     try{ const res = await fetch(CONFIG.LEAD_ENDPOINT, { method:'POST', headers:{'content-type':'application/json'}, body: JSON.stringify(payload) }); if(!res.ok){ console.warn('Lead POST failed', res.status); } } catch(err){ console.warn('Lead POST error (preview likely):', err?.message||err); }
     showResults();
