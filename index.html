@@ -426,9 +426,13 @@
     setStatus('Submitting your details securely...');
     const fd = new FormData(form);
     const phone = (fd.get('phone')||'').toString().replace(/[^\d+]/g,'');
+    const marketingValue = fd.get('consent_marketing');
+    const marketingOptIn = typeof marketingValue === 'string'
+      ? ['on', 'yes', 'true', '1'].includes(marketingValue.toLowerCase())
+      : false;
     const consent = {
       terms: fd.get('consent_terms') === 'on',
-      marketing: fd.get('consent_marketing') === 'on',
+      marketing: marketingOptIn,
       timestamp: new Date().toISOString()
     };
     const { state: stateAnswer, debt_amount: debtRange, ...restAnswers } = state.answers;
