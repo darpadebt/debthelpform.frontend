@@ -71,6 +71,10 @@
       border:1px solid #e2e8f0;
       transition:background .15s ease, color .15s ease;
     }
+    /* Defensive hide for any lingering Blog link variants */
+    .site-nav .links a[href="/blog"],
+    .site-nav .links a[href="/blog/"],
+    .site-nav .links a[href="/blog.html"]{display:none!important}
     .site-nav .links a:hover{background:#e2e8f0}
     .site-nav .links a:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:10px}
     .site-nav .links a.call{
@@ -164,7 +168,6 @@
         <a href="/relief.html">Relief Options</a>
         <a href="/about.html">About</a>
         <a href="/faq.html">FAQ</a>
-        <a href="/blog.index.html">Blog Index</a>
         <a href="/calculator.savings.html">Debt Calculator</a>
         <a href="/contact.html">Contact</a>
         <a href="/privacy.html">Privacy</a>
@@ -286,7 +289,16 @@
   (function(){
     const toggle = document.getElementById('navToggle');
     const links  = document.getElementById('navLinks');
-    if(!toggle || !links) return;
+      if(!toggle || !links) return;
+
+      // Remove any blog-related links that may have been cached into the nav
+      links.querySelectorAll('a').forEach((link) => {
+        const label=(link.textContent||'').trim().toLowerCase();
+        const href=(link.getAttribute('href')||'').toLowerCase();
+        if(label==='blog' || href==='/blog' || href==='/blog/' || href==='/blog.html'){
+          link.remove();
+        }
+      });
 
     function setOpen(open){
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');

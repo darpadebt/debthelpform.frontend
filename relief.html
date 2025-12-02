@@ -33,6 +33,10 @@
     .site-nav .brand img{height:52px;width:auto;display:block}
     .site-nav .links{display:flex;align-items:center;gap:10px;flex:1 1 auto;flex-wrap:wrap;margin-left:auto;justify-content:flex-end}
     .site-nav .links a{display:inline-flex;align-items:center;justify-content:center;padding:8px 12px;border-radius:12px;background:#f1f5f9;color:var(--text);text-decoration:none;font-weight:600;font-size:14px;border:1px solid #e2e8f0;transition:background .15s ease,color .15s ease}
+    /* Defensive hide for any lingering Blog link variants */
+    .site-nav .links a[href="/blog"],
+    .site-nav .links a[href="/blog/"],
+    .site-nav .links a[href="/blog.html"]{display:none!important}
     .site-nav .links a:hover{background:#e2e8f0}
     .site-nav .links a[aria-current="page"]{background:#dbeafe;color:#1d4ed8;border-color:#bfdbfe}
     .site-nav .links a.call{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#fff;border-color:transparent;font-weight:700;box-shadow:0 8px 18px var(--ring)}
@@ -247,6 +251,15 @@
       const toggle=document.getElementById('navToggle');
       const links=document.getElementById('navLinks');
       if(!toggle||!links)return;
+
+      // Remove any blog-related links that may have been cached into the nav
+      links.querySelectorAll('a').forEach((link)=>{
+        const label=(link.textContent||'').trim().toLowerCase();
+        const href=(link.getAttribute('href')||'').toLowerCase();
+        if(label==='blog'||href==='/blog'||href==='/blog/'||href==='/blog.html'){
+          link.remove();
+        }
+      });
 
       function setOpen(open){
         toggle.setAttribute('aria-expanded',open?'true':'false');
