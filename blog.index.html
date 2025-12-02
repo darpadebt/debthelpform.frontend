@@ -239,7 +239,7 @@
           return;
         }
         grid.innerHTML=posts.map(p=>{
-          const href=p.content_url||p.url||(p.slug?`/blog/${p.slug}.html`:'#');
+          const href=p.url||p.content_url||(p.slug?`/blog/${p.slug}.html`:'#');
           const displayDate=p.date_published||p.published_at;
           const date=displayDate?new Date(displayDate).toLocaleDateString(undefined,{month:'short',day:'numeric',year:'numeric'}):'';
           const img=p.image||p.thumbnail||'/og-cover.jpg';
