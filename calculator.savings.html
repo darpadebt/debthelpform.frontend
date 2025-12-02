@@ -507,8 +507,8 @@
   </script>
   <script>
     (function(){
-      const toggle = document.getElementById('navToggle');
-      const links  = document.getElementById('navLinks');
+    const toggle = document.getElementById('navToggle');
+    const links  = document.getElementById('navLinks');
       if(!toggle || !links) return;
 
       // Remove any blog-related links that may have been cached into the nav
@@ -517,6 +517,23 @@
         const href=(link.getAttribute('href')||'').toLowerCase();
         if(label==='blog' || href==='/blog' || href==='/blog/' || href==='/blog.html'){
           link.remove();
+        }
+      });
+
+      // Set active state based on current path
+      const currentPath=(location.pathname||'/').replace(/\/$/,'')||'/';
+      links.querySelectorAll('a[href]').forEach((link)=>{
+        if(link.classList.contains('call')) return;
+        const href=link.getAttribute('href');
+        try{
+          const linkPath=new URL(href, location.origin).pathname.replace(/\/$/,'')||'/';
+          if(linkPath===currentPath){
+            link.setAttribute('aria-current','page');
+          }else{
+            link.removeAttribute('aria-current');
+          }
+        }catch(_){
+          link.removeAttribute('aria-current');
         }
       });
       function setOpen(open){
