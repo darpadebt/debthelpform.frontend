@@ -38,10 +38,23 @@
       }
 
       function extractSlug(){
-        const path=window.location.pathname.replace(/\/+$/,'');
+        const url=new URL(window.location.href);
+        const path=url.pathname.replace(/\/+$/,'');
         const match=path.match(/\/blog\/(.+?)(?:\.html)?$/i);
-        if(!match||!match[1]) return null;
-        try{return decodeURIComponent(match[1]);}catch(_){return match[1];}
+        if(match&&match[1]){
+          try{return decodeURIComponent(match[1]);}catch(_){return match[1];}
+        }
+
+        // Fallback: allow /blog.router.html?slug=my-post
+        const fromQuery=url.searchParams.get('slug');
+        if(fromQuery){
+          try{return decodeURIComponent(fromQuery);}catch(_){return fromQuery;}
+        }
+
+        // Fallback: derive slug from a content_url/url query param
+        const fromUrl=url.searchParams.get('content_url')||url.searchParams.get('url');
+        const normalized=normalizeSlug(fromUrl);
+        return normalized||null;
       }
 
       function normalizeSlug(candidate){
