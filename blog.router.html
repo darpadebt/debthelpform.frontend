@@ -44,6 +44,17 @@
         try{return decodeURIComponent(match[1]);}catch(_){return match[1];}
       }
 
+      function normalizeSlug(candidate){
+        if(!candidate) return null;
+        // Strip any leading slash or /blog/ prefix
+        let s=candidate.replace(/^\/+/, '').replace(/^blog\//i,'');
+        // Strip date prefixes like 2025-08-03-
+        s=s.replace(/^\d{4}-\d{2}-\d{2}-/,'');
+        // Drop trailing .html if present
+        s=s.replace(/\.html$/i,'');
+        return s;
+      }
+
       async function load(){
         const slug=extractSlug();
         if(!slug){
@@ -56,12 +67,20 @@
           if(!res.ok) throw new Error('Failed to load blog index');
           const list=await res.json();
           const posts=Array.isArray(list)?list:[];
-          const match=posts.find(p=>p&&p.slug===slug);
+
+          const slugVariants=[slug, normalizeSlug(slug)].filter(Boolean);
+          const match=posts.find(p=>{
+            if(!p) return false;
+            const possible=[p.slug, normalizeSlug(p.content_url), normalizeSlug(p.url)];
+            return slugVariants.some(s=>possible.includes(s));
+          });
+
           if(!match){
             showError('We could not find that article.');
             return;
           }
-          const target=match.content_url||match.url||`/blog/${slug}.html`;
+
+          const target=match.content_url||match.url||`/blog/${match.slug||slug}.html`;
           window.location.replace(target);
         }catch(err){
           console.error(err);
