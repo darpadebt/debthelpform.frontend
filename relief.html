@@ -248,6 +248,15 @@
       const links=document.getElementById('navLinks');
       if(!toggle||!links)return;
 
+      // Remove any blog-related links that may have been cached into the nav
+      links.querySelectorAll('a').forEach((link)=>{
+        const label=(link.textContent||'').trim().toLowerCase();
+        const href=(link.getAttribute('href')||'').toLowerCase();
+        if(label==='blog'||href==='/blog'||href==='/blog/'||href==='/blog.html'){
+          link.remove();
+        }
+      });
+
       function setOpen(open){
         toggle.setAttribute('aria-expanded',open?'true':'false');
         links.classList.toggle('open',open);
