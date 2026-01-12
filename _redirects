@@ -20,6 +20,10 @@
 # Learn routes
 /learn/creditors-vs-collectors /learn/creditors-vs-collectors/index.html 200
 /learn/creditors-vs-collectors/ /learn/creditors-vs-collectors/index.html 200
+/learn/state-laws /learn/state-laws/index.html 200
+/learn/state-laws/ /learn/state-laws/index.html 200
+/state-specific-rules-overview /learn/state-laws/ 301
+/state-specific-rules-overview/ /learn/state-laws/ 301
 
 
 /blog/how-to-get-out-of-debt-without-ruining-your-credit-a-guide-to-debt-consolidation-loans /blog/2026-01-05-how-to-get-out-of-debt-without-ruining-your-credit-a-guide-to-debt-consolidation-loans.html 301
