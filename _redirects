@@ -17,6 +17,12 @@
 /faq/creditors-vs-collectors /creditors-vs-collectors.html 200
 /faq/creditors-vs-collectors/ /creditors-vs-collectors.html 200
 
+# Learn routes
+/learn/settlement-vs-consolidation /learn/settlement-vs-consolidation/index.html 200
+/learn/settlement-vs-consolidation/ /learn/settlement-vs-consolidation/index.html 200
+/settlement-vs-consolidation-loan /learn/settlement-vs-consolidation/ 301
+/settlement-vs-consolidation-loan.html /learn/settlement-vs-consolidation/ 301
+
 
 /blog/how-to-get-out-of-debt-without-ruining-your-credit-a-guide-to-debt-consolidation-loans /blog/2026-01-05-how-to-get-out-of-debt-without-ruining-your-credit-a-guide-to-debt-consolidation-loans.html 301
 
