@@ -19,7 +19,7 @@
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://debthelpform.com/"},{"@type":"ListItem","position":2,"name":"Debt Relief Options","item":"https://debthelpform.com/relief.html"}]}</script>
 
   <style>
-    :root{ --bg:#f8fafc; --surface:#ffffff; --text:#0f172a; --muted:#475569; --brand:#0ea5e9; --brand-2:#22c55e; --ring:rgba(14,165,233,.25); --radius:18px; --shadow:0 10px 30px rgba(2,6,23,.08); }
+    :root{ --bg:#f8fafc; --surface:#e6fafa; --text:#0f172a; --muted:#475569; --brand:#0ea5e9; --brand-2:#22c55e; --ring:rgba(14,165,233,.25); --radius:18px; --shadow:0 10px 30px rgba(2,6,23,.08); }
     *{box-sizing:border-box}
     html,body{height:100%}
     body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;background:var(--bg);color:var(--text);line-height:1.5}
@@ -63,8 +63,10 @@
     .actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center}
     .primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(90deg,var(--brand),#38bdf8);color:#fff;border:none;border-radius:999px;padding:14px 20px;font-weight:700;font-size:16px;text-decoration:none;box-shadow:0 8px 18px var(--ring)}
     .primary:active{transform:translateY(1px)}
-    .outline{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#fff;color:var(--text);border-radius:999px;padding:12px 18px;font-weight:700;font-size:15px;text-decoration:none;border:1px solid #cbd5f5;box-shadow:0 4px 10px rgba(15,23,42,.06)}
-    .outline:hover{background:#f8fafc}
+    .outline{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#5ac8c8;color:#fff;border-radius:999px;padding:12px 18px;font-weight:700;font-size:15px;text-decoration:none;border:1px solid #47b6b6;box-shadow:0 4px 10px rgba(15,23,42,.08)}
+    .outline:hover{background:#4fbcbc}
+    .btn-call{background:var(--brand-2);color:#fff;border-color:transparent;box-shadow:0 8px 18px rgba(34,197,94,.35)}
+    .btn-call:hover{background:#1fb159}
 
     .card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;margin:16px 0}
     .muted{color:var(--muted);font-size:14px}
@@ -97,6 +99,20 @@
     .callnow:hover{opacity:.95}
     @media(max-width:520px){.footer-sticky{flex-direction:column;align-items:stretch;text-align:center}.callnow{width:100%;justify-content:center;display:inline-flex}}
     .sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    .relief-image{margin:18px 0}
+    .relief-image img{width:100%;height:auto;display:block;border-radius:16px;box-shadow:var(--shadow)}
+    @media(max-width:640px){.relief-image{margin-left:-16px;margin-right:-16px}.relief-image img{border-radius:0}}
+    body.modal-open{overflow:hidden}
+    .call-modal{position:fixed;inset:0;background:rgba(15,23,42,.55);display:none;align-items:center;justify-content:center;padding:16px;z-index:2000}
+    .call-modal.open{display:flex}
+    .call-modal-card{background:#fff;border-radius:18px;padding:22px;max-width:420px;width:100%;box-shadow:var(--shadow);text-align:center}
+    .call-modal-card h3{margin:0 0 8px;font-size:20px}
+    .call-modal-card p{margin:0 0 16px;color:var(--muted)}
+    .call-number{display:inline-block;background:#f1f5f9;border-radius:12px;padding:10px 14px;font-weight:700;font-size:18px;letter-spacing:.02em}
+    .call-modal-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+    .call-modal-actions button{border:none;border-radius:999px;padding:10px 16px;font-weight:700;font-size:14px;cursor:pointer}
+    .call-modal-actions .copy-btn{background:#0ea5e9;color:#fff}
+    .call-modal-actions .close-btn{background:#e2e8f0;color:#0f172a}
   </style>
 </head>
 <body>
@@ -126,7 +142,7 @@
       <div class="sub">Compare the two programs we actually offer — consolidation loans and settlement — then start your secure estimate.</div>
       <div class="actions">
         <a href="/" class="primary btn">🔒 Start Secure Estimate</a>
-        <a href="tel:+18884377141" class="outline btn">📞 Talk to a Specialist</a>
+        <a href="tel:+18884377141" class="outline btn btn-call">📞 Talk to a Specialist</a>
       </div>
     </header>
 
@@ -136,7 +152,6 @@
         <span class="badge">FTC‑aligned • No upfront fees • Transparent savings estimates</span>
         <span class="badge">📞 888‑437‑7141</span>
       </div>
-      </aside>
     </div>
     
   <section class="section" aria-label="Relief tiles">
@@ -216,10 +231,16 @@
         <p class="muted" style="margin:.8rem 0 0">These examples illustrate how each program works. Actual results vary; we’ll personalize your plan during your secure estimate.</p>
         <div class="actions" style="margin-top:14px">
           <a class="primary btn" href="/#get-started">🔒 Start Secure Estimate</a>
-          <a class="outline btn" href="tel:+18884377141">📞 Call 888‑437‑7141</a>
+          <a class="outline btn btn-call" href="tel:+18884377141">📞 Call 888‑437‑7141</a>
         </div>
       </div>
       </section>
+
+    <section class="section" aria-label="Debt relief support image">
+      <figure class="relief-image">
+        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1600&q=80" alt="Person reviewing household bills and debt paperwork at a table" loading="lazy" />
+      </figure>
+    </section>
 
     <section class="section" aria-label="Trust & contact">
       <div class="card" style="text-align:center">
@@ -229,7 +250,7 @@
           <span class="badge" style="background:#f1f5f9;color:var(--text);border-color:#e2e8f0">• 📞 888‑437‑7141</span>
         </div>
       </div>
-    </section>>
+    </section>
 
   <footer class="card footer-card">
       <p style="margin:0">© <span id="y"></span> DebtHelpForm.com — a service of Gateway Financial Settlement Relief, LLC (GFSR). Not affiliated with “Gateway Debt Relief” of Costa Mesa, CA.</p>
@@ -250,6 +271,18 @@
     <div class="trust" style="color:var(--muted);font-weight:600">FTC‑aligned • No upfront fees</div>
     <a class="callnow" href="tel:+18884377141">📞 Call 888‑437‑7141</a>
     <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener nofollow" class="muted" style="font-size:12px;text-decoration:none">BBB Profile</a>
+  </div>
+
+  <div class="call-modal" id="callModal" role="dialog" aria-modal="true" aria-labelledby="callModalTitle" aria-hidden="true">
+    <div class="call-modal-card">
+      <h3 id="callModalTitle">Call our debt relief specialists</h3>
+      <p>On desktop, please dial this number from your phone.</p>
+      <div class="call-number" id="callNumber" tabindex="0">888‑437‑7141</div>
+      <div class="call-modal-actions">
+        <button class="copy-btn" type="button" id="copyNumber">Copy number</button>
+        <button class="close-btn" type="button" id="closeModal">Close</button>
+      </div>
+    </div>
   </div>
 
   <script>
@@ -333,6 +366,72 @@
   <!-- ONLY 016 + 036 calls -->
   <script>
     document.addEventListener('DOMContentLoaded', function(){
+      const callModal=document.getElementById('callModal');
+      const callNumber=document.getElementById('callNumber');
+      const closeModal=document.getElementById('closeModal');
+      const copyNumber=document.getElementById('copyNumber');
+      const telLinks=document.querySelectorAll('a[href^="tel:"]');
+
+      function isDesktop(){
+        return window.matchMedia('(pointer: fine)').matches && window.matchMedia('(hover: hover)').matches;
+      }
+
+      function openCallModal(){
+        if(!callModal||!callNumber) return;
+        callModal.classList.add('open');
+        callModal.setAttribute('aria-hidden','false');
+        document.body.classList.add('modal-open');
+        const selection=window.getSelection();
+        if(selection){
+          const range=document.createRange();
+          range.selectNodeContents(callNumber);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+        callNumber.focus({preventScroll:true});
+      }
+
+      function closeCallModal(){
+        if(!callModal) return;
+        callModal.classList.remove('open');
+        callModal.setAttribute('aria-hidden','true');
+        document.body.classList.remove('modal-open');
+      }
+
+      telLinks.forEach((link)=>{
+        link.addEventListener('click',(event)=>{
+          if(!isDesktop()) return;
+          event.preventDefault();
+          openCallModal();
+        });
+      });
+
+      if(closeModal){
+        closeModal.addEventListener('click',closeCallModal);
+      }
+
+      if(callModal){
+        callModal.addEventListener('click',(event)=>{
+          if(event.target===callModal){
+            closeCallModal();
+          }
+        });
+      }
+
+      if(copyNumber){
+        copyNumber.addEventListener('click',()=>{
+          if(callNumber && navigator.clipboard){
+            navigator.clipboard.writeText(callNumber.textContent || '').catch(()=>{});
+          }
+        });
+      }
+
+      document.addEventListener('keydown',(event)=>{
+        if(event.key==='Escape'){
+          closeCallModal();
+        }
+      });
+
       const ENDPOINTS={ sixteen:{health:'/api/mesh/016-persona-evolution-engine/health',chat:'/chat'}, thirtysix:{ingest:'/api/mesh/036-lead-router/ingest'} };
       // 016 presence
       try{ fetch(ENDPOINTS.sixteen.health,{method:'GET',mode:'no-cors'}); }catch(_){ }
