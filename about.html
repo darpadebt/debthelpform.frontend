@@ -44,7 +44,7 @@
   <style>
     :root{
       --bg:#f8fafc;
-      --surface:#ffffff;
+      --surface:#e6fafa;
       --text:#0f172a;
       --muted:#475569;
       --brand:#0ea5e9;
@@ -208,9 +208,16 @@
     }
     .button.primary:active{transform:translateY(1px)}
     .button.ghost{
-      background:#e2f2fb;
-      color:#0369a1;
-      border:1px solid #bae6fd;
+      background:#5ac8c8;
+      color:#fff;
+      border:1px solid #47b6b6;
+    }
+    .button.ghost:hover{background:#4fbcbc}
+    .button.call{
+      background:var(--brand-2);
+      color:#fff;
+      border-color:transparent;
+      box-shadow:0 8px 18px rgba(34,197,94,.35);
     }
 
     .page-card{
@@ -226,11 +233,12 @@
     .page-card a:hover{text-decoration:underline}
     .page-card ul{margin:0 0 14px 18px;color:var(--muted);padding:0}
     .page-card li{margin-bottom:8px}
+    .hidden{display:none}
 
     .values-grid{display:grid;gap:16px;margin-top:14px}
     @media (min-width:720px){.values-grid{grid-template-columns:repeat(3,1fr)}}
     .value-card{
-      background:#f1f5f9;
+      background:#fff;
       border-radius:16px;
       padding:16px 18px;
       border:1px solid #e2e8f0;
@@ -246,13 +254,21 @@
       align-items:flex-start;
     }
 
-    iframe{
-      width:100%;
-      border:none;
-      border-radius:14px;
-      background:#fff;
-      box-shadow:inset 0 0 0 1px #e2e8f0;
-      min-height:720px;
+    form{display:grid;gap:10px}
+    input,select{width:100%;padding:12px 14px;border:1px solid #e2e8f0;border-radius:12px;font-size:16px;background:#fff}
+    input:focus,select:focus{outline:none;border-color:#38bdf8;box-shadow:0 0 0 4px var(--ring)}
+    .consent{display:flex;gap:8px;align-items:flex-start;font-size:12px;color:var(--muted);line-height:1.4}
+    .consent input{margin-top:2px}
+    .consent a{color:var(--brand);font-weight:600;text-decoration:none}
+    .consent a:hover{text-decoration:underline}
+    #leadStatus{margin:6px 0 0}
+    #leadStatus[data-mode="error"]{color:#dc2626}
+    #leadStatus[data-mode="warn"]{color:#b45309}
+    .about-hero-image{margin:18px 0 0}
+    .about-hero-image img{width:100%;height:auto;display:block;border-radius:16px;box-shadow:var(--shadow)}
+    @media (max-width:640px){
+      .about-hero-image{margin-left:-16px;margin-right:-16px}
+      .about-hero-image img{border-radius:0}
     }
 
     .footer-sticky{
@@ -297,7 +313,6 @@
       .page-header h1{font-size:26px}
       .button{width:100%}
       .page-card{padding:20px}
-      iframe{min-height:640px}
     }
   </style>
 </head>
@@ -331,9 +346,12 @@
           <span class="badge">FTC & TCPA Aligned</span>
           <span class="badge">No Upfront Fees</span>
         </div>
+        <figure class="about-hero-image">
+          <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1600&q=80" alt="Trusted debt relief team reviewing paperwork with a client" loading="lazy" />
+        </figure>
         <div class="buttons">
           <a class="button primary" data-role="estimate" href="/#get-started">🔒 Start Secure Estimate</a>
-          <a class="button ghost" data-role="call" href="tel:+18884377141">📞 Call 888‑437‑7141</a>
+          <a class="button ghost call" data-role="call" href="tel:+18884377141">📞 Call 888‑437‑7141</a>
         </div>
       </header>
 
@@ -378,14 +396,24 @@
       <section class="page-card" aria-label="Free debt relief form">
         <h2 style="margin-bottom:16px">Secure Relief Request Form</h2>
         <p>Answer a few quick questions below and we’ll follow up with options tailored to you.</p>
-        <iframe
-          src="https://api.leadconnectorhq.com/widget/form/A5c9I3HkyNd1puU4nJWl"
-          height="1360"
-          data-form-id="A5c9I3HkyNd1puU4nJWl"
-          title="Free Debt Help Form"
-          loading="lazy"
-          allowtransparency="true">
-        </iframe>
+        <form id="leadForm" autocomplete="on">
+          <input type="text" name="first" placeholder="First name" required />
+          <input type="email" name="email" placeholder="Email" required inputmode="email" />
+          <input type="tel" name="phone" placeholder="Phone" required inputmode="tel" />
+          <input type="text" name="zip" placeholder="ZIP code" required inputmode="numeric" pattern="\\d{5}" />
+          <input type="text" name="hp" id="hp" class="hidden" tabindex="-1" autocomplete="off" />
+          <input type="hidden" name="form_ts" id="form_ts" />
+          <label class="consent">
+            <input type="checkbox" name="consent_terms" required />
+            <span>I agree to the <a href="/terms.html" target="_blank" rel="noopener">Terms</a> and <a href="/privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span>
+          </label>
+          <label class="consent">
+            <input type="checkbox" name="consent_marketing" value="yes" />
+            <span>It’s okay to contact me about debt relief options by phone, email, or text.</span>
+          </label>
+          <button class="button primary" type="submit">See my options</button>
+          <p class="muted hidden" id="leadStatus" role="status" aria-live="polite"></p>
+        </form>
       </section>
     </main>
   </div>
@@ -503,6 +531,121 @@
         if(target.matches('[data-role="estimate"]')) send('cta:start_click', { url: location.href });
         if(target.matches('[data-role="call"]') || target.matches('a[href^="tel:"]')) send('cta:call_click', { url: location.href });
       }, { passive:true });
+    })();
+  </script>
+  <script>
+    (() => {
+      const CONFIG = { LEAD_ENDPOINT: "/api/mesh/036-lead-router/ingest", SITE_TAG: "DHF" };
+      const form = document.getElementById('leadForm');
+      const statusEl = document.getElementById('leadStatus');
+
+      if(!form) return;
+
+      const UTM_PARAMS = (() => {
+        const params = new URLSearchParams(window.location.search);
+        const out = {};
+        params.forEach((value, key) => {
+          const normalizedKey = key.trim().toLowerCase();
+          if (/^(utm_[a-z0-9_]+|gclid|msclkid|fbclid|ttclid|yclid)$/.test(normalizedKey)) {
+            out[normalizedKey] = value.trim();
+          }
+        });
+        return out;
+      })();
+
+      const LANDING_CONTEXT = {
+        path: window.location.pathname,
+        query: window.location.search || "",
+        referrer: document.referrer || null
+      };
+
+      const formTs = document.getElementById('form_ts');
+      if(formTs){
+        formTs.value = Date.now().toString();
+      }
+
+      function setStatus(message, mode = 'info'){
+        if(!statusEl) return;
+        statusEl.textContent = message || '';
+        statusEl.classList.toggle('hidden', !message);
+        statusEl.dataset.mode = mode;
+      }
+
+      async function submitLead(payload){
+        const res = await fetch(CONFIG.LEAD_ENDPOINT, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+        let data = null;
+        try {
+          data = await res.json();
+        } catch(err){
+          console.warn('Lead router response parse error', err);
+        }
+        if(!res.ok){
+          const reason = data?.reason || data?.error || `HTTP ${res.status}`;
+          throw new Error(reason);
+        }
+        return data;
+      }
+
+      form.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const submitBtn = form.querySelector('button[type="submit"]');
+        submitBtn?.setAttribute('disabled', 'true');
+        setStatus('Submitting your details securely...');
+        const fd = new FormData(form);
+        const phone = (fd.get('phone')||'').toString().replace(/[^\d+]/g,'');
+        const marketingValue = fd.get('consent_marketing');
+        const marketingOptIn = typeof marketingValue === 'string'
+          ? ['on', 'yes', 'true', '1'].includes(marketingValue.toLowerCase())
+          : false;
+        const consent = {
+          terms: fd.get('consent_terms') === 'on',
+          marketing: marketingOptIn,
+          timestamp: new Date().toISOString()
+        };
+        const payload = {
+          name: (fd.get('first')||'').toString().trim(),
+          email: (fd.get('email')||'').toString().trim(),
+          phone,
+          zip: (fd.get('zip')||'').toString().trim(),
+          source: CONFIG.SITE_TAG,
+          hp: (fd.get('hp')||'').toString(),
+          form_ts: Number(fd.get('form_ts')||Date.now()),
+          state: null,
+          debt_amount: null,
+          meta: {
+            entrypoint: 'about_form',
+            site_tag: CONFIG.SITE_TAG,
+            landing: LANDING_CONTEXT
+          },
+          utm: UTM_PARAMS,
+          consent
+        };
+        try {
+          const res = await submitLead(payload);
+          const status = res?.status || 'accepted';
+          if(status === 'accepted' || status === 'duplicate'){
+            setStatus('Thanks! Your request is in. We will follow up shortly.');
+            form.reset();
+            if(formTs){
+              formTs.value = Date.now().toString();
+            }
+          } else if (status === 'limited') {
+            setStatus('We received your request but are temporarily limiting submissions. Please try again shortly.', 'warn');
+          } else {
+            const reason = res?.reason || 'Your request could not be completed. Please call us to finish your review.';
+            setStatus(reason, 'error');
+          }
+        } catch(err){
+          console.error('Lead router submission failed', err);
+          setStatus('We could not submit your details. Please check your connection and try again.', 'error');
+        } finally {
+          submitBtn?.removeAttribute('disabled');
+        }
+      });
     })();
   </script>
   <script>
