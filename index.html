@@ -145,14 +145,18 @@
     .trust{display:flex;align-items:center;gap:8px;color:#0369a1;font-weight:600;font-size:13px}
     .callnow{font-weight:800;color:#fff;background:var(--brand-2);border:none;border-radius:999px;padding:10px 14px;text-decoration:none}
     form{display:grid;gap:10px}
-    #leadGate{
+    .cta-panel{
       background:linear-gradient(135deg,#0ea5e9,#38bdf8 55%,#22c55e);
       color:#fff;
       border:none;
       box-shadow:0 18px 40px rgba(14,165,233,.25);
     }
-    #leadGate .prompt{color:#fff}
-    #leadGate .muted{color:rgba(255,255,255,.85)}
+    .cta-panel .prompt{color:#fff}
+    .cta-panel .muted{color:rgba(255,255,255,.85)}
+    .cta-panel .primary{
+      background:rgba(15,23,42,.9);
+      box-shadow:0 10px 20px rgba(15,23,42,.35);
+    }
     #leadGate form input{
       background:rgba(255,255,255,.95);
       border:1px solid rgba(255,255,255,.6);
@@ -161,10 +165,6 @@
     #leadGate form input::placeholder{color:#64748b}
     #leadGate .consent{color:rgba(255,255,255,.9)}
     #leadGate .consent a{color:#fff;text-decoration:underline}
-    #leadGate .primary{
-      background:rgba(15,23,42,.9);
-      box-shadow:0 10px 20px rgba(15,23,42,.35);
-    }
     input,select{width:100%;padding:12px 14px;border:1px solid #e2e8f0;border-radius:12px;font-size:16px}
     input:focus,select:focus{outline:none;border-color:#38bdf8;box-shadow:0 0 0 4px var(--ring)}
     .legal{font-size:12px;color:var(--muted)}
@@ -238,7 +238,7 @@
       <div class="muted" style="margin-top:8px">Secure & confidential. No obligation.</div>
     </div>
 
-    <div class="card hidden" id="leadGate">
+    <div class="card hidden cta-panel" id="leadGate">
       <div class="prompt">Thanks! Based on your answers, you may qualify for a consolidation loan.</div>
       <div class="muted">Where should we send your free results?</div>
       <form id="leadForm" autocomplete="on">

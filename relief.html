@@ -90,6 +90,10 @@
     .comparison{display:grid;margin-top:10px}
     .comparison-row{display:grid;gap:10px;padding:14px 0;border-bottom:1px solid #e2e8f0}
     .comparison-row:last-child{border-bottom:none;padding-bottom:0}
+    .comparison-row.goal-settlement{position:relative;overflow:hidden;border-radius:16px;padding:18px 16px;border:none;color:#f8fafc;background:#0f172a}
+    .comparison-row.goal-settlement::before{content:"";position:absolute;inset:0;background:url("https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;filter:brightness(.65) saturate(1.05)}
+    .comparison-row.goal-settlement::after{content:"";position:absolute;inset:0;background:rgba(15,23,42,.65)}
+    .comparison-row.goal-settlement > *{position:relative;z-index:1}
     @media(min-width:720px){.comparison-row{grid-template-columns:1.1fr 1fr}}
 
     .trust{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;color:#0369a1;font-weight:600;font-size:13px}
@@ -233,7 +237,7 @@
             <div role="cell"><strong>Goal (Consolidation)</strong></div>
             <div role="cell">Lower rate + simplify into one fixed payment</div>
           </div>
-          <div class="comparison-row" role="row">
+          <div class="comparison-row goal-settlement" role="row">
             <div role="cell"><strong>Goal (Settlement)</strong></div>
             <div role="cell">Reduce balances owed through negotiated settlements</div>
           </div>
@@ -245,12 +249,6 @@
         </div>
       </div>
       </section>
-
-    <section class="section" aria-label="Debt relief support image">
-      <figure class="relief-image">
-        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1600&q=80" alt="Person reviewing household bills and debt paperwork at a table" loading="lazy" />
-      </figure>
-    </section>
 
     <section class="section" aria-label="Trust & contact">
       <div class="card" style="text-align:center">
