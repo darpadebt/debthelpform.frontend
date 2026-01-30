@@ -1,7 +1,19 @@
-.cta-panel{
-  background:linear-gradient(135deg,#0ea5e9,#38bdf8 55%,#22c55e);
+.cta-panel,
+.page-card.cta-panel,
+.card.cta-panel{
+  background:linear-gradient(135deg,#0ea5e9,#38bdf8 55%,#22c55e) !important;
   color:#fff;
   border:none;
+}
+
+.cta-panel .muted,
+.cta-panel .range-labels,
+.cta-panel .legal{
+  color:rgba(255,255,255,.9);
+}
+
+.cta-panel .progress{
+  background:rgba(255,255,255,.25);
 }
 
 .cta-panel .button.primary,
