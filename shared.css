@@ -1,0 +1,12 @@
+.cta-panel{
+  background:linear-gradient(135deg,#0ea5e9,#38bdf8 55%,#22c55e);
+  color:#fff;
+  border:none;
+}
+
+.cta-panel .button.primary,
+.cta-panel .primary{
+  background:rgba(15,23,42,.9);
+  box-shadow:0 8px 18px rgba(15,23,42,.35);
+  color:#fff;
+}

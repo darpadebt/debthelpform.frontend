@@ -15,6 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="/shared.css" rel="stylesheet" />
   <style>
     :root{ --bg:#f8fafc; --surface:#e6fafa; --text:#0f172a; --muted:#475569; --brand:#0ea5e9; --brand-2:#22c55e; --ring: rgba(14,165,233,.25); --radius: 18px; --shadow: 0 10px 30px rgba(2,6,23,.08); --cta-gradient: linear-gradient(135deg,#0ea5e9,#38bdf8 55%,#22c55e); --cta-button: rgba(15,23,42,.9); --cta-button-shadow: 0 8px 18px rgba(15,23,42,.35); }
     *{box-sizing:border-box}
@@ -127,9 +128,29 @@
     .badge{font-size:12px;padding:6px 10px;border-radius:999px;background:#e6fafa;color:#0369a1;text-decoration:none}
     .primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(90deg,var(--brand),#38bdf8);color:#fff;border:none;border-radius:999px;padding:14px 18px;font-weight:700;font-size:16px;cursor:pointer;box-shadow:0 8px 18px var(--ring)}
     .primary:active{transform:translateY(1px)}
+    .button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      padding:12px 18px;
+      border-radius:999px;
+      font-weight:700;
+      font-size:15px;
+      text-decoration:none;
+      transition:transform .15s ease,box-shadow .15s ease,opacity .15s ease;
+    }
+    .button.primary{
+      background:linear-gradient(90deg,var(--brand),#38bdf8);
+      color:#fff;
+      border:none;
+      box-shadow:0 8px 18px var(--ring);
+    }
+    .button.primary:active{transform:translateY(1px)}
     .progress{height:6px;background:#e2e8f0;border-radius:999px;margin:18px 0 6px;overflow:hidden}
     .progress>i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand-2))}
     .card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin:12px 0}
+    .page-card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:18px;margin:12px 0}
     .prompt{font-size:20px;font-weight:700;margin:8px 0 16px}
     .muted{color:var(--muted);font-size:13px}
     .choices{display:grid;grid-template-columns:1fr;gap:10px}
@@ -145,24 +166,36 @@
     .trust{display:flex;align-items:center;gap:8px;color:#0369a1;font-weight:600;font-size:13px}
     .callnow{font-weight:800;color:#fff;background:var(--brand-2);border:none;border-radius:999px;padding:10px 14px;text-decoration:none}
     form{display:grid;gap:10px}
-    .cta-panel{
-      background:linear-gradient(135deg,#0ea5e9,#38bdf8 55%,#22c55e);
-      color:#fff;
-      border:none;
-    }
     .cta-panel .prompt{color:#fff}
-    .cta-panel .muted{color:rgba(255,255,255,.9)}
-    .cta-panel .primary{
-      background:rgba(15,23,42,.9);
-      box-shadow:0 8px 18px rgba(15,23,42,.35);
+    .cta-panel .muted,
+    .cta-panel .range-labels,
+    .cta-panel .legal{color:rgba(255,255,255,.9)}
+    .cta-panel .progress{background:rgba(255,255,255,.25)}
+    .cta-panel .choice{
+      background:rgba(15,23,42,.22);
+      border:1px solid rgba(255,255,255,.45);
       color:#fff;
+    }
+    .cta-panel .choice:hover{border-color:rgba(255,255,255,.8)}
+    .cta-panel .choice.active{
+      border-color:#fff;
+      background:rgba(15,23,42,.45);
+    }
+    .cta-panel .next{
+      background:rgba(15,23,42,.9);
+      color:#fff;
+      box-shadow:0 8px 18px rgba(15,23,42,.35);
     }
     #leadGate form input{
-      background:rgba(255,255,255,.95);
-      border:1px solid rgba(255,255,255,.6);
-      color:#0f172a;
+      background:rgba(15,23,42,.25);
+      border:1px solid rgba(255,255,255,.55);
+      color:#fff;
     }
-    #leadGate form input::placeholder{color:#64748b}
+    #leadGate form input::placeholder{color:rgba(255,255,255,.75)}
+    #leadGate form input:focus{
+      border-color:#fff;
+      box-shadow:0 0 0 3px rgba(255,255,255,.25);
+    }
     #leadGate .consent{color:rgba(255,255,255,.9)}
     #leadGate .consent a{color:#fff;text-decoration:underline}
     input,select{width:100%;padding:12px 14px;border:1px solid #e2e8f0;border-radius:12px;font-size:16px}
@@ -231,14 +264,14 @@
       </div>
     </div>
 
-    <div class="card hidden" id="survey">
+    <div class="card page-card hidden cta-panel" id="survey">
       <div class="progress"><i id="progressBar"></i></div>
       <div class="muted" id="stepLabel">Step 1 of 5</div>
       <div id="stepMount"></div>
       <div class="muted" style="margin-top:8px">Secure & confidential. No obligation.</div>
     </div>
 
-    <div class="card hidden cta-panel" id="leadGate">
+    <div class="card page-card hidden cta-panel" id="leadGate">
       <div class="prompt">Thanks! Based on your answers, you may qualify for a consolidation loan.</div>
       <div class="muted">Where should we send your free results?</div>
       <form id="leadForm" autocomplete="on">
@@ -256,12 +289,12 @@
           <input type="checkbox" name="consent_marketing" value="yes" />
           <span>It’s okay to contact me about debt relief options by phone, email, or text.</span>
         </label>
-        <button class="primary" type="submit">See my options</button>
+        <button class="button primary" type="submit">See my options</button>
         <p class="muted hidden" id="leadStatus" role="status" aria-live="polite"></p>
       </form>
     </div>
 
-    <div class="card hidden" id="results">
+    <div class="card page-card hidden cta-panel" id="results">
       <div class="prompt">Here’s what people like you often see when consolidating</div>
       <div class="calc">
         <div><span class="pill" id="calcDebt">$—</span> total debt</div>
