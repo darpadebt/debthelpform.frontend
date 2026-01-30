@@ -157,7 +157,7 @@
     .menu-toggle:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
     @media (max-width:860px){
       .site-nav{flex-wrap:wrap;gap:10px}
-      .site-nav .links{order:3;width:100%;display:none;flex-direction:column;align-items:stretch;justify-content:flex-start;margin-left:0;border-radius:18px;background:#fff;padding:8px 4px;border:1px solid #e2e8f0;box-shadow:var(--shadow)}
+      .site-nav .links{order:3;width:100%;display:none;flex-direction:column;align-items:stretch;justify-content:flex-start;margin-left:0;border-radius:0;background:#fff;padding:calc(84px + env(safe-area-inset-top, 0px)) 20px calc(24px + env(safe-area-inset-bottom, 0px));border:1px solid #e2e8f0;box-shadow:var(--shadow);position:fixed;inset:0;height:100vh;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;z-index:1100}
       .site-nav .links.open{display:flex}
       .site-nav .links a{justify-content:flex-start;font-size:15px;background:transparent;border:none;padding:10px 14px;border-radius:10px}
       .site-nav .links a:hover{background:#f1f5f9}
