@@ -292,26 +292,26 @@
           <div class="form-grid">
             <div>
               <label for="name">Your Name</label>
-              <input id="name" required />
+              <input id="name" name="name" required />
             </div>
             <div>
               <label for="email">Email</label>
-              <input id="email" type="email" required />
+              <input id="email" name="email" type="email" required />
             </div>
           </div>
           <div class="form-grid">
             <div>
               <label for="phone">Phone</label>
-              <input id="phone" inputmode="tel" placeholder="(555) 555‑5555" />
+              <input id="phone" name="phone" inputmode="tel" placeholder="(555) 555‑5555" />
             </div>
             <div>
               <label for="topic">Topic</label>
-              <input id="topic" placeholder="Estimate, Billing, Other" />
+              <input id="topic" name="topic" placeholder="Estimate, Billing, Other" />
             </div>
           </div>
           <div>
             <label for="message">Message</label>
-            <textarea id="message" required></textarea>
+            <textarea id="message" name="message" required></textarea>
           </div>
           <p>By contacting us, you agree to our <a href="/privacy.html">Privacy Policy</a>. We never sell your information.</p>
           <button type="submit" class="button primary submit">Send Message</button>
@@ -439,6 +439,7 @@
   <script>
     document.addEventListener('DOMContentLoaded', async function(){
       const ENDPOINTS={ thirtysix:{ingest:'/api/mesh/036-lead-router/ingest',config:'/api/mesh/036-lead-router/config'} };
+      const EMAIL_ENDPOINT='https://formsubmit.co/ajax/GatewayDebtHelp@gmail.com';
       try{
         if(navigator.sendBeacon){
           navigator.sendBeacon(ENDPOINTS.thirtysix.ingest,new Blob([JSON.stringify({event:'page_view',site:'DHF',page:'contact',ts:Date.now()})],{type:'application/json'}));
@@ -458,12 +459,36 @@
       const form=document.getElementById('contactForm');
       if(form) form.addEventListener('submit',async e=>{
         e.preventDefault();
-        const payload={event:'contact_submit',site:'DHF',page:'contact',name:document.getElementById('name').value,email:document.getElementById('email').value,phone:document.getElementById('phone').value,topic:document.getElementById('topic').value,message:document.getElementById('message').value,ts:Date.now()};
+        const name=document.getElementById('name').value;
+        const email=document.getElementById('email').value;
+        const phone=document.getElementById('phone').value;
+        const topic=document.getElementById('topic').value;
+        const message=document.getElementById('message').value;
+        const payload={event:'contact_submit',site:'DHF',page:'contact',name,email,phone,topic,message,ts:Date.now()};
+        const statusEl=document.getElementById('formMsg');
+        if(statusEl) statusEl.textContent='Sending your message...';
         try{
-          const r=await fetch(ENDPOINTS.thirtysix.ingest,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload),keepalive:true});
-          document.getElementById('formMsg').textContent=r.ok?"✅ Message sent! We’ll reply soon.":"❌ Error sending message.";
+          const [leadRes, emailRes]=await Promise.all([
+            fetch(ENDPOINTS.thirtysix.ingest,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(payload),keepalive:true}),
+            fetch(EMAIL_ENDPOINT,{
+              method:'POST',
+              headers:{'Content-Type':'application/x-www-form-urlencoded'},
+              body:new URLSearchParams({
+                name,
+                email,
+                phone,
+                topic,
+                message,
+                _subject:'Debt Help Form Contact Message',
+                _replyto: email || 'noreply@debthelpform.com'
+              })
+            })
+          ]);
+          const ok=leadRes.ok && emailRes.ok;
+          if(statusEl) statusEl.textContent=ok?"✅ Message sent! We’ll reply soon.":"❌ Error sending message.";
+          if(ok) form.reset();
         }catch(err){
-          document.getElementById('formMsg').textContent="❌ Error sending message.";
+          if(statusEl) statusEl.textContent="❌ Error sending message.";
         }
       });
       
