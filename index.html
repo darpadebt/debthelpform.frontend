@@ -122,6 +122,13 @@
     }
 
     header.hero{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:24px;margin:32px 0 12px}
+    header.hero.cta-panel{background:var(--cta-gradient);color:#fff;border:none}
+    header.hero.cta-panel .sub{color:rgba(255,255,255,.9)}
+    header.hero.cta-panel .badge{
+      background:rgba(15,23,42,.2);
+      color:#fff;
+      border:1px solid rgba(255,255,255,.35);
+    }
     header .h1{font-size:26px;line-height:1.2;margin:0 0 8px;font-weight:800}
     header .sub{color:var(--muted);font-size:15px;margin-bottom:16px}
     .badges{display:flex;gap:10px;flex-wrap:wrap}
@@ -242,7 +249,7 @@
       </div>
     </nav>
 
-    <header class="hero" id="entry">
+    <header class="hero cta-panel" id="entry">
       <div class="h1">See if you may qualify for a debt consolidation loan — in about 60 seconds</div>
       <div class="sub">Answer a few quick questions to preview your options. Secure & confidential. No obligation.</div>
       <div id="get-started">
