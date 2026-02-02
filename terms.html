@@ -275,6 +275,7 @@
       .page-card{padding:20px}
     }
   </style>
+  <script src="/ab015.sitewide.js" defer></script>
 </head>
 <body>
   <div class="shell">
@@ -296,17 +297,17 @@
         <a href="/contact.html">Contact</a>
         <a href="/privacy.html">Privacy</a>
         <a href="/terms.html">Terms</a>
-        <a class="call" href="tel:+18884377141">Call +1 (888) 437‑7141</a>
+        <a class="call" data-ab-slot="nav_call" href="tel:+18884377141">Call +1 (888) 437‑7141</a>
       </div>
     </nav>
 
     <main class="page" id="main">
       <header class="page-header">
-        <h1>Terms of Use</h1>
+        <h1 data-ab-slot="page_title">Terms of Use</h1>
         <p>Please review these terms before using this site.</p>
         <div class="buttons">
-          <a class="button primary" data-role="estimate" href="/#get-started">🔒 Start Secure Estimate</a>
-          <a class="button ghost call" data-role="call" href="tel:+18884377141">📞 Call 888‑437‑7141</a>
+          <a data-ab-slot="estimate_cta" class="button primary" data-role="estimate" href="/#get-started">🔒 Start Secure Estimate</a>
+          <a data-ab-slot="tel_call" class="button ghost call" data-role="call" href="tel:+18884377141">📞 Call 888‑437‑7141</a>
         </div>
       </header>
 
@@ -342,7 +343,7 @@
         <p>We may update these terms at any time. Continued use means you accept the changes. The latest version is posted on this page.</p>
 
         <h2>10. Contact</h2>
-        <p>Questions about these terms? Call <a href="tel:+18884377141">888‑437‑7141</a> or use the secure form below.</p>
+        <p>Questions about these terms? Call <a data-ab-slot="tel_call" href="tel:+18884377141">888‑437‑7141</a> or use the secure form below.</p>
 
         <p class="form-note" style="margin-top:12px">Prefer to compare numbers first? Try the <a href="/calculator.savings.html">Debt Savings Calculator</a> or review <a href="/relief.html">Debt Relief Options</a> and <a href="/geo-debt-relief.html">State Programs</a>.</p>
       </section>
@@ -361,7 +362,7 @@
 
   <div class="footer-sticky">
     <div class="trust">🔒 Secure & Confidential</div>
-    <a class="callnow" data-role="call" href="tel:+18884377141">Call Now</a>
+    <a data-ab-slot="tel_call" class="callnow" data-role="call" href="tel:+18884377141">Call Now</a>
     <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener nofollow" class="muted" style="font-size:12px;text-decoration:none">BBB Profile</a>
   </div>
 

@@ -329,6 +329,7 @@
     }
     
   </style>
+  <script src="/ab015.sitewide.js" defer></script>
 </head>
 <body>
   <div class="shell">
@@ -350,17 +351,17 @@
         <a href="/contact.html">Contact</a>
         <a href="/privacy.html">Privacy</a>
         <a href="/terms.html">Terms</a>
-        <a class="call" href="tel:+18884377141">Call +1 (888) 437‑7141</a>
+        <a class="call" data-ab-slot="nav_call" href="tel:+18884377141">Call +1 (888) 437‑7141</a>
       </div>
     </nav>
 
     <main class="page" id="main">
       <header class="page-header">
-        <h1>Privacy Policy</h1>
+        <h1 data-ab-slot="page_title">Privacy Policy</h1>
         <p>We respect your privacy and protect your information.</p>
         <div class="buttons">
-          <a class="button primary" data-role="estimate" href="#lead-form">🔒 Start Secure Estimate</a>
-          <a class="button ghost call" data-role="call" href="tel:+18884377141">📞 Call 888‑437‑7141</a>
+          <a data-ab-slot="estimate_cta" class="button primary" data-role="estimate" href="#lead-form">🔒 Start Secure Estimate</a>
+          <a data-ab-slot="tel_call" class="button ghost call" data-role="call" href="tel:+18884377141">📞 Call 888‑437‑7141</a>
         </div>
       </header>
 
@@ -393,7 +394,7 @@
         <h2>Your Choices</h2>
         <ul>
           <li>Opt out of marketing by replying STOP or using provided links.</li>
-          <li>Request access, correction, or deletion where applicable by contacting <a href="tel:+18884377141">888-437-7141</a>.</li>
+          <li>Request access, correction, or deletion where applicable by contacting <a data-ab-slot="tel_call" href="tel:+18884377141">888-437-7141</a>.</li>
         </ul>
         <h2>State Availability</h2>
         <p>Program availability varies by state. Review our <a href="/geo-debt-relief.html">State Programs</a>.</p>
@@ -403,7 +404,7 @@
         <h2>Changes</h2>
         <p>We may update this policy. Updates are posted with a revised “Last Updated” date.</p>
         <h2>Contact</h2>
-        <p>Questions? Call <a href="tel:+18884377141">888-437-7141</a> or use the secure form below.</p>
+        <p>Questions? Call <a data-ab-slot="tel_call" href="tel:+18884377141">888-437-7141</a> or use the secure form below.</p>
         <p class="muted" style="margin-top:12px">Prefer to compare first? Try the <a href="/calculator.savings.html">Debt Savings Calculator</a> or read <a href="/relief.html">Debt Relief Options</a>.</p>
       </section>
 
@@ -421,7 +422,7 @@
 
   <div class="footer-sticky">
     <div class="trust">🔒 Secure &amp; Confidential</div>
-    <a class="callnow" data-role="call" href="tel:+18884377141">Call Now</a>
+    <a data-ab-slot="tel_call" class="callnow" data-role="call" href="tel:+18884377141">Call Now</a>
     <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener nofollow" class="muted" style="font-size:12px;text-decoration:none">BBB Profile</a>
   </div>
 
