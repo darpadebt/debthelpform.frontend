@@ -297,6 +297,7 @@
       .page-card{padding:20px}
     }
   </style>
+  <script src="/ab015.sitewide.js" defer></script>
 </head>
 <body>
   <div class="shell">
@@ -318,13 +319,13 @@
         <a href="/contact.html">Contact</a>
         <a href="/privacy.html">Privacy</a>
         <a href="/terms.html">Terms</a>
-        <a class="call" href="tel:+18884377141">Call +1 (888) 437‑7141</a>
+        <a class="call" data-ab-slot="nav_call" href="tel:+18884377141">Call +1 (888) 437‑7141</a>
       </div>
     </nav>
 
     <main class="page" id="main">
       <header class="page-header">
-        <h1>Debt Validation Basics</h1>
+        <h1 data-ab-slot="page_title">Debt Validation Basics</h1>
         <p>Get the facts on debt validation so you can verify what you owe, protect your rights, and choose the best path toward debt relief.</p>
         <div class="badges" aria-label="Trust badges">
           <span class="badge">✅ Consumer Rights Focused</span>
@@ -332,8 +333,8 @@
           <span class="badge">🔒 Secure & Confidential</span>
         </div>
         <div class="buttons">
-          <a class="button primary" data-role="estimate" href="/#get-started">Explore Debt Relief Options</a>
-          <a class="button ghost" data-role="call" href="tel:+18884377141">Talk to a Specialist</a>
+          <a data-ab-slot="estimate_cta" class="button primary" data-role="estimate" href="/#get-started">Explore Debt Relief Options</a>
+          <a data-ab-slot="tel_call" class="button ghost" data-role="call" href="tel:+18884377141">Talk to a Specialist</a>
         </div>
       </header>
 
@@ -377,14 +378,14 @@
         <h3>Debt relief support</h3>
         <p>Work with a team that can explain your options, build a plan, and keep everything compliant.</p>
         <p>Ready to explore what fits your situation? Use the button below to reach the secure lead form and get personalized guidance.</p>
-        <a class="button primary" data-role="estimate" href="/#get-started">Get Personalized Debt Help</a>
+        <a data-ab-slot="estimate_cta" class="button primary" data-role="estimate" href="/#get-started">Get Personalized Debt Help</a>
       </section>
 
       <section class="page-card cta-panel" aria-labelledby="cta">
         <div class="cta-block">
           <h2 id="cta" style="margin:0;font-size:26px">Struggling with debt payments?</h2>
           <p style="margin:0 0 12px;font-size:16px;max-width:520px;color:rgba(255,255,255,.9)">We help people compare debt consolidation loans and debt relief programs with no pressure. Start with a quick, secure estimate today.</p>
-          <a class="button primary" data-role="estimate" href="/#get-started">Start Your Free Debt Relief Estimate</a>
+          <a data-ab-slot="estimate_cta" class="button primary" data-role="estimate" href="/#get-started">Start Your Free Debt Relief Estimate</a>
         </div>
       </section>
     </main>
@@ -392,7 +393,7 @@
 
   <div class="footer-sticky">
     <div class="trust">🔒 Secure & Confidential</div>
-    <a class="callnow" data-role="call" href="tel:+18884377141">Call Now</a>
+    <a data-ab-slot="tel_call" class="callnow" data-role="call" href="tel:+18884377141">Call Now</a>
     <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener nofollow" class="muted" style="font-size:12px;text-decoration:none">BBB Profile</a>
   </div>
 

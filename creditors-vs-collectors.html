@@ -296,6 +296,7 @@
       .page-card{padding:20px}
     }
   </style>
+  <script src="/ab015.sitewide.js" defer></script>
 </head>
 <body>
   <div class="shell">
@@ -317,13 +318,13 @@
         <a href="/contact.html">Contact</a>
         <a href="/privacy.html">Privacy</a>
         <a href="/terms.html">Terms</a>
-        <a class="call" href="tel:+18884377141">Call +1 (888) 437‑7141</a>
+        <a class="call" data-ab-slot="nav_call" href="tel:+18884377141">Call +1 (888) 437‑7141</a>
       </div>
     </nav>
 
     <main class="page" id="main">
       <header class="page-header">
-        <h1>Creditors vs Collectors</h1>
+        <h1 data-ab-slot="page_title">Creditors vs Collectors</h1>
         <p>Not sure who is contacting you about a debt? Learn the key differences between creditors and collectors and what each one is allowed to do.</p>
         <div class="badges" aria-label="Trust badges">
           <span class="badge">✅ Simple, Friendly Explanations</span>
@@ -331,8 +332,8 @@
           <span class="badge">🔒 Secure & Confidential</span>
         </div>
         <div class="buttons">
-          <a class="button primary" data-role="estimate" href="/#get-started">See Debt Relief Options</a>
-          <a class="button ghost" data-role="call" href="tel:+18884377141">Talk to a Specialist</a>
+          <a data-ab-slot="estimate_cta" class="button primary" data-role="estimate" href="/#get-started">See Debt Relief Options</a>
+          <a data-ab-slot="tel_call" class="button ghost" data-role="call" href="tel:+18884377141">Talk to a Specialist</a>
         </div>
       </header>
 
@@ -365,14 +366,14 @@
         <h3>Debt relief guidance</h3>
         <p>Get help comparing programs so you can make a confident, informed decision.</p>
         <p>If you're dealing with creditors and collectors and you're tired of the hassle, click here to see if you qualify for a consolidation loan or other debt relief options.</p>
-        <a class="button primary" data-role="estimate" href="/#get-started">See If You Qualify</a>
+        <a data-ab-slot="estimate_cta" class="button primary" data-role="estimate" href="/#get-started">See If You Qualify</a>
       </section>
 
       <section class="page-card" aria-labelledby="cta" style="background:linear-gradient(135deg,#0ea5e9,#38bdf8 55%,#22c55e);color:#fff">
         <div class="cta-block">
           <h2 id="cta" style="margin:0;font-size:26px">Ready to reduce the pressure?</h2>
           <p style="margin:0 0 12px;font-size:16px;max-width:520px;color:rgba(255,255,255,.9)">Compare debt consolidation loans and relief programs in minutes. Start with a quick, secure estimate today.</p>
-          <a class="button primary" data-role="estimate" href="/#get-started" style="background:rgba(15,23,42,.9);box-shadow:0 8px 18px rgba(15,23,42,.35)">Start Your Free Debt Relief Estimate</a>
+          <a data-ab-slot="estimate_cta" class="button primary" data-role="estimate" href="/#get-started" style="background:rgba(15,23,42,.9);box-shadow:0 8px 18px rgba(15,23,42,.35)">Start Your Free Debt Relief Estimate</a>
         </div>
       </section>
     </main>
@@ -380,7 +381,7 @@
 
   <div class="footer-sticky">
     <div class="trust">🔒 Secure & Confidential</div>
-    <a class="callnow" data-role="call" href="tel:+18884377141">Call Now</a>
+    <a data-ab-slot="tel_call" class="callnow" data-role="call" href="tel:+18884377141">Call Now</a>
     <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener nofollow" class="muted" style="font-size:12px;text-decoration:none">BBB Profile</a>
   </div>
 

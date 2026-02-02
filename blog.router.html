@@ -24,13 +24,14 @@
     a.btn:hover{text-decoration:none;opacity:.95}
     @keyframes spin{to{transform:rotate(360deg)}}
   </style>
+  <script src="/ab015.sitewide.js" defer></script>
 </head>
 <body>
   <div class="card" id="statusCard" role="status" aria-live="polite">
     <div class="spinner" aria-hidden="true"></div>
-    <h1>Loading article…</h1>
+    <h1 data-ab-slot="page_title">Loading article…</h1>
     <p>We’re fetching the blog post for you.</p>
-    <p id="fallback" style="display:none"><a class="btn" href="/blog.index.html">Go to blog index</a></p>
+    <p id="fallback" style="display:none"><a class="btn" data-ab-slot="primary_cta" href="/blog.index.html">Go to blog index</a></p>
   </div>
 
   <script>
