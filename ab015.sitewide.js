@@ -1,9 +1,10 @@
 (() => {
   const SITE = 'DHF';
   const CORR_KEY = 'ab_corr_DHF';
-  const CTA_ENDPOINT = '/variant';
-  const AB_CONFIG_ENDPOINT = '/ab-config';
-  const TRACK_ENDPOINT = '/track';
+  const BASE_ENDPOINT = '/api/mesh/015-a-b-test-accelerator';
+  const CTA_ENDPOINT = `${BASE_ENDPOINT}/variant`;
+  const AB_CONFIG_ENDPOINT = `${BASE_ENDPOINT}/ab-config`;
+  const TRACK_ENDPOINT = `${BASE_ENDPOINT}/track`;
   const COOKIE_KEY = 'gfsr_sid';
   const AB_CONFIG_CACHE_KEY = 'ab015_ab_config';
   const AB_CONFIG_SLOTS = new Set([
@@ -16,6 +17,16 @@
     'form_submit',
     'lead_anchor'
   ]);
+  const CANONICAL_SLOTS = new Set(AB_CONFIG_SLOTS);
+  const ALIAS_SLOT_MAP = {
+    nav_call: 'nav_cta',
+    page_title: 'hero_headline',
+    primary_cta: 'homepage_buttons',
+    primary_button: 'homepage_buttons',
+    estimate_cta: 'homepage_buttons',
+    secondary_cta: 'homepage_buttons',
+    tel_call: 'homepage_buttons'
+  };
   const AB_CONFIG_SLOT_MAP = {
     hero_headline: 'heroHeadlineText',
     nav_cta: 'navCtaLabel',
@@ -26,104 +37,13 @@
     form_submit: 'formSubmitLabel',
     lead_anchor: 'leadAnchorLabel'
   };
-  const AB_SCOPE_MAP = {
-    hero_headline: 'dhf_hero_headline',
-    nav_cta: 'dhf_nav_cta',
-    homepage_buttons: 'dhf_homepage_buttons',
-    blog_mid_segue: 'dhf_blog_mid_segue',
-    blog_end_cta: 'dhf_blog_end_cta',
-    form_next: 'dhf_form_next',
-    form_submit: 'dhf_form_submit',
-    lead_anchor: 'dhf_lead_anchor'
-  };
-  const CANONICAL_SLOTS = new Set(Object.keys(AB_SCOPE_MAP));
 
   const getDebugState = () => {
     if (!window.__ab015DebugState) {
-      window.__ab015DebugState = { adapter: null, variants: {} };
+      window.__ab015DebugState = { variants: {} };
     }
     return window.__ab015DebugState;
   };
-
-  const applyForSite = (config = {}) => {
-    if (!document || !document.documentElement) return;
-    const debugEnabled = config.debugEnabled || new URLSearchParams(window.location.search).has('abdebug');
-    const aliasMap = config.aliasMap || {};
-    const slotSelectors = config.slotSelectors || {};
-    const slotMultiples = config.slotMultiples || {};
-    const pageType = typeof config.getPageType === 'function' ? config.getPageType() : 'info';
-    const skip = typeof config.shouldSkip === 'function' ? config.shouldSkip(pageType) : pageType === 'blog';
-    if (skip) return;
-
-    const rewriteAlias = (element) => {
-      const slot = element.getAttribute('data-ab-slot');
-      if (!slot || !aliasMap[slot]) return false;
-      element.setAttribute('data-ab-slot', aliasMap[slot]);
-      return true;
-    };
-
-    const tagged = new Map();
-    const found = new Map();
-    const missing = new Set();
-
-    document.querySelectorAll('[data-ab-slot]').forEach((element) => {
-      const didRewrite = rewriteAlias(element);
-      const slot = element.getAttribute('data-ab-slot');
-      if (slot) {
-        if (!found.has(slot)) found.set(slot, []);
-        found.get(slot).push(element);
-      }
-      if (debugEnabled && didRewrite) {
-        if (!tagged.has(slot)) tagged.set(slot, []);
-        tagged.get(slot).push(element);
-      }
-    });
-
-    Object.entries(slotSelectors).forEach(([slotName, selectors]) => {
-      const list = Array.isArray(selectors) ? selectors : [selectors];
-      const allowMultiple = Boolean(slotMultiples[slotName]);
-      let taggedCount = 0;
-      list.forEach((selector) => {
-        if (!selector) return;
-        document.querySelectorAll(selector).forEach((element) => {
-          const existing = element.getAttribute('data-ab-slot');
-          if (existing) {
-            if (aliasMap[existing]) {
-              element.setAttribute('data-ab-slot', aliasMap[existing]);
-            }
-            if (!found.has(existing)) found.set(existing, []);
-            found.get(existing).push(element);
-            return;
-          }
-          if (!allowMultiple && taggedCount > 0) return;
-          if (!CANONICAL_SLOTS.has(slotName)) return;
-          element.setAttribute('data-ab-slot', slotName);
-          taggedCount += 1;
-          if (!found.has(slotName)) found.set(slotName, []);
-          found.get(slotName).push(element);
-          if (!tagged.has(slotName)) tagged.set(slotName, []);
-          tagged.get(slotName).push(element);
-        });
-      });
-      if (!found.has(slotName)) {
-        missing.add(slotName);
-      }
-    });
-
-    if (debugEnabled) {
-      const summary = {
-        pageType,
-        slotsFound: Array.from(found.keys()),
-        slotsTagged: Array.from(tagged.keys()),
-        slotsMissing: Array.from(missing)
-      };
-      const debugState = getDebugState();
-      debugState.adapter = summary;
-      console.info('[ab015][adapter]', summary);
-    }
-  };
-
-  window.ab015ApplyForSite = applyForSite;
 
   const getVisitorType = () => {
     try {
@@ -192,15 +112,6 @@
     return '0';
   };
 
-  const getPageSlug = () => {
-    if (window.__ab && window.__ab.pageKey) {
-      return String(window.__ab.pageKey).replace(/:/g, '-');
-    }
-    const path = window.location.pathname.replace(/\?.*$/, '').replace(/\.html$/, '');
-    const trimmed = path.replace(/^\/+|\/+$/g, '');
-    return trimmed ? trimmed.replace(/\//g, '-') : 'home';
-  };
-
   const applyLabel = (element, label) => {
     if (!label || !element) return;
     element.setAttribute('aria-label', label);
@@ -239,15 +150,17 @@
     if (!node || !(node instanceof HTMLElement)) return;
     if (node.hasAttribute && node.hasAttribute('data-ab-slot')) {
       const slotName = node.getAttribute('data-ab-slot');
-      if (slotName && AB_CONFIG_SLOTS.has(slotName)) {
-        applyAbConfigToElements(slotName, [node], abConfig);
+      const canonicalSlot = resolveCanonicalSlot(slotName);
+      if (canonicalSlot) {
+        applyAbConfigToElements(canonicalSlot, [node], abConfig);
       }
     }
     const nested = node.querySelectorAll ? node.querySelectorAll('[data-ab-slot]') : [];
     nested.forEach((element) => {
       const slotName = element.getAttribute('data-ab-slot');
-      if (slotName && AB_CONFIG_SLOTS.has(slotName)) {
-        applyAbConfigToElements(slotName, [element], abConfig);
+      const canonicalSlot = resolveCanonicalSlot(slotName);
+      if (canonicalSlot) {
+        applyAbConfigToElements(canonicalSlot, [element], abConfig);
       }
     });
   };
@@ -328,13 +241,20 @@
     }
   };
 
+  const resolveCanonicalSlot = (slotName) => {
+    if (!slotName) return null;
+    if (CANONICAL_SLOTS.has(slotName)) return slotName;
+    const alias = ALIAS_SLOT_MAP[slotName];
+    return CANONICAL_SLOTS.has(alias) ? alias : null;
+  };
+
   const buildSlotsFromAttributes = () => {
     const slots = new Map();
     const elements = Array.from(document.querySelectorAll('[data-ab-slot]'));
-    elements.forEach((element, index) => {
+    elements.forEach((element) => {
       const raw = element.getAttribute('data-ab-slot');
       if (!raw) return;
-      const slotName = raw.trim();
+      const slotName = resolveCanonicalSlot(raw.trim());
       if (!slotName) return;
       if (!slots.has(slotName)) slots.set(slotName, []);
       slots.get(slotName).push(element);
@@ -348,9 +268,11 @@
 
     Object.entries(window.__ab.slots).forEach(([slotName, selector]) => {
       if (!selector || typeof selector !== 'string') return;
+      const canonicalSlot = resolveCanonicalSlot(slotName);
+      if (!canonicalSlot) return;
       const elements = Array.from(document.querySelectorAll(selector));
       if (!elements.length) return;
-      slots.set(slotName, elements);
+      slots.set(canonicalSlot, elements);
     });
 
     return slots;
@@ -360,32 +282,31 @@
     const slots = new Map();
     const seen = new Set();
 
-    const addElements = (baseName, selector, allowMultiple = true) => {
+    const addElements = (baseName, selector) => {
       const elements = Array.from(document.querySelectorAll(selector)).filter((el) => {
         if (seen.has(el)) return false;
         seen.add(el);
         return true;
       });
       if (!elements.length) return;
-      elements.forEach((el, index) => {
-        const name = allowMultiple && elements.length > 1 ? `${baseName}_${index + 1}` : baseName;
-        if (!slots.has(name)) slots.set(name, []);
-        slots.get(name).push(el);
+      elements.forEach((el) => {
+        if (!slots.has(baseName)) slots.set(baseName, []);
+        slots.get(baseName).push(el);
       });
     };
 
-    addElements('homepage_buttons', 'a[data-role="estimate"]', false);
+    addElements('homepage_buttons', 'a[data-role="estimate"]');
     addElements('lead_anchor', 'a[href*="#get-started"], a[href*="#leadGate"], a[href*="#leadForm"], a[href*="#lead-form"]');
-    addElements('homepage_buttons', 'a.button.primary, button.button.primary, a.primary', false);
+    addElements('homepage_buttons', 'a.button.primary, button.button.primary, a.primary');
 
     return slots;
   };
 
   const resolveSlot = async ({ slotName, elements, context }) => {
+    if (!CANONICAL_SLOTS.has(slotName)) return;
     if (context.skipBlogSlots && (slotName === 'blog_mid_segue' || slotName === 'blog_end_cta')) return;
-    const scopeKey = AB_SCOPE_MAP[slotName] || null;
-    const testId = scopeKey || `dhf_${context.pageSlug}_${slotName}`;
-    const scope = scopeKey || `debthelpform:${context.pageSlug}:${slotName}`;
+    const testId = slotName;
+    const scope = slotName;
     const abConfigKey = AB_CONFIG_SLOT_MAP[slotName];
     if (context.abConfig && abConfigKey && context.abConfig[abConfigKey]) {
       applyAbConfigToElements(slotName, elements, context.abConfig);
@@ -541,7 +462,6 @@
       pageType: getPageType(),
       funnelStage: null,
       stepIndex: getStepIndex(),
-      pageSlug: getPageSlug(),
       correlationId: null,
       skipBlogSlots: false
     };
