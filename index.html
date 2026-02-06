@@ -288,10 +288,10 @@
       <div class="prompt">Thanks! Based on your answers, you may qualify for a consolidation loan.</div>
       <div class="muted">Where should we send your free results?</div>
       <form id="leadForm" autocomplete="on">
-        <input type="text" name="first" placeholder="First name" required />
-        <input type="email" name="email" placeholder="Email" required inputmode="email" />
-        <input type="tel" name="phone" placeholder="Phone" required inputmode="tel" />
-        <input type="text" name="zip" placeholder="ZIP code" required inputmode="numeric" pattern="\d{5}" />
+        <input type="text" name="first" placeholder="First name" required autocomplete="given-name" />
+        <input type="email" name="email" placeholder="Email" required inputmode="email" autocomplete="email" />
+        <input type="tel" name="phone" placeholder="Phone" required inputmode="tel" autocomplete="tel" />
+        <input type="text" name="zip" placeholder="ZIP code" required inputmode="numeric" pattern="\d{5}" autocomplete="postal-code" maxlength="5" />
         <input type="text" name="hp" id="hp" class="hidden" tabindex="-1" autocomplete="off" />
         <input type="hidden" name="form_ts" id="form_ts" />
         <label class="consent">
