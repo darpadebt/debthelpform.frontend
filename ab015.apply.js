@@ -37,6 +37,26 @@
     }
   };
 
+  const safeGetSessionStorage = () => {
+    try {
+      const testKey = '__ab015_exposure__';
+      sessionStorage.setItem(testKey, '1');
+      sessionStorage.removeItem(testKey);
+      return sessionStorage;
+    } catch (error) {
+      return null;
+    }
+  };
+
+  const trackExposureOnce = (slotName, label) => {
+    if (!window.AB015 || typeof window.AB015.track !== 'function') return;
+    const storage = safeGetSessionStorage();
+    const key = `ab015_exposure_${slotName}_${label}`;
+    if (storage?.getItem(key)) return;
+    window.AB015.track('exposure', slotName);
+    storage?.setItem(key, '1');
+  };
+
   const getSlotLabel = (slotName, config) => {
     const key = SLOT_MAP[slotName];
     const value = key ? config?.[key] : null;
@@ -53,6 +73,7 @@
       if (!label) return;
       if (element.dataset && element.dataset.abConfigApplied === label) return;
       applyLabel(element, label);
+      trackExposureOnce(slotName, label);
       if (element.dataset) {
         element.dataset.abConfigApplied = label;
       }

@@ -13,16 +13,19 @@
   const CONFIG_KEY = `ab015_config_${SITE}`;
   const DEFAULT_TTL_SECONDS = 300;
   const VARIANT_CACHE_KEY = `ab015_variants_${SITE}`;
-  const SLOT_SCOPE_MAP = {
-    homepage_buttons: 'dhf_homepage_buttons',
-    blog_mid_segue: 'dhf_blog_mid_segue',
-    blog_end_cta: 'dhf_blog_end_cta',
-    hero_headline: 'dhf_hero_headline',
-    nav_cta: 'dhf_nav_cta',
-    form_next: 'dhf_form_next',
-    form_submit: 'dhf_form_submit',
-    lead_anchor: 'dhf_lead_anchor'
-  };
+  const SLOT_SCOPE_MAP = (() => {
+    const prefix = SITE.toLowerCase() === 'drg' ? 'drg' : 'dhf';
+    return {
+      homepage_buttons: `${prefix}_homepage_buttons`,
+      blog_mid_segue: `${prefix}_blog_mid_segue`,
+      blog_end_cta: `${prefix}_blog_end_cta`,
+      hero_headline: `${prefix}_hero_headline`,
+      nav_cta: `${prefix}_nav_cta`,
+      form_next: `${prefix}_form_next`,
+      form_submit: `${prefix}_form_submit`,
+      lead_anchor: `${prefix}_lead_anchor`
+    };
+  })();
   const SCOPE_SLOT_MAP = Object.fromEntries(
     Object.entries(SLOT_SCOPE_MAP).map(([slot, scope]) => [scope, slot])
   );
