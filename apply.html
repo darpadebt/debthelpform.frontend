@@ -188,7 +188,7 @@
     </nav>
 
     <header class="page-header">
-      <h1 data-ab-slot="hero_headline">Start Your Secure Estimate</h1>
+      <h1 data-ab-slot="hero_headline" data-ab-click="false">Start Your Secure Estimate</h1>
       <p>Answer a few quick questions below and we’ll follow up with options tailored to you. Secure &amp; confidential.</p>
     </header>
 
@@ -317,6 +317,9 @@
           const res = await submitLead(payload);
           const status = res?.status || 'accepted';
           if(status === 'accepted' || status === 'duplicate'){
+            if (window.AB015 && typeof window.AB015.trackCompletion === 'function') {
+              window.AB015.trackCompletion({ status });
+            }
             setStatus('Thanks! Your request is in. We will follow up shortly.');
             form.reset();
             if(formTs){

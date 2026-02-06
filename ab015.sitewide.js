@@ -1,5 +1,6 @@
 (() => {
-  const resolveSite = () => {
+  const DEFAULT_BASE_ENDPOINT = '/api/mesh/015-a-b-test-accelerator';
+  const SITE = (() => {
     try {
       const host = window.location.hostname.toLowerCase();
       if (host.includes('debtreliefguard')) return 'DRG';
@@ -7,25 +8,36 @@
       // ignore
     }
     return 'DHF';
-  };
-  const SITE = resolveSite();
-  const CORR_KEY = `ab_corr_${SITE}`;
-  const DEFAULT_BASE_ENDPOINT = '/api/mesh/015-a-b-test-accelerator';
+  })();
+
   const resolveBaseEndpoint = () => {
+    let candidate = DEFAULT_BASE_ENDPOINT;
     if (typeof window !== 'undefined' && window.__ab015BaseEndpoint) {
-      return String(window.__ab015BaseEndpoint);
+      candidate = String(window.__ab015BaseEndpoint);
+    } else {
+      const meta = document.querySelector('meta[name="ab015-endpoint"]');
+      if (meta && meta.content) candidate = meta.content;
     }
-    const meta = document.querySelector('meta[name="ab015-endpoint"]');
-    if (meta && meta.content) return meta.content;
-    return DEFAULT_BASE_ENDPOINT;
+    try {
+      const url = new URL(candidate, window.location.origin);
+      if (url.origin !== window.location.origin) return DEFAULT_BASE_ENDPOINT;
+      return candidate.startsWith('http') ? `${url.origin}${url.pathname}` : url.pathname;
+    } catch (error) {
+      return DEFAULT_BASE_ENDPOINT;
+    }
   };
+
   const BASE_ENDPOINT = resolveBaseEndpoint();
-  const CTA_ENDPOINT = `${BASE_ENDPOINT}/variant`;
   const AB_CONFIG_ENDPOINT = `${BASE_ENDPOINT}/ab-config`;
+  const VARIANT_ENDPOINT = `${BASE_ENDPOINT}/variant`;
   const TRACK_ENDPOINT = `${BASE_ENDPOINT}/track`;
-  const COOKIE_KEY = 'gfsr_sid';
-  const AB_CONFIG_CACHE_KEY = 'ab015_ab_config';
-  const AB_CONFIG_SLOTS = new Set([
+
+  const STORAGE_KEY = 'ab015_session_id';
+  const COOKIE_KEY = 'ab015_session_id';
+  const EXPOSURE_KEY_PREFIX = 'ab015_exposures_';
+  const CORR_KEY = `ab_corr_${SITE}`;
+
+  const SUPPORTED_SCOPES = new Set([
     'hero_headline',
     'nav_cta',
     'homepage_buttons',
@@ -35,7 +47,7 @@
     'form_submit',
     'lead_anchor'
   ]);
-  const CANONICAL_SLOTS = new Set(AB_CONFIG_SLOTS);
+
   const ALIAS_SLOT_MAP = {
     headline: 'hero_headline',
     nav_call: 'nav_cta',
@@ -47,6 +59,7 @@
     estimate_cta: 'homepage_buttons',
     secondary_cta: 'homepage_buttons'
   };
+
   const AB_CONFIG_SLOT_MAP = {
     hero_headline: 'heroHeadlineText',
     nav_cta: 'navCtaLabel',
@@ -58,11 +71,86 @@
     lead_anchor: 'leadAnchorLabel'
   };
 
-  const getDebugState = () => {
-    if (!window.__ab015DebugState) {
-      window.__ab015DebugState = { variants: {} };
+  const variantCache = {};
+  const exposedThisPage = new Set();
+  const pendingExposures = new Set();
+
+  const safeGetStorage = () => {
+    try {
+      const testKey = '__ab015_test__';
+      localStorage.setItem(testKey, '1');
+      localStorage.removeItem(testKey);
+      return localStorage;
+    } catch (error) {
+      return null;
     }
-    return window.__ab015DebugState;
+  };
+
+  const getCookie = (name) => {
+    try {
+      const cookies = document.cookie ? document.cookie.split('; ') : [];
+      for (const cookie of cookies) {
+        const [key, value] = cookie.split('=');
+        if (key === name) return value || '';
+      }
+    } catch (error) {
+      // ignore
+    }
+    return '';
+  };
+
+  const setCookie = (name, value) => {
+    try {
+      document.cookie = `${name}=${value}; Path=/; SameSite=Lax; Max-Age=31536000`;
+    } catch (error) {
+      // ignore
+    }
+  };
+
+  const generateSessionId = () => {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let out = '';
+    for (let i = 0; i < 12; i += 1) {
+      out += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return out;
+  };
+
+  const getSessionId = () => {
+    const storage = safeGetStorage();
+    let id = storage?.getItem(STORAGE_KEY) || getCookie(COOKIE_KEY);
+    if (!id || id.length < 8) {
+      id = generateSessionId();
+      if (storage) {
+        storage.setItem(STORAGE_KEY, id);
+      } else {
+        setCookie(COOKIE_KEY, id);
+      }
+    }
+    return id;
+  };
+
+  const getExposureMap = (sessionId) => {
+    const storage = safeGetStorage();
+    if (!storage) return {};
+    try {
+      return JSON.parse(storage.getItem(`${EXPOSURE_KEY_PREFIX}${sessionId}`) || '{}');
+    } catch (error) {
+      return {};
+    }
+  };
+
+  const setExposure = (sessionId, scope) => {
+    const storage = safeGetStorage();
+    if (!storage) return;
+    const map = getExposureMap(sessionId);
+    map[scope] = true;
+    storage.setItem(`${EXPOSURE_KEY_PREFIX}${sessionId}`, JSON.stringify(map));
+  };
+
+  const hasExposure = (sessionId, scope) => {
+    const map = getExposureMap(sessionId);
+    return Boolean(map[scope]);
   };
 
   const getVisitorType = () => {
@@ -82,27 +170,12 @@
 
   const getTrafficSource = () => {
     const params = new URLSearchParams(window.location.search);
-    const utmSource = params.get('utm_source');
-    const utmMedium = params.get('utm_medium');
-    const utmCampaign = params.get('utm_campaign');
-    const gclid = params.get('gclid');
-    const fbclid = params.get('fbclid');
-
-    if (utmSource || utmMedium || utmCampaign) {
-      return [utmSource || 'utm', utmMedium || 'unknown', utmCampaign || ''].filter(Boolean).join(':');
-    }
-    if (gclid) return 'paid:google';
-    if (fbclid) return 'paid:facebook';
-    if (document.referrer) {
-      try {
-        const refHost = new URL(document.referrer).hostname.toLowerCase();
-        if (/(google|bing|yahoo|duckduckgo)\./.test(refHost)) return 'search';
-        if (/(facebook|instagram|tiktok|linkedin|twitter|x)\./.test(refHost)) return 'social';
-        return `referral:${refHost}`;
-      } catch (error) {
-        return 'referral';
-      }
-    }
+    if (params.get('utm_source')) return params.get('utm_source');
+    if (params.get('gclid')) return 'google';
+    if (params.get('msclkid')) return 'bing';
+    if (params.get('fbclid')) return 'facebook';
+    if (params.get('ttclid')) return 'tiktok';
+    if (params.get('yclid')) return 'yahoo';
     return 'direct';
   };
 
@@ -125,11 +198,23 @@
     const candidates = ['stepIndex', 'step_index', 'leadStep', 'leadStepIndex', 'currentStep'];
     for (const key of candidates) {
       const value = window[key];
-      if (typeof value === 'number' || (typeof value === 'string' && value.trim() !== '')) {
-        return String(value);
-      }
+      if (typeof value === 'number') return String(value);
+      if (typeof value === 'string' && value.trim() !== '') return value;
     }
     return '0';
+  };
+
+  const resolveCanonicalSlot = (slotName) => {
+    if (!slotName) return null;
+    if (SUPPORTED_SCOPES.has(slotName)) return slotName;
+    const alias = ALIAS_SLOT_MAP[slotName];
+    return SUPPORTED_SCOPES.has(alias) ? alias : null;
+  };
+
+  const isTelLink = (element) => {
+    if (!element || element.tagName !== 'A') return false;
+    const href = (element.getAttribute('href') || '').trim().toLowerCase();
+    return href.startsWith('tel:');
   };
 
   const applyLabel = (element, label) => {
@@ -151,138 +236,19 @@
   const getAbConfigLabel = (slotName, abConfig) => {
     if (!abConfig || !slotName) return null;
     const key = AB_CONFIG_SLOT_MAP[slotName];
-    return key ? abConfig[key] : null;
-  };
-
-  const applyAbConfigToElements = (slotName, elements, abConfig) => {
-    const label = getAbConfigLabel(slotName, abConfig);
-    if (!label) return;
-    elements.forEach((element) => {
-      if (element.dataset && element.dataset.abConfigApplied) return;
-      applyLabel(element, label);
-      if (element.dataset) {
-        element.dataset.abConfigApplied = 'true';
-      }
-    });
-  };
-
-  const applyAbConfigToNode = (node, abConfig) => {
-    if (!node || !(node instanceof HTMLElement)) return;
-    if (node.hasAttribute && node.hasAttribute('data-ab-slot')) {
-      const slotName = node.getAttribute('data-ab-slot');
-      const canonicalSlot = resolveCanonicalSlot(slotName);
-      if (canonicalSlot) {
-        applyAbConfigToElements(canonicalSlot, [node], abConfig);
-      }
-    }
-    const nested = node.querySelectorAll ? node.querySelectorAll('[data-ab-slot]') : [];
-    nested.forEach((element) => {
-      const slotName = element.getAttribute('data-ab-slot');
-      const canonicalSlot = resolveCanonicalSlot(slotName);
-      if (canonicalSlot) {
-        applyAbConfigToElements(canonicalSlot, [element], abConfig);
-      }
-    });
-  };
-
-  const setupAbConfigObserver = (abConfig) => {
-    if (!abConfig || !document.body || window.__abConfigObserver) return;
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        mutation.addedNodes.forEach((node) => applyAbConfigToNode(node, abConfig));
-      });
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-    window.__abConfigObserver = observer;
-  };
-
-  const readCachedAbConfig = (sessionId) => {
-    if (!sessionId) return null;
-    try {
-      const raw = localStorage.getItem(AB_CONFIG_CACHE_KEY);
-      if (!raw) return null;
-      const cached = JSON.parse(raw);
-      if (!cached || cached.sessionId !== sessionId) return null;
-      if (cached.expiresAt && Date.now() > cached.expiresAt) return null;
-      return cached.data || null;
-    } catch (error) {
-      return null;
-    }
-  };
-
-  const writeCachedAbConfig = (sessionId, data) => {
-    if (!sessionId || !data) return;
-    const ttlSeconds = Number(data.ttlSeconds);
-    if (!Number.isFinite(ttlSeconds) || ttlSeconds <= 0) return;
-    try {
-      const payload = {
-        sessionId,
-        expiresAt: Date.now() + ttlSeconds * 1000,
-        data
-      };
-      localStorage.setItem(AB_CONFIG_CACHE_KEY, JSON.stringify(payload));
-    } catch (error) {
-      // ignore
-    }
-  };
-
-  const fetchAbConfig = async (sessionId) => {
-    if (!sessionId || sessionId.length < 8) return null;
-    const cached = readCachedAbConfig(sessionId);
-    if (cached) return cached;
-    try {
-      const params = new URLSearchParams({ sessionId, site: SITE });
-      const response = await fetch(`${AB_CONFIG_ENDPOINT}?${params.toString()}`);
-      if (!response.ok) return null;
-      const data = await response.json();
-      if (!data || typeof data !== 'object') return null;
-      writeCachedAbConfig(sessionId, data);
-      return data;
-    } catch (error) {
-      return null;
-    }
-  };
-
-  const sendTrack = (payload) => {
-    try {
-      const body = JSON.stringify(payload);
-      if (navigator.sendBeacon) {
-        navigator.sendBeacon(TRACK_ENDPOINT, new Blob([body], { type: 'application/json' }));
-        return;
-      }
-      fetch(TRACK_ENDPOINT, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body,
-        keepalive: true
-      }).catch(() => {});
-    } catch (error) {
-      // silent
-    }
-  };
-
-  const resolveCanonicalSlot = (slotName) => {
-    if (!slotName) return null;
-    if (CANONICAL_SLOTS.has(slotName)) return slotName;
-    const alias = ALIAS_SLOT_MAP[slotName];
-    return CANONICAL_SLOTS.has(alias) ? alias : null;
-  };
-
-  const isTelLink = (element) => {
-    if (!element || element.tagName !== 'A') return false;
-    const href = (element.getAttribute('href') || '').trim().toLowerCase();
-    return href.startsWith('tel:');
+    const value = key ? abConfig[key] : null;
+    return typeof value === 'string' ? value : null;
   };
 
   const buildSlotsFromAttributes = () => {
     const slots = new Map();
     const elements = Array.from(document.querySelectorAll('[data-ab-slot]'));
     elements.forEach((element) => {
-      if (isTelLink(element)) return;
       const raw = element.getAttribute('data-ab-slot');
       if (!raw) return;
       const slotName = resolveCanonicalSlot(raw.trim());
       if (!slotName) return;
+      if (isTelLink(element) && slotName !== 'lead_anchor') return;
       if (!slots.has(slotName)) slots.set(slotName, []);
       slots.get(slotName).push(element);
     });
@@ -292,7 +258,6 @@
   const buildSlotsFromConfig = () => {
     const slots = new Map();
     if (!window.__ab || !window.__ab.slots) return slots;
-
     Object.entries(window.__ab.slots).forEach(([slotName, selector]) => {
       if (!selector || typeof selector !== 'string') return;
       const canonicalSlot = resolveCanonicalSlot(slotName);
@@ -301,7 +266,6 @@
       if (!elements.length) return;
       slots.set(canonicalSlot, elements);
     });
-
     return slots;
   };
 
@@ -314,6 +278,8 @@
       const href = (element.getAttribute('href') || '').toLowerCase();
       return href.includes('/apply.html#get-started') || href.includes('#get-started');
     };
+
+    const isLeadAnchor = (element) => isApplyAnchor(element);
 
     const isInForm = (element) => !!(element && element.closest && element.closest('form'));
 
@@ -372,7 +338,7 @@
         addElement('nav_cta', element);
         return;
       }
-      if (isApplyAnchor(element)) {
+      if (isLeadAnchor(element)) {
         addElement('lead_anchor', element);
         return;
       }
@@ -384,23 +350,93 @@
     return slots;
   };
 
-  const resolveSlot = async ({ slotName, elements, context }) => {
-    if (!CANONICAL_SLOTS.has(slotName)) return;
-    if (context.skipBlogSlots && (slotName === 'blog_mid_segue' || slotName === 'blog_end_cta')) return;
-    const testId = slotName;
-    const scope = slotName;
-    const abConfigKey = AB_CONFIG_SLOT_MAP[slotName];
-    if (context.abConfig && abConfigKey && context.abConfig[abConfigKey]) {
-      applyAbConfigToElements(slotName, elements, context.abConfig);
+  const applyAbConfigToNode = (node, abConfig) => {
+    if (!node || !(node instanceof HTMLElement)) return;
+    if (node.hasAttribute && node.hasAttribute('data-ab-slot')) {
+      if (isTelLink(node)) return;
+      const slotName = resolveCanonicalSlot(node.getAttribute('data-ab-slot'));
+      if (slotName) applyLabel(node, getAbConfigLabel(slotName, abConfig));
     }
+    const nested = node.querySelectorAll ? node.querySelectorAll('[data-ab-slot]') : [];
+    nested.forEach((element) => {
+      if (isTelLink(element)) return;
+      const slotName = resolveCanonicalSlot(element.getAttribute('data-ab-slot'));
+      if (slotName) applyLabel(element, getAbConfigLabel(slotName, abConfig));
+    });
+  };
+
+  const setupAbConfigObserver = (abConfig, slots, context) => {
+    if (!document.body || window.__abConfigObserver) return;
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => {
+          if (!node || !(node instanceof HTMLElement)) return;
+          if (node.hasAttribute && node.hasAttribute('data-ab-slot')) {
+            if (isTelLink(node)) return;
+            const slotName = resolveCanonicalSlot(node.getAttribute('data-ab-slot'));
+            if (slotName) {
+              if (!slots.has(slotName)) slots.set(slotName, []);
+              if (!slots.get(slotName).includes(node)) slots.get(slotName).push(node);
+              applySlot(slotName, slots.get(slotName), context, abConfig);
+            }
+          }
+          const nested = node.querySelectorAll ? node.querySelectorAll('[data-ab-slot]') : [];
+          nested.forEach((element) => {
+            if (isTelLink(element)) return;
+            const slotName = resolveCanonicalSlot(element.getAttribute('data-ab-slot'));
+            if (!slotName) return;
+            if (!slots.has(slotName)) slots.set(slotName, []);
+            if (!slots.get(slotName).includes(element)) slots.get(slotName).push(element);
+            applySlot(slotName, slots.get(slotName), context, abConfig);
+          });
+          if (window.__ab && window.__ab.slots) {
+            Object.entries(window.__ab.slots).forEach(([slotName, selector]) => {
+              if (!selector || typeof selector !== 'string') return;
+              const canonicalSlot = resolveCanonicalSlot(slotName);
+              if (!canonicalSlot) return;
+              const elements = Array.from(node.querySelectorAll ? node.querySelectorAll(selector) : []).filter((element) => !isTelLink(element));
+              if (!elements.length) return;
+              if (!slots.has(canonicalSlot)) slots.set(canonicalSlot, []);
+              const list = slots.get(canonicalSlot);
+              elements.forEach((element) => {
+                if (!list.includes(element)) list.push(element);
+              });
+              applySlot(canonicalSlot, list, context, abConfig);
+            });
+          }
+          applyAbConfigToNode(node, abConfig);
+        });
+      });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+    window.__abConfigObserver = observer;
+  };
+
+  const fetchAbConfig = async (sessionId) => {
+    if (!sessionId || sessionId.length < 8) return null;
+    try {
+      const params = new URLSearchParams({ sessionId, site: SITE });
+      const response = await fetch(`${AB_CONFIG_ENDPOINT}?${params.toString()}`, { credentials: 'same-origin' });
+      if (!response.ok) return null;
+      const data = await response.json();
+      if (!data || typeof data !== 'object') return null;
+      return data;
+    } catch (error) {
+      return null;
+    }
+  };
+
+  const resolveVariant = async (scope, context, stepIndex) => {
+    if (!SUPPORTED_SCOPES.has(scope)) return null;
+    if (variantCache[scope]) return variantCache[scope];
     const params = new URLSearchParams({
       bucket: context.sessionId,
       scope,
       site: SITE,
-      test_id: testId,
+      test_id: scope,
       page_type: context.pageType,
       funnel_stage: context.funnelStage,
-      step_index: context.stepIndex,
+      step_index: stepIndex,
       device_type: context.deviceType,
       traffic_source: context.trafficSource,
       time_bucket: context.timeBucket,
@@ -412,19 +448,9 @@
       params.set('correlation_id', context.correlationId);
     }
 
-    const debugState = getDebugState();
-    if (debugState.variants) {
-      debugState.variants[slotName] = { status: 'pending' };
-    }
-
     try {
-      const response = await fetch(`${CTA_ENDPOINT}?${params.toString()}`);
-      if (!response.ok) {
-        if (debugState.variants) {
-          debugState.variants[slotName] = { status: `error:${response.status}` };
-        }
-        return;
-      }
+      const response = await fetch(`${VARIANT_ENDPOINT}?${params.toString()}`, { credentials: 'same-origin' });
+      if (!response.ok) return null;
       const data = await response.json();
       if (data && data.correlation_id) {
         try {
@@ -433,95 +459,107 @@
           // ignore
         }
       }
-      const label = data && data.meta ? (data.meta.label || data.meta.text) : null;
-      const variant = data && data.variant ? data.variant : 'control';
-      if (debugState.variants) {
-        debugState.variants[slotName] = {
-          status: 'ok',
-          variant,
-          label
-        };
+      const variant = data?.variant || data?.variant_id || data?.id || null;
+      if (variant) {
+        variantCache[scope] = variant;
       }
-      if (label) {
-        elements.forEach((element) => {
-          if (element.dataset && element.dataset.abConfigApplied) return;
-          applyLabel(element, label);
-        });
-      }
+      return variant;
+    } catch (error) {
+      return null;
+    }
+  };
 
-      elements.forEach((element) => {
-        if (element.dataset && element.dataset.abClick === 'false') return;
-        element.addEventListener('click', () => {
-          sendTrack({
-            bucket: context.sessionId,
-            scope,
-            variant,
-            event: 'click',
-            site: SITE,
-            test_id: testId,
-            page_type: context.pageType,
-            funnel_stage: context.funnelStage,
-            step_index: context.stepIndex,
-            device_type: context.deviceType,
-            traffic_source: context.trafficSource,
-            time_bucket: context.timeBucket,
-            visitor_type: context.visitorType,
-            page_path: context.pagePath,
-            correlation_id: data && data.correlation_id ? data.correlation_id : context.correlationId
-          });
-        }, { passive: true });
+  const track = async (event, scope, context, meta = {}) => {
+    if (!scope || !SUPPORTED_SCOPES.has(scope)) return false;
+    const stepIndex = meta.step_index || getStepIndex();
+    const variant = await resolveVariant(scope, context, stepIndex);
+    if (!variant) return false;
+    const payload = {
+      bucket: context.sessionId,
+      scope,
+      variant,
+      event,
+      site: SITE,
+      test_id: scope,
+      page_type: context.pageType,
+      funnel_stage: context.funnelStage,
+      step_index: stepIndex,
+      device_type: context.deviceType,
+      traffic_source: context.trafficSource,
+      time_bucket: context.timeBucket,
+      visitor_type: context.visitorType,
+      page_path: context.pagePath,
+      correlation_id: context.correlationId || undefined
+    };
+
+    if (meta && typeof meta.status === 'string') {
+      payload.status = meta.status;
+    }
+
+    try {
+      await fetch(TRACK_ENDPOINT, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json' },
+        credentials: 'same-origin',
+        body: JSON.stringify(payload)
       });
+      return true;
     } catch (error) {
-      if (debugState.variants) {
-        debugState.variants[slotName] = { status: 'error:network' };
-      }
+      return false;
     }
   };
 
-  const getCookie = (name) => {
-    try {
-      const cookies = document.cookie ? document.cookie.split('; ') : [];
-      for (const cookie of cookies) {
-        const [key, value] = cookie.split('=');
-        if (key === name) return value || '';
-      }
-    } catch (error) {
-      // ignore
+  const applySlot = (slotName, elements, context, abConfig) => {
+    if (!SUPPORTED_SCOPES.has(slotName)) return;
+    const label = getAbConfigLabel(slotName, abConfig);
+    let appliedLabel = false;
+    if (label) {
+      elements.forEach((element) => {
+        if (isTelLink(element)) return;
+        if (element.dataset && element.dataset.abConfigApplied) return;
+        applyLabel(element, label);
+        if (element.dataset) {
+          element.dataset.abConfigApplied = 'true';
+        }
+        appliedLabel = true;
+      });
     }
-    return '';
+
+    if (appliedLabel && !hasExposure(context.sessionId, slotName) && !exposedThisPage.has(slotName) && !pendingExposures.has(slotName)) {
+      pendingExposures.add(slotName);
+      track('exposure', slotName, context, { step_index: getStepIndex() }).then((posted) => {
+        if (posted) {
+          setExposure(context.sessionId, slotName);
+          exposedThisPage.add(slotName);
+        }
+        pendingExposures.delete(slotName);
+      });
+    }
+
+    elements.forEach((element) => {
+      if (element.dataset && element.dataset.abClickBound) return;
+      if (element.dataset && element.dataset.abClick === 'false') return;
+      if (element.dataset) element.dataset.abClickBound = 'true';
+      element.addEventListener('click', () => {
+        if (slotName === 'form_next') {
+          track('step_advance', slotName, context, { step_index: getStepIndex() });
+          return;
+        }
+        track('click', slotName, context, { step_index: getStepIndex() });
+      }, { passive: true });
+    });
   };
 
-  const setCookie = (name, value) => {
-    try {
-      document.cookie = `${name}=${value}; Path=/; SameSite=Lax`;
-    } catch (error) {
-      // ignore
+  const maybeDebugLog = (state) => {
+    const params = new URLSearchParams(window.location.search);
+    if (params.get('ab_debug') === '1') {
+      console.log('[AB015]', state);
     }
-  };
-
-  const getSessionId = () => {
-    try {
-      const existing = getCookie(COOKIE_KEY);
-      if (existing) return existing;
-      const created = typeof crypto !== 'undefined' && crypto.randomUUID
-        ? `sid_${crypto.randomUUID()}`
-        : `sid_${Date.now()}_${Math.random().toString(16).slice(2)}`;
-      setCookie(COOKIE_KEY, created);
-      return created;
-    } catch (error) {
-      return `sid_${Date.now()}_${Math.random().toString(16).slice(2)}`;
-    }
-  };
-
-  const hasEmbeddedBlogAbConfig = () => {
-    const scripts = Array.from(document.querySelectorAll('script'));
-    return scripts.some((script) => script.textContent && script.textContent.includes('/ab-config'));
   };
 
   const init = () => {
     const slots = new Map();
-    const attrSlots = buildSlotsFromAttributes();
-    attrSlots.forEach((elements, slotName) => slots.set(slotName, elements));
+    buildSlotsFromAttributes().forEach((elements, slotName) => slots.set(slotName, elements));
 
     if (window.__ab && window.__ab.slots) {
       buildSlotsFromConfig().forEach((elements, slotName) => {
@@ -543,9 +581,7 @@
       pagePath: `${window.location.pathname}${window.location.search}`,
       pageType: getPageType(),
       funnelStage: null,
-      stepIndex: getStepIndex(),
-      correlationId: null,
-      skipBlogSlots: false
+      correlationId: null
     };
 
     context.funnelStage = getFunnelStage(context.pageType);
@@ -554,23 +590,31 @@
     } catch (error) {
       context.correlationId = null;
     }
-    context.skipBlogSlots = context.pageType === 'blog' && hasEmbeddedBlogAbConfig();
-    const applySlots = () => {
+
+    const applySlots = (abConfig) => {
       slots.forEach((elements, slotName) => {
-        resolveSlot({ slotName, elements, context });
+        applySlot(slotName, elements, context, abConfig);
       });
     };
 
     fetchAbConfig(context.sessionId)
       .then((abConfig) => {
-        context.abConfig = abConfig;
-        setupAbConfigObserver(abConfig);
-        applySlots();
+        setupAbConfigObserver(abConfig, slots, context);
+        applySlots(abConfig);
+        maybeDebugLog({
+          sessionId: context.sessionId,
+          abConfigOk: Boolean(abConfig),
+          slotsApplied: Array.from(slots.keys()),
+          variantIds: { ...variantCache }
+        });
       })
       .catch(() => {
-        context.abConfig = null;
-        applySlots();
+        applySlots(null);
       });
+
+    window.AB015 = window.AB015 || {};
+    window.AB015.track = (event, scope, meta) => track(event, scope, context, meta);
+    window.AB015.trackCompletion = (meta) => track('completion', 'form_submit', context, meta || {});
   };
 
   if (document.readyState === 'loading') {
