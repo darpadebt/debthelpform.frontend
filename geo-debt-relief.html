@@ -549,27 +549,6 @@
   })();
   </script>
 
-  <!-- 015: Optimizer bridge (helpers for workers) -->
-  <script>
-  (function(){
-    if(window.GFSR && window.GFSR.bridgeReady) return;
-    const api={
-      bridgeReady:true,
-      page:'dhf:geo',
-      slots:{headline:'#geoHeadline',primaryCta:'.mobile-est',phoneCta:'.mobile-call,.btn-call,a[href^="tel:"]'},
-      setHeadline(txt){ const h=document.querySelector('#geoHeadline'); if(h && typeof txt==='string') h.textContent=txt; },
-      setPrimaryCta({text,href}={}){ const a=document.querySelector('.mobile-est'); if(a){ if(typeof text==='string') a.textContent=text; if(typeof href==='string') a.href=href; } },
-      log(name,data={}){ try{ const b=new Blob([JSON.stringify({name,ts:Date.now(),url:location.href,...data})],{type:'application/json'}); if(navigator.sendBeacon) navigator.sendBeacon('/ingest',b); else fetch('/ingest',{method:'POST',body:b,keepalive:true,headers:{'Content-Type':'application/json'}}); }catch{} },
-      chatSend(text){ const i=document.getElementById('gfsrChatInput'); const f=document.getElementById('gfsrChatForm'); if(i&&f){ i.value=text||''; f.requestSubmit(); } }
-    };
-    api.w015={
-      decide:(experimentKey,context={})=>fetch('/ab/decide',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({experimentKey,context})}).then(r=>r.json()),
-      report:(experimentKey,variant,outcome,meta={})=>fetch('/ab/report',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({experimentKey,variant,outcome,meta})}).then(r=>r.ok)
-    };
-    window.GFSR=Object.assign(window.GFSR||{},api);
-  })();
-  </script>
-
   <noscript><p style="text-align:center;color:#666">Enable JavaScript to view dynamic features and secure estimate.</p></noscript>
 </body>
 </html>
