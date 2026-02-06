@@ -272,4 +272,5 @@
   window.AB015.getSessionId = getSessionId;
   window.AB015.getConfig = getConfig;
   window.AB015.track = track;
+  window.AB015.trackCompletion = (meta = {}) => track('completion', 'form_submit', meta);
 })();

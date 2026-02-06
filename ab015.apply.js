@@ -58,11 +58,6 @@
       }
     });
 
-    if (config.variantId) {
-      root.querySelectorAll('[data-cta]').forEach((element) => {
-        element.setAttribute('data-variant-id', config.variantId);
-      });
-    }
   };
 
   const bindTracking = (config, root = document) => {
