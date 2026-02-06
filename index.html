@@ -249,7 +249,8 @@
         <a href="/privacy.html">Privacy</a>
         <a href="/terms.html">Terms</a>
         <a data-ab-slot="nav_cta" href="/#get-started">Start Secure Estimate</a>
-        <a class="call" href="tel:+18884377141">Call +1 (888) 437‑7141</a>
+        <!-- // AB015 compatibility fix -->
+        <a class="call" href="tel:+18884377141" data-ab-slot="homepage_buttons">Call +1 (888) 437‑7141</a>
       </div>
     </nav>
 
@@ -258,6 +259,8 @@
       <div class="sub">Answer a few quick questions to preview your options. Secure & confidential. No obligation.</div>
       <div id="get-started">
         <button class="primary" id="startBtn" data-ab-slot="homepage_buttons">Start my free eligibility check</button>
+        <!-- // AB015 compatibility fix -->
+        <a class="hidden" href="#get-started" data-ab-slot="lead_anchor">Start my free eligibility check</a>
       </div>
       <div class="badges" style="margin-top:12px">
         <span class="badge">Secure & Confidential</span>
@@ -322,7 +325,8 @@
 
   <div class="footer-sticky">
     <div class="trust">🔒 Secure & Confidential</div>
-    <a class="callnow" id="stickyCall" href="tel:+18884377141">Call Now</a>
+    <!-- // AB015 compatibility fix -->
+    <a class="callnow" id="stickyCall" href="tel:+18884377141" data-ab-slot="homepage_buttons">Call Now</a>
     <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener nofollow" class="muted" style="font-size:12px;text-decoration:none">BBB Profile</a>
   </div>
 
@@ -488,8 +492,10 @@
     trackEvent('cta_click', { cta: 'start_survey' });
     startSurvey();
   });
-  function startSurvey(){ entry.classList.add('hidden'); survey.classList.remove('hidden'); state.step = 0; updateProgress(); steps[state.step](mount); document.getElementById('form_ts').value = Date.now().toString(); }
-  function advance(){ state.step++; if(state.step < steps.length){ updateProgress(); steps[state.step](mount);} else { showLeadGate(); } }
+  function startSurvey(){ entry.classList.add('hidden'); survey.classList.remove('hidden'); state.step = 0; // AB015 compatibility fix
+    window.stepIndex = state.step; updateProgress(); steps[state.step](mount); document.getElementById('form_ts').value = Date.now().toString(); }
+  function advance(){ state.step++; // AB015 compatibility fix
+    window.stepIndex = state.step; if(state.step < steps.length){ updateProgress(); steps[state.step](mount);} else { showLeadGate(); } }
   function updateProgress(){ const total = steps.length; const n = state.step + 1; stepLabel.textContent = `Step ${n} of ${total}`; bar.style.width = `${(n/total)*100}%`; }
   function showLeadGate(){ survey.classList.add('hidden'); leadGate.classList.remove('hidden'); }
 
