@@ -309,23 +309,77 @@
     const slots = new Map();
     const seen = new Set();
 
-    const addElements = (baseName, selector) => {
-      const elements = Array.from(document.querySelectorAll(selector)).filter((el) => {
-        if (seen.has(el)) return false;
-        seen.add(el);
-        if (isTelLink(el)) return false;
-        return true;
-      });
-      if (!elements.length) return;
-      elements.forEach((el) => {
-        if (!slots.has(baseName)) slots.set(baseName, []);
-        slots.get(baseName).push(el);
-      });
+    const isApplyAnchor = (element) => {
+      if (!element || element.tagName !== 'A') return false;
+      const href = (element.getAttribute('href') || '').toLowerCase();
+      return href.includes('/apply.html#get-started') || href.includes('#get-started');
     };
 
-    addElements('homepage_buttons', 'a[data-role="estimate"]');
-    addElements('lead_anchor', 'a[href*="#get-started"], a[href*="#leadGate"], a[href*="#leadForm"], a[href*="#lead-form"]');
-    addElements('homepage_buttons', 'a.button.primary, button.button.primary, a.primary');
+    const isInForm = (element) => !!(element && element.closest && element.closest('form'));
+
+    const isSubmitButton = (element) => {
+      if (!element) return false;
+      if (element.tagName === 'BUTTON') {
+        return (element.getAttribute('type') || '').toLowerCase() === 'submit';
+      }
+      return element.tagName === 'INPUT' && (element.getAttribute('type') || '').toLowerCase() === 'submit';
+    };
+
+    const isStepAdvance = (element) => {
+      if (!element) return false;
+      if (element.id === 'next') return true;
+      if (element.classList && element.classList.contains('next')) return true;
+      return element.hasAttribute && element.hasAttribute('data-step');
+    };
+
+    const isNavCta = (element) => {
+      if (!element) return false;
+      if (!isApplyAnchor(element)) return false;
+      return !!(element.closest && element.closest('.site-nav, #navLinks'));
+    };
+
+    const isHeroCta = (element) => {
+      if (!element) return false;
+      if (isInForm(element)) return false;
+      if (element.closest && element.closest('.site-nav, #navLinks')) return false;
+      if (element.tagName !== 'A' && element.tagName !== 'BUTTON') return false;
+      if (element.classList && (element.classList.contains('primary') || element.classList.contains('button'))) {
+        return true;
+      }
+      return false;
+    };
+
+    const addElement = (slotName, element) => {
+      if (!slotName || !element) return;
+      if (seen.has(element)) return;
+      seen.add(element);
+      if (!slots.has(slotName)) slots.set(slotName, []);
+      slots.get(slotName).push(element);
+    };
+
+    const candidates = Array.from(document.querySelectorAll('a, button, input[type="submit"]'));
+    candidates.forEach((element) => {
+      if (isTelLink(element)) return;
+      if (isInForm(element) || isSubmitButton(element)) {
+        addElement('form_submit', element);
+        return;
+      }
+      if (isStepAdvance(element)) {
+        addElement('form_next', element);
+        return;
+      }
+      if (isNavCta(element)) {
+        addElement('nav_cta', element);
+        return;
+      }
+      if (isApplyAnchor(element)) {
+        addElement('lead_anchor', element);
+        return;
+      }
+      if (isHeroCta(element)) {
+        addElement('homepage_buttons', element);
+      }
+    });
 
     return slots;
   };
