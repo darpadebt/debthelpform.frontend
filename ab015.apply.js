@@ -1,24 +1,13 @@
 (() => {
-  const SLOT_LABEL_KEYS = {
-    primaryCtaLabel: 'primaryCtaLabel',
-    blogSegueText: 'blogSegueText',
-    blogCtaText: 'blogCtaText',
-    heroHeadlineText: 'heroHeadlineText',
-    navCtaLabel: 'navCtaLabel',
-    formNextLabel: 'formNextLabel',
-    formSubmitLabel: 'formSubmitLabel',
-    leadAnchorLabel: 'leadAnchorLabel'
-  };
-
   const SLOT_MAP = {
-    homepage_buttons: SLOT_LABEL_KEYS.primaryCtaLabel,
-    blog_mid_segue: SLOT_LABEL_KEYS.blogSegueText,
-    blog_end_cta: SLOT_LABEL_KEYS.blogCtaText,
-    hero_headline: SLOT_LABEL_KEYS.heroHeadlineText,
-    nav_cta: SLOT_LABEL_KEYS.navCtaLabel,
-    form_next: SLOT_LABEL_KEYS.formNextLabel,
-    form_submit: SLOT_LABEL_KEYS.formSubmitLabel,
-    lead_anchor: SLOT_LABEL_KEYS.leadAnchorLabel
+    hero_headline: 'heroHeadlineText',
+    nav_cta: 'navCtaLabel',
+    homepage_buttons: 'primaryCtaLabel',
+    form_next: 'formNextLabel',
+    form_submit: 'formSubmitLabel',
+    blog_mid_segue: 'blogSegueText',
+    blog_end_cta: 'blogCtaText',
+    lead_anchor: 'leadAnchorLabel'
   };
 
   const applyLabel = (element, label) => {
@@ -78,7 +67,7 @@
 
   const applySlots = (config, root = document) => {
     if (!config) return;
-    const elements = root.querySelectorAll('[data-ab-slot]');
+    const elements = root.querySelectorAll('[data-ab-slot][data-ab-label]');
     elements.forEach((element) => {
       const slotName = element.getAttribute('data-ab-slot');
       if (!slotName || !(slotName in SLOT_MAP)) return;
@@ -86,7 +75,9 @@
       if (!label) return;
       if (element.dataset && element.dataset.abConfigApplied === label) return;
       applyLabel(element, label);
-      trackExposureOnce(slotName, config);
+      if (element.dataset?.abTrack === 'exposure') {
+        trackExposureOnce(slotName, config);
+      }
       if (element.dataset) {
         element.dataset.abConfigApplied = label;
       }
