@@ -8,9 +8,6 @@
   const AB_CONFIG_SLOTS = new Set([
     'hero_headline',
     'nav_cta',
-    'primary_cta',
-    'estimate_cta',
-    'primary_button',
     'homepage_buttons',
     'blog_mid_segue',
     'blog_end_cta',
@@ -21,9 +18,6 @@
   const AB_CONFIG_SLOT_MAP = {
     hero_headline: 'heroHeadlineText',
     nav_cta: 'navCtaLabel',
-    primary_cta: 'primaryCtaLabel',
-    estimate_cta: 'primaryCtaLabel',
-    primary_button: 'primaryCtaLabel',
     homepage_buttons: 'primaryCtaLabel',
     blog_mid_segue: 'blogSegueText',
     blog_end_cta: 'blogCtaText',
@@ -34,9 +28,6 @@
   const AB_SCOPE_MAP = {
     hero_headline: 'hero_headline',
     nav_cta: 'nav_cta',
-    primary_cta: 'homepage_buttons',
-    estimate_cta: 'homepage_buttons',
-    primary_button: 'homepage_buttons',
     homepage_buttons: 'homepage_buttons',
     blog_mid_segue: 'blog_mid_segue',
     blog_end_cta: 'blog_end_cta',
@@ -44,6 +35,94 @@
     form_submit: 'form_submit',
     lead_anchor: 'lead_anchor'
   };
+  const CANONICAL_SLOTS = new Set(Object.keys(AB_SCOPE_MAP));
+
+  const getDebugState = () => {
+    if (!window.__ab015DebugState) {
+      window.__ab015DebugState = { adapter: null, variants: {} };
+    }
+    return window.__ab015DebugState;
+  };
+
+  const applyForSite = (config = {}) => {
+    if (!document || !document.documentElement) return;
+    const debugEnabled = config.debugEnabled || new URLSearchParams(window.location.search).has('abdebug');
+    const aliasMap = config.aliasMap || {};
+    const slotSelectors = config.slotSelectors || {};
+    const slotMultiples = config.slotMultiples || {};
+    const pageType = typeof config.getPageType === 'function' ? config.getPageType() : 'info';
+    const skip = typeof config.shouldSkip === 'function' ? config.shouldSkip(pageType) : pageType === 'blog';
+    if (skip) return;
+
+    const rewriteAlias = (element) => {
+      const slot = element.getAttribute('data-ab-slot');
+      if (!slot || !aliasMap[slot]) return false;
+      element.setAttribute('data-ab-slot', aliasMap[slot]);
+      return true;
+    };
+
+    const tagged = new Map();
+    const found = new Map();
+    const missing = new Set();
+
+    document.querySelectorAll('[data-ab-slot]').forEach((element) => {
+      const didRewrite = rewriteAlias(element);
+      const slot = element.getAttribute('data-ab-slot');
+      if (slot) {
+        if (!found.has(slot)) found.set(slot, []);
+        found.get(slot).push(element);
+      }
+      if (debugEnabled && didRewrite) {
+        if (!tagged.has(slot)) tagged.set(slot, []);
+        tagged.get(slot).push(element);
+      }
+    });
+
+    Object.entries(slotSelectors).forEach(([slotName, selectors]) => {
+      const list = Array.isArray(selectors) ? selectors : [selectors];
+      const allowMultiple = Boolean(slotMultiples[slotName]);
+      let taggedCount = 0;
+      list.forEach((selector) => {
+        if (!selector) return;
+        document.querySelectorAll(selector).forEach((element) => {
+          const existing = element.getAttribute('data-ab-slot');
+          if (existing) {
+            if (aliasMap[existing]) {
+              element.setAttribute('data-ab-slot', aliasMap[existing]);
+            }
+            if (!found.has(existing)) found.set(existing, []);
+            found.get(existing).push(element);
+            return;
+          }
+          if (!allowMultiple && taggedCount > 0) return;
+          if (!CANONICAL_SLOTS.has(slotName)) return;
+          element.setAttribute('data-ab-slot', slotName);
+          taggedCount += 1;
+          if (!found.has(slotName)) found.set(slotName, []);
+          found.get(slotName).push(element);
+          if (!tagged.has(slotName)) tagged.set(slotName, []);
+          tagged.get(slotName).push(element);
+        });
+      });
+      if (!found.has(slotName)) {
+        missing.add(slotName);
+      }
+    });
+
+    if (debugEnabled) {
+      const summary = {
+        pageType,
+        slotsFound: Array.from(found.keys()),
+        slotsTagged: Array.from(tagged.keys()),
+        slotsMissing: Array.from(missing)
+      };
+      const debugState = getDebugState();
+      debugState.adapter = summary;
+      console.info('[ab015][adapter]', summary);
+    }
+  };
+
+  window.ab015ApplyForSite = applyForSite;
 
   const getBucket = () => {
     try {
@@ -277,9 +356,9 @@
       });
     };
 
-    addElements('estimate_cta', 'a[data-role="estimate"]');
+    addElements('homepage_buttons', 'a[data-role="estimate"]', false);
     addElements('lead_anchor', 'a[href*="#get-started"], a[href*="#leadGate"], a[href*="#leadForm"], a[href*="#lead-form"]');
-    addElements('primary_button', 'a.button.primary, button.button.primary, a.primary');
+    addElements('homepage_buttons', 'a.button.primary, button.button.primary, a.primary', false);
 
     return slots;
   };
@@ -312,9 +391,19 @@
       params.set('correlation_id', context.correlationId);
     }
 
+    const debugState = getDebugState();
+    if (debugState.variants) {
+      debugState.variants[slotName] = { status: 'pending' };
+    }
+
     try {
       const response = await fetch(`${CTA_ENDPOINT}?${params.toString()}`);
-      if (!response.ok) return;
+      if (!response.ok) {
+        if (debugState.variants) {
+          debugState.variants[slotName] = { status: `error:${response.status}` };
+        }
+        return;
+      }
       const data = await response.json();
       if (data && data.correlation_id) {
         try {
@@ -325,6 +414,13 @@
       }
       const label = data && data.meta ? (data.meta.label || data.meta.text) : null;
       const variant = data && data.variant ? data.variant : 'control';
+      if (debugState.variants) {
+        debugState.variants[slotName] = {
+          status: 'ok',
+          variant,
+          label
+        };
+      }
       if (label) {
         elements.forEach((element) => {
           if (element.dataset && element.dataset.abConfigApplied) return;
@@ -355,7 +451,9 @@
         }, { passive: true });
       });
     } catch (error) {
-      // silent
+      if (debugState.variants) {
+        debugState.variants[slotName] = { status: 'error:network' };
+      }
     }
   };
 
