@@ -251,7 +251,7 @@
       time_bucket: String(new Date().getHours()),
       visitor_type: getVisitorType(),
       correlation_id: meta.correlation_id,
-      test_id: meta.test_id,
+      test_id: meta.test_id || scope,
       page_path: `${window.location.pathname}${window.location.search}`
     };
 
