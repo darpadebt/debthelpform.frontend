@@ -45,9 +45,7 @@
     primary_button: 'homepage_buttons',
     primaryCta: 'homepage_buttons',
     estimate_cta: 'homepage_buttons',
-    secondary_cta: 'homepage_buttons',
-    phoneCta: 'homepage_buttons',
-    tel_call: 'homepage_buttons'
+    secondary_cta: 'homepage_buttons'
   };
   const AB_CONFIG_SLOT_MAP = {
     hero_headline: 'heroHeadlineText',
@@ -270,10 +268,17 @@
     return CANONICAL_SLOTS.has(alias) ? alias : null;
   };
 
+  const isTelLink = (element) => {
+    if (!element || element.tagName !== 'A') return false;
+    const href = (element.getAttribute('href') || '').trim().toLowerCase();
+    return href.startsWith('tel:');
+  };
+
   const buildSlotsFromAttributes = () => {
     const slots = new Map();
     const elements = Array.from(document.querySelectorAll('[data-ab-slot]'));
     elements.forEach((element) => {
+      if (isTelLink(element)) return;
       const raw = element.getAttribute('data-ab-slot');
       if (!raw) return;
       const slotName = resolveCanonicalSlot(raw.trim());
@@ -292,7 +297,7 @@
       if (!selector || typeof selector !== 'string') return;
       const canonicalSlot = resolveCanonicalSlot(slotName);
       if (!canonicalSlot) return;
-      const elements = Array.from(document.querySelectorAll(selector));
+      const elements = Array.from(document.querySelectorAll(selector)).filter((element) => !isTelLink(element));
       if (!elements.length) return;
       slots.set(canonicalSlot, elements);
     });
@@ -308,6 +313,7 @@
       const elements = Array.from(document.querySelectorAll(selector)).filter((el) => {
         if (seen.has(el)) return false;
         seen.add(el);
+        if (isTelLink(el)) return false;
         return true;
       });
       if (!elements.length) return;
