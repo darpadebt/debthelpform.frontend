@@ -1,6 +1,13 @@
 (() => {
   const BASE_ENDPOINT = '/api/mesh/015-a-b-test-accelerator';
-  const SITE = 'DHF';
+  const SITE = (() => {
+    const meta = document.querySelector('meta[name="ab015-site"]');
+    if (meta?.content) return meta.content.trim();
+    const host = window.location.hostname.toLowerCase();
+    if (host.includes('debtreliefguard')) return 'DRG';
+    if (host.includes('debthelpform')) return 'DHF';
+    return 'DHF';
+  })();
   const STORAGE_KEY = 'ab015_session_id';
   const COOKIE_KEY = 'ab015_session_id';
   const CONFIG_KEY = `ab015_config_${SITE}`;

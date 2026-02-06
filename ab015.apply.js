@@ -60,6 +60,13 @@
 
   };
 
+  const isInteractiveElement = (element) => {
+    if (!(element instanceof HTMLElement)) return false;
+    if (element.matches('a[href], button, [role="button"]')) return true;
+    if (element.matches('input[type="submit"], input[type="button"], input[type="image"]')) return true;
+    return false;
+  };
+
   const bindTracking = (config, root = document) => {
     if (!window.AB015 || typeof window.AB015.track !== 'function') return;
     const elements = root.querySelectorAll('[data-ab-slot]');
@@ -67,6 +74,8 @@
       if (element.dataset && element.dataset.abTrackingBound) return;
       const slotName = element.getAttribute('data-ab-slot');
       if (!slotName || !(slotName in SLOT_MAP)) return;
+      if (!isInteractiveElement(element)) return;
+      if (element.dataset && element.dataset.abClick === 'false') return;
       if (element.dataset) element.dataset.abTrackingBound = 'true';
       element.addEventListener(
         'click',
@@ -76,7 +85,7 @@
             return;
           }
           if (slotName === 'form_submit') {
-            window.AB015.track('completion', slotName, { step_index: getStepIndex() });
+            window.AB015.track('click', slotName, { step_index: getStepIndex() });
             return;
           }
           window.AB015.track('click', slotName, { step_index: getStepIndex() });
