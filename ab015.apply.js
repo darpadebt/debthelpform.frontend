@@ -37,6 +37,8 @@
     }
   };
 
+  const exposureFallback = new Set();
+
   const safeGetSessionStorage = () => {
     try {
       const testKey = '__ab015_exposure__';
@@ -48,13 +50,24 @@
     }
   };
 
-  const trackExposureOnce = (slotName, label) => {
+  const getExposureKey = (slotName, config) => {
+    if (slotName === 'homepage_buttons' && config?.variantId) {
+      return `ab015_exposure_${slotName}_${config.variantId}`;
+    }
+    return `ab015_exposure_${slotName}`;
+  };
+
+  const trackExposureOnce = (slotName, config) => {
     if (!window.AB015 || typeof window.AB015.track !== 'function') return;
     const storage = safeGetSessionStorage();
-    const key = `ab015_exposure_${slotName}_${label}`;
-    if (storage?.getItem(key)) return;
+    const key = getExposureKey(slotName, config);
+    if (storage?.getItem(key) || exposureFallback.has(key)) return;
     window.AB015.track('exposure', slotName);
-    storage?.setItem(key, '1');
+    if (storage) {
+      storage.setItem(key, '1');
+    } else {
+      exposureFallback.add(key);
+    }
   };
 
   const getSlotLabel = (slotName, config) => {
@@ -73,7 +86,7 @@
       if (!label) return;
       if (element.dataset && element.dataset.abConfigApplied === label) return;
       applyLabel(element, label);
-      trackExposureOnce(slotName, label);
+      trackExposureOnce(slotName, config);
       if (element.dataset) {
         element.dataset.abConfigApplied = label;
       }
