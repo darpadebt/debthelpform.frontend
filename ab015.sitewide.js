@@ -2,7 +2,48 @@
   const SITE = 'DHF';
   const CORR_KEY = 'ab_corr_DHF';
   const CTA_ENDPOINT = '/api/mesh/015-a-b-test-accelerator/cta';
+  const AB_CONFIG_ENDPOINT = '/api/mesh/015-a-b-test-accelerator/ab-config';
   const TRACK_ENDPOINT = '/api/mesh/015-a-b-test-accelerator/track';
+  const COOKIE_KEY = 'gfsr_sid';
+  const AB_CONFIG_SLOTS = new Set([
+    'hero_headline',
+    'nav_cta',
+    'primary_cta',
+    'estimate_cta',
+    'primary_button',
+    'homepage_buttons',
+    'blog_mid_segue',
+    'blog_end_cta',
+    'form_next',
+    'form_submit',
+    'lead_anchor'
+  ]);
+  const AB_CONFIG_SLOT_MAP = {
+    hero_headline: 'heroHeadlineText',
+    nav_cta: 'navCtaLabel',
+    primary_cta: 'primaryCtaLabel',
+    estimate_cta: 'primaryCtaLabel',
+    primary_button: 'primaryCtaLabel',
+    homepage_buttons: 'primaryCtaLabel',
+    blog_mid_segue: 'blogSegueText',
+    blog_end_cta: 'blogCtaText',
+    form_next: 'formNextLabel',
+    form_submit: 'formSubmitLabel',
+    lead_anchor: 'leadAnchorLabel'
+  };
+  const AB_SCOPE_MAP = {
+    hero_headline: 'hero_headline',
+    nav_cta: 'nav_cta',
+    primary_cta: 'homepage_buttons',
+    estimate_cta: 'homepage_buttons',
+    primary_button: 'homepage_buttons',
+    homepage_buttons: 'homepage_buttons',
+    blog_mid_segue: 'blog_mid_segue',
+    blog_end_cta: 'blog_end_cta',
+    form_next: 'form_next',
+    form_submit: 'form_submit',
+    lead_anchor: 'lead_anchor'
+  };
 
   const getBucket = () => {
     try {
@@ -68,7 +109,7 @@
     return 'info';
   };
 
-  const hasLeadFlow = () => !!document.querySelector('#get-started, #leadGate, #leadForm');
+  const hasLeadFlow = () => !!document.querySelector('#get-started, #leadGate, #leadForm, #lead-form');
 
   const getFunnelStage = (pageType) => {
     if (pageType === 'blog') return 'blog';
@@ -109,6 +150,66 @@
         node.textContent = label;
         return;
       }
+    }
+  };
+
+  const getAbConfigLabel = (slotName, abConfig) => {
+    if (!abConfig || !slotName) return null;
+    const key = AB_CONFIG_SLOT_MAP[slotName];
+    return key ? abConfig[key] : null;
+  };
+
+  const applyAbConfigToElements = (slotName, elements, abConfig) => {
+    const label = getAbConfigLabel(slotName, abConfig);
+    if (!label) return;
+    elements.forEach((element) => {
+      if (element.dataset && element.dataset.abConfigApplied) return;
+      applyLabel(element, label);
+      if (element.dataset) {
+        element.dataset.abConfigApplied = 'true';
+      }
+    });
+  };
+
+  const applyAbConfigToNode = (node, abConfig) => {
+    if (!node || !(node instanceof HTMLElement)) return;
+    if (node.hasAttribute && node.hasAttribute('data-ab-slot')) {
+      const slotName = node.getAttribute('data-ab-slot');
+      if (slotName && AB_CONFIG_SLOTS.has(slotName)) {
+        applyAbConfigToElements(slotName, [node], abConfig);
+      }
+    }
+    const nested = node.querySelectorAll ? node.querySelectorAll('[data-ab-slot]') : [];
+    nested.forEach((element) => {
+      const slotName = element.getAttribute('data-ab-slot');
+      if (slotName && AB_CONFIG_SLOTS.has(slotName)) {
+        applyAbConfigToElements(slotName, [element], abConfig);
+      }
+    });
+  };
+
+  const setupAbConfigObserver = (abConfig) => {
+    if (!abConfig || !document.body || window.__abConfigObserver) return;
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => applyAbConfigToNode(node, abConfig));
+      });
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
+    window.__abConfigObserver = observer;
+  };
+
+  const fetchAbConfig = async (sessionId) => {
+    if (!sessionId || sessionId.length < 8) return null;
+    try {
+      const params = new URLSearchParams({ sessionId, site: SITE });
+      const response = await fetch(`${AB_CONFIG_ENDPOINT}?${params.toString()}`);
+      if (!response.ok) return null;
+      const data = await response.json();
+      if (!data || typeof data !== 'object') return null;
+      return data;
+    } catch (error) {
+      return null;
     }
   };
 
@@ -176,18 +277,22 @@
       });
     };
 
-    addElements('nav_call', '.site-nav .links a.call', false);
-    addElements('tel_link', 'a[href^="tel:"]');
     addElements('estimate_cta', 'a[data-role="estimate"]');
-    addElements('lead_anchor', 'a[href*="#get-started"], a[href*="#leadGate"], a[href*="#leadForm"]');
+    addElements('lead_anchor', 'a[href*="#get-started"], a[href*="#leadGate"], a[href*="#leadForm"], a[href*="#lead-form"]');
     addElements('primary_button', 'a.button.primary, button.button.primary, a.primary');
 
     return slots;
   };
 
   const resolveSlot = async ({ slotName, elements, context }) => {
-    const testId = `dhf_${context.pageSlug}_${slotName}`;
-    const scope = `debthelpform:${context.pageSlug}:${slotName}`;
+    if (context.skipBlogSlots && (slotName === 'blog_mid_segue' || slotName === 'blog_end_cta')) return;
+    const scopeKey = AB_SCOPE_MAP[slotName] || null;
+    const testId = scopeKey ? `dhf_${scopeKey}` : `dhf_${context.pageSlug}_${slotName}`;
+    const scope = scopeKey || `debthelpform:${context.pageSlug}:${slotName}`;
+    const abConfigKey = AB_CONFIG_SLOT_MAP[slotName];
+    if (context.abConfig && abConfigKey && context.abConfig[abConfigKey]) {
+      applyAbConfigToElements(slotName, elements, context.abConfig);
+    }
     const params = new URLSearchParams({
       bucket: context.bucket,
       scope,
@@ -221,7 +326,10 @@
       const label = data && data.meta ? (data.meta.label || data.meta.text) : null;
       const variant = data && data.variant ? data.variant : 'control';
       if (label) {
-        elements.forEach((element) => applyLabel(element, label));
+        elements.forEach((element) => {
+          if (element.dataset && element.dataset.abConfigApplied) return;
+          applyLabel(element, label);
+        });
       }
 
       elements.forEach((element) => {
@@ -251,6 +359,46 @@
     }
   };
 
+  const getCookie = (name) => {
+    try {
+      const cookies = document.cookie ? document.cookie.split('; ') : [];
+      for (const cookie of cookies) {
+        const [key, value] = cookie.split('=');
+        if (key === name) return value || '';
+      }
+    } catch (error) {
+      // ignore
+    }
+    return '';
+  };
+
+  const setCookie = (name, value) => {
+    try {
+      document.cookie = `${name}=${value}; Path=/; SameSite=Lax`;
+    } catch (error) {
+      // ignore
+    }
+  };
+
+  const getSessionId = () => {
+    try {
+      const existing = getCookie(COOKIE_KEY);
+      if (existing) return existing;
+      const created = typeof crypto !== 'undefined' && crypto.randomUUID
+        ? `sid_${crypto.randomUUID()}`
+        : `sid_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+      setCookie(COOKIE_KEY, created);
+      return created;
+    } catch (error) {
+      return `sid_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+    }
+  };
+
+  const hasEmbeddedBlogAbConfig = () => {
+    const scripts = Array.from(document.querySelectorAll('script'));
+    return scripts.some((script) => script.textContent && script.textContent.includes('/api/mesh/015-a-b-test-accelerator/ab-config'));
+  };
+
   const init = () => {
     const slots = new Map();
     const attrSlots = buildSlotsFromAttributes();
@@ -278,7 +426,8 @@
       funnelStage: null,
       stepIndex: getStepIndex(),
       pageSlug: getPageSlug(),
-      correlationId: null
+      correlationId: null,
+      skipBlogSlots: false
     };
 
     context.funnelStage = getFunnelStage(context.pageType);
@@ -287,10 +436,23 @@
     } catch (error) {
       context.correlationId = null;
     }
+    context.skipBlogSlots = context.pageType === 'blog' && hasEmbeddedBlogAbConfig();
+    const applySlots = () => {
+      slots.forEach((elements, slotName) => {
+        resolveSlot({ slotName, elements, context });
+      });
+    };
 
-    slots.forEach((elements, slotName) => {
-      resolveSlot({ slotName, elements, context });
-    });
+    fetchAbConfig(getSessionId())
+      .then((abConfig) => {
+        context.abConfig = abConfig;
+        setupAbConfigObserver(abConfig);
+        applySlots();
+      })
+      .catch(() => {
+        context.abConfig = null;
+        applySlots();
+      });
   };
 
   if (document.readyState === 'loading') {
