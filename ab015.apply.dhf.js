@@ -1,69 +1,102 @@
 (() => {
-  const SITE = 'DHF';
-  const VARIANT_ENDPOINT = '/api/mesh/015-a-b-test-accelerator/variant';
-  const COOKIE_KEY = 'gfsr_sid';
-
-  const getRandomId = (prefix) => {
-    try {
-      if (typeof crypto !== 'undefined' && crypto.randomUUID) {
-        return `${prefix}_${crypto.randomUUID()}`;
-      }
-    } catch (error) {
-      // ignore
-    }
-    return `${prefix}_${Date.now()}_${Math.random().toString(16).slice(2)}`;
+  const aliasMap = {
+    nav_call: 'nav_cta',
+    page_title: 'hero_headline',
+    primary_cta: 'homepage_buttons',
+    primary_button: 'homepage_buttons',
+    estimate_cta: 'homepage_buttons',
+    secondary_cta: 'homepage_buttons'
   };
 
-  const getCookie = (name) => {
-    try {
-      const cookies = document.cookie ? document.cookie.split('; ') : [];
-      for (const cookie of cookies) {
-        const [key, value] = cookie.split('=');
-        if (key === name) return value || '';
-      }
-    } catch (error) {
-      // ignore
-    }
-    return '';
+  const slotSelectors = {
+    nav_cta: [
+      'nav a[data-role="estimate"]',
+      'nav a[href*="#get-started"]',
+      'nav a[href*="#lead"]'
+    ],
+    hero_headline: [
+      'main h1',
+      'header h1',
+      '.page-header h1',
+      '.page-hero h1',
+      '.h1#title',
+      '.h1',
+      'h1#geoHeadline'
+    ],
+    homepage_buttons: [
+      '#startBtn',
+      'a[data-role="estimate"]',
+      'a.button.primary',
+      'button.button.primary',
+      'a.btn.primary',
+      'a.primary',
+      'button.primary'
+    ],
+    lead_anchor: [
+      'a[href*="#get-started"]',
+      'a[href*="#leadGate"]',
+      'a[href*="#leadForm"]',
+      'a[href*="#lead-form"]'
+    ],
+    form_next: [
+      '#nextBtn',
+      '#next',
+      'button.next',
+      '.controls .next'
+    ],
+    form_submit: [
+      '#submitBtn',
+      'form button[type="submit"]',
+      'form [type="submit"]'
+    ]
   };
 
-  const setCookie = (name, value) => {
-    try {
-      document.cookie = `${name}=${value}; Path=/; SameSite=Lax`;
-    } catch (error) {
-      // ignore
-    }
+  const slotMultiples = {
+    homepage_buttons: true,
+    lead_anchor: true,
+    form_next: true
   };
 
-  const getSessionId = () => {
-    try {
-      const existing = getCookie(COOKIE_KEY);
-      if (existing) return existing;
-      const created = getRandomId('sid');
-      setCookie(COOKIE_KEY, created);
-      return created;
-    } catch (error) {
-      return getRandomId('sid');
-    }
-  };
-
-  const isBlogPage = () => {
+  const getPageType = () => {
     const path = window.location.pathname.toLowerCase();
-    return path.startsWith('/blog/') || path.includes('/blog');
+    if (path.includes('/blog')) return 'blog';
+    if (path === '/' || path.endsWith('/index.html')) return 'home';
+    return 'info';
   };
 
-  const hasBlogSlots = () => !!document.querySelector('[data-ab-slot="blog_mid_segue"], [data-ab-slot="blog_end_cta"]');
+  const shouldSkip = (pageType) => {
+    if (pageType === 'blog') return true;
+    return !!document.querySelector('[data-ab-slot="blog_mid_segue"], [data-ab-slot="blog_end_cta"]');
+  };
 
-  const init = () => {
-    if (isBlogPage() || hasBlogSlots()) return;
-    void SITE;
-    void VARIANT_ENDPOINT;
-    void getSessionId;
+  const runAdapter = () => {
+    if (typeof window.ab015ApplyForSite !== 'function') return;
+    window.ab015ApplyForSite({
+      aliasMap,
+      slotSelectors,
+      slotMultiples,
+      getPageType,
+      shouldSkip
+    });
+
+    const debugEnabled = new URLSearchParams(window.location.search).has('abdebug');
+    if (!debugEnabled) return;
+    const report = () => {
+      const summary = window.__ab015DebugState ? window.__ab015DebugState.adapter : null;
+      const variants = window.__ab015DebugState ? window.__ab015DebugState.variants : null;
+      console.info('[ab015][debug]', {
+        pageType: getPageType(),
+        adapter: summary,
+        variants
+      });
+    };
+    report();
+    setTimeout(report, 1500);
   };
 
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init, { passive: true });
+    document.addEventListener('DOMContentLoaded', runAdapter, { passive: true });
   } else {
-    init();
+    runAdapter();
   }
 })();
