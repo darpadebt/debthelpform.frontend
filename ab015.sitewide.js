@@ -1,10 +1,11 @@
 (() => {
   const SITE = 'DHF';
   const CORR_KEY = 'ab_corr_DHF';
-  const CTA_ENDPOINT = '/api/mesh/015-a-b-test-accelerator/cta';
-  const AB_CONFIG_ENDPOINT = '/api/mesh/015-a-b-test-accelerator/ab-config';
-  const TRACK_ENDPOINT = '/api/mesh/015-a-b-test-accelerator/track';
+  const CTA_ENDPOINT = '/variant';
+  const AB_CONFIG_ENDPOINT = '/ab-config';
+  const TRACK_ENDPOINT = '/track';
   const COOKIE_KEY = 'gfsr_sid';
+  const AB_CONFIG_CACHE_KEY = 'ab015_ab_config';
   const AB_CONFIG_SLOTS = new Set([
     'hero_headline',
     'nav_cta',
@@ -26,14 +27,14 @@
     lead_anchor: 'leadAnchorLabel'
   };
   const AB_SCOPE_MAP = {
-    hero_headline: 'hero_headline',
-    nav_cta: 'nav_cta',
-    homepage_buttons: 'homepage_buttons',
-    blog_mid_segue: 'blog_mid_segue',
-    blog_end_cta: 'blog_end_cta',
-    form_next: 'form_next',
-    form_submit: 'form_submit',
-    lead_anchor: 'lead_anchor'
+    hero_headline: 'dhf_hero_headline',
+    nav_cta: 'dhf_nav_cta',
+    homepage_buttons: 'dhf_homepage_buttons',
+    blog_mid_segue: 'dhf_blog_mid_segue',
+    blog_end_cta: 'dhf_blog_end_cta',
+    form_next: 'dhf_form_next',
+    form_submit: 'dhf_form_submit',
+    lead_anchor: 'dhf_lead_anchor'
   };
   const CANONICAL_SLOTS = new Set(Object.keys(AB_SCOPE_MAP));
 
@@ -123,22 +124,6 @@
   };
 
   window.ab015ApplyForSite = applyForSite;
-
-  const getBucket = () => {
-    try {
-      let bucket = localStorage.getItem('ab_bucket');
-      if (!bucket) {
-        const generated = typeof crypto !== 'undefined' && crypto.randomUUID
-          ? crypto.randomUUID()
-          : `b_${Date.now()}_${Math.random().toString(16).slice(2)}`;
-        bucket = generated;
-        localStorage.setItem('ab_bucket', bucket);
-      }
-      return bucket;
-    } catch (error) {
-      return `b_${Date.now()}_${Math.random().toString(16).slice(2)}`;
-    }
-  };
 
   const getVisitorType = () => {
     try {
@@ -278,14 +263,47 @@
     window.__abConfigObserver = observer;
   };
 
+  const readCachedAbConfig = (sessionId) => {
+    if (!sessionId) return null;
+    try {
+      const raw = localStorage.getItem(AB_CONFIG_CACHE_KEY);
+      if (!raw) return null;
+      const cached = JSON.parse(raw);
+      if (!cached || cached.sessionId !== sessionId) return null;
+      if (cached.expiresAt && Date.now() > cached.expiresAt) return null;
+      return cached.data || null;
+    } catch (error) {
+      return null;
+    }
+  };
+
+  const writeCachedAbConfig = (sessionId, data) => {
+    if (!sessionId || !data) return;
+    const ttlSeconds = Number(data.ttlSeconds);
+    if (!Number.isFinite(ttlSeconds) || ttlSeconds <= 0) return;
+    try {
+      const payload = {
+        sessionId,
+        expiresAt: Date.now() + ttlSeconds * 1000,
+        data
+      };
+      localStorage.setItem(AB_CONFIG_CACHE_KEY, JSON.stringify(payload));
+    } catch (error) {
+      // ignore
+    }
+  };
+
   const fetchAbConfig = async (sessionId) => {
     if (!sessionId || sessionId.length < 8) return null;
+    const cached = readCachedAbConfig(sessionId);
+    if (cached) return cached;
     try {
       const params = new URLSearchParams({ sessionId, site: SITE });
       const response = await fetch(`${AB_CONFIG_ENDPOINT}?${params.toString()}`);
       if (!response.ok) return null;
       const data = await response.json();
       if (!data || typeof data !== 'object') return null;
+      writeCachedAbConfig(sessionId, data);
       return data;
     } catch (error) {
       return null;
@@ -366,14 +384,14 @@
   const resolveSlot = async ({ slotName, elements, context }) => {
     if (context.skipBlogSlots && (slotName === 'blog_mid_segue' || slotName === 'blog_end_cta')) return;
     const scopeKey = AB_SCOPE_MAP[slotName] || null;
-    const testId = scopeKey ? `dhf_${scopeKey}` : `dhf_${context.pageSlug}_${slotName}`;
+    const testId = scopeKey || `dhf_${context.pageSlug}_${slotName}`;
     const scope = scopeKey || `debthelpform:${context.pageSlug}:${slotName}`;
     const abConfigKey = AB_CONFIG_SLOT_MAP[slotName];
     if (context.abConfig && abConfigKey && context.abConfig[abConfigKey]) {
       applyAbConfigToElements(slotName, elements, context.abConfig);
     }
     const params = new URLSearchParams({
-      bucket: context.bucket,
+      bucket: context.sessionId,
       scope,
       site: SITE,
       test_id: testId,
@@ -432,7 +450,7 @@
         if (element.dataset && element.dataset.abClick === 'false') return;
         element.addEventListener('click', () => {
           sendTrack({
-            bucket: context.bucket,
+            bucket: context.sessionId,
             scope,
             variant,
             event: 'click',
@@ -494,7 +512,7 @@
 
   const hasEmbeddedBlogAbConfig = () => {
     const scripts = Array.from(document.querySelectorAll('script'));
-    return scripts.some((script) => script.textContent && script.textContent.includes('/api/mesh/015-a-b-test-accelerator/ab-config'));
+    return scripts.some((script) => script.textContent && script.textContent.includes('/ab-config'));
   };
 
   const init = () => {
@@ -514,7 +532,7 @@
     if (!slots.size) return;
 
     const context = {
-      bucket: getBucket(),
+      sessionId: getSessionId(),
       visitorType: getVisitorType(),
       deviceType: getDeviceType(),
       trafficSource: getTrafficSource(),
@@ -541,7 +559,7 @@
       });
     };
 
-    fetchAbConfig(getSessionId())
+    fetchAbConfig(context.sessionId)
       .then((abConfig) => {
         context.abConfig = abConfig;
         setupAbConfigObserver(abConfig);
