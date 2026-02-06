@@ -32,7 +32,8 @@
     <div class="spinner" aria-hidden="true"></div>
     <h1 data-ab-slot="hero_headline">Loading article…</h1>
     <p>We’re fetching the blog post for you.</p>
-    <p id="fallback" style="display:none"><a class="btn" data-ab-slot="homepage_buttons" href="/blog.index.html">Go to blog index</a></p>
+    <!-- AB015 slot hygiene fix -->
+    <p id="fallback" style="display:none"><a class="btn" href="/blog.index.html">Go to blog index</a></p>
   </div>
 
   <script>

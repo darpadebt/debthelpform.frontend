@@ -1,7 +1,25 @@
 (() => {
-  const SITE = 'DHF';
-  const CORR_KEY = 'ab_corr_DHF';
-  const BASE_ENDPOINT = '/api/mesh/015-a-b-test-accelerator';
+  const resolveSite = () => {
+    try {
+      const host = window.location.hostname.toLowerCase();
+      if (host.includes('debtreliefguard')) return 'DRG';
+    } catch (error) {
+      // ignore
+    }
+    return 'DHF';
+  };
+  const SITE = resolveSite();
+  const CORR_KEY = `ab_corr_${SITE}`;
+  const DEFAULT_BASE_ENDPOINT = '/api/mesh/015-a-b-test-accelerator';
+  const resolveBaseEndpoint = () => {
+    if (typeof window !== 'undefined' && window.__ab015BaseEndpoint) {
+      return String(window.__ab015BaseEndpoint);
+    }
+    const meta = document.querySelector('meta[name="ab015-endpoint"]');
+    if (meta && meta.content) return meta.content;
+    return DEFAULT_BASE_ENDPOINT;
+  };
+  const BASE_ENDPOINT = resolveBaseEndpoint();
   const CTA_ENDPOINT = `${BASE_ENDPOINT}/variant`;
   const AB_CONFIG_ENDPOINT = `${BASE_ENDPOINT}/ab-config`;
   const TRACK_ENDPOINT = `${BASE_ENDPOINT}/track`;
@@ -19,12 +37,16 @@
   ]);
   const CANONICAL_SLOTS = new Set(AB_CONFIG_SLOTS);
   const ALIAS_SLOT_MAP = {
+    headline: 'hero_headline',
     nav_call: 'nav_cta',
     page_title: 'hero_headline',
+    primary: 'homepage_buttons',
     primary_cta: 'homepage_buttons',
     primary_button: 'homepage_buttons',
+    primaryCta: 'homepage_buttons',
     estimate_cta: 'homepage_buttons',
     secondary_cta: 'homepage_buttons',
+    phoneCta: 'homepage_buttons',
     tel_call: 'homepage_buttons'
   };
   const AB_CONFIG_SLOT_MAP = {
