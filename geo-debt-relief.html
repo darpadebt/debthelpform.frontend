@@ -211,6 +211,7 @@
     };
   </script>
   <script src="/ab015.sitewide.js" defer></script>
+  <script src="/ab015.apply.js" defer></script>
   <script src="/eng038.sitewide.js" defer></script>
 </head>
 <body>
@@ -375,22 +376,6 @@
       We do not provide tax, legal, or investment advice—consult qualified professionals.
     </div>
   </footer>
-
-  <!-- A/B headline (kept lean, index parity OK) -->
-  <script>
-    (function(){
-      const el = document.getElementById("geoHeadline");
-      const variants = [
-        "Get Out of Debt — Free Estimate in 60 Seconds",
-        "Lower Your Monthly Payments — See If You Qualify"
-      ];
-      try{
-        const chosen = localStorage.getItem("abTestHeadline") || variants[(Math.random()*variants.length)|0];
-        localStorage.setItem("abTestHeadline", chosen);
-        el.textContent = chosen;
-      }catch{}
-    })();
-  </script>
 
   <script>
     (function(){

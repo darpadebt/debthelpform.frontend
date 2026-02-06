@@ -1,79 +1,24 @@
 (() => {
-  const DEFAULT_BASE_ENDPOINT = '/api/mesh/015-a-b-test-accelerator';
-  const SITE = (() => {
-    try {
-      const host = window.location.hostname.toLowerCase();
-      if (host.includes('debtreliefguard')) return 'DRG';
-    } catch (error) {
-      // ignore
-    }
-    return 'DHF';
-  })();
-
-  const resolveBaseEndpoint = () => {
-    let candidate = DEFAULT_BASE_ENDPOINT;
-    if (typeof window !== 'undefined' && window.__ab015BaseEndpoint) {
-      candidate = String(window.__ab015BaseEndpoint);
-    } else {
-      const meta = document.querySelector('meta[name="ab015-endpoint"]');
-      if (meta && meta.content) candidate = meta.content;
-    }
-    try {
-      const url = new URL(candidate, window.location.origin);
-      if (url.origin !== window.location.origin) return DEFAULT_BASE_ENDPOINT;
-      return candidate.startsWith('http') ? `${url.origin}${url.pathname}` : url.pathname;
-    } catch (error) {
-      return DEFAULT_BASE_ENDPOINT;
-    }
-  };
-
-  const BASE_ENDPOINT = resolveBaseEndpoint();
-  const AB_CONFIG_ENDPOINT = `${BASE_ENDPOINT}/ab-config`;
-  const VARIANT_ENDPOINT = `${BASE_ENDPOINT}/variant`;
-  const TRACK_ENDPOINT = `${BASE_ENDPOINT}/track`;
-
+  const BASE_ENDPOINT = '/api/mesh/015-a-b-test-accelerator';
+  const SITE = 'DHF';
   const STORAGE_KEY = 'ab015_session_id';
   const COOKIE_KEY = 'ab015_session_id';
-  const EXPOSURE_KEY_PREFIX = 'ab015_exposures_';
-  const CORR_KEY = `ab_corr_${SITE}`;
-
-  const SUPPORTED_SCOPES = new Set([
-    'hero_headline',
-    'nav_cta',
-    'homepage_buttons',
-    'blog_mid_segue',
-    'blog_end_cta',
-    'form_next',
-    'form_submit',
-    'lead_anchor'
-  ]);
-
-  const ALIAS_SLOT_MAP = {
-    headline: 'hero_headline',
-    nav_call: 'nav_cta',
-    page_title: 'hero_headline',
-    primary: 'homepage_buttons',
-    primary_cta: 'homepage_buttons',
-    primary_button: 'homepage_buttons',
-    primaryCta: 'homepage_buttons',
-    estimate_cta: 'homepage_buttons',
-    secondary_cta: 'homepage_buttons'
+  const CONFIG_KEY = `ab015_config_${SITE}`;
+  const DEFAULT_TTL_SECONDS = 300;
+  const VARIANT_CACHE_KEY = `ab015_variants_${SITE}`;
+  const SLOT_SCOPE_MAP = {
+    homepage_buttons: 'dhf_homepage_buttons',
+    blog_mid_segue: 'dhf_blog_mid_segue',
+    blog_end_cta: 'dhf_blog_end_cta',
+    hero_headline: 'dhf_hero_headline',
+    nav_cta: 'dhf_nav_cta',
+    form_next: 'dhf_form_next',
+    form_submit: 'dhf_form_submit',
+    lead_anchor: 'dhf_lead_anchor'
   };
-
-  const AB_CONFIG_SLOT_MAP = {
-    hero_headline: 'heroHeadlineText',
-    nav_cta: 'navCtaLabel',
-    homepage_buttons: 'primaryCtaLabel',
-    blog_mid_segue: 'blogSegueText',
-    blog_end_cta: 'blogCtaText',
-    form_next: 'formNextLabel',
-    form_submit: 'formSubmitLabel',
-    lead_anchor: 'leadAnchorLabel'
-  };
-
-  const variantCache = {};
-  const exposedThisPage = new Set();
-  const pendingExposures = new Set();
+  const SCOPE_SLOT_MAP = Object.fromEntries(
+    Object.entries(SLOT_SCOPE_MAP).map(([slot, scope]) => [scope, slot])
+  );
 
   const safeGetStorage = () => {
     try {
@@ -130,28 +75,7 @@
     return id;
   };
 
-  const getExposureMap = (sessionId) => {
-    const storage = safeGetStorage();
-    if (!storage) return {};
-    try {
-      return JSON.parse(storage.getItem(`${EXPOSURE_KEY_PREFIX}${sessionId}`) || '{}');
-    } catch (error) {
-      return {};
-    }
-  };
-
-  const setExposure = (sessionId, scope) => {
-    const storage = safeGetStorage();
-    if (!storage) return;
-    const map = getExposureMap(sessionId);
-    map[scope] = true;
-    storage.setItem(`${EXPOSURE_KEY_PREFIX}${sessionId}`, JSON.stringify(map));
-  };
-
-  const hasExposure = (sessionId, scope) => {
-    const map = getExposureMap(sessionId);
-    return Boolean(map[scope]);
-  };
+  const getDeviceType = () => (window.matchMedia('(max-width: 860px)').matches ? 'mobile' : 'desktop');
 
   const getVisitorType = () => {
     try {
@@ -165,8 +89,6 @@
       return 'new';
     }
   };
-
-  const getDeviceType = () => (window.matchMedia('(max-width: 860px)').matches ? 'mobile' : 'desktop');
 
   const getTrafficSource = () => {
     const params = new URLSearchParams(window.location.search);
@@ -186,282 +108,121 @@
     return 'info';
   };
 
-  const hasLeadFlow = () => !!document.querySelector('#get-started, #leadGate, #leadForm, #lead-form');
-
-  const getFunnelStage = (pageType) => {
-    if (pageType === 'blog') return 'blog';
-    if (hasLeadFlow()) return 'leadflow';
-    return 'info';
-  };
-
-  const getStepIndex = () => {
-    const candidates = ['stepIndex', 'step_index', 'leadStep', 'leadStepIndex', 'currentStep'];
-    for (const key of candidates) {
-      const value = window[key];
-      if (typeof value === 'number') return String(value);
-      if (typeof value === 'string' && value.trim() !== '') return value;
-    }
-    return '0';
-  };
-
-  const resolveCanonicalSlot = (slotName) => {
-    if (!slotName) return null;
-    if (SUPPORTED_SCOPES.has(slotName)) return slotName;
-    const alias = ALIAS_SLOT_MAP[slotName];
-    return SUPPORTED_SCOPES.has(alias) ? alias : null;
-  };
-
-  const isTelLink = (element) => {
-    if (!element || element.tagName !== 'A') return false;
-    const href = (element.getAttribute('href') || '').trim().toLowerCase();
-    return href.startsWith('tel:');
-  };
-
-  const applyLabel = (element, label) => {
-    if (!label || !element) return;
-    element.setAttribute('aria-label', label);
-    if (element.tagName === 'INPUT') return;
-    if (element.childElementCount === 0) {
-      element.textContent = label;
-      return;
-    }
-    for (const node of element.childNodes) {
-      if (node.nodeType === Node.TEXT_NODE && node.textContent.trim()) {
-        node.textContent = label;
-        return;
-      }
+  const readCachedConfig = () => {
+    const storage = safeGetStorage();
+    if (!storage) return null;
+    try {
+      const raw = storage.getItem(CONFIG_KEY);
+      if (!raw) return null;
+      const cached = JSON.parse(raw);
+      if (!cached || typeof cached !== 'object') return null;
+      const ttlSeconds = Number(cached.ttlSeconds || DEFAULT_TTL_SECONDS);
+      const fetchedAt = Number(cached.fetchedAt || 0);
+      if (!fetchedAt || Number.isNaN(fetchedAt)) return null;
+      if (Date.now() - fetchedAt > ttlSeconds * 1000) return null;
+      return cached.data || null;
+    } catch (error) {
+      return null;
     }
   };
 
-  const getAbConfigLabel = (slotName, abConfig) => {
-    if (!abConfig || !slotName) return null;
-    const key = AB_CONFIG_SLOT_MAP[slotName];
-    const value = key ? abConfig[key] : null;
-    return typeof value === 'string' ? value : null;
-  };
-
-  const buildSlotsFromAttributes = () => {
-    const slots = new Map();
-    const elements = Array.from(document.querySelectorAll('[data-ab-slot]'));
-    elements.forEach((element) => {
-      const raw = element.getAttribute('data-ab-slot');
-      if (!raw) return;
-      const slotName = resolveCanonicalSlot(raw.trim());
-      if (!slotName) return;
-      if (isTelLink(element) && slotName !== 'lead_anchor') return;
-      if (!slots.has(slotName)) slots.set(slotName, []);
-      slots.get(slotName).push(element);
-    });
-    return slots;
-  };
-
-  const buildSlotsFromConfig = () => {
-    const slots = new Map();
-    if (!window.__ab || !window.__ab.slots) return slots;
-    Object.entries(window.__ab.slots).forEach(([slotName, selector]) => {
-      if (!selector || typeof selector !== 'string') return;
-      const canonicalSlot = resolveCanonicalSlot(slotName);
-      if (!canonicalSlot) return;
-      const elements = Array.from(document.querySelectorAll(selector)).filter((element) => !isTelLink(element));
-      if (!elements.length) return;
-      slots.set(canonicalSlot, elements);
-    });
-    return slots;
-  };
-
-  const buildFallbackSlots = () => {
-    const slots = new Map();
-    const seen = new Set();
-
-    const isApplyAnchor = (element) => {
-      if (!element || element.tagName !== 'A') return false;
-      const href = (element.getAttribute('href') || '').toLowerCase();
-      return href.includes('/apply.html#get-started') || href.includes('#get-started');
-    };
-
-    const isLeadAnchor = (element) => isApplyAnchor(element);
-
-    const isInForm = (element) => !!(element && element.closest && element.closest('form'));
-
-    const isSubmitButton = (element) => {
-      if (!element) return false;
-      if (element.tagName === 'BUTTON') {
-        return (element.getAttribute('type') || '').toLowerCase() === 'submit';
-      }
-      return element.tagName === 'INPUT' && (element.getAttribute('type') || '').toLowerCase() === 'submit';
-    };
-
-    const isStepAdvance = (element) => {
-      if (!element) return false;
-      if (element.id === 'next') return true;
-      if (element.classList && element.classList.contains('next')) return true;
-      return element.hasAttribute && element.hasAttribute('data-step');
-    };
-
-    const isNavCta = (element) => {
-      if (!element) return false;
-      if (!isApplyAnchor(element)) return false;
-      return !!(element.closest && element.closest('.site-nav, #navLinks'));
-    };
-
-    const isHeroCta = (element) => {
-      if (!element) return false;
-      if (isInForm(element)) return false;
-      if (element.closest && element.closest('.site-nav, #navLinks')) return false;
-      if (element.tagName !== 'A' && element.tagName !== 'BUTTON') return false;
-      if (element.classList && (element.classList.contains('primary') || element.classList.contains('button'))) {
-        return true;
-      }
-      return false;
-    };
-
-    const addElement = (slotName, element) => {
-      if (!slotName || !element) return;
-      if (seen.has(element)) return;
-      seen.add(element);
-      if (!slots.has(slotName)) slots.set(slotName, []);
-      slots.get(slotName).push(element);
-    };
-
-    const candidates = Array.from(document.querySelectorAll('a, button, input[type="submit"]'));
-    candidates.forEach((element) => {
-      if (isTelLink(element)) return;
-      if (isInForm(element) || isSubmitButton(element)) {
-        addElement('form_submit', element);
-        return;
-      }
-      if (isStepAdvance(element)) {
-        addElement('form_next', element);
-        return;
-      }
-      if (isNavCta(element)) {
-        addElement('nav_cta', element);
-        return;
-      }
-      if (isLeadAnchor(element)) {
-        addElement('lead_anchor', element);
-        return;
-      }
-      if (isHeroCta(element)) {
-        addElement('homepage_buttons', element);
-      }
-    });
-
-    return slots;
-  };
-
-  const applyAbConfigToNode = (node, abConfig) => {
-    if (!node || !(node instanceof HTMLElement)) return;
-    if (node.hasAttribute && node.hasAttribute('data-ab-slot')) {
-      if (isTelLink(node)) return;
-      const slotName = resolveCanonicalSlot(node.getAttribute('data-ab-slot'));
-      if (slotName) applyLabel(node, getAbConfigLabel(slotName, abConfig));
+  const readVariantCache = () => {
+    const storage = safeGetStorage();
+    if (!storage) return {};
+    try {
+      return JSON.parse(storage.getItem(VARIANT_CACHE_KEY) || '{}');
+    } catch (error) {
+      return {};
     }
-    const nested = node.querySelectorAll ? node.querySelectorAll('[data-ab-slot]') : [];
-    nested.forEach((element) => {
-      if (isTelLink(element)) return;
-      const slotName = resolveCanonicalSlot(element.getAttribute('data-ab-slot'));
-      if (slotName) applyLabel(element, getAbConfigLabel(slotName, abConfig));
-    });
   };
 
-  const setupAbConfigObserver = (abConfig, slots, context) => {
-    if (!document.body || window.__abConfigObserver) return;
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        mutation.addedNodes.forEach((node) => {
-          if (!node || !(node instanceof HTMLElement)) return;
-          if (node.hasAttribute && node.hasAttribute('data-ab-slot')) {
-            if (isTelLink(node)) return;
-            const slotName = resolveCanonicalSlot(node.getAttribute('data-ab-slot'));
-            if (slotName) {
-              if (!slots.has(slotName)) slots.set(slotName, []);
-              if (!slots.get(slotName).includes(node)) slots.get(slotName).push(node);
-              applySlot(slotName, slots.get(slotName), context, abConfig);
-            }
-          }
-          const nested = node.querySelectorAll ? node.querySelectorAll('[data-ab-slot]') : [];
-          nested.forEach((element) => {
-            if (isTelLink(element)) return;
-            const slotName = resolveCanonicalSlot(element.getAttribute('data-ab-slot'));
-            if (!slotName) return;
-            if (!slots.has(slotName)) slots.set(slotName, []);
-            if (!slots.get(slotName).includes(element)) slots.get(slotName).push(element);
-            applySlot(slotName, slots.get(slotName), context, abConfig);
-          });
-          if (window.__ab && window.__ab.slots) {
-            Object.entries(window.__ab.slots).forEach(([slotName, selector]) => {
-              if (!selector || typeof selector !== 'string') return;
-              const canonicalSlot = resolveCanonicalSlot(slotName);
-              if (!canonicalSlot) return;
-              const elements = Array.from(node.querySelectorAll ? node.querySelectorAll(selector) : []).filter((element) => !isTelLink(element));
-              if (!elements.length) return;
-              if (!slots.has(canonicalSlot)) slots.set(canonicalSlot, []);
-              const list = slots.get(canonicalSlot);
-              elements.forEach((element) => {
-                if (!list.includes(element)) list.push(element);
-              });
-              applySlot(canonicalSlot, list, context, abConfig);
-            });
-          }
-          applyAbConfigToNode(node, abConfig);
-        });
-      });
-    });
-    observer.observe(document.body, { childList: true, subtree: true });
-    window.__abConfigObserver = observer;
+  const writeVariantCache = (cache) => {
+    const storage = safeGetStorage();
+    if (!storage) return;
+    try {
+      storage.setItem(VARIANT_CACHE_KEY, JSON.stringify(cache));
+    } catch (error) {
+      // ignore
+    }
   };
 
-  const fetchAbConfig = async (sessionId) => {
+  const writeCachedConfig = (data) => {
+    const storage = safeGetStorage();
+    if (!storage || !data) return;
+    try {
+      const ttlSeconds = Number(data.ttlSeconds || DEFAULT_TTL_SECONDS);
+      storage.setItem(
+        CONFIG_KEY,
+        JSON.stringify({
+          data,
+          ttlSeconds,
+          fetchedAt: Date.now()
+        })
+      );
+    } catch (error) {
+      // ignore
+    }
+  };
+
+  const fetchConfig = async (sessionId) => {
     if (!sessionId || sessionId.length < 8) return null;
     try {
       const params = new URLSearchParams({ sessionId, site: SITE });
-      const response = await fetch(`${AB_CONFIG_ENDPOINT}?${params.toString()}`, { credentials: 'same-origin' });
+      const response = await fetch(`${BASE_ENDPOINT}/ab-config?${params.toString()}`, {
+        credentials: 'same-origin'
+      });
       if (!response.ok) return null;
       const data = await response.json();
       if (!data || typeof data !== 'object') return null;
+      writeCachedConfig(data);
       return data;
     } catch (error) {
       return null;
     }
   };
 
-  const resolveVariant = async (scope, context, stepIndex) => {
-    if (!SUPPORTED_SCOPES.has(scope)) return null;
-    if (variantCache[scope]) return variantCache[scope];
-    const params = new URLSearchParams({
-      bucket: context.sessionId,
-      scope,
-      site: SITE,
-      test_id: scope,
-      page_type: context.pageType,
-      funnel_stage: context.funnelStage,
-      step_index: stepIndex,
-      device_type: context.deviceType,
-      traffic_source: context.trafficSource,
-      time_bucket: context.timeBucket,
-      visitor_type: context.visitorType,
-      page_path: context.pagePath
+  let inflightConfig = null;
+  const getConfig = () => {
+    const cached = readCachedConfig();
+    if (cached) return Promise.resolve(cached);
+    if (inflightConfig) return inflightConfig;
+    const sessionId = getSessionId();
+    inflightConfig = fetchConfig(sessionId).finally(() => {
+      inflightConfig = null;
     });
+    return inflightConfig;
+  };
 
-    if (context.correlationId) {
-      params.set('correlation_id', context.correlationId);
-    }
+  const resolveScope = (scopeOrSlot) => {
+    if (!scopeOrSlot) return null;
+    if (SLOT_SCOPE_MAP[scopeOrSlot]) return SLOT_SCOPE_MAP[scopeOrSlot];
+    if (SCOPE_SLOT_MAP[scopeOrSlot]) return scopeOrSlot;
+    return scopeOrSlot;
+  };
 
+  const resolveVariantForScope = (scopeOrSlot, config) => {
+    if (!config) return null;
+    const slotName = SCOPE_SLOT_MAP[scopeOrSlot] || scopeOrSlot;
+    if (slotName === 'homepage_buttons' && config.variantId) return config.variantId;
+    return null;
+  };
+
+  const fetchVariant = async (scopeOrSlot, sessionId) => {
+    const scope = resolveScope(scopeOrSlot);
+    if (!scope || !sessionId || sessionId.length < 8) return null;
+    const cache = readVariantCache();
+    if (cache[scope]) return cache[scope];
     try {
-      const response = await fetch(`${VARIANT_ENDPOINT}?${params.toString()}`, { credentials: 'same-origin' });
+      const params = new URLSearchParams({ bucket: sessionId, scope, site: SITE });
+      const response = await fetch(`${BASE_ENDPOINT}/variant?${params.toString()}`, {
+        credentials: 'same-origin'
+      });
       if (!response.ok) return null;
       const data = await response.json();
-      if (data && data.correlation_id) {
-        try {
-          localStorage.setItem(CORR_KEY, data.correlation_id);
-        } catch (error) {
-          // ignore
-        }
-      }
       const variant = data?.variant || data?.variant_id || data?.id || null;
       if (variant) {
-        variantCache[scope] = variant;
+        cache[scope] = variant;
+        writeVariantCache(cache);
       }
       return variant;
     } catch (error) {
@@ -469,35 +230,33 @@
     }
   };
 
-  const track = async (event, scope, context, meta = {}) => {
-    if (!scope || !SUPPORTED_SCOPES.has(scope)) return false;
-    const stepIndex = meta.step_index || getStepIndex();
-    const variant = await resolveVariant(scope, context, stepIndex);
+  const track = async (event, scopeOrSlot, meta = {}) => {
+    const scope = resolveScope(scopeOrSlot);
+    if (!event || !scope) return false;
+    const sessionId = getSessionId();
+    const config = await getConfig();
+    const variant = meta.variant || resolveVariantForScope(scopeOrSlot, config) || await fetchVariant(scope, sessionId);
     if (!variant) return false;
     const payload = {
-      bucket: context.sessionId,
       scope,
+      bucket: sessionId,
       variant,
       event,
       site: SITE,
-      test_id: scope,
-      page_type: context.pageType,
-      funnel_stage: context.funnelStage,
-      step_index: stepIndex,
-      device_type: context.deviceType,
-      traffic_source: context.trafficSource,
-      time_bucket: context.timeBucket,
-      visitor_type: context.visitorType,
-      page_path: context.pagePath,
-      correlation_id: context.correlationId || undefined
+      page_type: getPageType(),
+      funnel_stage: meta.funnel_stage,
+      step_index: meta.step_index,
+      device_type: getDeviceType(),
+      traffic_source: getTrafficSource(),
+      time_bucket: String(new Date().getHours()),
+      visitor_type: getVisitorType(),
+      correlation_id: meta.correlation_id,
+      test_id: meta.test_id,
+      page_path: `${window.location.pathname}${window.location.search}`
     };
 
-    if (meta && typeof meta.status === 'string') {
-      payload.status = meta.status;
-    }
-
     try {
-      await fetch(TRACK_ENDPOINT, {
+      await fetch(`${BASE_ENDPOINT}/track`, {
         method: 'POST',
         headers: { 'content-type': 'application/json' },
         credentials: 'same-origin',
@@ -509,117 +268,8 @@
     }
   };
 
-  const applySlot = (slotName, elements, context, abConfig) => {
-    if (!SUPPORTED_SCOPES.has(slotName)) return;
-    const label = getAbConfigLabel(slotName, abConfig);
-    let appliedLabel = false;
-    if (label) {
-      elements.forEach((element) => {
-        if (isTelLink(element)) return;
-        if (element.dataset && element.dataset.abConfigApplied) return;
-        applyLabel(element, label);
-        if (element.dataset) {
-          element.dataset.abConfigApplied = 'true';
-        }
-        appliedLabel = true;
-      });
-    }
-
-    if (appliedLabel && !hasExposure(context.sessionId, slotName) && !exposedThisPage.has(slotName) && !pendingExposures.has(slotName)) {
-      pendingExposures.add(slotName);
-      track('exposure', slotName, context, { step_index: getStepIndex() }).then((posted) => {
-        if (posted) {
-          setExposure(context.sessionId, slotName);
-          exposedThisPage.add(slotName);
-        }
-        pendingExposures.delete(slotName);
-      });
-    }
-
-    elements.forEach((element) => {
-      if (element.dataset && element.dataset.abClickBound) return;
-      if (element.dataset && element.dataset.abClick === 'false') return;
-      if (element.dataset) element.dataset.abClickBound = 'true';
-      element.addEventListener('click', () => {
-        if (slotName === 'form_next') {
-          track('step_advance', slotName, context, { step_index: getStepIndex() });
-          return;
-        }
-        track('click', slotName, context, { step_index: getStepIndex() });
-      }, { passive: true });
-    });
-  };
-
-  const maybeDebugLog = (state) => {
-    const params = new URLSearchParams(window.location.search);
-    if (params.get('ab_debug') === '1') {
-      console.log('[AB015]', state);
-    }
-  };
-
-  const init = () => {
-    const slots = new Map();
-    buildSlotsFromAttributes().forEach((elements, slotName) => slots.set(slotName, elements));
-
-    if (window.__ab && window.__ab.slots) {
-      buildSlotsFromConfig().forEach((elements, slotName) => {
-        if (!slots.has(slotName)) slots.set(slotName, elements);
-      });
-    }
-
-    if (!slots.size) {
-      buildFallbackSlots().forEach((elements, slotName) => slots.set(slotName, elements));
-    }
-    if (!slots.size) return;
-
-    const context = {
-      sessionId: getSessionId(),
-      visitorType: getVisitorType(),
-      deviceType: getDeviceType(),
-      trafficSource: getTrafficSource(),
-      timeBucket: String(new Date().getHours()),
-      pagePath: `${window.location.pathname}${window.location.search}`,
-      pageType: getPageType(),
-      funnelStage: null,
-      correlationId: null
-    };
-
-    context.funnelStage = getFunnelStage(context.pageType);
-    try {
-      context.correlationId = localStorage.getItem(CORR_KEY) || null;
-    } catch (error) {
-      context.correlationId = null;
-    }
-
-    const applySlots = (abConfig) => {
-      slots.forEach((elements, slotName) => {
-        applySlot(slotName, elements, context, abConfig);
-      });
-    };
-
-    fetchAbConfig(context.sessionId)
-      .then((abConfig) => {
-        setupAbConfigObserver(abConfig, slots, context);
-        applySlots(abConfig);
-        maybeDebugLog({
-          sessionId: context.sessionId,
-          abConfigOk: Boolean(abConfig),
-          slotsApplied: Array.from(slots.keys()),
-          variantIds: { ...variantCache }
-        });
-      })
-      .catch(() => {
-        applySlots(null);
-      });
-
-    window.AB015 = window.AB015 || {};
-    window.AB015.track = (event, scope, meta) => track(event, scope, context, meta);
-    window.AB015.trackCompletion = (meta) => track('completion', 'form_submit', context, meta || {});
-  };
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  window.AB015 = window.AB015 || {};
+  window.AB015.getSessionId = getSessionId;
+  window.AB015.getConfig = getConfig;
+  window.AB015.track = track;
 })();

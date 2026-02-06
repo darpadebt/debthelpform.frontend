@@ -125,7 +125,6 @@
 (() => {
   const site = "DHF";
   const slug = "understanding-debt-relief-options-a-comprehensive-guide-for-consumers";
-  const abUrl = "/api/mesh/015-a-b-test-accelerator/ab-config";
   const engageUrl = "/api/mesh/038-engagement-router/engage";
   const cookieName = "mesh_session_id";
 
@@ -208,36 +207,6 @@
     });
   };
 
-  const applyVariants = (data) => {
-    if (!data || typeof data !== "object") return;
-    if (data.blogSegueText) {
-      document.querySelectorAll('[data-ab-slot="blog_mid_segue"]').forEach((el) => {
-        el.textContent = data.blogSegueText;
-      });
-    }
-    if (data.blogCtaText) {
-      document.querySelectorAll('[data-ab-slot="blog_end_cta"]').forEach((el) => {
-        el.textContent = data.blogCtaText;
-      });
-    }
-    if (data.variantId) {
-      document.querySelectorAll("[data-cta]").forEach((el) => {
-        el.setAttribute("data-variant-id", data.variantId);
-      });
-    }
-  };
-
-  fetch(
-    abUrl
-      + "?sessionId="
-      + encodeURIComponent(sessionId)
-      + "&site="
-      + encodeURIComponent(site),
-  )
-    .then((res) => (res.ok ? res.json() : null))
-    .then((data) => applyVariants(data))
-    .catch(() => {});
-
   wireCtaClicks();
 })();
 </script>
@@ -253,5 +222,7 @@
 
 <div class="engagement-hooks" data-site="debthelpform" data-blog-slug="understanding-debt-relief-options-a-comprehensive-guide-for-consumers"></div>
 
+  <script src="/ab015.sitewide.js" defer></script>
+  <script src="/ab015.apply.js" defer></script>
 </body>
 </html>
