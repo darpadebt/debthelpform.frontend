@@ -97,14 +97,15 @@
       display:flex;
       align-items:center;
       gap:6px;
-      flex:0 0 auto;
+      flex:1 1 auto;
+      min-width:0;
     }
-    .site-nav .brand img{height:52px;width:auto;display:block}
+    .site-nav .brand img{height:auto;width:100%;max-width:520px;max-height:56px;object-fit:contain;display:block}
     .site-nav .links{
       display:flex;
       align-items:center;
       gap:10px;
-      flex:1 1 auto;
+      flex:0 0 auto;
       flex-wrap:wrap;
       margin-left:auto;
       justify-content:flex-end;
@@ -187,7 +188,7 @@
     @media (min-width:769px){.sticky-menu{bottom:0}}
     .sticky-menu nav{display:flex;gap:1rem;overflow-x:auto;padding:0 .75rem;width:100%;align-items:center;scrollbar-width:none}
     .sticky-menu nav::-webkit-scrollbar{display:none}
-    .sticky-menu nav a{color:#ffdd00;text-decoration:none;padding:.35rem .55rem;border-radius:6px;font-weight:700;font-size:.92rem;flex:0 0 auto}
+    .sticky-menu nav a{color:#ffdd00;text-decoration:none;padding:.35rem .55rem;border-radius:6px;font-weight:700;font-size:.92rem;flex:1 1 auto;min-width:0}
     .sticky-menu nav a:hover,.sticky-menu nav a:focus{background:rgba(255,255,255,.1);outline:none}
     /* Mobile dual-action bar */
     .mobile-bar{position:fixed;left:0;right:0;bottom:0;background:#0b1220;color:#fff;display:flex;gap:8px;padding:.6rem;z-index:10000}
@@ -211,7 +212,7 @@
   <div class="shell">
     <nav class="site-nav" role="navigation" aria-label="Primary">
       <a class="brand" href="/" aria-label="Gateway Debt Help">
-        <img src="/gatewaylego.webp" alt="Gateway Debt Help logo" loading="lazy" />
+        <img src="/gatewaylego.svg" alt="Gateway Debt Help logo" loading="lazy" />
       </a>
       <button class="menu-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks">Menu</button>
       <div class="links" id="navLinks">
