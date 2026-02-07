@@ -79,6 +79,10 @@
     .muted{color:var(--muted);font-size:14px}
     .badges{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
     .badge{font-size:12px;padding:6px 12px;border-radius:999px;background:#e2f2fb;color:#0369a1;text-decoration:none;font-weight:600;border:1px solid #bae6fd}
+    .cta-panel{background:linear-gradient(135deg,#0ea5e9,#38bdf8 55%,#22c55e);color:#fff;border:none}
+    .cta-panel .muted{color:rgba(255,255,255,.9)}
+    .cta-panel .outline{background:rgba(15,23,42,.9);border-color:transparent;box-shadow:0 8px 18px rgba(15,23,42,.35);color:#fff}
+    .cta-panel .outline:hover{background:rgba(15,23,42,.82)}
 
     .section{margin:28px 0}
     .options{display:grid;gap:16px}
@@ -178,7 +182,7 @@
     
   <section class="section" aria-label="Relief tiles">
       <div class="options">
-        <article class="card tile" aria-labelledby="opt1">
+        <article class="card tile cta-panel" aria-labelledby="opt1">
           <h3 id="opt1">Debt Consolidation Loan</h3>
           <p class="muted">Replace multiple cards with one fixed payment at a lower rate (credit/income required).</p>
           <ul class="muted">
@@ -190,7 +194,7 @@
             <a class="outline btn" href="/apply.html#get-started">Estimate my consolidation</a>
           </div>
         </article>
-        <article class="card tile" aria-labelledby="opt2">
+        <article class="card tile cta-panel" aria-labelledby="opt2">
           <h3 id="opt2">Debt Settlement Program</h3>
           <p class="muted">Resolve enrolled accounts for less than you owe by negotiating settlements over time.</p>
           <ul class="muted">
