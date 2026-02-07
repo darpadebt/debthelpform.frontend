@@ -142,11 +142,42 @@
       border:1px solid rgba(255,255,255,.35);
     }
     header .h1{font-size:26px;line-height:1.2;margin:0 0 8px;font-weight:800;color:#fff}
+    header .h1.cta-title{font-size:32px;letter-spacing:.2px}
     header .sub{color:rgba(255,255,255,.9);font-size:15px;margin-bottom:16px}
     .badges{display:flex;gap:10px;flex-wrap:wrap}
     .badge{font-size:12px;padding:6px 10px;border-radius:999px;background:#e6fafa;color:#0369a1;text-decoration:none}
+    .hero-benefits{
+      list-style:none;
+      padding:0;
+      margin:14px 0 0;
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:10px;
+    }
+    .hero-benefits li{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:14px;
+      background:rgba(15,23,42,.2);
+      border:1px solid rgba(255,255,255,.35);
+      font-size:13px;
+      font-weight:600;
+    }
+    .hero-benefits li span{font-size:16px}
+    @media (max-width:640px){
+      .hero-benefits{grid-template-columns:1fr}
+    }
     header.hero .badge{background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.35)}
     .primary{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:linear-gradient(90deg,var(--brand),#38bdf8);color:#fff;border:none;border-radius:999px;padding:14px 18px;font-weight:700;font-size:16px;cursor:pointer;box-shadow:0 8px 18px var(--ring)}
+    #get-started{display:flex;justify-content:center}
+    #get-started .primary{
+      width:min(320px,100%);
+      font-size:18px;
+      padding:16px 22px;
+      letter-spacing:.3px;
+    }
     .primary:active{transform:translateY(1px)}
     .button{
       display:inline-flex;
@@ -269,17 +300,17 @@
     </nav>
 
     <header class="hero cta-panel" id="entry">
-      <div class="h1">See if you may qualify for a debt consolidation loan — in about 60 seconds</div>
+      <div class="h1 cta-title">Take 60 Seconds - Check Loan Qualification</div>
       <div class="sub">Answer a few quick questions to preview your options. Secure & confidential. No obligation.</div>
       <div id="get-started">
         <button class="primary" id="startBtn">Start Now</button>
       </div>
-      <div class="badges" style="margin-top:12px">
-        <span class="badge">Secure & Confidential</span>
-        <span class="badge">No Obligation</span>
-        <span class="badge">Debt‑free in 24–48 months</span>
-        <span class="badge">One low monthly payment</span>
-      </div>
+      <ul class="hero-benefits">
+        <li><span>🔒</span>Secure & Confidential</li>
+        <li><span>✅</span>No Obligation</li>
+        <li><span>📉</span>Debt‑free in 24–48 months</li>
+        <li><span>💳</span>One low monthly payment</li>
+      </ul>
     </header>
 
     <!-- Trust row with BBB link (non-member profile) -->
