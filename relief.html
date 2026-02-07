@@ -94,9 +94,10 @@
     .image-highlight::before{content:"";position:absolute;inset:0;background:var(--highlight-image) center/cover no-repeat;filter:brightness(.65) saturate(1.05)}
     .image-highlight::after{content:"";position:absolute;inset:0;background:rgba(15,23,42,.65)}
     .image-highlight > *{position:relative;z-index:1}
-    .comparison-row.goal-consolidation{--highlight-image:url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80")}
-    .comparison-row.goal-settlement{--highlight-image:url("https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1600&q=80")}
-    .cleanup-note{--highlight-image:url("https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80");margin:16px 0}
+    .comparison-row.goal-consolidation,
+    .comparison-row.goal-settlement{--highlight-image:url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80");min-height:120px}
+    .comparison-row.goal-settlement{--highlight-image:url("https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1600&q=80");margin-top:8px}
+    .cleanup-note{--highlight-image:url("/debt-relief-couple.png");margin:16px 0}
     .cleanup-note p{margin:0;font-weight:600;font-size:16px;color:#fff}
     @media(min-width:720px){.comparison-row{grid-template-columns:1.1fr 1fr}}
 
@@ -206,7 +207,7 @@
 
     <section class="section" aria-label="Site note">
       <div class="cleanup-note image-highlight">
-        <p>We tried to clean this up on DHF but according to ChatGPT we missed a few things.</p>
+        <p>Get a clear, personalized comparison of consolidation vs. settlement based on your goals.</p>
       </div>
     </section>
 
