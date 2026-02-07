@@ -56,9 +56,9 @@
       top:0;
       margin-top:calc(10px + env(safe-area-inset-top, 0px));
       z-index:1000;
-      background:linear-gradient(135deg, rgba(14,165,233,.14), rgba(34,197,94,.14)), rgba(255,255,255,.96);
+      background:#0b2b4a;
       backdrop-filter:saturate(120%) blur(6px);
-      border:1px solid #e2e8f0;
+      border:1px solid #0b2b4a;
       border-radius:24px;
       padding:10px 14px;
       display:grid;
@@ -71,7 +71,7 @@
     .site-nav .brand{
       font-weight:800;
       text-decoration:none;
-      color:var(--text);
+      color:#fff;
       font-size:17px;
       display:flex;
       align-items:center;
@@ -84,8 +84,8 @@
     .site-nav .brand img{
       height:auto;
       width:100%;
-      max-width:640px;
-      max-height:72px;
+      max-width:720px;
+      max-height:96px;
       object-fit:contain;
       filter:hue-rotate(165deg) saturate(1.15);
       display:block;
@@ -112,9 +112,9 @@
     .site-nav .links a.call:hover{opacity:.95}
     .site-nav .links a.active{background:#dbeafe;border-color:#93c5fd}
     .menu-toggle{
-      border:none;
-      background:rgba(15,23,42,.88);
-      color:#fff;
+      border:1px solid #0f172a;
+      background:#fff;
+      color:#0f172a;
       border-radius:10px;
       padding:8px 10px;
       font-weight:700;
@@ -124,7 +124,7 @@
       margin-left:0;
       justify-self:end;
       grid-column:3;
-      box-shadow:0 6px 14px rgba(15,23,42,.25);
+      box-shadow:0 6px 14px rgba(15,23,42,.15);
     }
     .menu-toggle:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
 
