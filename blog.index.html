@@ -108,8 +108,6 @@
     @media(min-width:769px){footer.sticky-menu{bottom:0}}
     @media(max-width:600px){.shell{padding-bottom:180px}}
   </style>
-  <script src="/ab015.sitewide.js" defer></script>
-  <script src="/ab015.apply.js" defer></script>
   <script src="/eng038.sitewide.js" defer></script>
 </head>
 <body>
@@ -132,15 +130,14 @@
         <a href="/contact.html">Contact</a>
         <a href="/privacy.html">Privacy</a>
         <a href="/terms.html">Terms</a>
-        <!-- AB015 slot hygiene fix -->
-        <a data-ab-slot="nav_cta" data-ab-label href="/apply.html#get-started">Start Secure Estimate</a>
+        <a href="/apply.html#get-started">Start Secure Estimate</a>
         <a class="call" href="tel:+18884377141">Call +1 (888) 437‑7141</a>
       </div>
     </nav>
 
   <header class="page-hero" role="banner">
       <span class="badge">Debt Help Form Blog</span>
-      <h1 id="ab-cta-text" data-ab-slot="hero_headline" data-ab-label>Latest Articles</h1>
+      <h1 id="ab-cta-text">Latest Articles</h1>
       <p class="sub">Guides to help you compare consolidation vs settlement and choose confidently.</p>
       <div class="badges">
         <a class="badge" href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener nofollow">BBB Profile — A– rating</a>
@@ -156,19 +153,18 @@
           <div id="emptyState" class="sidecard" style="margin-top:12px">
             <h3>Guides coming soon</h3>
             <p class="sub">Meanwhile, see how much you can save today.</p>
-            <p><a data-ab-slot="lead_anchor" data-ab-label class="btn primary" href="/apply.html#get-started">🔒 Start Secure Estimate</a></p>
+            <p><a class="btn primary" href="/apply.html#get-started">🔒 Start Secure Estimate</a></p>
           </div>
         </div>
       <aside class="sidebar" aria-label="Helpful actions">
           <div class="sidecard">
             <h3>Estimate Your Savings</h3>
             <p class="sub">Private, fast, no hard credit check.</p>
-            <p><a data-ab-slot="lead_anchor" data-ab-label class="btn primary" href="/apply.html#get-started">Get Free Estimate</a></p>
+            <p><a class="btn primary" href="/apply.html#get-started">Get Free Estimate</a></p>
           </div>
           <div class="sidecard">
             <h3>Talk to a Specialist</h3>
             <p class="sub">Prefer the phone? We’re here to help.</p>
-            <!-- AB015 slot hygiene fix -->
             <p><a class="btn ghost call" href="tel:+18884377141">📞 Call 888‑437‑7141</a></p>
           </div>
           <div class="sidecard bbb">
@@ -180,9 +176,8 @@
   </div>
 
   <div id="dhfMobileBar" class="mobile-bar" aria-label="Quick actions">
-    <!-- AB015 slot hygiene fix -->
     <a class="mobile-call" href="tel:+18884377141">📞 Call 888‑437‑7141</a>
-    <a class="mobile-est" href="/apply.html#get-started" data-ab-slot="lead_anchor" data-ab-label>🔒 Start Secure Estimate</a>
+    <a class="mobile-est" href="/apply.html#get-started">🔒 Start Secure Estimate</a>
   </div>
 
   <footer class="sticky-menu" role="navigation" aria-label="Site map">
@@ -292,7 +287,7 @@
               <p class="excerpt">${ex}</p>
               <div class="inline-cta">
                 <a href="${href}">Read more →</a>
-                <a href="/apply.html#get-started" data-ab-slot="lead_anchor" data-ab-label>See savings →</a>
+                <a href="/apply.html#get-started">See savings →</a>
               </div>
             </div>
           </article>`;

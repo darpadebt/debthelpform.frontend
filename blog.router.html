@@ -24,16 +24,13 @@
     a.btn:hover{text-decoration:none;opacity:.95}
     @keyframes spin{to{transform:rotate(360deg)}}
   </style>
-  <script src="/ab015.sitewide.js" defer></script>
-  <script src="/ab015.apply.js" defer></script>
   <script src="/eng038.sitewide.js" defer></script>
 </head>
 <body>
   <div class="card" id="statusCard" role="status" aria-live="polite">
     <div class="spinner" aria-hidden="true"></div>
-    <h1 data-ab-slot="hero_headline" data-ab-label>Loading article…</h1>
+    <h1>Loading article…</h1>
     <p>We’re fetching the blog post for you.</p>
-    <!-- AB015 slot hygiene fix -->
     <p id="fallback" style="display:none"><a class="btn" href="/blog.index.html">Go to blog index</a></p>
   </div>
 

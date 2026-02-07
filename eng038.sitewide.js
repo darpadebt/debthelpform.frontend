@@ -204,8 +204,7 @@
       attr.indexOf("start") !== -1 ||
       attr.indexOf("eligib") !== -1 ||
       attr.indexOf("form") !== -1 ||
-      element.hasAttribute("data-cta") ||
-      element.hasAttribute("data-ab-slot")
+      element.hasAttribute("data-cta")
     );
   }
 

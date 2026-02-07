@@ -223,8 +223,6 @@
   <script type="application/ld+json">
     {"@context":"https://schema.org","@type":["Organization","FinancialService"],"@id":"https://gatewaydebthelp.com/#gfsr","name":"Gateway Financial Settlement Relief, LLC","alternateName":["GFSR","Gateway Debt Help","Debt Help Form"],"url":"https://debthelpform.com/","telephone":"+1-888-437-7141","sameAs":["https://debthelpform.com/","https://debtreliefguard.com/","https://gatewaydebthelp.com/","https://gatewayfinancialsettlementrelief.com/"],"disambiguatingDescription":"Not affiliated with Gateway Debt Relief of Costa Mesa, CA."}
   </script>
-  <script src="/ab015.sitewide.js" defer></script>
-  <script src="/ab015.apply.js" defer></script>
   <script src="/eng038.sitewide.js" defer></script>
 </head>
 <body>
@@ -248,18 +246,16 @@
         <a href="/contact.html">Contact</a>
         <a href="/privacy.html">Privacy</a>
         <a href="/terms.html">Terms</a>
-        <a data-ab-slot="nav_cta" data-ab-label href="/apply.html#get-started">Start Secure Estimate</a>
-        <!-- AB015 slot hygiene fix -->
+        <a href="/apply.html#get-started">Start Secure Estimate</a>
         <a class="call" href="tel:+18884377141">Call +1 (888) 437‑7141</a>
       </div>
     </nav>
 
     <header class="hero cta-panel" id="entry">
-      <div class="h1" data-ab-slot="hero_headline" data-ab-label data-ab-track="exposure" data-ab-click="false">See if you may qualify for a debt consolidation loan — in about 60 seconds</div>
+      <div class="h1">See if you may qualify for a debt consolidation loan — in about 60 seconds</div>
       <div class="sub">Answer a few quick questions to preview your options. Secure & confidential. No obligation.</div>
       <div id="get-started">
-        <button class="primary" id="startBtn" data-ab-slot="homepage_buttons" data-ab-label>Start my free eligibility check</button>
-        <!-- AB015 slot hygiene fix -->
+        <button class="primary" id="startBtn">Start my free eligibility check</button>
       </div>
       <div class="badges" style="margin-top:12px">
         <span class="badge">Secure & Confidential</span>
@@ -302,7 +298,7 @@
           <input type="checkbox" name="consent_marketing" value="yes" />
           <span>It’s okay to contact me about debt relief options by phone, email, or text.</span>
         </label>
-        <button class="button primary" type="submit" data-ab-slot="form_submit" data-ab-label>See my options</button>
+        <button class="button primary" type="submit">See my options</button>
         <p class="muted hidden" id="leadStatus" role="status" aria-live="polite"></p>
       </form>
     </div>
@@ -324,7 +320,6 @@
 
   <div class="footer-sticky">
     <div class="trust">🔒 Secure & Confidential</div>
-    <!-- AB015 slot hygiene fix -->
     <a class="callnow" id="stickyCall" href="tel:+18884377141">Call Now</a>
     <a href="https://www.bbb.org/us/fl/inglis/profile/debt-relief-services/gateway-financial-settlement-relief-llc-0733-235973278" target="_blank" rel="noopener nofollow" class="muted" style="font-size:12px;text-decoration:none">BBB Profile</a>
   </div>
@@ -443,12 +438,12 @@
         <input id="rngDebt" type="range" min="0" max="4" step="1" value="1" />
         <div class="range-labels"><span>Under $10k</span><span>$10–20k</span><span>$20–40k</span><span>$40–60k</span><span>$60k+</span></div>
       </div>
-      <div class="controls"><button class="next" id="next" data-ab-slot="form_next" data-ab-label>Next</button></div>`;
+      <div class="controls"><button class="next" id="next">Next</button></div>`;
       document.getElementById('next').onclick = ()=>{ const v = +document.getElementById('rngDebt').value; state.answers.debt_amount = ["<10k","10-20k","20-40k","40-60k",">60k"][v]; advance(); } },
     function mountDebtType($){ $.innerHTML = `
       <div class="prompt">Which debts do you want to combine into one simpler payment?</div>
       <div class="choices" id="choices"></div>
-      <div class="controls"><button class="next" id="next" data-ab-slot="form_next" data-ab-label disabled>Next</button></div>`;
+      <div class="controls"><button class="next" id="next" disabled>Next</button></div>`;
       const items = ["Credit cards","Personal loans","Medical bills","Other unsecured debt"]; const sel = new Set(); const box = document.getElementById('choices'); const nextBtn = document.getElementById('next');
       items.forEach(label=>{ const el = document.createElement('div'); el.className = 'choice'; el.textContent = label; el.onclick = ()=>{ if(sel.has(label)){ sel.delete(label); el.classList.remove('active'); } else { sel.add(label); el.classList.add('active'); } nextBtn.disabled = sel.size===0; }; box.appendChild(el); });
       nextBtn.onclick = ()=>{ state.answers.debt_type = Array.from(sel); advance(); } },
@@ -457,7 +452,7 @@
       <div class="choices" id="pay"></div>
       <div class="prompt" style="margin-top:18px">If you know your credit score, which range sounds about right?</div>
       <div class="choices" id="cred"></div>
-      <div class="controls"><button class="next" id="next" data-ab-slot="form_next" data-ab-label>Next</button></div>`;
+      <div class="controls"><button class="next" id="next">Next</button></div>`;
       const pay = ["I’m current on payments","Missed 1–2 months","3+ months behind"], cred = ["720+","660–719","600–659","Below 600","Not sure"]; let payPick=null, credPick=null;
       function radio(id, items, on){ const box = document.getElementById(id); items.forEach(label=>{ const el = document.createElement('div'); el.className='choice'; el.textContent=label; el.onclick=()=>{ Array.from(box.children).forEach(c=>c.classList.remove('active')); el.classList.add('active'); on(label); }; box.appendChild(el); }); }
       radio('pay', pay, v=> payPick=v); radio('cred', cred, v=> credPick=v);
@@ -465,7 +460,7 @@
     function mountState($){ $.innerHTML = `
       <div class="prompt">Where do you live?</div>
       <select id="selState" required></select>
-      <div class="controls"><button class="next" id="next" data-ab-slot="form_next" data-ab-label>Next</button></div>`;
+      <div class="controls"><button class="next" id="next">Next</button></div>`;
       const states = ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY"];
       const sel = document.getElementById('selState'); sel.innerHTML = '<option value="" disabled selected>Select your state</option>' + states.map(s=>`<option>${s}</option>`).join('');
       document.getElementById('next').onclick = ()=>{ state.answers.state = sel.value || null; showLeadGate(); } }
@@ -570,9 +565,6 @@
       const res = await submitLead(payload);
       const status = res?.status || 'accepted';
       if(status === 'accepted' || status === 'duplicate'){
-        if (window.AB015 && typeof window.AB015.trackCompletion === 'function') {
-          window.AB015.trackCompletion({ status });
-        }
         setStatus('');
         showResults();
       } else if (status === 'limited') {
