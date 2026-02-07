@@ -180,7 +180,9 @@
 
     main.page{display:block}
     .page-header{
-      background:var(--surface);
+      background:linear-gradient(135deg,#0ea5e9,#38bdf8 55%,#22c55e);
+      color:#fff;
+      border:none;
       border-radius:var(--radius);
       box-shadow:var(--shadow);
       padding:26px 26px 28px;
@@ -191,8 +193,9 @@
       line-height:1.2;
       margin:0 0 8px;
       font-weight:800;
+      color:#fff;
     }
-    .page-header p{margin:0 0 18px;color:var(--muted);font-size:15px}
+    .page-header p{margin:0 0 18px;color:rgba(255,255,255,.9);font-size:15px}
     .page-header .badges{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
     .badge{
       display:inline-flex;
@@ -204,6 +207,10 @@
       color:#0369a1;
       font-size:13px;
       font-weight:600;
+    }
+    .page-header .badge{
+      background:rgba(255,255,255,.2);
+      color:#fff;
     }
     .page-header .buttons{display:flex;flex-wrap:wrap;gap:10px}
 
