@@ -90,10 +90,14 @@
     .comparison{display:grid;margin-top:10px}
     .comparison-row{display:grid;gap:10px;padding:14px 0;border-bottom:1px solid #e2e8f0}
     .comparison-row:last-child{border-bottom:none;padding-bottom:0}
-    .comparison-row.goal-settlement{position:relative;overflow:hidden;border-radius:16px;padding:18px 16px;border:none;color:#f8fafc;background:#0f172a}
-    .comparison-row.goal-settlement::before{content:"";position:absolute;inset:0;background:url("https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1600&q=80") center/cover no-repeat;filter:brightness(.65) saturate(1.05)}
-    .comparison-row.goal-settlement::after{content:"";position:absolute;inset:0;background:rgba(15,23,42,.65)}
-    .comparison-row.goal-settlement > *{position:relative;z-index:1}
+    .image-highlight{position:relative;overflow:hidden;border-radius:16px;padding:18px 16px;border:none;color:#f8fafc;background:#0f172a}
+    .image-highlight::before{content:"";position:absolute;inset:0;background:var(--highlight-image) center/cover no-repeat;filter:brightness(.65) saturate(1.05)}
+    .image-highlight::after{content:"";position:absolute;inset:0;background:rgba(15,23,42,.65)}
+    .image-highlight > *{position:relative;z-index:1}
+    .comparison-row.goal-consolidation{--highlight-image:url("https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80")}
+    .comparison-row.goal-settlement{--highlight-image:url("https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1600&q=80")}
+    .cleanup-note{--highlight-image:url("https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1600&q=80");margin:16px 0}
+    .cleanup-note p{margin:0;font-weight:600;font-size:16px;color:#fff}
     @media(min-width:720px){.comparison-row{grid-template-columns:1.1fr 1fr}}
 
     .trust{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:center;color:#0369a1;font-weight:600;font-size:13px}
@@ -200,6 +204,12 @@
       </div>
   </section>
 
+    <section class="section" aria-label="Site note">
+      <div class="cleanup-note image-highlight">
+        <p>We tried to clean this up on DHF but according to ChatGPT we missed a few things.</p>
+      </div>
+    </section>
+
     <section class="section" aria-label="Comparison">
       <div class="card">
         <h2 style="margin:0 0 10px">Side‑by‑Side Comparison</h2>
@@ -236,11 +246,12 @@
             <div role="cell"><strong>Credit Impact (Settlement)</strong></div>
             <div role="cell">Possible late marks during negotiations; scores may dip before improving</div>
           </div>
-          <div class="comparison-row" role="row">
+          <div class="comparison-row goal-consolidation image-highlight" role="row">
+            <img class="sr-only" src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1600&q=80" alt="Debt consolidation goal: lower rates and simplify into one fixed payment." loading="lazy" />
             <div role="cell"><strong>Goal (Consolidation)</strong></div>
-            <div role="cell">Lower rate + simplify into one fixed payment</div>
+            <div role="cell">Lower rates and simplify into one fixed payment</div>
           </div>
-          <div class="comparison-row goal-settlement" role="row">
+          <div class="comparison-row goal-settlement image-highlight" role="row">
             <div role="cell"><strong>Goal (Settlement)</strong></div>
             <div role="cell">Reduce balances owed through negotiated settlements</div>
           </div>
