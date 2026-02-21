@@ -169,6 +169,11 @@
     .card{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin:18px 0}
     .muted{color:var(--muted);font-size:14px;line-height:1.6}
 
+
+    .compare-grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+    .compare-item{border:1px solid #e2e8f0;border-radius:14px;padding:14px;background:#f1f5f9;line-height:1.55}
+    section[id]{scroll-margin-top:110px}
+
     .faq-card{margin-top:12px}
     .faq-list{display:grid;gap:14px}
     details.faq-item{border:1px solid #e2e8f0;border-radius:var(--radius);background:var(--surface);box-shadow:var(--shadow);overflow:hidden}
@@ -268,14 +273,14 @@
     <main aria-labelledby="entry">
       <section class="card">
         <h2>On this page</h2>
-        <div class="toc">
-          <a href="#overview">Overview</a>
-          <a href="#how-it-works">How it works</a>
-          <a href="#eligibility">Eligibility</a>
-          <a href="#costs">Costs</a>
-          <a href="#compare">Compare options</a>
-          <a href="#common-questions">Common questions</a>
-          <a href="#get-started">Get started</a>
+        <div class="badges">
+          <a class="badge" href="#overview">Overview</a>
+          <a class="badge" href="#how-it-works">How it works</a>
+          <a class="badge" href="#eligibility">Eligibility</a>
+          <a class="badge" href="#costs">Costs</a>
+          <a class="badge" href="#compare">Compare options</a>
+          <a class="badge" href="#common-questions">Common questions</a>
+          <a class="badge" href="#get-started">Get started</a>
         </div>
       </section>
 
